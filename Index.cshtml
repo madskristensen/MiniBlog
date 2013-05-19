@@ -1,20 +1,17 @@
 ﻿@{    
-    string theme = ConfigurationManager.AppSettings.Get("blog:theme");
-    string name = ConfigurationManager.AppSettings.Get("blog:name");
-    bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
-    
-    Layout = "/themes/" + theme + "/_layout.cshtml";
+    Layout = "/themes/" + Blog.Theme + "/_layout.cshtml";
+    bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]); 
 }
 
 @if (showPostList)
 {
-    Page.Title = name;
-    @RenderPage("/themes/" + theme + "/PostList.cshtml")
+    Page.Title = Blog.Title;
+    @RenderPage("/themes/" + Blog.Theme + "/PostList.cshtml")
 }
 else
 {
-    Post post = Blog.GetPosts(1).ElementAt(0);
-    Page.Title = post.Title;
+    Post post = Post.GetPosts(1).ElementAt(0);
+    Page.Title = post.Title + " | " + Blog.Title;   
      
-    @RenderPage("/themes/" + theme + "/Post.cshtml", post)
+    @RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
 }

@@ -1,13 +1,10 @@
-﻿@{
-    Page.Title = Model.Title;   
-}
-
-<article class="post">
+﻿
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogpost">
     <header>
-        <h1>
-            <a href="/@Model.Slug">@Model.Title</a>
-        </h1>
+        <h2>
+            <a href="/@Model.Slug" itemprop="url name">@Model.Title</a>
+        </h2>
     </header>
 
-    <div>@Html.Raw(Model.Content)</div>
+    <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
 </article>

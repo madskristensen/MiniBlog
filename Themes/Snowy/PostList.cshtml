@@ -1,19 +1,16 @@
 ﻿@{
     int postsPerPage = 5;
-    int currentPage = Request.CurrentPage();
+    int pageNum = Blog.CurrentPage(Request);
+    string prevDisabled = pageNum < 2 ? "disabled" : "";
+    string nextDisabled = pageNum * postsPerPage >= Post.Posts.Count ? "disabled" : "";
 }
 
-@foreach (var post in Blog.GetPosts(postsPerPage))
+@foreach (var post in Post.GetPosts(postsPerPage))
 {
     @RenderPage("Post.cshtml", post);
 }
 
-@{
-    string prevDisabled = currentPage < 2 ? "disabled" : "";
-    string nextDisabled = currentPage * postsPerPage >= Blog.Posts.Count ? "disabled" : "";
-}
-
 <ul class="pager">
-    <li class="previous @prevDisabled"><a href="/page/@(currentPage - 1)/">&larr; Older</a></li>
-    <li class="next @nextDisabled"><a href="/page/@(currentPage + 1)/">Newer &rarr;</a></li>
+    <li class="previous @prevDisabled"><a href="/page/@(pageNum - 1)/">&larr; Older</a></li>
+    <li class="next @nextDisabled"><a href="/page/@(pageNum + 1)/">Newer &rarr;</a></li>
 </ul>

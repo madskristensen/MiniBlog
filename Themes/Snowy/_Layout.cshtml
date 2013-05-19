@@ -3,21 +3,22 @@
 <head>
     <title>@Page.Title</title>
     <meta charset="utf-8" />
+    <meta name="description" content="@Page.Title" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="/themes/snowy/site.css" rel="stylesheet" />
 </head>
-<body>
+<body itemscope itemtype="http://schema.org/Blog">
     <div class="container">
 
         <header class="page-header">
-            <h1><a href="/">My Blog</a></h1>
+            <h1><a href="/" itemprop="url name">@Blog.Title</a></h1>
         </header>
 
         <div class="row-fluid">
-            <section role="main" class="span8">
+            <div role="main" class="span8">
                 @RenderBody()
-            </section>
+            </div>
 
             <aside class="span4">
                 @RenderPage("Sidebar.cshtml")
@@ -25,8 +26,8 @@
         </div>
     </div>
 
-    <footer class="text-center">
-        <span>Copyright &copy; @DateTime.Now.Year <a href="/" rel="me">Mads Kristensen</a></span>
+    <footer itemscope itemtype="http://schema.org/Person" itemprop="author">
+        <span>Copyright &copy; @DateTime.Now.Year <a href="/" rel="me" itemprop="name url">Mads Kristensen</a></span>
     </footer>
 </body>
 </html>
