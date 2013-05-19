@@ -1,28 +1,17 @@
 ﻿@{    
     Layout = "/themes/" + Blog.Theme + "/_layout.cshtml";
     bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
-
-    // Handle authentication
-    if (Request.HttpMethod == "POST")
-    { 
-        if (!string.IsNullOrEmpty(Request.Form["username"]) && !string.IsNullOrEmpty(Request.Form["password"]))
-        {
-            FormsAuthentication.Authenticate(Request.Form["username"], Request.Form["password"]);
-            FormsAuthentication.SetAuthCookie(Request.Form["username"], true);
-            Response.Redirect(Request.RawUrl, true);
-        }
-        else if (!string.IsNullOrEmpty(Request.QueryString["signout"]))
-        {
-            FormsAuthentication.SignOut();
-            Response.Redirect("~/" + Request.QueryString["slug"], true);
-        }
-    }
 }
 
 @if (showPostList)
 {
     Page.Title = Blog.Title;
     @RenderPage("/themes/" + Blog.Theme + "/PostList.cshtml")
+}
+else if (Request.RawUrl.Trim('/') == "login")
+{
+    Page.Title = "Sign in | " + Blog.Title;
+    @RenderPage("~/login.cshtml")
 }
 else
 {

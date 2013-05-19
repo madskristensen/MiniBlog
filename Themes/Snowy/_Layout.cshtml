@@ -9,14 +9,19 @@
     <link href="/themes/snowy/site.css" rel="stylesheet" />
 </head>
 <body itemscope itemtype="http://schema.org/Blog">
-    
+
     <div class="container">
 
         <header class="page-header row-fluid">
             <h1 class="span7"><a href="/" itemprop="url name">@Blog.Title</a></h1>
-            <aside class="span5 login">
-                @RenderPage("_login.cshtml")
-            </aside>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post" class="span5 user">
+                    <span>@User.Identity.Name</span>
+                    <button type="submit" class="btn btn-small">Sign out</button>
+                </form>
+            }
         </header>
 
 
@@ -26,13 +31,20 @@
             </div>
 
             <aside class="span4">
-                @RenderPage("Sidebar.cshtml")
+                @RenderPage("_Sidebar.cshtml")
             </aside>
         </div>
     </div>
 
     <footer itemscope itemtype="http://schema.org/Person" itemprop="author">
-        <span>Copyright &copy; @DateTime.Now.Year <a href="/" rel="me" itemprop="name url">Mads Kristensen</a></span>
+        @if (!User.Identity.IsAuthenticated)
+        { 
+            <span class="login"><a href="/login/?return=@Request.RawUrl">Sign in</a></span>
+        }
+
+        <span>Copyright &copy; @DateTime.Now.Year
+            <a href="/" rel="me" itemprop="name url">Mads Kristensen</a>
+        </span>
     </footer>
 
 </body>

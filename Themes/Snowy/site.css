@@ -1,4 +1,4 @@
-﻿body {
+﻿body, button, input {
     font: 1em/1.4 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
 }
 
@@ -10,14 +10,13 @@
     margin-bottom: 2em;
 }
 
-.login {
+.user {
     text-align: right;
 }
 
-    .login form input {
-        max-width: 135px;
-        min-width: 120px;
-    }
+.user span {
+    margin-right: 1em;
+}
 
 .post {
     margin-bottom: 3em;
@@ -37,6 +36,11 @@
         padding: .2em 0;
     }
 
+    #login{
+        margin: auto;
+        width: 300px;
+    }
+
 footer {
     background-color: #181818;
     color: white;
@@ -48,4 +52,9 @@ footer {
     opacity: .9;
     width: 100%;
     line-height: 30px;
+}
+
+footer .login{
+    position: fixed;
+    right: 1em;
 }
