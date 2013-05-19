@@ -9,11 +9,16 @@
     <link href="/themes/snowy/site.css" rel="stylesheet" />
 </head>
 <body itemscope itemtype="http://schema.org/Blog">
+    
     <div class="container">
 
-        <header class="page-header">
-            <h1><a href="/" itemprop="url name">@Blog.Title</a></h1>
+        <header class="page-header row-fluid">
+            <h1 class="span7"><a href="/" itemprop="url name">@Blog.Title</a></h1>
+            <aside class="span5 login">
+                @RenderPage("_login.cshtml")
+            </aside>
         </header>
+
 
         <div class="row-fluid">
             <div role="main" class="span8">
@@ -29,5 +34,6 @@
     <footer itemscope itemtype="http://schema.org/Person" itemprop="author">
         <span>Copyright &copy; @DateTime.Now.Year <a href="/" rel="me" itemprop="name url">Mads Kristensen</a></span>
     </footer>
+
 </body>
 </html>

@@ -12,7 +12,7 @@ public class Post
 
     static Post()
     {
-        foreach (string file in Directory.GetFiles(HostingEnvironment.MapPath("~/App_Data/"), "*.xml"))
+        foreach (string file in Directory.GetFiles(HostingEnvironment.MapPath("~/App_Data/posts/"), "*.xml"))
         {
             XElement doc = XElement.Load(file);
 

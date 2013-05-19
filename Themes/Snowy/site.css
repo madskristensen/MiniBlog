@@ -10,6 +10,15 @@
     margin-bottom: 2em;
 }
 
+.login {
+    text-align: right;
+}
+
+    .login form input {
+        max-width: 135px;
+        min-width: 120px;
+    }
+
 .post {
     margin-bottom: 3em;
 }
