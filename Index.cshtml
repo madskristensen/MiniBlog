@@ -1,22 +1,24 @@
-﻿@{    
+﻿@{
+    Page.ShowComments = false;    
     Layout = "/themes/" + Blog.Theme + "/_layout.cshtml";
     bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
 }
 
 @if (showPostList)
-{
+{   
     Page.Title = Blog.Title;
     @RenderPage("/themes/" + Blog.Theme + "/PostList.cshtml")
 }
 else if (Request.RawUrl.Trim('/') == "login")
-{
+{    
     Page.Title = "Sign in | " + Blog.Title;
     @RenderPage("~/login.cshtml")
 }
 else
 {
     Post post = Post.GetPosts(1).ElementAt(0);
-    Page.Title = post.Title + " | " + Blog.Title;   
-     
+    Page.Title = post.Title + " | " + Blog.Title;
+    Page.ShowComments = true;
+        
     @RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
 }
