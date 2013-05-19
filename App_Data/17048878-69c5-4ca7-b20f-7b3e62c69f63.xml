@@ -1,0 +1,315 @@
+﻿
+<post>
+  <author>Mads Kristensen</author>
+  <title>Simple FTP file upload in C# 2.0</title>
+  <description />
+  <content>&lt;p&gt;
+   Sometimes you just want a simple function to perform a simple task. There are a lot
+   of FTP libraries for free download on the Internet, but if you simply want to upload
+   a file to an FTP server in C#, these libraries&amp;nbsp;are&amp;nbsp;overkill for&amp;nbsp;that
+   simple little task. That's what I thought when I browsed the web for such a simple
+   little function. Maybe I'm slower than normal people, but I couldn't find any simple
+   method on the web. They where all too complicated, so I thought to myself that I could
+   do better. 
+&lt;/p&gt;
+&lt;p&gt;
+   Here's what I came up with:
+&lt;/p&gt;
+&lt;p&gt;
+   &lt;span STYLE="FONT-SIZE: 11px; COLOR: black; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;&lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;private&lt;/span&gt; &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;static&lt;/span&gt; &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;void&lt;/span&gt; Upload(&lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;string&lt;/span&gt; ftpServer, &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;string&lt;/span&gt; userName, &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;string&lt;/span&gt; password, &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;string&lt;/span&gt; filename)&lt;br&gt;
+   {&lt;br&gt;
+   &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;using&lt;/span&gt; (System.Net.WebClient
+   client &lt;span STYLE="FONT-SIZE: 11px; COLOR: red; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;=&lt;/span&gt; &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;new&lt;/span&gt; System.Net.WebClient())&lt;br&gt;
+   &amp;nbsp;&amp;nbsp;&amp;nbsp;{&lt;br&gt;
+   &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;client.Credentials &lt;span STYLE="FONT-SIZE: 11px; COLOR: red; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;=&lt;/span&gt; &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;new&lt;/span&gt; System.Net.NetworkCredential(userName,
+   password);&lt;br&gt;
+   &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;client.UploadFile(ftpServer &lt;span STYLE="FONT-SIZE: 11px; COLOR: red; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;+&lt;/span&gt; &lt;span STYLE="FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e4e4e4"&gt;"/"&lt;/span&gt; &lt;span STYLE="FONT-SIZE: 11px; COLOR: red; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;+&lt;/span&gt; &lt;span STYLE="FONT-SIZE: 11px; COLOR: blue; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;new&lt;/span&gt; FileInfo(filename).Name, &lt;span STYLE="FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e4e4e4"&gt;"STOR"&lt;/span&gt;,
+   filename);&lt;br&gt;
+   &amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;br&gt;
+   }&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;
+   Then call the method with the right parameters, and you're set to go:
+&lt;/p&gt;
+&lt;p&gt;
+   &lt;span STYLE="FONT-SIZE: 11px; COLOR: black; FONT-FAMILY: Courier New; BACKGROUND-COLOR: transparent"&gt;Upload(&lt;span STYLE="FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e4e4e4"&gt;"ftp://ftpserver.com"&lt;/span&gt;, &lt;span STYLE="FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e4e4e4"&gt;"TheUserName"&lt;/span&gt;, &lt;span STYLE="FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e4e4e4"&gt;"ThePassword"&lt;/span&gt;, &lt;span STYLE="FONT-SIZE: 11px; COLOR: #666666; FONT-FAMILY: Courier New; BACKGROUND-COLOR: #e4e4e4"&gt;@"C:\file.txt"&lt;/span&gt;);&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;
+   Can it get any simpler than that?
+&lt;/p&gt;
+&lt;img WIDTH="0" HEIGHT="0" SRC="http://www.madskristensen.dk/blog/aggbug.ashx?id=f9298556-bd40-4400-b8cf-25e40aa83213" /&gt;</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2006-06-07 22:16:35</pubDate>
+  <lastModified>2007-04-03 18:38:19</lastModified>
+  <raters>17</raters>
+  <rating>4.411765</rating>
+  <slug>Simple FTP file upload in C</slug>
+  <tags />
+  <comments>
+    <comment id="cac46ae7-6113-444f-aca1-7eb73bab0d5d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2006-06-08 22:42:11</date>
+      <author> Jan Schreuder</author>
+      <email>jan.m.schreuder@gmail.com</email>
+      <country />
+      <ip />
+      <website>http://bloggingabout.net/blogs/jschreuder/</website>
+      <content>Really smart code. I have my own Ftp library which uses the WinInet API. I migrated it from VB6 to VB.Net and later to C#. But if you just need to upload, this is a beauty!</content>
+    </comment>
+    <comment id="f33398db-72a2-4ff1-b595-d5cd6a63b8dc" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2006-06-14 10:27:24</date>
+      <author> tomash</author>
+      <email>tomash@yahoo.com</email>
+      <country />
+      <ip />
+      <website>http://www.goodchoicemusic.com/az_g</website>
+      <content>Hello Jan, wher can i download captcha tool for my blog?</content>
+    </comment>
+    <comment id="5757f62f-5147-4afc-9813-f8aa56550d65" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2006-08-17 11:46:43</date>
+      <author>G.G.W. Andustar</author>
+      <email>none@none.com</email>
+      <country />
+      <ip />
+      <content>Great code, and yes, I have found exactly the same thing on the net. All I want to do is upload a file! Microsoft should keep a more rigorous example database like Sun keeps for its Java platform. It would help sort out allot of overkill problems like the one described.</content>
+    </comment>
+    <comment id="7762f628-e7a9-4d4f-9c9d-7755de0f6a0e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2006-09-04 17:22:40</date>
+      <author> Ivan Lora</author>
+      <email>ivan.lora@vzit.com.do</email>
+      <country />
+      <ip />
+      <content>I'm receiving this error:&lt;br /&gt;The server returned an address in response to the PASV command that is different than the address to which the FTP connection was made.&lt;br /&gt;&lt;br /&gt;What it could be?&lt;br /&gt;&lt;br /&gt;Thanks,</content>
+    </comment>
+    <comment id="65f96d86-a525-4f2a-b4f3-b5ede85ee09f" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2006-09-04 17:46:18</date>
+      <author> Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country />
+      <ip />
+      <website>http://www.madskristensen.dk/blog/</website>
+      <content>I have never seen that error before. It sounds like a redirection is being made from the FTP-server to another URL.</content>
+    </comment>
+    <comment id="098d3489-45c4-4d21-8ef3-4194ae675f7e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2006-09-19 16:05:38</date>
+      <author> Edgar L&amp;#243;pez</author>
+      <email>elopezrios@yahoo.com.mx</email>
+      <country />
+      <ip />
+      <content>Hi,&lt;br /&gt;&lt;br /&gt;I'm using this tip, and i got this error &amp;quot;The remote server returned an error: (530) Not logged in.&amp;quot;; I can access my ftp server from my browser but in my c# code it doesn't work.&lt;br /&gt;&lt;br /&gt;Enviroment: Windows XP pro (spanish) SP2, VS2005, there is no proxies.&lt;br /&gt;&lt;br /&gt;Ideas and suggestions are appreciated.&lt;br /&gt;&lt;br /&gt;Thanks,&lt;br /&gt;&lt;br /&gt;Edgar</content>
+    </comment>
+    <comment id="4f26baa5-44ea-4fc6-a4e2-d6650dd31856" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-03-24 11:01:11</date>
+      <author> Philip</author>
+      <email>philtan1@singnet.com.sg</email>
+      <country />
+      <ip />
+      <content>Couldn't have agreed more with your explanation.&lt;br /&gt;&lt;br /&gt;This small piece of code is exactly what I needed.  Clean, simple and very direct.&lt;br /&gt;&lt;br /&gt;Thanks,&lt;br /&gt;Philip&lt;br /&gt;</content>
+    </comment>
+    <comment id="6aa0cd82-0717-4bc2-8eca-f5b6353d0083" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-03-30 17:45:50</date>
+      <author> Nic</author>
+      <email>nic@newcube.net</email>
+      <country />
+      <ip />
+      <content>You might want to try this to solve the Passive FTP problem - just use the FTPWebClient in the WebClient's place and set  UsePassiveFTP where required:&lt;br /&gt;&lt;br /&gt;Class FTPWebClient : WebClient&lt;br /&gt;    {&lt;br /&gt;&lt;br /&gt;        public bool UsePassiveFTP = false;&lt;br /&gt;&lt;br /&gt;        protected override WebRequest GetWebRequest(Uri address)&lt;br /&gt;        {&lt;br /&gt;            FtpWebRequest req = (FtpWebRequest)base.GetWebRequest(address);&lt;br /&gt;            req.UsePassive = this.UsePassiveFTP;&lt;br /&gt;            return req;&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;    }</content>
+    </comment>
+    <comment id="39eb473f-8a56-431b-948b-34720ba95f09" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-07-28 05:55:26</date>
+      <author>Garnet R. Chaney</author>
+      <email>gchaney@webmill.com</email>
+      <country>us</country>
+      <ip>67.188.188.136</ip>
+      <website>http://www.bobsgear.com/</website>
+      <content>I've got a program that needs to create directories on remote FTP servers, and also upload files to those directories. I've written this to create the remote directories: 
+
+            FtpWebRequest ftp = null;
+            FtpWebResponse resp = null;
+            try
+            {
+                ftp = (FtpWebRequest)FtpWebRequest.Create(sFullFtpUrl);
+                ftp.Credentials = new NetworkCredential(Username, Password);
+                ftp.Method = WebRequestMethods.Ftp.MakeDirectory;
+
+                resp = (FtpWebResponse)ftp.GetResponse();
+                Console.WriteLine(&amp;quot;MKD status: {0}&amp;quot;, resp.StatusDescription);
+                resp.Close();
+
+                // Remember this directory so we don't try to create it again
+                CreatedDirectories.Add(sDir, 0);
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(&amp;quot;Create FTP directory &amp;quot;+sDir+&amp;quot; &amp;quot;+exc.Message);
+
+                // If the error is already exists, don't bother trying again... 
+                CreatedDirectories.Add(sDir, 0);
+
+            }
+
+
+This code works for a while (maybe dozens of calls), then it starts throwing &amp;quot;The Operation Has Timed Out&amp;quot;. I am watching the messages log on the remote FTP site, and when the program is working, I see the logins/commands/logouts recorded... But when this routine starts timing out, I don't see anymore new connection or login messages. 
+
+In the exception routine, I can see that there is a private variable  ftp.m_FtpWebResponse that has been set, although only &amp;quot;LastModified&amp;quot; and &amp;quot;ResponseUri&amp;quot; seem to be set. There is no way to get at it to try and call close on it. 
+
+I saw a similar problem to this with using the GetResponse to read webpages. If you remember to close the streams, but forget to close the WebResponse (as some examples show), eventually .NET stops return GetResponse. I monitored the network, and nothing was getting sent over the wire. It seems to be like there is an internal pool of objects that get used up.... I am worried that with FTP, getting exceptions (like directory already exists), might be leaving FtpWebResponse objects hanging open.
+
+Stopping the program and restarting allows operation to continue again, at least for a while....
+
+Let me know if you have any ideas on this problem of the Ftp  GetResponse no longer being sent over the network.</content>
+    </comment>
+    <comment id="5e2904e6-3516-44e6-88b7-93f9c8271f88" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-09-18 21:12:51</date>
+      <author>santosh Kumar</author>
+      <email>saantosh@gmail.com</email>
+      <country>in</country>
+      <ip>192.131.90.131</ip>
+      <content>thanks
+This is good code to upload a file in webserver.
+</content>
+    </comment>
+    <comment id="36e213e1-4321-4295-9e5a-3f6a16075e6e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-12-20 10:37:49</date>
+      <author>deddy</author>
+      <email>deddy.one@gmail.com</email>
+      <country>jp</country>
+      <ip>60.32.230.101</ip>
+      <content>Hi, I've tried your code, it worked perfectly on local server. but when I moved it to production IIS server, I got the &amp;quot;could not find part of path&amp;quot; kind of error. do you have any suggestion ??</content>
+    </comment>
+    <comment id="1f4499ab-e251-4279-abb2-94b21b66021a" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-12-20 11:02:20</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country>dk</country>
+      <ip>91.143.115.78</ip>
+      <website>http://blog.madskristensen.dk/</website>
+      <content>@deddy, the error has to do with the filename you feed the method. It could be because the relative paths are different on your production environment than on your local machine.</content>
+    </comment>
+    <comment id="8136875b-53a3-4eb0-abc2-fb5c35c9f96b" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-12-21 01:27:54</date>
+      <author>deddy</author>
+      <email>deddy.one@gmail.com</email>
+      <country>jp</country>
+      <ip>61.203.143.186</ip>
+      <content>Hi, thanks for the quick response, but I'm still having trouble.
+I'm using your code like this :
+
+            client.Credentials = new System.Net.NetworkCredential(&amp;quot;&amp;quot;, &amp;quot;&amp;quot;);
+            client.UploadFile(&amp;quot;ftp://myftpsite/&amp;quot; + new FileInfo(FileUpload1.PostedFile.FileName.ToString()).Name, &amp;quot;STOR&amp;quot;, @FileUpload1.PostedFile.FileName.ToString());
+
+can you give me some enlightment.
+I dont set any username nor password on my ftpsite yet, 
+so this code is working fine on local server.
+can you tell me how to make it works too on IIS server?
+</content>
+    </comment>
+    <comment id="daaa2315-576b-403f-b711-fb400c34a0cf" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-12-24 00:31:54</date>
+      <author>Chris</author>
+      <email>chris@dscoduc.com</email>
+      <country>us</country>
+      <ip>68.105.243.101</ip>
+      <website>http://www.dscoduc.com/</website>
+      <content>Yum yum... another ftp username and password flying through the web just waiting to be consumed by those pesky hackers.  Mads, you really shouldn't be using FTP for anything other than anonymous file posting...  actually it's not my place to tell you what you should and shouldn't be doing, 8~)
+
+But seriously folks, why on earth would you want your credentials sent out into the eWorld in the clear? There are many alternatives available that you can use in replace of FTP that will protect your credentials.  Perhaps you could have a look at my recent post that talks about this issue (http://www.dscoduc.com/post/2007/12/Use-SSH-to-manage-your-blog.aspx).
+
+And as for quick transfers from you could always explore plink.exe and pscp.exe (http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) for those command level uploads.
+
+When Windows 2008 comes out there will be a sFTP based on SSL available that would probably be a good fit for you also...</content>
+    </comment>
+    <comment id="455278da-dfc2-439c-bdfc-8d490276f089" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-04-23 12:14:10</date>
+      <author>Alex</author>
+      <email>alejandro.morris@nackademin.com</email>
+      <country>se</country>
+      <ip>85.229.21.36</ip>
+      <content>Very good and simple, but I have one question.
+
+&amp;quot;client.UploadFile(ftpServer + &amp;quot;/&amp;quot; + new FileInfo(filename).Name, &amp;quot;STOR&amp;quot;, filename);&amp;quot;
+
+Why did you write &amp;quot;STOR&amp;quot;? I get an webexception error...</content>
+    </comment>
+    <comment id="8093783c-a620-489c-957e-d8568353fecf" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-04-23 12:34:42</date>
+      <author>Alex</author>
+      <email>alejandro.morris@nackademin.com</email>
+      <country>se</country>
+      <ip>85.229.21.36</ip>
+      <content>using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using System.IO;
+using System.Net;
+using System.Text;
+
+
+public partial class Default2 : System.Web.UI.Page
+{
+    string filen, uppladdurl,anvNamn, losen;
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        uppladdurl = @&amp;quot;ftp://gallery.mypage.se/ImageBank/images&amp;quot;;
+        losen = &amp;quot;1234&amp;quot;;
+        anvNamn = &amp;quot;gallery&amp;quot;;
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        filen = FileUpload1.FileName;
+
+        Upload(uppladdurl, anvNamn, losen, filen);
+    }
+    private static void Upload(string ftpServer, string userName, string password, string filename)
+    {
+        using (System.Net.WebClient client = new System.Net.WebClient())
+        {
+            client.Credentials = new System.Net.NetworkCredential(userName, password);
+            client.UploadFile(ftpServer + &amp;quot;/&amp;quot; + new FileInfo(filename).Name, filename);
+        }
+    } 
+
+
+}
+
+Don&amp;#180;t know what I&amp;#180;m doing wrong. Could someone help pls?</content>
+    </comment>
+    <comment id="859fe799-36c0-459e-b7cf-e536fbcca022" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-12-17 22:47:05</date>
+      <author>immortalkamikaze.wordpress.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>72.233.96.151</ip>
+      <website>http://immortalkamikaze.wordpress.com/2008/12/17/simple-ftp-upload-in-c/</website>
+      <content>Pingback from immortalkamikaze.wordpress.com
+
+Simple FTP Upload in C# &amp;laquo; Precursor to a Thought</content>
+    </comment>
+    <comment id="dc289bd7-c8f8-48d2-9a92-c58719a531db" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-09 19:46:50</date>
+      <author>Scott Hanselman</author>
+      <email>trackback</email>
+      <country />
+      <ip>206.72.120.92</ip>
+      <website>http://www.hanselman.com/blog/NuGetPackagesOfTheWeek12AccessingGoogleSpreadsheetsWithGDataFromCAndHostingRazorTemplatesToGenerateHTMLFromAConsoleApp.aspx</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>NuGet Package(s) of the Week #12 - Accessing Google Spreadsheets with GData from
+
+</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>d72958d9-ddb0-4729-8aa9-f42f9fe73730</category>
+  </categories>
+  <notifications />
+</post>

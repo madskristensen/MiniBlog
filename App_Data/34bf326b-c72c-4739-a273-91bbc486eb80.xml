@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>Mads Kristensen</author>
+  <title>Localize text in JavaScript files in ASP.NET</title>
+  <description>Use a simple HTTP handler to localize your .js script files</description>
+  <content>&lt;p&gt;
+Just about every web project I&amp;rsquo;ve been involved in have, at one time or the other, needed to present some text to the visitor through JavaScript. It could be in an alert box or some other way and the problem has always been to localize that text into different languages using resource files or satellite assemblies. 
+&lt;/p&gt;
+&lt;p&gt;
+There are many ways of localizing the keys, but most of them involve writing out variables on a page with the localized text and then let the .js include files read from those variables. That&amp;rsquo;s not a good solution. It would be much better if the .js files could be rendered with the localized text directly. 
+&lt;/p&gt;
+&lt;p&gt;
+At work, I&amp;rsquo;ve written exactly such a mechanism and here is a cleaned up, plug &amp;lsquo;n play version you can use in your own web project. It&amp;rsquo;s an HttpHandler that intercepts the requests to the .js files and performs the localization based on regular expressions. Here&amp;rsquo;s how it works. 
+&lt;/p&gt;
+&lt;h2&gt;Resource files&lt;/h2&gt;
+&lt;p&gt;
+It doesn&amp;rsquo;t matter whether you use .resx files or satellite assemblies for localizing your text, because both methods work with the &lt;a href="http://msdn.microsoft.com/en-us/library/system.resources.resourcemanager.aspx"&gt;System.Resources.ResourceManager&lt;/a&gt; class. 
+&lt;/p&gt;
+&lt;p&gt;
+A resource file contains&amp;nbsp;keys and a values. The key is always the same, but the value varies for each language. Each language is represented in its own .resx file and the name of the file decides which language it contains like below. 
+&lt;/p&gt;
+&lt;p&gt;
+&lt;img src="/image.axd?picture=2008%2f8%2fApp_GlobalResources.gif" alt="" width="160" height="65" /&gt;&amp;nbsp; 
+&lt;/p&gt;
+&lt;p&gt;
+If no language is added in the file name, it automatically becomes the default localizations &amp;ndash; normally English. The three .resx files each contain one line with the key &lt;em&gt;nameOfPage&lt;/em&gt;. The value in each of the files is localized text that can be referenced by the key. 
+&lt;/p&gt;
+&lt;p&gt;
+text.resx: &lt;em&gt;Name of page&lt;/em&gt;&lt;br /&gt;
+text.da.resx: &lt;em&gt;Sidens navn&lt;br /&gt;
+&lt;/em&gt;text.es.resx: &lt;em&gt;Namo de la pago&lt;/em&gt; (Sorry, my Spanish is slightly rusty) 
+&lt;/p&gt;
+&lt;h2&gt;The script method&lt;/h2&gt;
+&lt;p&gt;
+In the .js script files you need a way to specify a certain text as localizable. I&amp;rsquo;ve chosen to pick a syntax that looks like this: 
+&lt;/p&gt;
+&lt;p&gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;&lt;br /&gt;
+&amp;nbsp; alert(&amp;lsquo;Translate(nameOfPage)&amp;rsquo;);&lt;br /&gt;
+&amp;lt;/script&amp;gt; 
+&lt;/p&gt;
+&lt;p&gt;
+Notice that the &lt;em&gt;Translate&lt;/em&gt; method above&amp;nbsp;takes the localizable key as parameter. This is the syntax the regular expression in the HttpHandler is looking for. 
+&lt;/p&gt;
+&lt;h2&gt;The HttpHandler&lt;/h2&gt;
+&lt;p&gt;
+The HttpHandler does a couple of things. It reads the content of the script file, localizes the text, caches the response and compresses it using HTTP compression. It does all this in about 150 lines of easy readable code. 
+&lt;/p&gt;
+&lt;p&gt;
+To make it work, you need to update your script references a little bit. Instead of pointing to &lt;em&gt;/scripts/messages.js&lt;/em&gt; you need to append .axd to the end of the reference so it becomes &lt;em&gt;/scripts/messages.js&lt;strong&gt;.axd&lt;/strong&gt;&lt;/em&gt;. Then you need to add this line to the web.config so that the new script reference actually works. 
+&lt;/p&gt;
+&lt;p&gt;
+&amp;lt;httpHandlers&amp;gt;&lt;br /&gt;
+&amp;nbsp; &amp;lt;add verb=&amp;quot;*&amp;quot; path=&amp;quot;*.js.axd&amp;quot; type=&amp;quot;ScriptTranslator&amp;quot; /&amp;gt;&lt;br /&gt;
+&amp;lt;/httpHandlers&amp;gt; 
+&lt;/p&gt;
+&lt;p&gt;
+If your site isn&amp;rsquo;t yet localized you probably need to add the &lt;em&gt;uiCulture&lt;/em&gt; attribute to the globalization element in the web.config and set its value to auto. 
+&lt;/p&gt;
+&lt;p&gt;
+&amp;lt;globalization uiCulture=&amp;quot;auto&amp;quot; /&amp;gt; 
+&lt;/p&gt;
+&lt;p&gt;
+This will trigger the correct .resx file to be used based on the visiting browser&amp;rsquo;s language. If your .resx files aren&amp;rsquo;t called &lt;em&gt;text.resx&lt;/em&gt; or you use satellite assemblies, then you need to update the instantiation of the &lt;em&gt;ResourceManager&lt;/em&gt; in the &lt;em&gt;TranslateScript&lt;/em&gt; method in the handler. 
+&lt;/p&gt;
+&lt;h2&gt;Download code and sample&lt;/h2&gt;
+&lt;p&gt;
+Download the code below and place the ScriptTranslator.cs in your App_Code folder. Then update your web.config with the web.config values found&amp;nbsp;in the zip file. If you unzip the zip file, the entire contents can be opened directly in Visual Studio and you will be able to try it out easily. 
+&lt;/p&gt;
+&lt;p&gt;
+&lt;a href="/file.axd?file=2008%2f8%2fLocalization.zip"&gt;Localization.zip (8,37 kb)&lt;/a&gt; 
+&lt;/p&gt;
+</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2008-08-21 23:17:00</pubDate>
+  <lastModified>2008-08-21 23:43:49</lastModified>
+  <raters>7</raters>
+  <rating>4.428571</rating>
+  <slug>Localize-text-in-JavaScript-files-in-ASPNET</slug>
+  <tags>
+    <tag>httphandler</tag>
+    <tag>javascript</tag>
+    <tag>localization</tag>
+  </tags>
+  <comments>
+    <comment id="ef3ddd5b-c09b-4878-906b-f2e6cc5ff708" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-22 01:39:41</date>
+      <author>Juan</author>
+      <email>juan@juanformoso.com.ar</email>
+      <country>ar</country>
+      <ip>201.212.161.225</ip>
+      <website>http://www.juanformoso.com.ar/</website>
+      <content>Very cool solution, I learned to love HttpHandlers thanks to your blog =)
+
+It's &amp;quot;Nombre de la p&amp;#225;gina&amp;quot; in spanish by the way</content>
+    </comment>
+    <comment id="846179c7-b4ae-4079-a040-4366d6a0209b" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-22 09:33:33</date>
+      <author>Davide Espertini</author>
+      <email>davidee@espertini.com</email>
+      <country>it</country>
+      <ip>88.54.227.99</ip>
+      <website>http://www.espertini.com/</website>
+      <content>Nice and clean solution Mads. COOL!
+
+Good work! Thank you for share your knowledge with us</content>
+    </comment>
+    <comment id="a3c87aee-3db3-4442-9bad-79b0a795aa1d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-22 09:34:23</date>
+      <author>DotNetKicks.com</author>
+      <email>trackback</email>
+      <country />
+      <ip>209.200.85.7</ip>
+      <website>http://www.dotnetkicks.com/aspnet/Localize_text_in_JavaScript_files_in_ASP_NET</website>
+      <content>Localize text in JavaScript files in ASP.NET
+
+You've been kicked (a good thing) - Trackback from DotNetKicks.com</content>
+    </comment>
+    <comment id="6e0a2bf9-f09b-46f1-b03e-be7290c24a83" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-22 10:41:26</date>
+      <author>blog.cwa.me.uk</author>
+      <email>pingback</email>
+      <country />
+      <ip>212.227.118.27</ip>
+      <website>http://blog.cwa.me.uk/2008/08/22/the-morning-brew-164/</website>
+      <content>Pingback from blog.cwa.me.uk
+
+Reflective Perspective - Chris Alcock  &amp;raquo; The Morning Brew #164</content>
+    </comment>
+    <comment id="ead54cd1-37f8-4e4f-98b6-00a4af0f6d93" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-22 15:17:16</date>
+      <author>alvinashcraft.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>98.130.2.20</ip>
+      <website>http://www.alvinashcraft.com/2008/08/22/dew-drop-august-22-2008/</website>
+      <content>Pingback from alvinashcraft.com
+
+Dew Drop - August 22, 2008 | Alvin Ashcraft's Morning Dew</content>
+    </comment>
+    <comment id="436b0202-334b-437e-916e-41b113def128" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-22 20:02:34</date>
+      <author>Mike Borozdin</author>
+      <email>mike.borozdin@gmail.com</email>
+      <country>ru</country>
+      <ip>89.110.59.154</ip>
+      <website>http://www.mikeborozdin.com/</website>
+      <content>Thank you, Mads, for sharing an important piece of knowledge.</content>
+    </comment>
+    <comment id="e2cadfbe-b900-4d78-ac1c-eb19a5567e9e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-23 20:54:01</date>
+      <author>asp.net</author>
+      <email>dmitrievdm@gmail.com</email>
+      <country>ru</country>
+      <ip>83.219.130.34</ip>
+      <website>http://www.progblog.ru/</website>
+      <content>thx, great solution.</content>
+    </comment>
+    <comment id="e66f7c28-0660-441d-9b66-b3cf6e75a19e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-24 15:47:14</date>
+      <author>G Suleman</author>
+      <email>sulaiman.gboyega@4mat.com</email>
+      <country>gb</country>
+      <ip>79.76.156.50</ip>
+      <content>This is a great solution.
+
+However, I ran into a hitch.  Supposing I keep all localized javascripts strings in one single location (as in global resource), How can I use resource manager to access global reource within the handler.
+
+Thanks.</content>
+    </comment>
+    <comment id="6d5261f9-f689-424d-912a-b043e1cc6510" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-24 15:59:37</date>
+      <author>G Suleman</author>
+      <email>sulaiman.gboyega@4mat.com</email>
+      <country>gb</country>
+      <ip>79.76.156.50</ip>
+      <content>Hi all
+
+My last question was incomplete.  I forgot to add that I am using customresourceprovider. I store values in sql server and access it through a custom resource provider.</content>
+    </comment>
+    <comment id="7a349e33-d3db-4ee2-9f2b-a49f4d443695" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-24 16:12:47</date>
+      <author>G Suleman</author>
+      <email>sulaiman.gboyega@4mat.com</email>
+      <country>gb</country>
+      <ip>79.76.156.50</ip>
+      <content>Hi all
+
+I have found the solution to  my query above.  I changed the resourcemenager to my customprovider and created and instance of GlobalResourceProvider from the provider factory. And GetObject just worked normally.
+
+Thanks.</content>
+    </comment>
+    <comment id="17562d8b-333e-4255-9a24-adb652ffb69e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-08-28 14:44:29</date>
+      <author>Janko At Warp Speed</author>
+      <email>trackback</email>
+      <country />
+      <ip>194.9.94.202</ip>
+      <website>http://jankoatwarpspeed.com/post/2008/08/28/Amazing-web-development-articles-of-Summer-2008.aspx</website>
+      <content>Amazing web development articles of Summer 2008
+
+Amazing web development articles of Summer 2008</content>
+    </comment>
+    <comment id="da025216-c2c6-47e2-9854-512e2017271a" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-09-02 14:32:24</date>
+      <author>javapronews.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>66.28.139.85</ip>
+      <website>http://www.javapronews.com/using-javascript-to-localize-text/</website>
+      <content>Pingback from javapronews.com
+
+Java Programming News  &amp;raquo; Blog Archive   &amp;raquo; Using JavaScript to Localize Text - JavaProNews.com</content>
+    </comment>
+    <comment id="ae1fcd77-dcdb-4e98-b175-b58cbf1dcf11" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-09-06 18:22:28</date>
+      <author>Boah</author>
+      <email>boah123@hotmail.com</email>
+      <country />
+      <ip>82.75.18.176</ip>
+      <content>Cool script, but does not work yet in my solution. I receive the error:
+The type or namespace name 'text' does not exist in the namespace 'Resources' (are you missing an assembly reference?)
+</content>
+    </comment>
+    <comment id="cb388368-4746-4aef-be6b-f29bee551a3d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-09-06 19:20:47</date>
+      <author>Boah</author>
+      <email>boah123@hotmail.com</email>
+      <country />
+      <ip>82.75.18.176</ip>
+      <content>Edit for upper message.
+
+I made a mistake. Sorry! I changed the name of the resource file to something else. Now it works for me too.</content>
+    </comment>
+    <comment id="66dcae23-7829-4363-b295-e7312455394a" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-10-20 20:21:20</date>
+      <author>Morning Break</author>
+      <email>trackback</email>
+      <country />
+      <ip>217.26.209.236</ip>
+      <website>http://msforge.net/blogs/janko/archive/2008/08/28/amazing-web-development-articles-of-summer-2008.aspx</website>
+      <content>Amazing web development articles of Summer 2008
+
+The summer is near its end and I think it&amp;#39;s a good time to see what was hot during past three months</content>
+    </comment>
+    <comment id="86ce947c-8845-41c5-9c2c-f299d8accde0" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-11-15 22:45:55</date>
+      <author>melih g&amp;#252;m&amp;#252;ş&amp;#231;ay</author>
+      <email>mmelihh@yahoo.com</email>
+      <country>tr</country>
+      <ip>78.182.1.241</ip>
+      <website>http://www.montagraph.com/</website>
+      <content>Hi Mads,
+i ve got some addition to your code.If one uses a dropdownlist to select a culture=language your code can not sense it so i changed it a bit: it implements IRequiresSessionState now. i got culture from session at initializeculture.
+(that is public class ScriptTranslator : IHttpHandler, IRequiresSessionState)
+and i use resourceset for dropdown case.
+
+public void ProcessRequest(HttpContext context)
+	{
+		string relativePath = context.Request.AppRelativeCurrentExecutionFilePath.Replace(&amp;quot;.axd&amp;quot;, string.Empty);
+		string absolutePath = context.Server.MapPath(relativePath);
+		string script = ReadFile(absolutePath);
+        string translated;
+
+        if (context.Session != null &amp;amp;&amp;amp; context.Session[&amp;quot;MyUICulture&amp;quot;] != null)
+        {
+            CultureInfo currentCultureInfo = (CultureInfo)context.Session[&amp;quot;MyUICulture&amp;quot;];
+            translated = TranslateScript(script, currentCultureInfo);
+        }
+        else
+        {
+            translated = TranslateScript(script);
+        }
+		
+		context.Response.Write(translated);
+
+		Compress(context);
+		SetHeadersAndCache(absolutePath, context);		
+	}
+
+	#endregion
+
+	/// &amp;lt;summary&amp;gt;
+	/// This will make the browser and server keep the output
+	/// in its cache and thereby improve performance.
+	/// &amp;lt;/summary&amp;gt;
+	private void SetHeadersAndCache(string file, HttpContext context)
+	{
+		
+		context.Response.AddFileDependency(file);
+		
+	}
+
+	#region Localization
+
+	private static Regex REGEX = new Regex(@&amp;quot;Translate\(([^\))]*)\)&amp;quot;, RegexOptions.Singleline | RegexOptions.Compiled);
+
+	/// &amp;lt;summary&amp;gt;
+	/// Translates the text keys in the script file. The format is Translate(key).
+	/// &amp;lt;/summary&amp;gt;
+	/// &amp;lt;param name=&amp;quot;text&amp;quot;&amp;gt;The text in the script file.&amp;lt;/param&amp;gt;
+	/// &amp;lt;returns&amp;gt;A localized version of the script&amp;lt;/returns&amp;gt;
+	private string TranslateScript(string Site, CultureInfo currentCultureInfo)
+	{
+		MatchCollection matches = REGEX.Matches(Site);
+		ResourceManager manager = new ResourceManager(typeof(Resources.Site));
+        ResourceSet resourceSet = manager.GetResourceSet(currentCultureInfo, true, true);
+
+		foreach (Match match in matches)
+		{
+			object obj = resourceSet.GetObject(match.Groups[1].Value);
+			if (obj != null)
+			{
+				Site = Site.Replace(match.Value, CleanText(obj.ToString()));
+			}
+		}
+		return Site;
+	}</content>
+    </comment>
+    <comment id="0bb6780d-5cbf-4206-b772-d4af1c434a77" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-12-19 18:54:54</date>
+      <author>Belajar</author>
+      <email>belajar@yahoo.com</email>
+      <country />
+      <ip>203.128.249.213</ip>
+      <website>http://belajarseo.com/</website>
+      <content>thanks for this post, it's really helpful :)</content>
+    </comment>
+    <comment id="b6b8f03a-3165-4e3c-8e4d-c104c3ae7a0f" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2009-01-09 20:27:44</date>
+      <author>adult dating</author>
+      <email>flingthething@gmail.com</email>
+      <country>gb</country>
+      <ip>41.212.147.105</ip>
+      <website>http://adultfriendfinderinn.com/adult-friend-finder-dating.html</website>
+      <content>It is quite easy to add JavaScript to a specific server control that resides on an ASP.NET page. Let's take a look at the button server control as an example. If you drag and drop a Button HTML server control (HtmlInputButton Class) onto a page using either Microsoft Visual Studio&amp;#174; .NET or the ASP.NET Web Matrix and run it as a server control, it should have the following construction:
+
+&amp;lt;INPUT type=&amp;quot;button&amp;quot; value=&amp;quot;Button&amp;quot; runat=&amp;quot;server&amp;quot; id=&amp;quot;Button1&amp;quot;&amp;gt;</content>
+    </comment>
+    <comment id="11630ffc-ca6e-4190-ab6c-9af53390a401" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2009-01-15 03:52:03</date>
+      <author>Hebrew seraphim Bible guides Ben Affleck and Jennifer Garner in naming baby</author>
+      <email>Arlyndomingo20@yahoo.com</email>
+      <country>us</country>
+      <ip>222.127.223.75</ip>
+      <website>http://pinayspeak.com/pinaytest/hebrew-seraphim-bible-guides-ben-afflect-and-jennifer-garner-in-naming-baby/</website>
+      <content>Nice work. Keep up the good work.</content>
+    </comment>
+    <comment id="02f29e46-805e-412c-9f25-fd046ae41048" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2009-04-08 21:17:13</date>
+      <author>Al</author>
+      <email>alistair.hunt@hotmail.com</email>
+      <country>au</country>
+      <ip>116.212.211.226</ip>
+      <website>http://viewstate.spaces.live.com/</website>
+      <content>Excellent solution. Just what I was looking for.</content>
+    </comment>
+    <comment id="68509b6b-8757-472f-b3b2-3b13b9957bc0" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-24 15:51:36</date>
+      <author>Slyvia Boarman</author>
+      <email>Ottey@gmail.com</email>
+      <country>us</country>
+      <ip>178.156.172.143</ip>
+      <website>http://alt.com/go/g1341268</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>nice post but i have a better one :-) register on this website and i will show you something that will turn your world up side down (MY ID: Dreaming)</content>
+    </comment>
+    <comment id="cd956b87-93e8-4e95-a42d-3695354416a8" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-02-08 07:41:21</date>
+      <author>dnasir.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>69.89.31.200</ip>
+      <website>http://dnasir.com/2013/01/11/localising-your-javascript-in-asp-net/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from dnasir.com
+
+Localising your JavaScript in ASP.NET &amp;larr; Dzulqarnain Nasir</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>cfcd9812-476b-43a0-ae90-69085cd9baf1</category>
+    <category>f9ca92b1-d70a-462f-8a1c-79e22c68b036</category>
+    <category>555dee8d-beef-4c87-a492-2334f4f414ea</category>
+  </categories>
+  <notifications>
+    <email>mike.borozdin@gmail.com</email>
+    <email>sulaiman.gboyega@4mat.com</email>
+  </notifications>
+</post>

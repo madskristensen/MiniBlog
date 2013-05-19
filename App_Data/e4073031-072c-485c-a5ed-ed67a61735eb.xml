@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>mads kristensen</author>
+  <title>Web Developer Checklist</title>
+  <description />
+  <content>&lt;p&gt;&lt;a href="http://madskristensen.net/image.axd?picture=image_59.png"&gt;&lt;/a&gt;So you just built a website and are about to make it public to the world. You go through a few checks to make sure that everything works as expected. Perhaps run HTML validation and other similar services. &lt;/p&gt;  &lt;p&gt;But are you sure you remembered to implement all the best practices? Does it look good on mobile devices, in Windows 8 snapped view and what about basic accessibility?&lt;/p&gt;  &lt;p&gt;Enter &lt;a href="http://webdevchecklist.com/"&gt;Web Developer Checklist&lt;/a&gt;&lt;/p&gt;  &lt;p&gt;We’ve tried to come up with the complete list of tasks and checks that every web developer should go through when developing any kind of website. The &lt;a href="http://webdevchecklist.com/"&gt;Web Developer Checklist&lt;/a&gt; is structured in a way that makes it really easy to follow the progress as well as getting help to perform all the checks.&lt;/p&gt;  &lt;p&gt;Give it a try and let me know what you think.&lt;/p&gt;</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2013-01-07 22:06:31</pubDate>
+  <lastModified>2013-01-07 22:06:54</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>Web-Developer-Checklist</slug>
+  <tags />
+  <comments>
+    <comment id="3da80b1f-ff2a-49c6-a5b2-a6ebcee066ef" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-07 22:45:25</date>
+      <author>John Bates</author>
+      <email>j.bates-web@devstuff.com</email>
+      <country>au</country>
+      <ip>59.167.209.236</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Nice concept.
+
+A problem though: the information icons don&amp;#39;t expand when using Firefox 17.0.1, especially the one attached to the &amp;quot;Check website in all browsers&amp;quot; option :-D
+</content>
+    </comment>
+    <comment id="124aca01-9471-437a-acd4-05857d4a81e5" parentid="3da80b1f-ff2a-49c6-a5b2-a6ebcee066ef" approved="True" spam="False" deleted="False">
+      <date>2013-01-07 23:28:56</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country>us</country>
+      <ip>174.127.225.204</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Haha, how&amp;#39;s that for irony :)
+
+It works well in Firefox 17.0.1 on my machine. Strange...</content>
+    </comment>
+    <comment id="953a0cac-1954-4f58-9853-e10458645d8b" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2013-01-08 02:59:32</date>
+      <author>ipartho</author>
+      <email>ipartha50@gmail.com</email>
+      <country>bd</country>
+      <ip>180.210.133.125</ip>
+      <website>http://divasforhire.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Wow, incredible blog layout! How long have you been blogging for? you made blogging look easy. The overall look of your web site is fantastic, as well as the content!</content>
+    </comment>
+    <comment id="f31d65c3-a0ec-4c5b-9d46-f1f5ec7e345f" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-08 17:12:58</date>
+      <author>Rick Mason</author>
+      <email>caterwomtious@gmail.com</email>
+      <country>gb</country>
+      <ip>90.222.29.125</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Nice idea, but still needs work. For starters:
+
+I don&amp;#39;t see the info icons at all on original iPad (3 browsers tried) so I have no idea what &amp;quot;world ready&amp;quot; is.
+Rather than no www, I&amp;#39;d say make sure it works with and without www and one version 301s to the other. Lots of people will type www even if you say not to.
+&amp;quot;Security best practices&amp;quot; is too vague. Obviously there could be hundreds but maybe refer to OWASP top 10?
+Not sure why you specify microdata when you don&amp;#39;t mention specific tech elsewhere. RDFa is just as good, arguably better.
+I don&amp;#39;t think it should have WAI-ARIA as optional. I&amp;#39;d put &amp;quot;test in NVDA&amp;quot; instead. If there are problems WAI-ARIA may be the solution, but you need it or you don&amp;#39;t - it&amp;#39;s not a preference.
+
+By the way your comment form isn&amp;#39;t working in the mobile theme.</content>
+    </comment>
+    <comment id="09e535b3-9873-4f6b-abe2-a847a12a7f2a" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-09 14:07:34</date>
+      <author>Grant Palin</author>
+      <email>grant@grantpalin.com</email>
+      <country>ca</country>
+      <ip>207.34.158.52</ip>
+      <website>http://grantpalin.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>There&amp;#39;s some good feedback on Hacker News: http://news.ycombinator.com/item?id=5022523</content>
+    </comment>
+    <comment id="eeb5f463-659c-4c4d-b03f-289aaed013b2" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-09 15:37:56</date>
+      <author>Kenneth Brubaker</author>
+      <email>kennethbrubaker@hotmail.com</email>
+      <country>us</country>
+      <ip>74.121.113.3</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>I don&amp;#39;t see OpenGraph along with microdata. IE10 shares rich content if you support OpenGraph:
+
+http://msoftnews.com/uncategorized/sharing-links-from-ie10-on-windows-8/
+</content>
+    </comment>
+    <comment id="5ed05544-7e5f-4f04-aef7-da483931f8dd" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-09 19:16:56</date>
+      <author>steen.hulthin.dk</author>
+      <email>pingback</email>
+      <country />
+      <ip>212.97.132.102</ip>
+      <website>http://steen.hulthin.dk/blog/work-journal-2013-jan-08/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from steen.hulthin.dk
+
+Work journal 2013-jan-08 | Corner Case CodeCorner Case Code</content>
+    </comment>
+    <comment id="160054ac-f3aa-4b47-81a3-66187cfcbda0" parentid="eeb5f463-659c-4c4d-b03f-289aaed013b2" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 11:10:12</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.164</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>A bug has been created and OpenGraph will be added shortly</content>
+    </comment>
+    <comment id="d02fafc3-70a6-4182-b639-514c8e7e12eb" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-06 03:40:39</date>
+      <author>Mobile website design</author>
+      <email>charliealexander214@yahoo.com</email>
+      <country>ph</country>
+      <ip>112.198.64.39</ip>
+      <website>http://www.spiderwebmobi.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Probably one of the most reliable source of information on the web today.</content>
+    </comment>
+    <comment id="3bd38cc0-f23f-499e-be7d-dcb4164d98d0" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-28 02:15:51</date>
+      <author>azer</author>
+      <email>mark2qx@gmail.com</email>
+      <country />
+      <ip>91.121.83.112</ip>
+      <website>http://freeeshopping.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi : Dear                                                                                                                              While earlier the internet only connected people, today it has created a boom by connecting businesses. The internet today has come out as a new medium for shopping. Online shopping has grown enormously popular and is one of the fastest growing businesses across the globe. Shopping today has surpassed the boundaries of visiting malls, shopping outlets and stores. Online shopping has changed the old-fashioned ways of shopping. Everyone, be it the men or the women, younger generation or the older, all are going online and shopping. Today a lot of companies are creating online stores and hence creating their social presence. There are stores to cater both to the needs of sellers and buyers              http://hpilaptop.info                                                                                        http://freeeshopping.com                                                                  http://freeshopping.asia                                                                                                  Thanks                                                                                                                                      Azer</content>
+    </comment>
+    <comment id="38606295-37a6-4185-b9a9-06992d6c26d7" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-28 03:06:41</date>
+      <author>azer</author>
+      <email>mark2qx@gmail.com</email>
+      <country />
+      <ip>91.121.83.112</ip>
+      <website>http://freeeshopping.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi : Dear                                                                                                                              While earlier the internet only connected people, today it has created a boom by connecting businesses. The internet today has come out as a new medium for shopping. Online shopping has grown enormously popular and is one of the fastest growing businesses across the globe. Shopping today has surpassed the boundaries of visiting malls, shopping outlets and stores. Online shopping has changed the old-fashioned ways of shopping. Everyone, be it the men or the women, younger generation or the older, all are going online and shopping. Today a lot of companies are creating online stores and hence creating their social presence. There are stores to cater both to the needs of sellers and buyers              http://hpilaptop.info                                                                                        http://freeeshopping.com                                                                  http://freeshopping.asia                                                                                                  Thanks                                                                                                                                      Azer</content>
+    </comment>
+    <comment id="ec04c20c-0cac-435f-9ff3-866064bc887a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-28 03:07:58</date>
+      <author>azer</author>
+      <email>mark2qx@gmail.com</email>
+      <country />
+      <ip>91.121.83.112</ip>
+      <website>http://freeeshopping.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Hi : Dear                                                                                                                              While earlier the internet only connected people, today it has created a boom by connecting businesses. The internet today has come out as a new medium for shopping. Online shopping has grown enormously popular and is one of the fastest growing businesses across the globe. Shopping today has surpassed the boundaries of visiting malls, shopping outlets and stores. Online shopping has changed the old-fashioned ways of shopping. Everyone, be it the men or the women, younger generation or the older, all are going online and shopping. Today a lot of companies are creating online stores and hence creating their social presence. There are stores to cater both to the needs of sellers and buyers              http://hpilaptop.info                                                                                        http://freeeshopping.com                                                                  http://freeshopping.asia                                                                                                  Thanks                                                                                                                                      Azer</content>
+    </comment>
+    <comment id="d78c89e0-01f4-4ef1-b889-5445715ecb6a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-28 03:09:10</date>
+      <author>azer</author>
+      <email>mark2qx@gmail.com</email>
+      <country />
+      <ip>91.121.83.112</ip>
+      <website>http://freeeshopping.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Hi : Dear                                                                                                                              While earlier the internet only connected people, today it has created a boom by connecting businesses. The internet today has come out as a new medium for shopping. Online shopping has grown enormously popular and is one of the fastest growing businesses across the globe. Shopping today has surpassed the boundaries of visiting malls, shopping outlets and stores. Online shopping has changed the old-fashioned ways of shopping. Everyone, be it the men or the women, younger generation or the older, all are going online and shopping. Today a lot of companies are creating online stores and hence creating their social presence. There are stores to cater both to the needs of sellers and buyers              http://hpilaptop.info                                                                                        http://freeeshopping.com                                                                  http://freeshopping.asia                                                                                                  Thanks                                                                                                                                      Azer</content>
+    </comment>
+    <comment id="891e5df3-02fe-4043-b6ce-75a34b1ca22c" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-28 03:50:33</date>
+      <author>azer</author>
+      <email>mark2qx@gmail.com</email>
+      <country />
+      <ip>91.121.83.112</ip>
+      <website>http://freeeshopping.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Hi : Dear                                                                                                                              While earlier the internet only connected people, today it has created a boom by connecting businesses. The internet today has come out as a new medium for shopping. Online shopping has grown enormously popular and is one of the fastest growing businesses across the globe. Shopping today has surpassed the boundaries of visiting malls, shopping outlets and stores. Online shopping has changed the old-fashioned ways of shopping. Everyone, be it the men or the women, younger generation or the older, all are going online and shopping. Today a lot of companies are creating online stores and hence creating their social presence. There are stores to cater both to the needs of sellers and buyers              http://hpilaptop.info                                                                                        http://freeeshopping.com                                                                  http://freeshopping.asia                                                                                                  Thanks                                                                                                                                      Azer</content>
+    </comment>
+    <comment id="4e713acd-a84f-4a35-9b83-390d0f921585" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-28 03:51:27</date>
+      <author>azer</author>
+      <email>mark2qx@gmail.com</email>
+      <country />
+      <ip>91.121.83.112</ip>
+      <website>http://freeeshopping.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Hi : Dear                                                                                                                              While earlier the internet only connected people, today it has created a boom by connecting businesses. The internet today has come out as a new medium for shopping. Online shopping has grown enormously popular and is one of the fastest growing businesses across the globe. Shopping today has surpassed the boundaries of visiting malls, shopping outlets and stores. Online shopping has changed the old-fashioned ways of shopping. Everyone, be it the men or the women, younger generation or the older, all are going online and shopping. Today a lot of companies are creating online stores and hence creating their social presence. There are stores to cater both to the needs of sellers and buyers              http://hpilaptop.info                                                                                        http://freeeshopping.com                                                                  http://freeshopping.asia                                                                                                  Thanks                                                                                                                                      Azer</content>
+    </comment>
+    <comment id="1e044fc7-a616-4555-9f88-064fdcfa73e2" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-28 03:54:17</date>
+      <author>azer</author>
+      <email>mark2qx@gmail.com</email>
+      <country />
+      <ip>91.121.83.112</ip>
+      <website>http://freeeshopping.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Hi : Dear                                                                                                                              While earlier the internet only connected people, today it has created a boom by connecting businesses. The internet today has come out as a new medium for shopping. Online shopping has grown enormously popular and is one of the fastest growing businesses across the globe. Shopping today has surpassed the boundaries of visiting malls, shopping outlets and stores. Online shopping has changed the old-fashioned ways of shopping. Everyone, be it the men or the women, younger generation or the older, all are going online and shopping. Today a lot of companies are creating online stores and hence creating their social presence. There are stores to cater both to the needs of sellers and buyers              http://hpilaptop.info                                                                                        http://freeeshopping.com                                                                  http://freeshopping.asia                                                                                                  Thanks                                                                                                                                      Azer</content>
+    </comment>
+    <comment id="f3ff9111-21f9-44d5-ab23-6fc3ada48a8f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-21 07:34:00</date>
+      <author>vikram</author>
+      <email>vickyvikramfnt@gmail.com</email>
+      <country>in</country>
+      <ip>180.151.36.168</ip>
+      <website>http://www.fntsofttech.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>NICE BLOG!!! Thanks for your valuable information, It would be really helpful about ecommerce information Am working in &amp;lt;a href=&amp;quot;http://www.fntsofttech.com/services/web_development/web_development.php
+&amp;quot;&amp;gt;Web development company in Bangalore&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="8269e37d-1d48-41f7-8bce-871a7c4aba36" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-22 07:43:50</date>
+      <author>vikram</author>
+      <email>vickyvikramfnt@gmail.com</email>
+      <country>in</country>
+      <ip>180.151.36.168</ip>
+      <website>http://www.fntsofttech.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>NICE BLOG!!! Thanks for your valuable information, It would be really helpful about ecommerce information Am working in &amp;lt;a href=&amp;quot;http://www.fntsofttech.com/services/web_development/portal_development.php
+&amp;quot;&amp;gt;Portal development company Bangalore&amp;lt;/a&amp;gt;.</content>
+    </comment>
+    <comment id="226d9030-18ee-4bcd-8fb1-cf41fc5b2325" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-25 06:04:28</date>
+      <author>vishal bagchi</author>
+      <email>sharonstone623@gmail.com</email>
+      <country>us</country>
+      <ip>122.168.114.255</ip>
+      <website>http://aboutvishalbagchi.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>This is a great inspiring article. I am pretty much pleased with your good work. You put really very helpful information. Keep it up. Keep blogging. Looking to reading your next post.</content>
+    </comment>
+    <comment id="fa7d914f-aa68-4792-b98f-bd0b2aebf919" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-26 05:14:38</date>
+      <author>sex chat</author>
+      <email>chalsbroun2@gmail.com</email>
+      <country>us</country>
+      <ip>122.175.140.185</ip>
+      <website>http://pussycamxxx.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>The post is written in very a good manner and it entails much useful information for me. I appreciated what you have done here. I am always searching for informative information like this. Thanks for sharing with us.</content>
+    </comment>
+    <comment id="2b7f8042-b214-4689-aaa4-30e700337266" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-04-05 19:43:13</date>
+      <author>Rafii Dj</author>
+      <email>parto_6@hotmail.com</email>
+      <country>es</country>
+      <ip>80.31.254.38</ip>
+      <website>http://www.todopelys.es/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>no me va OpenGraph</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>cfcd9812-476b-43a0-ae90-69085cd9baf1</category>
+    <category>555dee8d-beef-4c87-a492-2334f4f414ea</category>
+  </categories>
+  <notifications>
+    <email>ipartha50@gmail.com</email>
+    <email>kennethbrubaker@hotmail.com</email>
+  </notifications>
+</post>

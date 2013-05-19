@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>Mads Kristensen</author>
+  <title>Remove whitespace from your pages</title>
+  <description />
+  <content>&lt;p&gt;
+Ok, this is not new. I&amp;rsquo;ve also written about this a &lt;a href="/post/Remove-whitespace-from-your-ASPNET-page.aspx"&gt;few&lt;/a&gt; &lt;a href="/post/A-whitespace-removal-HTTP-module-for-ASPNET-20.aspx"&gt;times&lt;/a&gt; &lt;a href="/post/Remove-whitespace-safely-at-runtime.aspx"&gt;in&lt;/a&gt; &lt;a href="/post/Remove-whitespace-from-stylesheets-and-JavaScript-files.aspx"&gt;the&lt;/a&gt; &lt;a href="/post/Reduce-the-weight-of-stylesheets-by-3525-at-runtime.aspx"&gt;past&lt;/a&gt;. The thing is that removing whitespace is a very tricky discipline that is different from site to site. At least that was what I thought until very recently. 
+&lt;/p&gt;
+&lt;p&gt;
+For some unexplained reason I started working on a little simple method to remove whitespace in a way so it works on all websites without breaking any HTML. Maybe not unexplained since I&amp;rsquo;ve written about it so many times that it would seem I got a secret obsession. 
+&lt;/p&gt;
+&lt;p&gt;
+Obsession or not, here is the code I ended up with after a few hours of hacking. Just copy the code onto your base page or master page and watch the magic. 
+&lt;/p&gt;
+&lt;p&gt;
+[code:c#] 
+&lt;/p&gt;
+&lt;p&gt;
+private static readonly Regex REGEX_BETWEEN_TAGS = new Regex(@&amp;quot;&amp;gt;\s+&amp;lt;&amp;quot;, RegexOptions.Compiled);&lt;br /&gt;
+private static readonly Regex REGEX_LINE_BREAKS = new Regex(@&amp;quot;\n\s+&amp;quot;, RegexOptions.Compiled);&lt;br /&gt;
+&amp;nbsp;&lt;br /&gt;
+/// &amp;lt;summary&amp;gt;&lt;br /&gt;
+/// Initializes the &amp;lt;see cref=&amp;quot;T:System.Web.UI.HtmlTextWriter&amp;quot;&amp;gt;&amp;lt;/see&amp;gt; object and calls on the child &lt;br /&gt;
+/// controls of the &amp;lt;see cref=&amp;quot;T:System.Web.UI.Page&amp;quot;&amp;gt;&amp;lt;/see&amp;gt; to render.&lt;br /&gt;
+/// &amp;lt;/summary&amp;gt;&lt;br /&gt;
+/// &amp;lt;param name=&amp;quot;writer&amp;quot;&amp;gt;The &amp;lt;see cref=&amp;quot;T:System.Web.UI.HtmlTextWriter&amp;quot;&amp;gt;&amp;lt;/see&amp;gt; that receives the page content.&amp;lt;/param&amp;gt;&lt;br /&gt;
+protected override void Render(HtmlTextWriter writer)&lt;br /&gt;
+{&lt;br /&gt;
+&amp;nbsp; using (HtmlTextWriter htmlwriter = new HtmlTextWriter(new System.IO.StringWriter()))&lt;br /&gt;
+&amp;nbsp; {&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; base.Render(htmlwriter);&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; string html = htmlwriter.InnerWriter.ToString();&lt;br /&gt;
+&amp;nbsp;&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; html = REGEX_BETWEEN_TAGS.Replace(html, &amp;quot;&amp;gt; &amp;lt;&amp;quot;);&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; html = REGEX_LINE_BREAKS.Replace(html, string.Empty);&lt;br /&gt;
+&amp;nbsp;&lt;br /&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; writer.Write(html.Trim());&lt;br /&gt;
+&amp;nbsp; }&lt;br /&gt;
+} 
+&lt;/p&gt;
+&lt;p&gt;
+[/code] 
+&lt;/p&gt;
+&lt;p&gt;
+Remember that whitespace removal speeds up rendering in especially IE and reduces the overall weight of your page. 
+&lt;/p&gt;
+</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2007-10-21 21:13:00</pubDate>
+  <lastModified>2007-10-21 21:34:10</lastModified>
+  <raters>15</raters>
+  <rating>4.666667</rating>
+  <slug>Remove-whitespace-from-your-pages</slug>
+  <tags>
+    <tag>performance</tag>
+    <tag>optimization</tag>
+    <tag>regularexpressions</tag>
+  </tags>
+  <comments>
+    <comment id="2535b550-8047-4b6e-835a-ac2a6517b451" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 02:20:02</date>
+      <author>Miron Abramson</author>
+      <email>miron.abramson@gmail.com</email>
+      <country>il</country>
+      <ip>201.213.12.13</ip>
+      <website>http://www.mironabramson.com/blog</website>
+      <content>Hi Mads,
+Good for us that you have such obsessions   ;-)
+Thanks for sharing.
+Why don't you put this code in one of the modules that already in the site?
+
+Miron</content>
+    </comment>
+    <comment id="e06bc785-4d54-4ec3-a763-46c9fe1d0bf0" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 03:50:27</date>
+      <author>Mark kemper</author>
+      <email>mkemper@xsation.net.au</email>
+      <country>au</country>
+      <ip>121.209.162.194</ip>
+      <content>I concer with Miron</content>
+    </comment>
+    <comment id="a1346815-1e9e-4956-9967-4e5ad42fe835" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 09:13:05</date>
+      <author>Fredrik</author>
+      <email>fredrik@kalseth.com</email>
+      <country>no</country>
+      <ip>84.234.179.242</ip>
+      <website>http://blog.iridescence.no/</website>
+      <content>I like the idea, but would love to see some stats on this - how does the increased rendering time server-side compare to the time saved client-side?</content>
+    </comment>
+    <comment id="a0aeb094-6545-4c6f-8510-c0627f9c007b" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 10:07:43</date>
+      <author>NinjaCross</author>
+      <email>info@ninjacross.com</email>
+      <country>it</country>
+      <ip>82.106.211.191</ip>
+      <website>http://www.ninjacross.com/</website>
+      <content>Thanks for sharing Mads, I was waiting for a 360&amp;#176; solution like this  :)</content>
+    </comment>
+    <comment id="00f5946b-4ae2-44c8-ba37-549a81926a1c" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 10:25:39</date>
+      <author>Michel</author>
+      <email>michelc@gmail.com</email>
+      <country>fr</country>
+      <ip>193.111.12.50</ip>
+      <website>http://blog.pagesd.info/</website>
+      <content>I use this sometimes, but I think you need to be careful about spaces inside TEXTAREA.</content>
+    </comment>
+    <comment id="92e8b58a-d815-4cee-84c7-71879d54d374" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 10:36:56</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country>dk</country>
+      <ip>91.143.115.78</ip>
+      <website>http://blog.madskristensen.dk/</website>
+      <content>@Michel, this technique does not change anything inside a TEXTAREA. I've also had that problem before so this version will not break things like that.</content>
+    </comment>
+    <comment id="5a8b394e-08c4-4db5-8a52-0b76e6197938" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 12:58:59</date>
+      <author>spybot</author>
+      <email>martin.knotek@webprogress.cz</email>
+      <country>cz</country>
+      <ip>81.19.10.83</ip>
+      <website>http://blog.vyvojar.cz/dotnet</website>
+      <content>Im using:
+
+System.IO.StringWriter stringWriter = new System.IO.StringWriter();
+System.Web.UI.HtmlTextWriter htmlWriter = new System.Web.UI.HtmlTextWriter(stringWriter);
+base.Render(htmlWriter);
+System.Text.StringBuilder htmlData = new System.Text.StringBuilder(stringWriter.ToString());
+
+.. move postbeck controls downpage
+
+//remove whitespace
+html.Replace(&amp;quot;  &amp;quot;, String.Empty);
+html.Replace(&amp;quot;\t&amp;quot;, String.Empty);
+html.Replace(&amp;quot;\r\n&amp;quot;, String.Empty);
+
+writer.Write(htmlData.ToString());
+
+..
+
+Do you thing REGEX is faster like stringreplace?</content>
+    </comment>
+    <comment id="2940c0e9-036b-4ae6-80fd-95c6db98cf7d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 20:09:17</date>
+      <author>Brian</author>
+      <email>brianjlowry@gmail.com</email>
+      <country>us</country>
+      <ip>67.62.205.82</ip>
+      <content>@spybot
+
+I think Regex is faster.</content>
+    </comment>
+    <comment id="028da821-4be2-4c05-9e3b-178209b86421" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-22 22:06:14</date>
+      <author>michael</author>
+      <email>michael.mccreary@vitalstrategy.com</email>
+      <country>us</country>
+      <ip>65.77.101.63</ip>
+      <content>Having issues with AJAX postback. For now I put in a condition to not do anything for Request[&amp;quot;HTTP_X_MICROSOFTAJAX&amp;quot;] == null and seems to work. Might be nice to do the same for AJAX returns though - prolly some regex magic needed.
+</content>
+    </comment>
+    <comment id="89cbaab5-073c-4698-8fa7-d3b1d548d62a" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-23 10:07:31</date>
+      <author>Dactivo</author>
+      <email>miguelangel.gonzalezm@gmail.com</email>
+      <country>es</country>
+      <ip>193.27.9.131</ip>
+      <website>http://netadictos.weblog.discapnet.es/</website>
+      <content>This piece of code isn't working for me in textareas where you include more than one line break:
+
+private static readonly Regex REGEX_LINE_BREAKS = new Regex(@&amp;quot;\n\s+&amp;quot;, RegexOptions.Compiled);
+
+Right now i am using only the first regex, but it would be great to have a piece of code that solves this, without affecting the content in textareas.</content>
+    </comment>
+    <comment id="b778a0c8-7988-477c-9ae5-375ec7633b02" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-29 16:09:10</date>
+      <author>mhinze.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>208.97.167.25</ip>
+      <website>http://mhinze.com/21-links-today-2007-10-29/</website>
+      <content>Pingback from mhinze.com
+
+21 Links Today (2007-10-29)</content>
+    </comment>
+    <comment id="cf13a279-ca20-42f7-8446-fc9dd2c920d2" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-11-16 03:02:37</date>
+      <author>huobazi</author>
+      <email>huobazi@aspxboy.com</email>
+      <country>cn</country>
+      <ip>61.185.224.83</ip>
+      <website>http://www.devedu.com/</website>
+      <content>but when my page any  contain javascript comment 
+such as
+
+&amp;lt;script type=&amp;quot;javascript&amp;quot;&amp;gt;
+// here is  a line comment.
+var myComment = &amp;quot;a line comment&amp;quot;;
+alert(myComment);
+&amp;lt;/script&amp;gt;
+
+when remove the &amp;quot;\n&amp;quot; 
+
+it was changed to 
+
+&amp;lt;script type=&amp;quot;javascript&amp;quot;&amp;gt;// here is  a line comment. var myComment = &amp;quot;a line comment&amp;quot;; alert(myComment);&amp;lt;/script&amp;gt;
+
+so... javascript error.
+
+how ???
+</content>
+    </comment>
+    <comment id="12a0fd94-d874-48c8-bda6-b13fc7325c78" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-03-24 14:14:05</date>
+      <author>sharona</author>
+      <email>sharona@spam.la</email>
+      <country>do</country>
+      <ip>81.169.137.209</ip>
+      <website>http://www.spam.la/</website>
+      <content>Converted to VB.net and works perfect! Thank you!!</content>
+    </comment>
+    <comment id="13b4a0f0-3953-457f-8ae6-bfd0902a03e2" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-04-03 22:34:34</date>
+      <author>alex</author>
+      <email>alejandro.alema@gmail.com</email>
+      <country>mx</country>
+      <ip>200.67.139.88</ip>
+      <content>Hi,
+
+I really would like to use this, but i have one problem and i think you are the guru so i will explain you:
+
+I need to remove tabs, whitespaces, and line breaks but only for the text outside the tags &amp;lt;report&amp;gt;&amp;lt;/report&amp;gt; (this is non standard i think, but we use it on a specific platform to generate reports)
+
+So the content:
+
+[quote]
+&amp;lt; p align = &amp;quot;center&amp;quot; &amp;gt; Hello              World!!&amp;lt; /p &amp;gt;
+ Follows is the report :
+&amp;lt;report&amp;gt;
+Hello everybody the balance is         : 250.00 usd
+
+You can use it until tomorrow 
+
+        Regards        
+&amp;lt;/report&amp;gt;[/quote]
+
+This should finish like this:
+[quote]
+&amp;lt;p align=&amp;quot;center&amp;quot;&amp;gt;Hello World!!&amp;lt;/p&amp;gt;Follows is the report:&amp;lt;report&amp;gt;
+Hello everybody the balance is         : 250.00 usd
+
+You can use it until tomorrow 
+
+        Regards        &amp;lt;/report&amp;gt;
+[/quote]
+
+I hope you can answer me Mads or someone other with expertise.
+
+Thank you very much!</content>
+    </comment>
+    <comment id="a5a41c51-ff4e-4835-868d-c2abea83707e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-04-23 22:40:16</date>
+      <author>pimp.webdevelopernews.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>66.28.139.79</ip>
+      <website>http://pimp.webdevelopernews.com/2007/10/22/removing-whitespace-from-your-pages-with-aspnet/</website>
+      <content>Pingback from pimp.webdevelopernews.com
+
+Removing Whitespace From Your Pages With ASP.NET</content>
+    </comment>
+    <comment id="16ed4ece-7f8a-430e-b8d3-f56cfdfc1013" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-07-17 13:12:34</date>
+      <author>Alex</author>
+      <email>NagornovAlex@gmail.com</email>
+      <country>by</country>
+      <ip>217.21.35.104</ip>
+      <content>The idea is good and worth trying. But check twice before going live. This method ruins your ajax and javascript if you use any. </content>
+    </comment>
+    <comment id="0cbe3cb8-9fe9-4eb0-94ac-eb1b23afab7c" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-09-14 06:41:16</date>
+      <author>Zack Owens</author>
+      <email>trackback</email>
+      <country />
+      <ip>66.129.67.214</ip>
+      <website>http://weblogs.asp.net/zowens/archive/2008/09/14/asp-net-mvc-remove-page-whitespace.aspx</website>
+      <content>ASP.NET MVC: Remove Page Whitespace
+
+I just spent a whole 4 hours trying to figure out the best way to get my whitespace off my rendered HTML</content>
+    </comment>
+    <comment id="60fad17a-b163-4ce8-a3a0-ada7c8d0034e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-09-24 15:44:06</date>
+      <author>Nino</author>
+      <email>ninodaversa@gmail.com</email>
+      <country>ca</country>
+      <ip>66.11.94.81</ip>
+      <content>Have you been able to get this to work with AJAX? I dosen't work for postbacks
+</content>
+    </comment>
+    <comment id="7c853c5e-ef96-4548-a17d-8b4eb6f7691e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-10-27 17:21:02</date>
+      <author>Al</author>
+      <email>madskristensen@tenhundfeld.org</email>
+      <country>us</country>
+      <ip>24.75.89.130</ip>
+      <content>I'll second Nino's comment: has anyone gotten a whitespace removal solution to work with ASP.NET AJAX postbacks? 
+
+Yes, there are ways to make whitespace removal work for the standard requests and be disabled for AJAX requests, but I've been unable to find a solution that will successfully trim the whitespace in AJAX postbacks.</content>
+    </comment>
+    <comment id="e567dbe7-a639-43a3-8225-f06c8d8986c8" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2009-02-09 01:50:20</date>
+      <author>Barry Jones</author>
+      <email>barry.jones@redwoodcommerce.com</email>
+      <country>us</country>
+      <ip>72.211.248.175</ip>
+      <website>http://www.redwoodcommerce.com/</website>
+      <content>Thanks for the great article, it has been really useful in the sites that I have developed.
+
+I struggled on the asp.net AJAX post-back for a while until I looked at the source code for the page and noticed that the function [quote]__doPostBack[/quote] was surrounded by JavaScript comments //.
+
+[quote]//&amp;lt;![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]&amp;gt;
+[/quote]
+
+After the white space compression has removed tabs, newlines etc the JavaScript above appears on one line. This makes the whole thing appear as a comment and therefore the reason you get problems with post backs in .Net when using AJAX.
+
+
+The solution I wrote for my sites is:
+
+[quote]    html = REGEX_BETWEEN_TAGS.Replace(html, &amp;quot;&amp;gt; &amp;lt;&amp;quot;);
+    html = REGEX_LINE_BREAKS.Replace(html, string.Empty);
+    html = html.Replace(&amp;quot;\r&amp;quot;, &amp;quot;&amp;quot;);
+    html = html.Replace(&amp;quot;//&amp;lt;![CDATA[&amp;quot;, &amp;quot;&amp;quot;);
+    html = html.Replace(&amp;quot;//]]&amp;gt;&amp;quot;, &amp;quot;&amp;quot;);
+    html = html.Replace(&amp;quot;\n&amp;quot;, &amp;quot;&amp;quot;);[/quote]
+
+</content>
+    </comment>
+    <comment id="d93ea69e-0ea8-45e8-b8b3-48fdeae3693d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2010-03-27 10:20:36</date>
+      <author>klaus_b@.NET</author>
+      <email>trackback</email>
+      <country />
+      <ip>213.239.211.109</ip>
+      <website>http://blog.klaus-b.net/post/2010/02/13/Nutzlosen-Whitespace-zur-Laufzeit-aus-dem-HTML-entfernen.aspx</website>
+      <content>Nutzlosen Whitespace zur Laufzeit aus dem HTML entfernen
+
+Nutzlosen Whitespace zur Laufzeit aus dem HTML entfernen</content>
+    </comment>
+    <comment id="9d728fc8-548a-4e3e-837b-f2d108c40f97" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-22 06:06:08</date>
+      <author>html.deveronline.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>184.168.152.9</ip>
+      <website>http://html.deveronline.com/html-language-development/22/asp-net-line-breaks-in-title-element.html</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from html.deveronline.com
+
+ASP.NET Line Breaks in Title Element | HTML Language Development | HTML Language Development</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>cfcd9812-476b-43a0-ae90-69085cd9baf1</category>
+  </categories>
+  <notifications>
+    <email>miron.abramson@gmail.com</email>
+    <email>mkemper@xsation.net.au</email>
+    <email>martin.knotek@webprogress.cz</email>
+    <email>michael.mccreary@vitalstrategy.com</email>
+    <email>miguelangel.gonzalezm@gmail.com</email>
+    <email>alejandro.alema@gmail.com</email>
+    <email>ninodaversa@gmail.com</email>
+    <email>madskristensen@tenhundfeld.org</email>
+  </notifications>
+</post>

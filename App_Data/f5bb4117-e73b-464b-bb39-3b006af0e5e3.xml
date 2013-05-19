@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>Mads Kristensen</author>
+  <title>Remove whitespace from stylesheets and JavaScript files</title>
+  <description />
+  <content>&lt;p&gt;
+   There is a lot of whitespace in both stylesheets and JavaScript files. This is because
+   of indented text and line breaks to name a few. They are typically also filled with
+   comments to make them more maintainable. Believe it or not, it all adds up substantially
+   to the overall file size. My tests show that stylesheets can be reduced by more than
+   30% and JavaScript files by 20%. That’s a lot. 
+&lt;/p&gt;
+&lt;p&gt;
+   I made two C# classes, which implement the IHttpHandler interface, one for stylesheets
+   and one for JavaScript files. The easiest way to implement them is simply to add this
+   line to the &amp;lt;system.web&amp;gt; section of the web.config. 
+&lt;/p&gt;
+&lt;p&gt;
+   &amp;lt;httpHandlers&amp;gt;&lt;br&gt;
+   &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;lt;add verb="*" path="*.js" type="ScriptHandler" validate="false"/&amp;gt;&lt;br&gt;
+   &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;lt;add verb="*" path="*.css" type="CssHandler" validate="false"/&amp;gt;&lt;br&gt;
+   &amp;lt;/httpHandlers&amp;gt;
+&lt;/p&gt;
+&lt;p&gt;
+   You also have to make sure that the IIS lets the ASP.NET ISAPI filter handle files
+   with .css and .js extensions.
+&lt;/p&gt;
+&lt;p&gt;
+   The classes use regular expressions to remove whitespace and comments. Then it caches
+   the cleaned file and adds a dependency to the real .css/.js file on disk. Every time
+   you change the source file, the cache reloads. 
+&lt;/p&gt;
+&lt;p&gt;
+   In order to remove comments properly, you should use the /*&amp;nbsp; …&amp;nbsp; */ syntax
+   and not //. Further more, it can be a problem for the JavaScript handler if a line
+   isn’t closed with a semicolon. Enjoy.&lt;br&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/p&gt;
+&lt;a HREF="/file.axd?file=httphandlers.zip"&gt;httphandlers.zip
+(1,95 KB)&lt;/a&gt;&lt;img WIDTH="0" HEIGHT="0" SRC="http://www.madskristensen.dk/blog/aggbug.ashx?id=b99bc31a-82b6-4e63-bd9d-f5605d489a6b" /&gt;</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2006-02-12 15:57:06</pubDate>
+  <lastModified>0001-01-01 03:00:00</lastModified>
+  <raters>3</raters>
+  <rating>5</rating>
+  <slug>Remove-whitespace-from-stylesheets-and-JavaScript-files</slug>
+  <tags />
+  <comments>
+    <comment id="1164a194-d69f-4523-9e21-d629a14edae9" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-26 02:00:26</date>
+      <author>Josh Stodola</author>
+      <email>josh420@josh420.com</email>
+      <country>us</country>
+      <ip>76.84.42.71</ip>
+      <website>http://blog.josh420.com/</website>
+      <content>&amp;gt;&amp;gt; You also have to make sure that the IIS lets the ASP.NET ISAPI filter handle files with .css and .js extensions. &amp;lt;&amp;lt;
+
+It would be awesome if you could elaborate on how to do this.
+
+Best regards...</content>
+    </comment>
+    <comment id="246099c5-85b7-4056-b143-a560a5838368" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-10-28 03:43:35</date>
+      <author>Josh Stodola</author>
+      <email>josh420@josh420.com</email>
+      <country>us</country>
+      <ip>76.84.42.71</ip>
+      <website>http://blog.josh420.com/</website>
+      <content>Nevermind, I got it figured out.  I also changed it to recognize &amp;quot;CSS Naked Day&amp;quot;.
+
+Thanks dude!</content>
+    </comment>
+    <comment id="65caefb4-2b38-48ec-bcfa-584dbb8266f5" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2007-11-30 16:44:10</date>
+      <author>ajit goel</author>
+      <email>ajitgoel@gmail.com</email>
+      <country>us</country>
+      <ip>71.154.18.246</ip>
+      <content>&amp;gt;&amp;gt; You also have to make sure that the IIS lets the ASP.NET ISAPI filter handle files with .css and .js extensions. &amp;lt;&amp;lt; 
+
+It would be awesome if you could elaborate on how to do this. Do I need to make changes using the IIS manager for my site?? 
+
+Best Regards;
+
+Ajit Goel</content>
+    </comment>
+    <comment id="d7421104-5297-4989-ae52-5131bbfe3cfa" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-04-04 09:55:56</date>
+      <author>Rainynight</author>
+      <email>rainynight_6889@yahoo.com</email>
+      <country>ir</country>
+      <ip>85.198.53.191</ip>
+      <content>it conflict with CompressionModule :(</content>
+    </comment>
+    <comment id="55a02108-9805-4bff-8a8b-86c29dfac4e3" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2008-04-23 22:40:14</date>
+      <author>pimp.webdevelopernews.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>66.28.139.79</ip>
+      <website>http://pimp.webdevelopernews.com/2007/10/22/removing-whitespace-from-your-pages-with-aspnet/</website>
+      <content>Pingback from pimp.webdevelopernews.com
+
+Removing Whitespace From Your Pages With ASP.NET</content>
+    </comment>
+    <comment id="44b17ec9-5f5d-45d0-8e1b-1ca5db7ac459" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-02-26 08:11:24</date>
+      <author>aspnet.deveronline.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>184.154.137.178</ip>
+      <website>http://aspnet.deveronline.com/asp-net-developed-tutorials/26/resource-js-css-compression-minification-and-versioning.html</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from aspnet.deveronline.com
+
+Resource (JS, CSS) compression, minification, and versioning | Asp.Net developed Tutorials | Asp.Net Developed Tutorials</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>cfcd9812-476b-43a0-ae90-69085cd9baf1</category>
+  </categories>
+  <notifications />
+</post>

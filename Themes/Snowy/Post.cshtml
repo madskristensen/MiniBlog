@@ -1,0 +1,13 @@
+﻿@{
+    Page.Title = Model.Title;   
+}
+
+<article class="post">
+    <header>
+        <h1>
+            <a href="/@Model.Slug">@Model.Title</a>
+        </h1>
+    </header>
+
+    <div>@Html.Raw(Model.Content)</div>
+</article>

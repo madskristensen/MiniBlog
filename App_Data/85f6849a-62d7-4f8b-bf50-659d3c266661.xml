@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>Mads Kristensen</author>
+  <title>Web Essentials nightly builds</title>
+  <description />
+  <content>&lt;p&gt;Many Web Essentials users have requested a more formal process around nightly builds, that should result in a better delivery and update mechanism. To make it really easy to always run the latest and greatest, I&amp;rsquo;ve now created a custom feed for the &lt;em&gt;Extensions and Updates&lt;/em&gt; dialog in Visual Studio 2012.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s how it works:&lt;/p&gt;
+&lt;p&gt;Go to &lt;em&gt;Tools &amp;gt; Options&lt;/em&gt; and open the the tab located under &lt;em&gt;Environment &amp;ndash;&amp;gt; Extensions and Updates&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://madskristensen.net/image.axd?picture=image_56.png"&gt;&lt;img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="image" src="http://madskristensen.net/image.axd?picture=image_thumb_33.png" alt="image" width="644" height="379" border="0" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Click the &lt;em&gt;Add&lt;/em&gt; button and type &amp;ldquo;Web Essentials Nightly&amp;rdquo; in the &lt;em&gt;Name&lt;/em&gt; field and &amp;ldquo;&lt;a href="http://vswebessentials.com/nightly/feed.ashx" target="_blank"&gt;http://vswebessentials.com/nightly/feed.ashx&lt;/a&gt;&amp;rdquo; in the &lt;em&gt;URL&lt;/em&gt; field. Now click the &lt;em&gt;Apply&lt;/em&gt; button and you&amp;rsquo;re all set. Now click the &lt;em&gt;OK&lt;/em&gt; button to exit the Options dialog.&lt;/p&gt;
+&lt;p&gt;Now the custom feed shows up in the Extensions dialog. Go to &lt;em&gt;Tools &amp;gt; Extensions and Updates&amp;hellip;&lt;/em&gt; to verify that the new feed is working. You should have a new sub category under the &lt;em&gt;Online&lt;/em&gt; tab called &amp;ldquo;Web Essentials Nightly&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="image" src="http://madskristensen.net/image.axd?picture=image_57.png" alt="image" width="613" height="258" border="0" /&gt;&lt;/p&gt;
+&lt;p&gt;The Nightly build shares the same extension ID as the official released versions of Web Essentials, so the newest one will always override the one installed &amp;ndash; regardless if it&amp;rsquo;s the nightly build or the official version. And updates will work normally.&lt;/p&gt;
+&lt;p&gt;In other words, it should be perfectly safe to use this custom feed without any changes to how the update mechanism works from the user&amp;rsquo;s point of view. Only difference is that with this new feed, you can get the updates much faster than before.&lt;/p&gt;
+&lt;p&gt;Give it a try and let me know what you think.&lt;/p&gt;</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2012-12-02 14:44:00</pubDate>
+  <lastModified>2012-12-30 09:05:38</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>Web-Essentials-nightly-builds</slug>
+  <tags>
+    <tag>web essentials</tag>
+    <tag>visual studio</tag>
+    <tag>extensions</tag>
+  </tags>
+  <comments>
+    <comment id="b1b2f47a-4115-4dc6-8554-9e39d13c77ee" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-12-03 03:13:00</date>
+      <author>David Rose</author>
+      <email>vido.ardes@gmail.com</email>
+      <country>gb</country>
+      <ip>46.65.103.27</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Great way to get the latest fixes! Is there a change-log available?</content>
+    </comment>
+    <comment id="bd36fc08-b99e-4401-bce5-fd5e2cb2b0c0" parentid="b1b2f47a-4115-4dc6-8554-9e39d13c77ee" approved="True" spam="False" deleted="False">
+      <date>2012-12-05 00:55:33</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country>us</country>
+      <ip>174.127.225.204</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>There is no change log, but I&amp;#39;ll try to update the description in the extensions dialog to show the changes</content>
+    </comment>
+    <comment id="2e724192-7620-4a03-810a-bc71dfe1224e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-12-05 15:32:29</date>
+      <author>Jon Kragh</author>
+      <email>jon@jonkragh.com</email>
+      <country>us</country>
+      <ip>173.63.187.240</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Nice solution, love web essentials!</content>
+    </comment>
+    <comment id="cd8b52bd-72f3-4c52-9d2c-a6a385396fc2" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-12-06 17:02:16</date>
+      <author>Kamran Ayub</author>
+      <email>kamran.ayub@gmail.com</email>
+      <country>us</country>
+      <ip>146.217.200.214</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>TIL that VS 2012 allows custom extension feeds.
+
+You&amp;#39;ve just made our internal Power Tools extension deployment much easier my friend.</content>
+    </comment>
+    <comment id="11f612fc-3b04-4c3e-b681-961561e126f5" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2012-12-08 17:33:53</date>
+      <author>maison container</author>
+      <email>freeglobes_fr@hotmail.fr</email>
+      <country>fr</country>
+      <ip>88.180.44.74</ip>
+      <website>http://tiny.cc/maisoncontainer</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Article super interessant. Beaucoup de discernement dans tes explications. Je met ca en favoris. Merci pour le partage !</content>
+    </comment>
+    <comment id="09eed389-c4d2-4a03-b84e-c428bf87e227" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-12-11 15:47:52</date>
+      <author>matricis.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>23.23.227.122</ip>
+      <website>http://matricis.com/en/reading-notes/reading-notes-2012-12-10/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from matricis.com
+
+Reading Notes 2012-12-10 | Matricis</content>
+    </comment>
+    <comment id="68fa8294-d608-4584-b126-9aa8c9f9e84e" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-12-12 22:48:39</date>
+      <author>James Hancock</author>
+      <email>jhancockdarwin@gmail.com</email>
+      <country>us</country>
+      <ip>75.68.122.109</ip>
+      <website>http://www.tradepoint360.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Just fired it up, looks good except I still can&amp;#39;t get Typescript files to edit properly. They&amp;#39;re all gray text with no syntax highlighting or anything.... What am I doing wrong?</content>
+    </comment>
+    <comment id="69813c92-ee6c-405e-9674-280f7d19427f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2012-12-13 03:55:24</date>
+      <author>male enhancement</author>
+      <email>erectz@hotmail.com</email>
+      <country>us</country>
+      <ip>59.90.209.155</ip>
+      <website>http://www.erectz.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Subsequently, after spending many hours on the internet at last We&amp;#39;ve uncovered an individual that definitely does know what they are discussing many thanks a great deal wonderful post.</content>
+    </comment>
+    <comment id="492defe4-86d6-452a-a878-bc21bc7e332b" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2012-12-14 05:53:58</date>
+      <author>Rajeesh</author>
+      <email>cvrajeesh@gmail.com</email>
+      <country>in</country>
+      <ip>27.251.162.82</ip>
+      <website>http://www.rajeeshcv.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>That&amp;#39;s wonderful,  thanks for putting this up.</content>
+    </comment>
+    <comment id="110395c6-f9a3-4ee4-bd30-15df6d3e5e1e" parentid="68fa8294-d608-4584-b126-9aa8c9f9e84e" approved="True" spam="False" deleted="False">
+      <date>2012-12-14 07:57:33</date>
+      <author>James Hancock</author>
+      <email>jhancockdarwin@gmail.com</email>
+      <country>us</country>
+      <ip>75.68.122.109</ip>
+      <website>http://www.tradepoint360.com/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>For anyone else with this issue.... you need to manually run the typescript.wsix from the install directory and then everything starts working...
+
+Unfortunately your visual studio will also start crashing like crazy once you do this with the current version 0.8.1.1 but...</content>
+    </comment>
+    <comment id="909ca6c5-7c47-4736-afdb-a97606b101dd" parentid="492defe4-86d6-452a-a878-bc21bc7e332b" approved="False" spam="True" deleted="True">
+      <date>2012-12-27 04:42:37</date>
+      <author>orlando roofing contractor </author>
+      <email>contractororlandoroofing@gmail.com</email>
+      <country>us</country>
+      <ip>202.134.13.142</ip>
+      <website>http://www.johnsonroofingorlando.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>This was a really quality post. In theory I&amp;#39;d like to write like this too - taking time and real effort to make a good article... but what can I say... I procrastinate alot and never seem to get something done.</content>
+    </comment>
+    <comment id="26c23ee9-f4d0-4bee-9dcc-b548ef75fb7e" parentid="492defe4-86d6-452a-a878-bc21bc7e332b" approved="False" spam="True" deleted="True">
+      <date>2012-12-27 04:45:17</date>
+      <author>orlando roofing contractor</author>
+      <email>contractororlandoroofing@gmail.com</email>
+      <country>us</country>
+      <ip>202.134.13.142</ip>
+      <website>http://www.johnsonroofingorlando.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Troubles have a way of striking us when we least expect them. We are almost always unprepared for all the adjustments that come with any kind of accidents which are a common sight these days owing to the risky lives we lead. There are very few people we can rely on as we move through these lean periods and Austin personal injury lawyer is one among them. </content>
+    </comment>
+    <comment id="da2d834e-9b53-439e-ae35-8d6b9e47f0c7" parentid="09eed389-c4d2-4a03-b84e-c428bf87e227" approved="False" spam="True" deleted="True">
+      <date>2012-12-27 04:46:49</date>
+      <author>orlando roofing contractor</author>
+      <email>contractororlandoroofing@gmail.com</email>
+      <country>us</country>
+      <ip>202.134.13.142</ip>
+      <website>http://www.johnsonroofingorlando.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>You made great points there. I made a search on the topic and found most peoples will agree with your blog.</content>
+    </comment>
+    <comment id="6671636e-3410-49b5-ba5d-82ceed2731a7" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2012-12-30 12:05:38</date>
+      <author>bybe</author>
+      <email>simonhayter@gmail.com</email>
+      <country>gb</country>
+      <ip>86.129.52.20</ip>
+      <website>http://www.bybe.net/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>Thanks once again for the nightly updates, these are superb.</content>
+    </comment>
+    <comment id="fd89a04d-bf0b-449d-b90d-f11711768c18" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-02 21:00:15</date>
+      <author>Cory</author>
+      <email>cory@deppen.us</email>
+      <country>us</country>
+      <ip>65.12.178.105</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>I&amp;#39;ve uninstalled the previous version but I get an error &amp;quot;The extension could not be installed because the following error occurred: The remote server returned an error: (404) Not Found.&amp;quot; when trying to install the nightly build.</content>
+    </comment>
+    <comment id="010160b8-d26c-43cf-b089-db12da9fbe41" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-03 12:12:25</date>
+      <author>Diego Terzano</author>
+      <email>diego.terzano@gmail.com</email>
+      <country>us</country>
+      <ip>24.51.207.52</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Same error as Cory. Nightly 2.2.5 won&amp;#39;t install. I get a 404 error on the Feed. Using the older feed url (madskrintensen.net/....) works but the plugin fails to install saying it is already present. I have 2.2.3.2 at the moment, not 2.2.5</content>
+    </comment>
+    <comment id="5865dc83-0b45-4244-a5a8-a05882de48b3" parentid="bd36fc08-b99e-4401-bce5-fd5e2cb2b0c0" approved="False" spam="True" deleted="False">
+      <date>2013-01-18 00:22:56</date>
+      <author>linux virtual server hosting</author>
+      <email>Marks.tylor@gmail.com</email>
+      <country>in</country>
+      <ip>103.23.124.6</ip>
+      <website>http://www.alphavbox.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>i enjoyed .Net slave  every little bit part of it. It contains truly information. I want to thank you for this informative read; I really appreciate sharing this great.</content>
+    </comment>
+    <comment id="3e058aca-0e89-4e75-8fde-2647cdbfad95" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-06 03:40:43</date>
+      <author>Mobile website design</author>
+      <email>charliealexander214@yahoo.com</email>
+      <country>ph</country>
+      <ip>112.198.64.39</ip>
+      <website>http://www.spiderwebmobi.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Probably one of the most reliable source of information on the web today.</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>5680ea4a-449d-43a5-b2b8-3646f61b3eab</category>
+  </categories>
+  <notifications>
+    <email>vido.ardes@gmail.com</email>
+    <email>erectz@hotmail.com</email>
+    <email>cory@deppen.us</email>
+  </notifications>
+</post>

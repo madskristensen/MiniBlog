@@ -1,0 +1,907 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>Mads Kristensen</author>
+  <title>CSS speed typing for Visual Studio</title>
+  <description />
+  <content>&lt;p&gt;For the past few months, I’ve been looking at how to improve the web development experience in Visual Studio. This summer I released the &lt;a href="http://visualstudiogallery.msdn.microsoft.com/a15c3ce9-f58f-42b7-8668-53f6cdc2cd83" target="_blank"&gt;Web Standards Update&lt;/a&gt; which brings HTML5 and CSS3 to Visual Studio, and a few weeks back &lt;a href="http://visualstudiogallery.msdn.microsoft.com/6ed4c78f-a23e-49ad-b5fd-369af0c2107f" target="_blank"&gt;Web Essentials&lt;/a&gt; was published. &lt;/p&gt;  &lt;p&gt;This week I’ve been working on a proof of concept that eliminates the need for typing curly braces, colons and semi-colons when working with CSS. In non-English keyboard layouts, these characters can be rather difficult to type, because you need to use SHIFT and ALT to get to them. &lt;/p&gt;  &lt;p&gt;Here is a quick demonstration of how to write CSS without the need for these characters.&lt;/p&gt;  &lt;div style="padding-bottom: 0px; padding-left: 0px; width: 434px; padding-right: 0px; display: block; float: none; margin-left: auto; margin-right: auto; padding-top: 0px" id="scid:53357c8b-5919-4e32-8c25-305d27c17a37:3ac2bb83-741d-45ca-9a52-19542f4b4274" class="wlWriterEditableSmartContent"&gt;&lt;embed src="http://www.youtube.com/v/_FmIWfGNxE8" type="application/x-shockwave-flash" wmode="transparent" width="434" height="357"&gt;&lt;/embed&gt;&lt;/div&gt;  &lt;p&gt;I’ve been using this for about a day now on an English keyboard and I am so much more productive writing CSS. What I’m really interested in though, is whether or not YOU are when using this extension. Also, is it annoying, in your way, a waste of time, or the best thing EVAR!! Please try it out and let me know. I’d appreciate any feedback on this. Thank you!&lt;/p&gt;  &lt;h2&gt;Try it today!&lt;/h2&gt;  &lt;p&gt;&lt;a href="http://madskristensen.net/custom/SpeedTyping1.0.vsix"&gt;Download the SpeedTyping extension&lt;/a&gt; for Visual Studio 2010 and let me know what you think on &lt;a href="http://twitter.com/mkristensen" target="_blank"&gt;Twitter&lt;/a&gt;&lt;/p&gt;  &lt;p&gt;Who knows, we might add this to the next version of Visual Studio…&lt;/p&gt;</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2011-11-17 20:36:13</pubDate>
+  <lastModified>2011-11-28 10:35:43</lastModified>
+  <raters>7</raters>
+  <rating>5</rating>
+  <slug>CSS-speed-typing-for-Visual-Studio</slug>
+  <tags>
+    <tag>visual studio</tag>
+    <tag>video</tag>
+    <tag>css</tag>
+  </tags>
+  <comments>
+    <comment id="abbbc99f-cc4e-483f-b5ea-d919ba833ec9" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2011-11-17 21:56:56</date>
+      <author>Brennan Stehling</author>
+      <email>offwhite@gmail.com</email>
+      <country>us</country>
+      <ip>184.59.4.151</ip>
+      <content>Typing faster can be  a big help, but well over 80% of my time in CSS will be in making sense of a mess that was created long before I arrived. Today I worked in a CSS file which was over 3000 lines long and assembled over the past year by multiple contributors. If I were to define a set of killer features it would be to better make sense of a complex CSS file. Being able to relate files like you can with JavaScript files would be helpful. Being able to tell the editor how this CSS file relates to others which are in the project locally and even remotely would be very helpful. One difficulty with CSS is side effects due to conflicting selectors, possibly because you did not know that a class selector was specifying a width and you thought the class name you just created was already in place somewhere else in the CSS file you are editing or even in another file entirely. It would be a huge help to show a window alongside the CSS editor which would show these complex relationships and help point out how the current selector and ruleset relates to what else is there. When you can help the developer conceptualize a large CSS file that would truly cut down on their work load because I really find myself reading CSS that I ever do in writing it.
+
+A secondary feature I would then leverage with these features is to break up blocks of CSS into separate files which can later be assembled into a single file without difficulty. I recently leveraged AjaxMin from Microsoft to power an MVC Controller which assembled a set of CSS files into a single output file for use live on the web site. During development the developer can have the CSS outputted without minification to assist with debugging layouts and once it is deployed the CSS (and JS) would be minified. The extra benefit of this approach is that I can break sections of CSS coding into separate files, document the techniques which are being used even with links to blogs about those techniques, which are then stripped out when the CSS is minified. I find this greatly speeds up development because the developer can organize the CSS better and document workarounds which are still very much necessary for a wide range of desktop and mobile viewers.
+
+Then there is Less which may mix this up a bit, but a workflow to also work Less into the mix would be great. So far I have not bothered with Less because I do want syntax support from my IDE. Once I am satisfied that I can get great support for Less I will switch to it in a heartbeat. But if I could mix legacy CSS with Less so that I can get the features I listed above I could really work Less into my projects more easily and greatly simplify my work and really focus on the real features of the web site instead of the complexity of a garbled mess of CSS.</content>
+    </comment>
+    <comment id="843a8d34-b028-4a09-90f0-b0cfe7e919c7" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2011-11-24 15:25:19</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country>us</country>
+      <ip>71.35.174.21</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>test</content>
+    </comment>
+    <comment id="56f6b24f-9747-4d26-9730-3f00b56acedb" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2011-11-24 15:54:02</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country>us</country>
+      <ip>71.35.174.21</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>Huge stylesheets are always an issue to maintain. I&amp;#39;m planning to add some sort of refactoring to Web Essentials to help this. Also a CSSCop would be very helpful in this regard.
+
+LESS support is already in the extension gallery. Search for Web Workbench by Mindscape. Web Essentials play nicely with both LESS and SaSS when using Web Workbench</content>
+    </comment>
+    <comment id="cab927fa-7439-4a38-bb9a-85ed78c099e2" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-24 18:01:34</date>
+      <author>Kate Admes</author>
+      <email>AdamBrockic@hotmail.com</email>
+      <country>us</country>
+      <ip>199.19.104.146</ip>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>Great to see a website with respectable content material these days.</content>
+    </comment>
+    <comment id="64ce7f9d-b8c5-4c87-8520-8ac2e720f0ef" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-24 19:15:59</date>
+      <author>lipo</author>
+      <email>Dally@ymail.com</email>
+      <country>us</country>
+      <ip>186.192.5.206</ip>
+      <website>http://tritigen.ari.gov.cy/userinfo.php?uid=105658</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Nice blog.keep up the good work.</content>
+    </comment>
+    <comment id="4aeeed5a-8b84-46b2-a4e3-b2fc777bb4cb" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-24 20:13:11</date>
+      <author>free ipad 2</author>
+      <email>Pretti@gmail.com</email>
+      <country>us</country>
+      <ip>117.103.197.12</ip>
+      <website>http://premium4free.org/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>I was very pleased to find this web-site.I wanted to thanks for your time for this wonderful read!! I definitely enjoying every little bit of it and I have you bookmarked to check out new stuff you blog post.
+</content>
+    </comment>
+    <comment id="bd0f3947-8523-4c4e-bfc8-604d53eb5225" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:04:13</date>
+      <author>article rewriter</author>
+      <email>Mccarthy8601@hotmail.com</email>
+      <country>us</country>
+      <ip>111.118.246.67</ip>
+      <website>http://ntechmedia.in/rewrite/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hello there, just became alert to your blog through Google, and found that it is really informative. I’m gonna watch out for brussels. I’ll be grateful if you continue this in future. A lot of people will be benefited from your writing. Cheers!</content>
+    </comment>
+    <comment id="9e079303-d358-46ab-a3d7-af572fd8905c" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:05:54</date>
+      <author>ugg boot uk</author>
+      <email>bushizhendeba@hotmail.com</email>
+      <country>us</country>
+      <ip>79.143.176.157</ip>
+      <website>http://www.uggaustraliauggsbootuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>that they were hardly ever noticed being a model accessory. The fiendish genius of UGG Australia was to generate women, and now some metrosexualised guys, put on them as &amp;#161;&amp;#234;100-plus style statements despite that ugliness.</content>
+    </comment>
+    <comment id="dff8d081-67ed-4338-9425-741812284e6b" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:06:38</date>
+      <author>uggs boots bailey</author>
+      <email>xuxu195@hotmail.com</email>
+      <country>us</country>
+      <ip>109.164.248.10</ip>
+      <website>http://www.cheapuggsbootsbailey.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content> The 205 Capulin is really a wonderful variation of your nonetheless-in, hiking-fashion boot, along with the 135 Chaucer style is usually that nearly unthinkable point - UGG Australia shoes you may wear to perform.</content>
+    </comment>
+    <comment id="943b44fa-35e5-4bae-91ec-26a0a6bf009a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:08:52</date>
+      <author>cheap uggs boots</author>
+      <email>kity1112011@126.com</email>
+      <country>us</country>
+      <ip>91.228.149.9</ip>
+      <website>http://www.cheapuggsbootsbailey.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>First, woman celebrities including Sarah Jessica Parker and Jennifer Aniston started to become photographed slouching from Starbucks to carpark in UGG Australia boots, then Oprah Winfrey championed them: previously due to the fact, the virus has been uncontainable.</content>
+    </comment>
+    <comment id="2df21453-791b-4944-88ad-6f7e7c22f339" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:09:32</date>
+      <author>uggs boot uk</author>
+      <email>recognizable89@gmail.com</email>
+      <country>us</country>
+      <ip>178.49.100.138</ip>
+      <website>http://www.australianuggsbootuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Mencyclopaedia: Outdated England For UGG haters, nonetheless, there exists hope. The continuous conversion of ridiculous-hunting guys (sadly the the moment imperious Warney now falls into this category) into UGG wearers may possibly just prove to be Decker&amp;#39;s equivalent of Burberry&amp;#39;s verify second.</content>
+    </comment>
+    <comment id="2b2bfb1f-e1a2-4461-b2ac-edc8d381b906" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:09:49</date>
+      <author>ugg boot uk</author>
+      <email>niaoniaozi9974568@163.com</email>
+      <country>us</country>
+      <ip>173.0.59.53</ip>
+      <website>http://www.uggbootonsaleuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>As soon as you slip a pair on (no socks required) you recognize: that fleece inside is really a miracle with the ft. But simply because they offer no arch assist, they turn into immediately disgusting when rained upon, and therefore are so very ugly - the clue&amp;#39;s in the name </content>
+    </comment>
+    <comment id="963cc85e-d82f-4cdf-8818-ebb4ba2ebc8b" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:16:50</date>
+      <author>uggs cheapest</author>
+      <email>ermu11@126.com</email>
+      <country>us</country>
+      <ip>82.102.145.242</ip>
+      <website>http://www.uggscheapestonsaleuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>The appalling sight of Shane Warne carrying a pair of Ugg boots this month marked a terrible reduced for Australian masculinity. For it represents the taming of a dude the moment as esteemed Down Under for his unabashedly yahoo way of living - the crafty fags between overs, the womanising, the addiction to tinned spaghetti - as his sporting genius. Now, bewitched by Elizabeth Hurley, the freshly scrawny &amp;quot;Horny Warney&amp;quot; promises he&amp;#39;s addicted to diet plan shakes instead.</content>
+    </comment>
+    <comment id="326e3a4f-42f8-430b-87ed-dfca0e8e21ff" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:17:05</date>
+      <author>ugg on sale uk</author>
+      <email>recognizable89@gmail.com</email>
+      <country>us</country>
+      <ip>101.50.17.14</ip>
+      <website>http://www.uggscheapestonsaleuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content> fairly craftily had trademarked the phrase &amp;quot;Ugg&amp;quot;. Deckers then sparked outrage in Australia by enforcing that trademark, despite the fact that boots generically generally known as &amp;quot;Uggs&amp;quot; experienced been popular there for many years.</content>
+    </comment>
+    <comment id="7abd5005-50ee-4302-b21f-313bb7b58cc2" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:18:28</date>
+      <author>australian uggs</author>
+      <email>xxxiao90@gmail.com</email>
+      <country>us</country>
+      <ip>81.219.108.11</ip>
+      <website>http://www.australianuggsbootuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>A lot more gallingly for that cottage Aussie business that created the authentic, household-grown boots, Deckers utilised its marketing and advertising clout to transform the model into your internationally inescapable and extremely lucrative blight it has become.</content>
+    </comment>
+    <comment id="db9f95a9-d3bc-42cd-89c2-e032309f36ff" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:21:26</date>
+      <author>uggs boots bailey</author>
+      <email>huiru99@yahoo.com</email>
+      <country>us</country>
+      <ip>89.33.0.239</ip>
+      <website>http://www.cheapuggsbootsbailey.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>The appalling sight of Shane Warne carrying a pair of Ugg boots this 30 days marked a terrible reduced for Australian masculinity. For it represents the taming of a dude the moment as esteemed Straight down Beneath for his unabashedly yahoo life style - the crafty fags amongst overs, the womanising, the addiction to tinned spaghetti - as his sporting genius. Now, bewitched by Elizabeth Hurley, the newly scrawny &amp;quot;Horny Warney&amp;quot; statements he is addicted to diet plan shakes alternatively.</content>
+    </comment>
+    <comment id="88ea1c62-8003-4530-948a-17043af3f870" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:22:28</date>
+      <author>ugg boot uk</author>
+      <email>bushizhendeba@hotmail.com</email>
+      <country>us</country>
+      <ip>201.161.16.194</ip>
+      <website>http://www.uggaustraliauggsbootuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Nonetheless it isn&amp;#39;t.For UGG Australia is owned by the Californian shoe corporation Deckers and produces the huge vast majority of its boots in China. Deckers bought the organization in 1999 from an Australian surfer who was advertising the imported footwear within the US, and who</content>
+    </comment>
+    <comment id="9cacfe32-4bcd-4f20-9e39-a0aeeb509050" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:24:12</date>
+      <author>uggs outlet</author>
+      <email>huiru99@yahoo.com</email>
+      <country>us</country>
+      <ip>87.207.36.173</ip>
+      <website>http://www.baileybuttonuggsoutlet.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>A lot more gallingly towards the cottage Aussie marketplace that made the original, house-grown boots, Deckers employed its marketing and advertising clout to transform the model to the internationally inescapable and very lucrative blight it has develop into.</content>
+    </comment>
+    <comment id="63408790-abd0-46f4-8cbf-15f205bd6ef7" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:25:29</date>
+      <author>uggs boot uk</author>
+      <email>xianghongji123@gmail.com</email>
+      <country>us</country>
+      <ip>80.50.55.14</ip>
+      <website>http://www.australianuggsbootuk.co.uk/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>First, female celebrities for example Sarah Jessica Parker and Jennifer Aniston began to generally be photographed slouching from Starbucks to carpark in UGG Australia boots, then Oprah Winfrey championed them: actually considering, the virus may be uncontainable.</content>
+    </comment>
+    <comment id="b26b8577-b90b-4cb6-8c8d-90a97f8b9f5f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:36:29</date>
+      <author>cheap uggs boots</author>
+      <email>buzhidaodelo@hotmail.com</email>
+      <country>us</country>
+      <ip>112.109.20.98</ip>
+      <website>http://www.cheapuggsbootsbailey.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Even more gallingly with the cottage Aussie industry that created the original, home-grown boots, Deckers used its advertising clout to transform the type in to the internationally inescapable and highly lucrative blight it has grow to be.</content>
+    </comment>
+    <comment id="3275119f-65d2-4ce8-8e43-4f44a9f90e8e" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:38:10</date>
+      <author>uggs boot</author>
+      <email>buzhidaodelo@hotmail.com</email>
+      <country>us</country>
+      <ip>49.128.176.18</ip>
+      <website>http://www.uggsbootunitedkingdom.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>its new assortment for adult men functions pretty much almost everything but the classic boot. Yes, the &amp;#161;&amp;#234;185 Pueblo hints at the original UGG in the ankle up, but south of that may be extra like a Canadian snow boot.</content>
+    </comment>
+    <comment id="c711ae0b-70cf-48f0-b6ee-4357aff59c82" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:39:27</date>
+      <author>ugg bailey boots</author>
+      <email>kity19872011@hotmail.com</email>
+      <country>us</country>
+      <ip>208.43.216.138</ip>
+      <website>http://www.uggbootscheapbailey.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>But it surely is not.For UGG Australia is owned with the Californian shoe firm Deckers and produces the vast majority of its boots in China. Deckers bought the company in 1999 from an Australian surfer who was marketing the imported footwear within the US, and who</content>
+    </comment>
+    <comment id="3bf1ef2a-3d49-47ad-909c-ecb1e81ba056" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:41:32</date>
+      <author>ugg on sale uk</author>
+      <email>kity1112011@126.com</email>
+      <country>us</country>
+      <ip>201.161.16.194</ip>
+      <website>http://www.uggscheapestonsaleuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Reassuringly, the adult men in UGG Australia&amp;#39;s ad campaigns - such as this chap inside choose-up truck (left) together with his jeans tucked into his &amp;quot;Stoneman Grizzly&amp;quot; - nevertheless look utterly ridiculous.</content>
+    </comment>
+    <comment id="032e3752-cbbb-48a7-8575-dcc359cb44a9" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:50:54</date>
+      <author>uggs boot</author>
+      <email>xuwenli18@gmail.com</email>
+      <country>us</country>
+      <ip>204.48.54.3</ip>
+      <website>http://www.uggsbootunitedkingdom.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>His adoption of this sort of slouchy boot so preferred between ladies marks the crucial phase of Warne&amp;#39;s conversion from Alphabetti Spaghetti-guzzling Alpha male to metrosexual. What a cruel irony it will be have been UGG Australia - the manufacturer which has turned its signature design of fleece-lined sheepskin boot into a world trend phenomenon - really was Australian.</content>
+    </comment>
+    <comment id="a294cd53-b484-4707-ad9a-002d7ef2c7ad" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:54:04</date>
+      <author>ugg on sale</author>
+      <email>ermu11@126.com</email>
+      <country>us</country>
+      <ip>115.124.72.177</ip>
+      <website>http://www.uggbootonsaleuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content> rather craftily obtained trademarked the word &amp;quot;Ugg&amp;quot;. Deckers then sparked outrage in Australia by enforcing that trademark, though boots generically known as &amp;quot;Uggs&amp;quot; received been well-known there for decades.</content>
+    </comment>
+    <comment id="f2b15be5-d58a-4955-ad70-328f0851f669" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 02:59:15</date>
+      <author>ugg boot uk</author>
+      <email>buzhidaodelo@hotmail.com</email>
+      <country>us</country>
+      <ip>91.228.149.9</ip>
+      <website>http://www.uggaustraliauggsbootuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>that they were never noticed as a type accessory. The fiendish genius of UGG Australia was for making women, and now some metrosexualised adult males, put on them as &amp;#161;&amp;#234;a hundred-plus style statements despite that ugliness.</content>
+    </comment>
+    <comment id="958ad591-2e65-4347-91f8-6146d532d69f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:02:23</date>
+      <author>uggs boot united kingdom</author>
+      <email>xianghongji123@gmail.com</email>
+      <country>us</country>
+      <ip>89.206.12.85</ip>
+      <website>http://www.uggsbootunitedkingdom.co.uk/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content> fairly craftily received trademarked the word &amp;quot;Ugg&amp;quot;. Deckers then sparked outrage in Australia by enforcing that trademark, despite the fact that boots generically generally known as &amp;quot;Uggs&amp;quot; acquired been popular there for several years.</content>
+    </comment>
+    <comment id="f7df6d0c-fd9b-479d-8fb3-3ba8503ae6cd" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:04:05</date>
+      <author>uggs cheapest</author>
+      <email>jishibudebi@hotmail.com</email>
+      <country>us</country>
+      <ip>178.49.100.138</ip>
+      <website>http://www.uggscheapestonsaleuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content> fairly craftily experienced trademarked the word &amp;quot;Ugg&amp;quot;. Deckers then sparked outrage in Australia by enforcing that trademark, although boots generically referred to as &amp;quot;Uggs&amp;quot; experienced been well-known there for years.</content>
+    </comment>
+    <comment id="7b48aaf9-a49d-47bf-b019-3c3d8732105f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:04:20</date>
+      <author>uggs cheapest</author>
+      <email>recognizable89@gmail.com</email>
+      <country>us</country>
+      <ip>178.255.199.199</ip>
+      <website>http://www.uggscheapestonsaleuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Mencyclopaedia: Previous England For UGG haters, having said that, there exists hope. The continuous conversion of ridiculous-hunting adult males (sadly the after imperious Warney now falls into this category) into UGG wearers might just prove to be Decker&amp;#39;s equivalent of Burberry&amp;#39;s examine moment.</content>
+    </comment>
+    <comment id="de5df91f-1625-4da4-ad86-718c668517e7" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:07:01</date>
+      <author>ugg boots for cheap</author>
+      <email>xianghongji123@gmail.com</email>
+      <country>us</country>
+      <ip>218.189.26.158</ip>
+      <website>http://www.uggbootsenglandforcheap.co.uk/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>In their genuine, genuinely Australian, sort, Uggs are perfectly acceptable parts of utilitarian male attire. Surfers wear them from seashore to VW camper van for article-wave warmth and, earlier than the UGG Australia impact took hold, they were unisex ft-warmers greatest worn in your house. </content>
+    </comment>
+    <comment id="d6e3a796-ecf8-42c1-89b0-0de38b7a4878" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:08:19</date>
+      <author>Everett Calendine</author>
+      <email>Stromme@yahoo.com</email>
+      <country>us</country>
+      <ip>173.234.244.138</ip>
+      <website>http://www.bestdiablo3golds.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>I am a banker and I support OWS and ethical capitalism-. I am part of the 20%, which is part of the 99%. To the 1% - please get out of our sandbox until you know how to play nice. Thank you. &amp;lt;a href=&amp;quot;http://www.bestdiablo3golds.com&amp;quot;&amp;gt;best diablo 3 gold&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="fe251cc5-d5c4-4d9d-b12e-7c4455499b0e" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:09:05</date>
+      <author>Raleigh Malek</author>
+      <email>Harlan@hotmail.com</email>
+      <country>us</country>
+      <ip>129.121.109.68</ip>
+      <website>http://www.make-wowgold.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hey...some-times you gotta do..what you gotta do...and dozing off is what he had to do. It has happened to the best of us....and for a lot of folks, we&amp;#39;re far away from 84.&amp;lt;a href=&amp;quot;http://www.make-wowgold.com&amp;quot;&amp;gt;wow gold&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="f8cc9a18-144f-4abe-8d1f-49b037a30e79" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:11:44</date>
+      <author>ugg boots for cheap</author>
+      <email>xianghongji123@gmail.com</email>
+      <country>us</country>
+      <ip>1.227.196.123</ip>
+      <website>http://www.uggbootsenglandforcheap.co.uk/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content> The 205 Capulin is often a wonderful variation with the still-in, hiking-style boot, as well as the 135 Chaucer style and design is always that nearly unthinkable point - UGG Australia shoes you can wear to get the job done.</content>
+    </comment>
+    <comment id="6aebc163-d85e-49ea-ac91-4e32c787e9a2" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:13:20</date>
+      <author>cheap uggs boots</author>
+      <email>xianghongji123@gmail.com</email>
+      <country>us</country>
+      <ip>89.174.170.42</ip>
+      <website>http://www.cheapuggsbootsbailey.co.uk/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>which they ended up never observed being a design accessory. The fiendish genius of UGG Australia was for making girls, and now some metrosexualised men, wear them as &amp;#161;&amp;#234;100-plus trend statements despite that ugliness.</content>
+    </comment>
+    <comment id="e488ac7a-c81f-4ce6-ba93-af4d38c9558a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:14:16</date>
+      <author>Cheap Newport 100s Cigarettes</author>
+      <email>Annala@gmail.com</email>
+      <country>us</country>
+      <ip>205.209.140.84</ip>
+      <website>http://www.best-cigarettes.net/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Gamefly offer a wide variety of games, with over 7000 titles to their credit. It’s very easy to make use of their services. Just register and pick your plan and begin to rent! When you gain access to their services, you can browse their selection of games; each game page has its own summary, reviews, and even cheats.</content>
+    </comment>
+    <comment id="31da39a7-d738-45f0-9866-44172ff8a153" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:21:14</date>
+      <author>ugg on sale</author>
+      <email>buzhidaodelo@hotmail.com</email>
+      <country>us</country>
+      <ip>91.211.141.194</ip>
+      <website>http://www.uggbootonsaleuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Reassuringly, the adult men in UGG Australia&amp;#39;s advert campaigns - which include this chap within the select-up truck (left) along with his jeans tucked into his &amp;quot;Stoneman Grizzly&amp;quot; - nevertheless glance utterly ridiculous.</content>
+    </comment>
+    <comment id="e8e7f179-1585-4e15-825a-6800772e429f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:22:35</date>
+      <author>ugg boots england</author>
+      <email>kity19872011@hotmail.com</email>
+      <country>us</country>
+      <ip>195.57.148.26</ip>
+      <website>http://www.uggbootsenglandforcheap.co.uk/</website>
+      <moderatedby>App_Code.Extensions.StopForumSpam</moderatedby>
+      <avatar />
+      <content>His adoption of this style of slouchy boot so well-known amongst most women marks the important phase of Warne&amp;#39;s conversion from Alphabetti Spaghetti-guzzling Alpha male to metrosexual. What a cruel irony it can be were UGG Australia - the model which has turned its signature style of fleece-lined sheepskin boot into a worldwide trend phenomenon - genuinely was Australian.</content>
+    </comment>
+    <comment id="cdec1e95-1bb1-43c7-bd6e-d94962e32c14" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:23:07</date>
+      <author>ugg bailey boots</author>
+      <email>xuxu195@hotmail.com</email>
+      <country>us</country>
+      <ip>89.206.12.85</ip>
+      <website>http://www.uggbootscheapbailey.co.uk/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content> The 205 Capulin is often a good variation from the still-in, hiking-model boot, and also the 135 Chaucer design is usually that almost unthinkable matter - UGG Australia shoes you can put on to do the job.</content>
+    </comment>
+    <comment id="4c7f38f6-0437-46f6-b839-1354d900c65b" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:26:00</date>
+      <author>ugg australia boot</author>
+      <email>kity19872011@hotmail.com</email>
+      <country>us</country>
+      <ip>91.228.149.9</ip>
+      <website>http://www.uggaustraliauggsbootuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Reassuringly, the adult males in UGG Australia&amp;#39;s ad campaigns - including this chap inside the pick-up truck (left) along with his jeans tucked into his &amp;quot;Stoneman Grizzly&amp;quot; - nevertheless appear utterly ridiculous.</content>
+    </comment>
+    <comment id="59458f18-0604-45d6-9321-b84c252621a4" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:26:14</date>
+      <author>uggs boot uk</author>
+      <email>huiru99@yahoo.com</email>
+      <country>us</country>
+      <ip>202.60.201.183</ip>
+      <website>http://www.australianuggsbootuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>But it isn&amp;#39;t.For UGG Australia is owned from the Californian shoe organization Deckers and produces the vast majority of its boots in China. Deckers bought the company in 1999 from an Australian surfer who was promoting the imported footwear inside US, and who</content>
+    </comment>
+    <comment id="062f264b-ee32-451f-9149-d1c367d9b786" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:28:43</date>
+      <author>uggs boot uk</author>
+      <email>buzhidaodelo@hotmail.com</email>
+      <country>us</country>
+      <ip>101.50.17.14</ip>
+      <website>http://www.australianuggsbootuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content> somewhat craftily obtained trademarked the word &amp;quot;Ugg&amp;quot;. Deckers then sparked outrage in Australia by enforcing that trademark, although boots generically generally known as &amp;quot;Uggs&amp;quot; acquired been common there for decades.</content>
+    </comment>
+    <comment id="5fa0590d-794e-4ac1-812f-98be2d9734ac" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:31:14</date>
+      <author>Maudie Bolin</author>
+      <email>Sommerfield@gmail.com</email>
+      <country>us</country>
+      <ip>64.127.106.237</ip>
+      <website>http://www.searchengine-reports.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi there,i&amp;#39;m dropping by to say that i agree with this topic. I have bookmarked this site and will be back soon to be updated of what&amp;#39;s happening here and also let my friends know about your site.This is one of the topics i like to discuss about.Thank you</content>
+    </comment>
+    <comment id="fd6b3751-d2ac-4873-b76d-a3729afd7e53" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:31:39</date>
+      <author>uggs cheapest</author>
+      <email>kity19872011@hotmail.com</email>
+      <country>us</country>
+      <ip>87.207.36.173</ip>
+      <website>http://www.uggscheapestonsaleuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>The appalling sight of Shane Warne wearing a pair of Ugg boots this 30 days marked a terrible minimal for Australian masculinity. For it represents the taming of a gentleman the moment as esteemed Decrease Below for his unabashedly yahoo lifestyle - the crafty fags in between overs, the womanising, the addiction to tinned spaghetti - as his sporting genius. Now, bewitched by Elizabeth Hurley, the recently scrawny &amp;quot;Horny Warney&amp;quot; says he is addicted to food plan shakes instead.</content>
+    </comment>
+    <comment id="8a4c7535-f085-4a4c-a071-ef3944f10ed3" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:38:32</date>
+      <author>ugg on sale</author>
+      <email>kity1112011@126.com</email>
+      <country>us</country>
+      <ip>213.184.226.116</ip>
+      <website>http://www.uggbootonsaleuk.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>The appalling sight of Shane Warne carrying a pair of Ugg boots this calendar month marked a terrible minimal for Australian masculinity. For it represents the taming of a dude when as esteemed Down Under for his unabashedly yahoo way of life - the crafty fags between overs, the womanising, the addiction to tinned spaghetti - as his sporting genius. Now, bewitched by Elizabeth Hurley, the freshly scrawny &amp;quot;Horny Warney&amp;quot; statements he&amp;#39;s addicted to weight loss plan shakes rather.</content>
+    </comment>
+    <comment id="bf847c32-5b70-4113-a35e-b959044b770f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:39:00</date>
+      <author>uggs bailey button</author>
+      <email>kity19872011@hotmail.com</email>
+      <country>us</country>
+      <ip>219.91.184.47</ip>
+      <website>http://www.uggsbaileybuttonoutlets.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content> fairly craftily experienced trademarked the phrase &amp;quot;Ugg&amp;quot;. Deckers then sparked outrage in Australia by enforcing that trademark, despite the fact that boots generically called &amp;quot;Uggs&amp;quot; had been well-known there for decades.</content>
+    </comment>
+    <comment id="48804cb5-0795-4fab-8753-6a7a950942c4" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2011-11-25 03:40:56</date>
+      <author>ugg on sale</author>
+      <email>jishibudebi@hotmail.com</email>
+      <country>us</country>
+      <ip>218.189.26.158</ip>
+      <website>http://www.uggbootonsaleuk.co.uk/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Reassuringly, the adult men in UGG Australia&amp;#39;s advert campaigns - such as this chap in the pick-up truck (still left) together with his jeans tucked into his &amp;quot;Stoneman Grizzly&amp;quot; - however look utterly ridiculous.</content>
+    </comment>
+    <comment id="4116f005-028f-488d-b999-a27d5d711842" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:41:23</date>
+      <author>ugg bailey boots</author>
+      <email>ermu11@126.com</email>
+      <country>us</country>
+      <ip>123.255.206.68</ip>
+      <website>http://www.uggbootscheapbailey.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>His adoption of this kind of slouchy boot so preferred among women marks the important phase of Warne&amp;#39;s conversion from Alphabetti Spaghetti-guzzling Alpha male to metrosexual. What a cruel irony it could be have been UGG Australia - the type which has turned its signature design of fleece-lined sheepskin boot into a world wide vogue phenomenon - truly was Australian.</content>
+    </comment>
+    <comment id="4e6653a9-34a2-47e0-8b70-c76f8069c449" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:41:54</date>
+      <author>ugg boot uk</author>
+      <email>xxxiao90@gmail.com</email>
+      <country>us</country>
+      <ip>114.31.209.80</ip>
+      <website>http://www.uggaustraliauggsbootuk.co.uk/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content> instead craftily experienced trademarked the phrase &amp;quot;Ugg&amp;quot;. Deckers then sparked outrage in Australia by enforcing that trademark, though boots generically known as &amp;quot;Uggs&amp;quot; had been popular there for a long time.</content>
+    </comment>
+    <comment id="316b5331-c75e-4479-8a66-9f3ad2871618" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:51:00</date>
+      <author>Otto Graap</author>
+      <email>Sawaia@gmail.com</email>
+      <country>us</country>
+      <ip>74.112.57.173</ip>
+      <website>http://www.searchengine-reports.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi there,i&amp;#39;m dropping by to say that i agree with this topic. I have bookmarked this site and will be back soon to be updated of what&amp;#39;s happening here and also let my friends know about your site.This is one of the topics i like to discuss about.Thank you</content>
+    </comment>
+    <comment id="4b54987e-e68b-4f8b-a624-f5042c67c864" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:51:17</date>
+      <author>uggs boots bailey</author>
+      <email>kity19872011@hotmail.com</email>
+      <country>us</country>
+      <ip>27.131.56.254</ip>
+      <website>http://www.cheapuggsbootsbailey.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>His adoption of this style of slouchy boot so preferred among girls marks the essential phase of Warne&amp;#39;s conversion from Alphabetti Spaghetti-guzzling Alpha male to metrosexual. What a cruel irony it will be have been UGG Australia - the manufacturer that has turned its signature type of fleece-lined sheepskin boot right into a worldwide style phenomenon - really was Australian.</content>
+    </comment>
+    <comment id="22b37e45-cd59-413d-9988-a0d399ae36a8" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 03:51:40</date>
+      <author>ugg boots for cheap</author>
+      <email>wennuannide@hotmail.com</email>
+      <country>us</country>
+      <ip>87.207.36.173</ip>
+      <website>http://www.uggbootsenglandforcheap.co.uk/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>The appalling sight of Shane Warne sporting a pair of Ugg boots this thirty day period marked a terrible low for Australian masculinity. For it represents the taming of a dude as soon as as esteemed Straight down Under for his unabashedly yahoo life style - the crafty fags among overs, the womanising, the addiction to tinned spaghetti - as his sporting genius. Now, bewitched by Elizabeth Hurley, the recently scrawny &amp;quot;Horny Warney&amp;quot; statements he&amp;#39;s addicted to diet regime shakes as an alternative.</content>
+    </comment>
+    <comment id="c9165f72-ba43-4050-9d25-58dac3d2ac28" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 04:02:36</date>
+      <author>Jamison Dicamillo</author>
+      <email>Ransford70@hotmail.com</email>
+      <country>us</country>
+      <ip>222.35.39.140</ip>
+      <website>http://www.searchengine-reports.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi there,i&amp;#39;m dropping by to say that i agree with this topic. I have bookmarked this site and will be back soon to be updated of what&amp;#39;s happening here and also let my friends know about your site.This is one of the topics i like to discuss about.Thank you</content>
+    </comment>
+    <comment id="5a320db8-b4b0-4459-96a6-dc725f93163f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 04:06:15</date>
+      <author>rubblish replays</author>
+      <email>81Rhym@yahoo.com</email>
+      <country>us</country>
+      <ip>69.175.64.134</ip>
+      <website>http://dota.replays.net/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>We currently have included website support outside surely have will long been experience just don’t forget this skill on the . Next you possess a whole lot of helpful suggestions implementing thus i savour think about regarding large web and additionally. Preserve on the particular quality position!</content>
+    </comment>
+    <comment id="92b74370-8112-48b4-b404-e3ced90b3498" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 05:30:00</date>
+      <author>ugg boot cheapest</author>
+      <email>bushi25@163.com</email>
+      <country>us</country>
+      <ip>91.228.149.9</ip>
+      <website>http://www.uggbootclassicshortcheapest.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Has never been additional frightened, out of the blue the whole system adyramia, weak. In front from the pc, is capable to dominate all of her gentleman. She be very upset, no fear, if he ... ... If he ... ... Sub term grabbed the edge of the chair, forcing myself to serene decrease.</content>
+    </comment>
+    <comment id="a9aab0e3-e4ef-41d2-b678-a310009aee6d" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 05:35:32</date>
+      <author>bailey button uggs</author>
+      <email>nihuaisile86@hotmail.com</email>
+      <country>us</country>
+      <ip>112.109.20.98</ip>
+      <website>http://www.uggsminisonsaleuk.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>He instantly maintain her, silent for a although, it was mentioned: &amp;quot; but you previous evening continues to be called his name, so painful and sad. I get in touch with your brand, but often can wake you.&amp;quot;</content>
+    </comment>
+    <comment id="91f8321e-f91f-493a-a7fd-fbf3810ac5c8" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 05:37:59</date>
+      <author>Alejandra King</author>
+      <email>spccmn55@sccgloccl.ngt</email>
+      <country>us</country>
+      <ip>91.144.44.65</ip>
+      <website>http://flickor.wordpress.com/2011/11/25/kon/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Spot on with this write-up, I truly think this website needs much more consideration. I’ll probably be again to read much more, thanks for that info.</content>
+    </comment>
+    <comment id="5c08ada9-d721-451a-bb56-a9d546df19d2" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 05:47:20</date>
+      <author>Annis Dewolf</author>
+      <email>Ausherman@gmail.com</email>
+      <country>us</country>
+      <ip>23.19.210.169</ip>
+      <website>http://www.paisamaster.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Everybody pressed cause osama bin ladden dead|DatKid_Vonte|</content>
+    </comment>
+    <comment id="d3e46ece-9bd0-441c-ae15-7d7b1db6c070" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 06:31:10</date>
+      <author>Oren Mozingo</author>
+      <email>Cordas65@hotmail.com</email>
+      <country>us</country>
+      <ip>190.9.128.96</ip>
+      <website>http://www.searchengine-reports.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi there,i&amp;#39;m dropping by to say that i agree with this topic. I have bookmarked this site and will be back soon to be updated of what&amp;#39;s happening here and also let my friends know about your site.This is one of the topics i like to discuss about.Thank you</content>
+    </comment>
+    <comment id="ee67e646-1e04-4ac7-bf79-958c6f17e0e5" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 06:32:48</date>
+      <author>Thresa Barbee</author>
+      <email>Gridley37868@gmail.com</email>
+      <country>us</country>
+      <ip>64.191.94.130</ip>
+      <website>http://www.facebook.com/whoiskimkardashian</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi there can I reference some of the content here in this entry if I reference you with a link back to your site?</content>
+    </comment>
+    <comment id="c66561a9-04d1-4f2f-adad-335e65a0c5a8" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 06:48:49</date>
+      <author>Tamar Carranco</author>
+      <email>Filkins@gmail.com</email>
+      <country>us</country>
+      <ip>174.142.19.205</ip>
+      <website>http://www.searchengine-reports.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi there,i&amp;#39;m dropping by to say that i agree with this topic. I have bookmarked this site and will be back soon to be updated of what&amp;#39;s happening here and also let my friends know about your site.This is one of the topics i like to discuss about.Thank you</content>
+    </comment>
+    <comment id="b3b6f27b-52f3-490f-acf4-1c54ab7e5621" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 07:54:03</date>
+      <author>Solar Power</author>
+      <email>Kensey@bloggedout.com</email>
+      <country>us</country>
+      <ip>173.234.12.7</ip>
+      <website>http://buildsolarpanelssite.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hello, I think your website might be having browser compatibility issues. When I look at your blog in Chrome, it looks fine but when opening in Internet Explorer, it has some overlapping. I just wanted to give you a quick heads up! Other than that, wonderful blog on .NET Slave | CSS speed typing for Visual Studio!</content>
+    </comment>
+    <comment id="15c93712-1768-4347-a506-cd8ff6f2588f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 07:56:26</date>
+      <author>cheap wow gold</author>
+      <email>jackychen@yahoo.com</email>
+      <country>us</country>
+      <ip>110.84.39.60</ip>
+      <website>http://www.gamemammy.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>i agree with you.you should write more good posts.can i have a link exchange with you?</content>
+    </comment>
+    <comment id="6778af84-6f39-4a97-a8f9-cc49cb49fe71" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 09:33:40</date>
+      <author>Plumbing Contractor</author>
+      <email>Enslow@ymail.com</email>
+      <country>us</country>
+      <ip>94.60.168.219</ip>
+      <website>http://www.your-local-plumber.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Excellent website. I live on Long Island and recently needed my &amp;lt;A href=&amp;quot;http://www.your-local-plumber.com&amp;quot;&amp;gt;plumbing service&amp;lt;/A&amp;gt;. I found &amp;lt;A href=&amp;quot;http://www.sewer-replacements.com&amp;quot;&amp;gt;www.your-local-plumber.com&amp;lt;/A&amp;gt; - they are owned by Allied/All-City, Inc. of New York City. Anyway, your site is excellent. I will come back soon to check for updates. Thanks so much!</content>
+    </comment>
+    <comment id="f7941b9a-6028-4ee3-b781-a3c84a5f3e8a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 09:42:50</date>
+      <author>bouvier bernois</author>
+      <email>Catinella12@gmail.com</email>
+      <country>us</country>
+      <ip>201.50.20.220</ip>
+      <website>http://agir-adoption.com/races-de-chiens/le-bouvier-bernois</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>I thought it was heading to become some dull previous publish, nevertheless it truly compensated for my time. I&amp;#226;€™ll publish a hyperlink to this internet page on my blog. I&amp;#39;m positive my visitors will uncover that really valuable.</content>
+    </comment>
+    <comment id="7d693027-b58a-41a5-9ebc-55ef6984159c" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 10:02:44</date>
+      <author>Enriqueta Brighton</author>
+      <email>Palay2906@aol.com</email>
+      <country>us</country>
+      <ip>201.75.4.38</ip>
+      <website>http://www.tihson.com/Art/15427/226/Forex-Pros-B.O.R.N-Night-Owl-Back-Testing.html</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>The new Zune browser is surprisingly good, but not as good as the iPod&amp;#39;s. It works well, but isn&amp;#39;t as fast as Safari, and has a clunkier interface. If you occasionally plan on using the web browser that&amp;#39;s not an issue, but if you&amp;#39;re planning to browse the web alot from your PMP then the iPod&amp;#39;s larger screen and better browser may be important. </content>
+    </comment>
+    <comment id="85387c48-1c0b-4008-8b4e-c89f47680240" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 10:17:07</date>
+      <author>Rena Kuznicki</author>
+      <email>Strader@gmail.com</email>
+      <country>us</country>
+      <ip>206.53.155.87</ip>
+      <website>https://flippa.com/2668570-web-site-with-pr-3-and-over-2500-revenue-from-last-six-months</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>WEB SITE WITH PR-3 AND OVER $2500 REVENUE FROM LAST SIX MONTHS&amp;lt;a href=https://flippa.com/2668570-web-site-with-pr-3-and-over-2500-revenue-from-last-six-months&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="cd9acf39-b908-4cf8-b291-d155a8e67700" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 11:13:45</date>
+      <author>Reginald Modena</author>
+      <email>Moos9696@yahoo.com</email>
+      <country>us</country>
+      <ip>94.63.130.194</ip>
+      <website>http://www.wazzupvanillaface123.com/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>Whoa, dude, it seems like the stylesheet experienced a quake because your blog looks screwed. I think you would like to check that out </content>
+    </comment>
+    <comment id="2a20af75-7233-43ab-a937-1c75b982d69d" parentid="56f6b24f-9747-4d26-9730-3f00b56acedb" approved="False" spam="True" deleted="True">
+      <date>2011-11-25 16:21:01</date>
+      <author>Mario</author>
+      <email>bros@gmsil.com</email>
+      <country>us</country>
+      <ip>190.18.104.80</ip>
+      <website>http://madkristensen.net/</website>
+      <moderatedby>App_Code.Extensions.StopForumSpam</moderatedby>
+      <avatar />
+      <content>Hi guys, nice site</content>
+    </comment>
+    <comment id="007a6e81-4087-4411-bb86-17a6dd074646" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2011-11-27 18:12:09</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.dk</email>
+      <country>us</country>
+      <ip>71.35.173.2</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>test</content>
+    </comment>
+    <comment id="64cf6726-e041-4eaf-9809-c604b08fef0b" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2011-11-27 18:30:55</date>
+      <author>Mads Kristensen2</author>
+      <email>post@madskristensen.dk</email>
+      <country>us</country>
+      <ip>71.35.173.2</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>test</content>
+    </comment>
+    <comment id="a99067df-3f6c-44ca-b1a6-abd98f40e042" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-28 05:13:00</date>
+      <author>zoey</author>
+      <email>zoey@hotmail.com</email>
+      <country>cn</country>
+      <ip>14.145.189.164</ip>
+      <website>http://topwholesaler.net/accessories/belts/c_58</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Thanks for providing the prevention tips here!! I am going to link this to my post !
+
+</content>
+    </comment>
+    <comment id="6a6718c2-bec2-4aaf-9b3c-2930fea9f2c0" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-28 13:35:43</date>
+      <author>Cory</author>
+      <email>Mole37@googlemail.com</email>
+      <country>us</country>
+      <ip>199.58.165.156</ip>
+      <website>http://waterways4u.com/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>Just to say I adore your blog and found it interesting reading some of the content, I&amp;#39;ll spend some more time here when I&amp;#39;ve got a few minutes to spare.</content>
+    </comment>
+    <comment id="40adaec7-4762-4477-bfcd-6f6015a51b36" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-30 03:34:48</date>
+      <author>Abercrombie D&amp;#252;sseldorf </author>
+      <email>5632523@qq.com</email>
+      <country>us</country>
+      <ip>14.223.48.244</ip>
+      <website>http://www.abercrombieandfitchdeutschlands.de.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>This article is well written ,give a person very deep impression, I really have no language to describe it, I hope the authors make persistent efforts, come on!.
+
+</content>
+    </comment>
+    <comment id="a790411e-fe92-40ee-af35-0b71263d32bc" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-30 03:35:11</date>
+      <author>Hollister UK</author>
+      <email>5632523@qq.com</email>
+      <country>us</country>
+      <ip>14.223.48.244</ip>
+      <website>http://www.hollisterukshop.org.uk/</website>
+      <moderatedby>App_Code.Extensions.TypePadFilter</moderatedby>
+      <avatar />
+      <content>I have surrendered my free will to the years of accumulated habits and the past deeds of my life have already marked out a path which threatend</content>
+    </comment>
+    <comment id="4942bc9b-e10d-4f9c-bca1-bbcadb9fd0ec" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-30 03:36:37</date>
+      <author>ansar</author>
+      <email>ans@coupon-hub.com</email>
+      <country />
+      <ip>188.65.113.2</ip>
+      <website>http://coupon-hub.org/category/web-hosting-coupons/network-solutions-discount-promotional-coupon-codes/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Thanks  for the share</content>
+    </comment>
+    <comment id="73750d5f-56cd-4cbf-a64c-ab9f34dfa688" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-11-30 08:25:10</date>
+      <author>maison a louer</author>
+      <email>denisarnaud@gmail.com</email>
+      <country>us</country>
+      <ip>173.234.31.82</ip>
+      <website>http://www.agda.fr/listing-380/location/immobilier-grenoble</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>location vente maison appartement immobilier grenoble</content>
+    </comment>
+    <comment id="672d8fb8-2912-4229-9d21-76ef2e8503f7" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="True">
+      <date>2011-12-03 23:12:29</date>
+      <author>Stephen</author>
+      <email>lk3204@gmail.com</email>
+      <country />
+      <ip>174.121.10.130</ip>
+      <website>http://wheretofindx.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Thanks  for this great site. Seems like there\\\&amp;#39;s always something new I learn even after being in the field for 10 years.</content>
+    </comment>
+    <comment id="01909680-fdd7-4401-af01-9277a11e9e1c" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="True">
+      <date>2011-12-08 09:00:54</date>
+      <author>Charlz</author>
+      <email>mscharlz81@gmail.com</email>
+      <country />
+      <ip>174.132.162.162</ip>
+      <website>http://www.facebook.com/Workfromhomemommys</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hi, I have enjoyed your insightful website. I have bookmarked your site so, will check in now and then. Thank you!</content>
+    </comment>
+    <comment id="7e14ced8-2273-4dfc-bb49-97353c63fceb" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-04-09 10:25:55</date>
+      <author>xaviercompany.es</author>
+      <email>pingback</email>
+      <country />
+      <ip>217.160.140.75</ip>
+      <website>http://www.xaviercompany.es/visual-studio-2010-extension-desarrollo-web/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from xaviercompany.es
+
+Visual Studio 2010 - Extension desarrollo web</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>024f6032-8846-4ddf-a7fe-9f544d4608ea</category>
+    <category>f9ca92b1-d70a-462f-8a1c-79e22c68b036</category>
+  </categories>
+  <notifications>
+    <email>offwhite@gmail.com</email>
+    <email>natashajapthapi305@gmail.com</email>
+  </notifications>
+</post>

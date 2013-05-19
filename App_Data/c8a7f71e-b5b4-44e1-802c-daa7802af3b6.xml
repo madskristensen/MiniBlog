@@ -1,0 +1,786 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>mads kristensen</author>
+  <title>Cache busting in ASP.NET</title>
+  <description />
+  <content>&lt;p&gt;Optimizing for website performance includes setting long expiration dates on our static resources, such s images, stylesheets and JavaScript files. Doing that tells the browser to cache our files so it doesn’t have to request them every time the user loads a page. This is one of the most important things to do when optimizing websites.&lt;/p&gt;  &lt;p&gt;In ASP.NET on IIS7+ it’s really easy. Just add this chunk of XML to the web.config’s &amp;lt;system.webServer&amp;gt; element:&lt;/p&gt;  &lt;p&gt;&amp;lt;staticContent&amp;gt;    &lt;br /&gt;&amp;#160; &amp;lt;clientCache cacheControlMode=&amp;quot;UseMaxAge&amp;quot; cacheControlMaxAge=&amp;quot;365:00:00&amp;quot; /&amp;gt;     &lt;br /&gt;&amp;lt;/staticContent&amp;gt;&lt;/p&gt; &lt;style type="text/css"&gt;
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }&lt;/style&gt;  &lt;p&gt;The above code tells the browsers to automatically cache all static resources for 365 days. That’s good and you should do this right now.&lt;/p&gt;  &lt;p&gt;The issue becomes clear the first time you make a change to any static file. How is the browser going to know that you made a change, so it can download the latest version of the file? The answer is that it can’t. It will keep serving the same cached version of the file for the next 365 days regardless of any changes you are making to the files.&lt;/p&gt;  &lt;h2&gt;Fingerprinting&lt;/h2&gt;  &lt;p&gt;The good news is that it is fairly trivial to make a change to our code, that changes the URL pointing to the static files and thereby tricking the browser into believing it’s a brand new resource that needs to be downloaded.&lt;/p&gt;  &lt;p&gt;Here’s a little class that I use on several websites, that adds a fingerprint, or timestamp, to the URL of the static file.&lt;/p&gt;  &lt;p&gt;using System;    &lt;br /&gt;using System.IO;     &lt;br /&gt;using System.Web;     &lt;br /&gt;using System.Web.Caching;     &lt;br /&gt;using System.Web.Hosting;&lt;/p&gt;  &lt;p&gt;public class Fingerprint    &lt;br /&gt;{     &lt;br /&gt;&amp;#160; public static string Tag(string rootRelativePath)     &lt;br /&gt;&amp;#160; {     &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160; if (HttpRuntime.Cache[rootRelativePath] == null)     &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160; {     &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; string absolute = HostingEnvironment.MapPath(&amp;quot;~&amp;quot; + rootRelativePath);&lt;/p&gt;  &lt;p&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; DateTime date = File.GetLastWriteTime(absolute);    &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; int index = rootRelativePath.LastIndexOf('/');&lt;/p&gt;  &lt;p&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; string result = rootRelativePath.Insert(index, &amp;quot;/v-&amp;quot; + date.Ticks);    &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute));     &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160; }&lt;/p&gt;  &lt;p&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; return HttpRuntime.Cache[rootRelativePath] as string;    &lt;br /&gt;&amp;#160; }     &lt;br /&gt;}&lt;/p&gt;  &lt;p&gt;All you need to change in order to use this class, is to modify the references to the static files.&lt;/p&gt;  &lt;h2&gt;Modify references&lt;/h2&gt;  &lt;p&gt;Here’s what it looks like in Razor for the stylesheet reference:&lt;/p&gt;  &lt;pre class="csharpcode"&gt;&lt;span class="kwrd"&gt;&amp;lt;&lt;/span&gt;&lt;span class="html"&gt;link&lt;/span&gt; &lt;span class="attr"&gt;rel&lt;/span&gt;&lt;span class="kwrd"&gt;=&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="attr"&gt;href&lt;/span&gt;&lt;span class="kwrd"&gt;=&amp;quot;@Fingerprint.Tag(&amp;quot;&lt;/span&gt;/&lt;span class="attr"&gt;content&lt;/span&gt;/&lt;span class="attr"&gt;site&lt;/span&gt;.&lt;span class="attr"&gt;css&lt;/span&gt;&lt;span class="kwrd"&gt;&amp;quot;)&amp;quot;&lt;/span&gt; &lt;span class="kwrd"&gt;/&amp;gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;style type="text/css"&gt;
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }&lt;/style&gt;
+
+&lt;p&gt;…and in WebForms:&lt;/p&gt;
+
+&lt;pre class="csharpcode"&gt;&lt;span class="kwrd"&gt;&amp;lt;&lt;/span&gt;&lt;span class="html"&gt;link&lt;/span&gt; &lt;span class="attr"&gt;rel&lt;/span&gt;&lt;span class="kwrd"&gt;=&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="attr"&gt;href&lt;/span&gt;&lt;span class="kwrd"&gt;=&amp;quot;&amp;lt;%=Fingerprint.Tag(&amp;quot;&lt;/span&gt;/&lt;span class="attr"&gt;content&lt;/span&gt;/&lt;span class="attr"&gt;site&lt;/span&gt;.&lt;span class="attr"&gt;css&lt;/span&gt;&lt;span class="kwrd"&gt;&amp;quot;) %&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class="kwrd"&gt;/&amp;gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;style type="text/css"&gt;
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }&lt;/style&gt;
+
+&lt;p&gt;The result of using the FingerPrint.Tag method will in this case be:&lt;/p&gt;
+
+&lt;pre class="csharpcode"&gt;&lt;span class="kwrd"&gt;&amp;lt;&lt;/span&gt;&lt;span class="html"&gt;link&lt;/span&gt; &lt;span class="attr"&gt;rel&lt;/span&gt;&lt;span class="kwrd"&gt;=&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="attr"&gt;href&lt;/span&gt;&lt;span class="kwrd"&gt;=&amp;quot;/content/v-634933238684083941/site.css&amp;quot;&lt;/span&gt; &lt;span class="kwrd"&gt;/&amp;gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;style type="text/css"&gt;
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }&lt;/style&gt;
+
+&lt;p&gt;Since the URL now has a reference to a non-existing folder (v-634933238684083941), we need to make the web server pretend it exist. We do that with URL rewriting.&lt;/p&gt;
+
+&lt;h2&gt;URL rewrite&lt;/h2&gt;
+
+&lt;p&gt;By adding this snippet of XML to the web.config’s &amp;lt;system.webServer&amp;gt; section, we instruct IIS 7+ to intercept all URLs with a folder name containing “v=[numbers]” and rewrite the URL to the original file path.&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;rewrite&amp;gt;
+  &lt;br /&gt;&amp;#160; &amp;lt;rules&amp;gt;
+
+  &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160; &amp;lt;rule name=&amp;quot;fingerprint&amp;quot;&amp;gt;
+
+  &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; &amp;lt;match url=&amp;quot;([\S]+)(/v-[0-9]+/)([\S]+)&amp;quot;&amp;#160; /&amp;gt;
+
+  &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; &amp;lt;action type=&amp;quot;Rewrite&amp;quot; url=&amp;quot;{R:1}/{R:3}&amp;quot; /&amp;gt;
+
+  &lt;br /&gt;&amp;#160;&amp;#160;&amp;#160; &amp;lt;/rule&amp;gt;
+
+  &lt;br /&gt;&amp;#160; &amp;lt;/rules&amp;gt;
+
+  &lt;br /&gt;&amp;lt;/rewrite&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;You can use this technique for all your JavaScript and image files as well.&lt;/p&gt;
+
+&lt;p&gt;The beauty is, that every time you change one of the referenced static files, the fingerprint will change as well. This creates a brand new URL every time so the browsers will download the updated files.&lt;/p&gt;
+
+&lt;p&gt;FYI, you need to run the AppPool in &lt;a href="http://msdn.microsoft.com/en-us/magazine/cc135973.aspx"&gt;Integrated Pipeline mode&lt;/a&gt; for the &amp;lt;system.webServer&amp;gt; section to have any effect.&lt;/p&gt;</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2013-01-09 16:03:05</pubDate>
+  <lastModified>2013-01-10 11:38:40</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>Cache-busting-in-ASPNET</slug>
+  <tags>
+    <tag>performance</tag>
+  </tags>
+  <comments>
+    <comment id="b2047a1c-98d0-479d-b091-c1dd1f39f6f4" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-09 18:17:58</date>
+      <author>Murilo</author>
+      <email>murilokunze@hotmail.com</email>
+      <country>br</country>
+      <ip>189.26.158.97</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>So, what is the reason of &amp;quot;Last modified&amp;quot;?
+If I set 365 days for caching, the browser doesn`t check the last modified date?</content>
+    </comment>
+    <comment id="76f20ebd-c6f4-41e8-aa91-0a5614e40e6a" parentid="b2047a1c-98d0-479d-b091-c1dd1f39f6f4" approved="True" spam="False" deleted="False">
+      <date>2013-01-09 22:03:20</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>174.127.225.204</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Correct, the &amp;quot;Last-Modified&amp;quot; is used for what is called Cache Validation purposes, but is not read if the file is already in the cache and you don&amp;#39;t force a refresh (F5 and shift+F5). So during normal browsing, it has no effect on how the browser serves the file directly from its cache.</content>
+    </comment>
+    <comment id="b17e3d8b-4538-42f3-94b2-9bae17de0d1a" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 03:36:45</date>
+      <author>vanhauto</author>
+      <email>tom.vanhaute@telenet.be</email>
+      <country>be</country>
+      <ip>193.191.138.240</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>That&amp;#39;s about the same trick I use.
+I also added a switch for debug- or min-files.
+For local debugging I use the debug-file. In production- or staging-environment I use the min-file:
+
+    if (HttpRuntime.Cache[rootRelativePath] == null) 
+    { 
+      string absolute = HostingEnvironment.MapPath(&amp;quot;~&amp;quot; + rootRelativePath);
+
+      DateTime date = File.GetLastWriteTime(absolute);
+      int index = rootRelativePath.LastIndexOf(&amp;#39;/&amp;#39;);
+
+      string result = rootRelativePath.Insert(index, &amp;quot;/v-&amp;quot; + date.Ticks);
+
+index = result.LastIndexOf(&amp;#39;.&amp;#39;);
+string switch = ConfigurationManager.Appsettings[&amp;quot;StaticSwitch&amp;quot;]; //debug or min
+result = result.Insert(index, &amp;quot;.&amp;quot; + switch);
+
+      HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute)); 
+    }
+</content>
+    </comment>
+    <comment id="e4dfdde5-c3b5-4efc-86e2-385b5140ef4d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 04:08:48</date>
+      <author>Alex Bee</author>
+      <email>vipeo@mail.ru</email>
+      <country>ru</country>
+      <ip>62.148.13.132</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Mads, I guess there should be some handler implemented which will resolve this &amp;#39;/content/v-634933238684083941/site.css&amp;#39; path. Is that right? Or I&amp;#39;m missing something...</content>
+    </comment>
+    <comment id="598bc08b-0553-43fe-b383-823973cd2bd5" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 04:32:47</date>
+      <author>melih g&amp;#252;m&amp;#252;ş&amp;#231;ay</author>
+      <email>mmelihh@yahoo.com</email>
+      <country>tr</country>
+      <ip>88.255.123.50</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Yes this is what i thought about, too...Or thre should be some kind of iis redirect i guess</content>
+    </comment>
+    <comment id="c8200f75-feab-4068-ad8c-140fa41ea50f" parentid="e4dfdde5-c3b5-4efc-86e2-385b5140ef4d" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 05:16:40</date>
+      <author>Stefan Kip</author>
+      <email>mail@kipusoep.nl</email>
+      <country>nl</country>
+      <ip>62.163.29.44</ip>
+      <website>http://www.kipusoep.nl/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>I&amp;#39;m having the same question.</content>
+    </comment>
+    <comment id="9a191070-8b56-4557-841b-0020312b4198" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 08:16:28</date>
+      <author>Eduardo</author>
+      <email>eduardo@molteni.net.ar</email>
+      <country>ar</country>
+      <ip>186.56.231.224</ip>
+      <website>http://eduardo.molteni.net.ar/</website>
+      <moderatedby>mads kristensen</moderatedby>
+      <avatar />
+      <content>You can use &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;/content/site.css?v-634933238684083941&amp;quot; /&amp;gt; if you want to avoid having a IIS redirect</content>
+    </comment>
+    <comment id="5f3315ac-a2b6-4911-a137-aa0f061e990e" parentid="c8200f75-feab-4068-ad8c-140fa41ea50f" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 09:38:52</date>
+      <author>Fatih Şahin</author>
+      <email>fatihsahin72@gmail.com</email>
+      <country>tr</country>
+      <ip>88.255.123.50</ip>
+      <website>http://kiyas.la/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>This is an alternative to implementing a handler 
+
+you can use the querystring like
+
+site.css?version=v-634933238684083941</content>
+    </comment>
+    <comment id="2c30fe52-8af3-41c7-a8eb-a7cb1c3147ee" parentid="5f3315ac-a2b6-4911-a137-aa0f061e990e" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 09:41:17</date>
+      <author>Alex Bee</author>
+      <email>vipeo@mail.ru</email>
+      <country>ru</country>
+      <ip>62.148.13.132</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>I know that one. But I&amp;#39;d like to get more details on what Mads is doing.</content>
+    </comment>
+    <comment id="4d477bfc-1738-44a4-b89c-428447b48269" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 09:58:22</date>
+      <author>Johan Sk&amp;#246;ldekrans</author>
+      <email>johsko@carnegie.se</email>
+      <country>se</country>
+      <ip>193.182.104.10</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Could this have something to do if you use IIS Express or the built in web server in VS?</content>
+    </comment>
+    <comment id="2b0c2805-eaef-4a94-8869-1f8d5177c6a8" parentid="c8200f75-feab-4068-ad8c-140fa41ea50f" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 09:59:22</date>
+      <author>magellin</author>
+      <email>magellings2@gmail.com</email>
+      <country>us</country>
+      <ip>173.227.203.100</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Me too!</content>
+    </comment>
+    <comment id="e27f5f4a-93eb-4eb8-bb85-308764d22e25" parentid="c8200f75-feab-4068-ad8c-140fa41ea50f" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 11:04:34</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.164</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Of course!! How could I forget the last part...?
+
+Thanks for reminding me, it is now added</content>
+    </comment>
+    <comment id="9aaa187b-ca24-4e25-b3b8-e33e1174af2a" parentid="9a191070-8b56-4557-841b-0020312b4198" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 11:08:16</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.164</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Yes, you can do that, but it&amp;#39;s not considered a good practice to have URL parameters on static resources. Google Page Speed won&amp;#39;t give you maximum points if you do that either.</content>
+    </comment>
+    <comment id="64eecd21-cd0a-474d-8576-4699118d7dc5" parentid="4d477bfc-1738-44a4-b89c-428447b48269" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 11:09:22</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.164</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>This works on both full IIS and IIS Express</content>
+    </comment>
+    <comment id="983a8231-bf2c-47e2-9327-4d42dd28bd47" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 11:21:11</date>
+      <author>Johan Sk&amp;#246;ldekrans</author>
+      <email>johsko@carnegie.se</email>
+      <country>se</country>
+      <ip>193.182.104.10</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Still cant get it to work. I get the rewrite tag underlined stating that it is not valid in system.webServer. I&amp;#39;m using VS2012 but when I google it seems to be an old problem solved in VS2010. Do I need to update the intellisense so it compiles correctly or is there something else needed in web.config?</content>
+    </comment>
+    <comment id="4d3c2b76-07fd-45dc-80b7-bbfe896f3249" parentid="983a8231-bf2c-47e2-9327-4d42dd28bd47" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 11:28:20</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.164</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>There is no Intellisense for it, so VS is expected to invalidate the &amp;lt;rewrite&amp;gt; element. Just ignore the validation warning. You need to run the AppPool in Integrated Pipeline mode for the &amp;lt;system.webServer&amp;gt; to take effect.</content>
+    </comment>
+    <comment id="fc073370-87ec-457e-b562-e1b4fdd440f5" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 12:17:41</date>
+      <author>techblog.ginktage.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>174.37.243.135</ip>
+      <website>http://techblog.ginktage.com/2013/01/interesting-net-links-january-10-2013/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from techblog.ginktage.com
+
+Interesting .NET Links &amp;#8211; January 10 , 2013 | TechBlog</content>
+    </comment>
+    <comment id="c4a55b3c-e346-404e-b6fd-67a864edbf87" parentid="4d3c2b76-07fd-45dc-80b7-bbfe896f3249" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 12:35:49</date>
+      <author>Kenneth Scott</author>
+      <email>mr.kenneth.scott@gmail.com</email>
+      <country>us</country>
+      <ip>74.120.89.251</ip>
+      <website>http://programmerramblings.blogspot.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Don&amp;#39;t you also need to install the Microsoft URL Rewrite Module 2.0 for IIS 7 ?</content>
+    </comment>
+    <comment id="66847c10-e94a-4c48-be95-13c59ef5d211" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 12:37:53</date>
+      <author>Carsten Petersen</author>
+      <email>artbyte@artbyte.dk</email>
+      <country>dk</country>
+      <ip>87.62.153.226</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Is it possible to do something similar with MVC4 bundling / minification ... instead of the version querystring?
+</content>
+    </comment>
+    <comment id="c5138939-12bd-4d57-8e41-1eb8e804f64f" parentid="c4a55b3c-e346-404e-b6fd-67a864edbf87" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 12:43:28</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.164</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Yes, potentially. However, most hosters already have it installed and I believe it&amp;#39;s pre-installed on IIS 8. </content>
+    </comment>
+    <comment id="ba865a3c-fa38-499a-883c-df710ede40a0" parentid="66847c10-e94a-4c48-be95-13c59ef5d211" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 12:44:48</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country />
+      <ip>131.107.192.164</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>I just asked the bundling team and they don&amp;#39;t have a way to change that behavior for now. It&amp;#39;s on their backlog. You can write your own Fingerprint class that works with the BundleTable to do the same thing though.</content>
+    </comment>
+    <comment id="2aeb409e-15c8-4ff4-ae7d-c9ef8a642aa2" parentid="ba865a3c-fa38-499a-883c-df710ede40a0" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 12:53:52</date>
+      <author>Carsten Petersen</author>
+      <email>artbyte@artbyte.dk</email>
+      <country>dk</country>
+      <ip>87.62.153.226</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Ok, thanks for asking =)</content>
+    </comment>
+    <comment id="604f08f9-b524-445d-a8df-0798faf35fed" parentid="ba865a3c-fa38-499a-883c-df710ede40a0" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 13:20:46</date>
+      <author>Carsten Petersen</author>
+      <email>artbyte@artbyte.dk</email>
+      <country>dk</country>
+      <ip>87.62.153.226</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Made a extension method, which converts the URL ... if anyone else might be interested ...
+
+public static class HtmlHelper
+{
+	private readonly static Regex re_Version = new Regex(@&amp;quot;(\?v=([^$]+)$)&amp;quot;, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+	private readonly static Regex re_LastFolder = new Regex(@&amp;quot;(/[^/$]+)$&amp;quot;, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+	public static IHtmlString ToTag(this IHtmlString htmlString, int cacheDuration = 10)
+	{
+		string rootRelativePath = htmlString.ToHtmlString();
+		if (HttpRuntime.Cache[rootRelativePath] == null)
+		{
+			var result = rootRelativePath;
+			if (re_Version.IsMatch(result))
+			{
+				var versionString = re_Version.Match(result).Groups[2].Value;
+				result = re_Version.Replace(result, &amp;quot;&amp;quot;);
+				if (re_LastFolder.IsMatch(result))
+				{
+					var lastFolderSegment = re_LastFolder.Match(result).Groups[1].Value;
+					result = string.Concat(re_LastFolder.Replace(result, &amp;quot;&amp;quot;), &amp;quot;/v-&amp;quot;, versionString, lastFolderSegment);
+				}
+			}
+			HttpRuntime.Cache.Insert(rootRelativePath, result, null, DateTime.Now.AddMinutes(cacheDuration), new TimeSpan(0));
+		}
+		return MvcHtmlString.Create(HttpRuntime.Cache[rootRelativePath] as string);
+	}
+}
+
+The web.config rewrite rule shuold be modified to ...
+
+&amp;lt;rewrite&amp;gt;
+			&amp;lt;rules&amp;gt;
+				&amp;lt;rule name=&amp;quot;fingerprint&amp;quot; stopProcessing=&amp;quot;false&amp;quot;&amp;gt;
+					&amp;lt;match url=&amp;quot;([\S]+)[b](/v-[^/]+/)[/b]([\S]+)&amp;quot; ignoreCase=&amp;quot;true&amp;quot; negate=&amp;quot;false&amp;quot; /&amp;gt;
+					&amp;lt;action type=&amp;quot;Rewrite&amp;quot; url=&amp;quot;{R:1}/{R:3}&amp;quot; /&amp;gt;
+				&amp;lt;/rule&amp;gt;
+			&amp;lt;/rules&amp;gt;
+		&amp;lt;/rewrite&amp;gt;
+
+If the razor views (eg. _Layout.cshtml) it can be included as ...
+
+&amp;lt;script src=&amp;quot;@Scripts.Url(&amp;quot;~/bundles/jquery&amp;quot;).ToTag()&amp;quot; type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;</content>
+    </comment>
+    <comment id="55e25d6c-e6a2-46b4-9814-349361fc4d8c" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 15:39:03</date>
+      <author>Kenneth Scott</author>
+      <email>mr.kenneth.scott@gmail.com</email>
+      <country>us</country>
+      <ip>74.120.89.251</ip>
+      <website>http://programmerramblings.blogspot.com/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>I&amp;#39;m curious...  
+
+Instead of globally adding the staticContent/clientCache configuration in the web.config, if you wanted to only perm cache these particular resources, could you modify that rewrite rule somehow to also add a Cache-Control response header set to like &amp;quot;public,max-age=2147472000&amp;quot;?
+</content>
+    </comment>
+    <comment id="a6818ac3-5fef-4d27-aea9-fea7654e9cfe" parentid="55e25d6c-e6a2-46b4-9814-349361fc4d8c" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 17:18:48</date>
+      <author>Kenneth Scott</author>
+      <email>mr.kenneth.scott@gmail.com</email>
+      <country>us</country>
+      <ip>74.120.89.251</ip>
+      <website>http://programmerramblings.blogspot.com/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>I tried using the URL in the outbound rule, but by then it&amp;#39;s already been rewritten.  I had to save off the original request path in a server variable and use that in the outbound rule.
+
+This is what i came up with.  It seems to work but the drawback is you have to remember to allow the server variable (X_REQUESTED_URL_PATH / whatever you want to call it) in IIS/applicationHost.config.
+
+    &amp;lt;rewrite&amp;gt;
+      &amp;lt;rules&amp;gt;
+        &amp;lt;rule name=&amp;quot;fingerprint&amp;quot;&amp;gt;   
+          &amp;lt;match url=&amp;quot;([\S]+)(/v-[0-9]+/)([\S]+)&amp;quot; /&amp;gt;
+          &amp;lt;action type=&amp;quot;Rewrite&amp;quot; url=&amp;quot;{R:1}/{R:3}&amp;quot; /&amp;gt;
+          &amp;lt;serverVariables&amp;gt;
+            &amp;lt;set name=&amp;quot;X_REQUESTED_URL_PATH&amp;quot; value=&amp;quot;{R:0}&amp;quot; /&amp;gt;  
+          &amp;lt;/serverVariables&amp;gt;
+        &amp;lt;/rule&amp;gt;
+      &amp;lt;/rules&amp;gt;
+      &amp;lt;outboundRules&amp;gt;              
+        &amp;lt;rule name=&amp;quot;fingerprint cache header&amp;quot;&amp;gt;   
+          &amp;lt;match serverVariable=&amp;quot;RESPONSE_Cache-Control&amp;quot; pattern=&amp;quot;.*&amp;quot; /&amp;gt;
+          &amp;lt;conditions&amp;gt;
+            &amp;lt;add input=&amp;quot;{X_REQUESTED_URL_PATH}&amp;quot; pattern=&amp;quot;([\S]+)(/v-[0-9]+/)([\S]+)&amp;quot; /&amp;gt;
+          &amp;lt;/conditions&amp;gt;
+          &amp;lt;action type=&amp;quot;Rewrite&amp;quot; value=&amp;quot;public,max-age=2147472000&amp;quot; /&amp;gt;
+        &amp;lt;/rule&amp;gt;
+      &amp;lt;/outboundRules&amp;gt;
+    &amp;lt;/rewrite&amp;gt;
+
+But this way you don&amp;#39;t have to globally enable the staticContent/clientCache configuration.
+
+Thoughts?
+</content>
+    </comment>
+    <comment id="f90e8db1-aed2-47ce-a596-39d72cc2ef71" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-10 18:09:26</date>
+      <author>Joe Nobody</author>
+      <email>nobody@nowhere.com</email>
+      <country>us</country>
+      <ip>74.120.89.251</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>What if you use this on stylesheet A that @import&amp;#39;s another stylesheet B?   If you make changes to stylesheet B - they&amp;#39;ll never be picked up because only A is fingerprinted, right?
+
+</content>
+    </comment>
+    <comment id="bd5ccb3f-cf4f-4ae5-a135-7cb9f18ad491" parentid="c5138939-12bd-4d57-8e41-1eb8e804f64f" approved="True" spam="False" deleted="False">
+      <date>2013-01-11 05:29:35</date>
+      <author>Johan Sk&amp;#246;ldekrans</author>
+      <email>johsko@carnegie.se</email>
+      <country>se</country>
+      <ip>193.182.104.10</ip>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Doesnt seem to work with the devserver in VS, only with IIS Express. </content>
+    </comment>
+    <comment id="db474a4e-0772-434f-94a1-09b3b77ab851" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-11 07:54:26</date>
+      <author>adam</author>
+      <email>adam.straughan@gmail.com</email>
+      <country>gb</country>
+      <ip>165.193.168.109</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Is there a reason to not use etags? http://en.wikipedia.org/wiki/HTTP_ETag , http://www.dotnetscraps.com/dotnetscraps/post/ETag-and-IIS-demystified.aspx</content>
+    </comment>
+    <comment id="cee2390b-733a-4d25-8194-b394fe21b919" parentid="55e25d6c-e6a2-46b4-9814-349361fc4d8c" approved="True" spam="False" deleted="False">
+      <date>2013-01-14 02:16:36</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>174.127.225.204</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>You can add &amp;quot;public&amp;quot; to the cache-control header like so, but it would be for all static resources:
+
+&amp;lt;clientCache cacheControlMode=&amp;quot;UseMaxAge&amp;quot; cacheControlMaxAge=&amp;quot;365:00:00&amp;quot; cacheControlCustom=&amp;quot;public&amp;quot; /&amp;gt;</content>
+    </comment>
+    <comment id="eea517b9-8117-4edf-9018-f0e98c08f96b" parentid="db474a4e-0772-434f-94a1-09b3b77ab851" approved="True" spam="False" deleted="False">
+      <date>2013-01-14 02:18:48</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country />
+      <ip>174.127.225.204</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>No, you can use ETags. That&amp;#39;s not a problem unless you run in a web farm and you are using the default ETag generation performed automatically by IIS. And even then, it&amp;#39;s not that big a problem</content>
+    </comment>
+    <comment id="3d82d835-1392-4093-a34e-f557c062207c" parentid="db474a4e-0772-434f-94a1-09b3b77ab851" approved="True" spam="False" deleted="False">
+      <date>2013-01-14 02:19:26</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country />
+      <ip>174.127.225.204</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Here&amp;#39;s how to remove ETags if you want to just use the Last-Modified header instead: http://mark.mymonster.nl/2011/10/18/improve-the-yslow-score-remove-the-etags</content>
+    </comment>
+    <comment id="546c01e8-b3c7-4b63-a863-a47de3dc1507" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-15 03:40:51</date>
+      <author>Martin H. Normark</author>
+      <email>m@martinnormark.com</email>
+      <country>dk</country>
+      <ip>80.63.50.106</ip>
+      <website>http://martinnormark.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>I always use the build number assigned by the build server for cache busting.
+
+In TeamCity it is really simple to peek into AssemblyInfo.cs and change the revision part of the version to the build number. There&amp;#39;s a built-in feature that can do just that: http://confluence.jetbrains.net/display/TCD7/AssemblyInfo+Patcher
+
+Then I have a Razor HTML Helper that adds the Assembly&amp;#39;s revision number to the URL:
+
+public static class UrlHelperExtensions
+{
+	private static int _revisionNumber;
+ 
+	public static string ContentVersioned(this UrlHelper urlHelper, string contentPath)
+	{
+		string url = urlHelper.Content(contentPath);
+		int revisionNumber = GetRevisionNumber();
+ 
+		return String.Format(&amp;quot;{0}?v={1}&amp;quot;, url, revisionNumber);
+	}
+ 
+	public static int GetRevisionNumber()
+	{
+		if (_revisionNumber == 0)
+		{
+			Version v = Assembly.GetExecutingAssembly().GetName().Version;
+ 
+			_revisionNumber = v.Revision;
+		}
+ 
+		return _revisionNumber;
+	}
+}
+
+And in my Razor layout page, I include scripts like this:
+
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;@Url.ContentVersioned(&amp;quot;/Scripts/libs/backbone-min.js&amp;quot;)&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+</content>
+    </comment>
+    <comment id="3f7f4448-bc03-4754-adff-897770786e9d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-15 10:58:34</date>
+      <author>Scott Kuhl</author>
+      <email>scott@kuhl.ws</email>
+      <country>us</country>
+      <ip>170.135.112.14</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Any advice on how to handle images referenced inside a stylesheet?
+
+Ex: background: url(&amp;#39;/Images/background.jpg&amp;#39;);
+
+Right now we add a version number to the name, but it doesn&amp;#39;t seem like the best approach.
+
+background: url(&amp;#39;/Images/background-1.jpg&amp;#39;);</content>
+    </comment>
+    <comment id="ad1cffdd-5e32-4357-8c52-ff140d8139c0" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-16 01:43:59</date>
+      <author>Ole Marius L&amp;#248;set</author>
+      <email>olemariusloset@gmail.com</email>
+      <country>no</country>
+      <ip>199.48.229.89</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Will GetLastWriteTime work even when the file goes trough a VCS, or when in different time zones/different server times? </content>
+    </comment>
+    <comment id="1febfd9f-487e-422c-a977-a5147e1cb745" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-27 23:31:15</date>
+      <author>ProHOST</author>
+      <email>khanhle@prohost.vn</email>
+      <country>vn</country>
+      <ip>222.253.161.184</ip>
+      <website>http://prohost.vn/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>In my web.config file, as default is:
+
+[b]&amp;lt;clientCache cacheControlMode=&amp;quot;UseMaxAge&amp;quot; cacheControlMaxAge=&amp;quot;365:00:00&amp;quot; cacheControlCustom=&amp;quot;public&amp;quot; /&amp;gt;[/b]
+
+But when check header
+
+[b]http://prohost.vn/
+Date: Mon, 28 Jan 2013 04:23:59 GMT
+Content-Encoding: deflate
+Server: Microsoft-IIS/6.0
+X-Powered-By: ASP.NET
+Content-Type: text/html; charset=utf-8
+Content-Script-Type: text/javascript
+Cache-Control: private
+Content-Style-Type: text/css
+Content-Length: 12943
+
+200 OK
+[/b]
+Can you help me!</content>
+    </comment>
+    <comment id="4a2aa657-a521-455d-b447-57cabaa4f44d" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-02-05 10:30:49</date>
+      <author>Tom Pietrosanti</author>
+      <email>tom@rykus.com</email>
+      <country>us</country>
+      <ip>72.11.218.185</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Might be worth noting that if you have any relative URLs in your stylesheets, you&amp;#39;ll need to add an extra &amp;#39;../&amp;#39; to them, or convert them to absolute URLs.</content>
+    </comment>
+    <comment id="f0807e14-dda4-4c88-9e1d-59264d84c08a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-06 03:39:29</date>
+      <author>Mobile website design</author>
+      <email>charliealexander214@yahoo.com</email>
+      <country>ph</country>
+      <ip>112.198.64.39</ip>
+      <website>http://www.spiderwebmobi.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Probably one of the most reliable source of information on the web today.</content>
+    </comment>
+    <comment id="613f4da9-985f-4f4d-8e3b-fcc5ddd3b107" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-16 01:42:58</date>
+      <author>Mobile website design</author>
+      <email>lxavier210@hotmail.com</email>
+      <country>ph</country>
+      <ip>112.198.64.39</ip>
+      <website>http://www.spiderwebmobi.com/what-we-do</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Its nice to read this kind of article. cheers mate.</content>
+    </comment>
+    <comment id="6f596978-45d4-4365-bd8f-6c2b92829a9c" parentid="4a2aa657-a521-455d-b447-57cabaa4f44d" approved="False" spam="True" deleted="False">
+      <date>2013-03-19 06:08:46</date>
+      <author>Mohamed Kadi</author>
+      <email>kadi_mohamed10@hotmail.com</email>
+      <country>be</country>
+      <ip>212.35.118.20</ip>
+      <moderatedby>App_Code.Extensions.TypePadFilter</moderatedby>
+      <avatar />
+      <content>Or you can add a rewrite rule.. For my own project, this is what it looks like..
+
+&amp;lt;rule name=&amp;quot;cssImages&amp;quot;&amp;gt;
+          &amp;lt;match url=&amp;quot;(stylesheets/images/)([\S]+)&amp;quot; /&amp;gt;
+          &amp;lt;action type=&amp;quot;Rewrite&amp;quot; url=&amp;quot;images/{R:2}&amp;quot; /&amp;gt;
+&amp;lt;/rule&amp;gt;</content>
+    </comment>
+    <comment id="2d54e2a7-5f76-454b-bcc6-3172e67fbc80" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-25 06:04:00</date>
+      <author>vishal bagchi</author>
+      <email>sharonstone623@gmail.com</email>
+      <country>us</country>
+      <ip>122.168.114.255</ip>
+      <website>https://pipl.com/directory/name/Bagchi/Vishal/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>I haven’t any word to appreciate this post.... I think this is really a great thing about the fashion. Really I am impressed from this post. I am very happy to read this article. Thanks for giving us nice info. Fantastic walk-through. I appreciate this post.</content>
+    </comment>
+    <comment id="0d0ad9f4-cb5b-4ada-bec6-aea998b81ad3" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-26 05:14:05</date>
+      <author>sex chat</author>
+      <email>chalsbroun2@gmail.com</email>
+      <country>us</country>
+      <ip>122.175.140.185</ip>
+      <website>http://pussycamxxx.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>I am very much pleased with the contents you have mentioned. I enjoyed every little bit part of it. It contains truly information. I want to thank you for this informative read; I really appreciate sharing this great.</content>
+    </comment>
+    <comment id="a247045e-efa8-441d-9039-692163c898b8" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-04-05 19:44:47</date>
+      <author>Rafii Dj</author>
+      <email>parto_6@hotmail.com</email>
+      <country>es</country>
+      <ip>80.31.254.38</ip>
+      <website>http://www.todopelys.es/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>muchas gracias por el truco :D</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>cfcd9812-476b-43a0-ae90-69085cd9baf1</category>
+    <category>555dee8d-beef-4c87-a492-2334f4f414ea</category>
+  </categories>
+  <notifications>
+    <email>tom.vanhaute@telenet.be</email>
+    <email>vipeo@mail.ru</email>
+    <email>fatihsahin72@gmail.com</email>
+    <email>mr.kenneth.scott@gmail.com</email>
+    <email>adam.straughan@gmail.com</email>
+    <email>scott@kuhl.ws</email>
+    <email>olemariusloset@gmail.com</email>
+    <email>khanhle@prohost.vn</email>
+    <email>tom@rykus.com</email>
+  </notifications>
+</post>

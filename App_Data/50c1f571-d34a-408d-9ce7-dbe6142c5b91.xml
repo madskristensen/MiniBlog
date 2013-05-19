@@ -1,0 +1,701 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<post>
+  <author>mads kristensen</author>
+  <title>The ASP.NET developer checklist</title>
+  <description />
+  <content>&lt;p&gt;&lt;a title="ASP.NET Web Developer Checklist" href="http://webdevchecklist.com/asp.net/"&gt;&lt;/a&gt;In the beginning of January, we released the &lt;a href="http://webdevchecklist.com/"&gt;Web Developer Checklist&lt;/a&gt; with great interest from the general web community. The checklist helps raising awareness of common best practices for building websites.&lt;/p&gt;  &lt;p&gt;It was always the plan to branch the checklist out into technology specific checklists to make it even easier to apply all the best practices.&lt;/p&gt;  &lt;p&gt;Today we’re excited to announce the first technology specific checklist – the &lt;a href="http://webdevchecklist.com/asp.net/"&gt;ASP.NET Developer Checklist&lt;/a&gt;. It contains links to many ASP.NET specific tools and solutions to common problems. &lt;/p&gt;  &lt;p&gt;Not only is it a great tool for all ASP.NET developers to learn from, but also to track the progress of implementing the various best practices. &lt;/p&gt;  &lt;p&gt;We hope it will be received well and add value to the millions of ASP.NET developers worldwide. In the meantime we will be working on finishing &lt;a href="http://webdevchecklist.com/asp.net/performance/"&gt;another ASP.NET specific checklist&lt;/a&gt; that focuses on website performance. &lt;/p&gt;  &lt;p&gt;ASP.NET is just the first of many web technologies to receive its own checklist, so remember to check the &lt;a href="http://webdevchecklist.com/"&gt;Web Developer Checklist&lt;/a&gt; often for updates.&lt;/p&gt;</content>
+  <ispublished>True</ispublished>
+  <isdeleted>False</isdeleted>
+  <iscommentsenabled>True</iscommentsenabled>
+  <pubDate>2013-01-15 23:04:05</pubDate>
+  <lastModified>2013-01-15 23:09:35</lastModified>
+  <raters>0</raters>
+  <rating>0</rating>
+  <slug>The-ASPNET-developer-checklist</slug>
+  <tags />
+  <comments>
+    <comment id="ee7c5f23-a110-4205-a383-b8a118142b24" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 03:27:57</date>
+      <author>Lee Englestone</author>
+      <email>lee.englestone@gmail.com</email>
+      <country>gb</country>
+      <ip>62.253.215.141</ip>
+      <website>http://www.leeenglestone.co.uk/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Any chance of an ASP.NET MVC one? I think it deserves one and you&amp;#39;d have lots of checks for it indeed.</content>
+    </comment>
+    <comment id="fe628870-c477-422e-8e19-e145969f0102" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 04:09:49</date>
+      <author>Daniel </author>
+      <email>lodnert@gmail.com</email>
+      <country>se</country>
+      <ip>213.187.196.190</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Any chance of an Java one?</content>
+    </comment>
+    <comment id="cbb1e240-8146-4260-9f73-e89a5bd1dd89" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 11:52:48</date>
+      <author>Rob</author>
+      <email>monte96_@hotmail.com</email>
+      <country>us</country>
+      <ip>12.9.138.10</ip>
+      <website>http://www.avnet.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Mads-  My company has webdevchecklist.com blocked by WebSense.  Any chance you can submit something to WebSense to get them to remove it from the &amp;#39;potentially damaging content&amp;#39; category?  I&amp;#39;ve had to do this before for sites that I&amp;#39;ve done.  </content>
+    </comment>
+    <comment id="fc881415-c9b2-4ba6-89f2-882f38fcd6b2" parentid="cbb1e240-8146-4260-9f73-e89a5bd1dd89" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 11:56:29</date>
+      <author>Rob</author>
+      <email>monte96_@hotmail.com</email>
+      <country>us</country>
+      <ip>12.9.138.10</ip>
+      <website>http://www.avnet.com/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>BTW- you just have to send them an email:  suggest@websense.com telling them you&amp;#39;re the site owner and a description of what it&amp;#39;s purpose is.</content>
+    </comment>
+    <comment id="8748f8ea-bd1a-497b-be0a-5e9cf3605053" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 13:30:10</date>
+      <author>Luis F. Quesada</author>
+      <email>lfqh@rocketmail.com</email>
+      <country>cr</country>
+      <ip>201.195.152.222</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Really helpful and well organized info. Thanks for your time and effort.</content>
+    </comment>
+    <comment id="18bacd00-2705-46ac-af68-13c186d4c1be" parentid="fc881415-c9b2-4ba6-89f2-882f38fcd6b2" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 14:10:11</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.68</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Yikes, I&amp;#39;ll contact them. Thanks for the heads-up. </content>
+    </comment>
+    <comment id="c623883b-7745-4434-979d-3ec6d804d7f5" parentid="fe628870-c477-422e-8e19-e145969f0102" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 14:22:59</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.174.40</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>Sure, we accept pull requests and it&amp;#39;s super easy to add additional languages. Here&amp;#39;s how: https://github.com/ligershark/webdevchecklist.com/wiki/Sections</content>
+    </comment>
+    <comment id="c9f206a5-310a-41d1-b238-bde30da62ccc" parentid="ee7c5f23-a110-4205-a383-b8a118142b24" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 14:25:20</date>
+      <author>Mads Kristensen</author>
+      <email>post@madskristensen.net</email>
+      <country>us</country>
+      <ip>131.107.192.68</ip>
+      <website>http://madskristensen.net/</website>
+      <moderatedby>Rule:authenticated</moderatedby>
+      <avatar />
+      <content>The ASP.NET page already cover a lot of both MVC, WebForms and WebPages. We accept pull requests, so if there is something you&amp;#39;d like to see in the list, please send us one. Here&amp;#39;s how: https://github.com/ligershark/webdevchecklist.com/wiki/Sections</content>
+    </comment>
+    <comment id="87b18350-5c58-47d7-a541-3f6f7a742925" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-17 19:40:59</date>
+      <author>Nikola</author>
+      <email>nikola.iliev@hotmail.com</email>
+      <country>mk</country>
+      <ip>79.126.136.237</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Really helpful thanks for your time...</content>
+    </comment>
+    <comment id="c821870d-f678-4656-94f1-637700f27eb5" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-18 02:45:10</date>
+      <author>Sridhar</author>
+      <email>sridharonl@outlook.com</email>
+      <country>in</country>
+      <ip>125.16.133.124</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Whenever we tried to open webdevchecklist.com, my company network blocking this site and showing this message
+&amp;quot;[b]This Websense category is filtered: Potentially Damaging Content. Sites in this category may pose a security threat to network resources or private information, and are blocked by your organization.[/b]&amp;quot;
+
+Is there any damaging content in this site?
+
+I am able to use this site from my home network. Nice work.
+
+Thanks</content>
+    </comment>
+    <comment id="ae3173dd-acd5-48bd-b2d3-6ae104fb6268" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-18 02:49:57</date>
+      <author>jitendra singh</author>
+      <email>jitendraapi@gmail.com</email>
+      <country>in</country>
+      <ip>27.7.232.6</ip>
+      <website>http://jitendra.me/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Awesome checklist. The asp.net check list comprises MVC however is there any separate check point?</content>
+    </comment>
+    <comment id="e1be5aa4-cbc5-4b8c-b802-10c571de5c20" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-18 09:51:26</date>
+      <author>darkernemesis.com</author>
+      <email>pingback</email>
+      <country />
+      <ip>50.56.222.232</ip>
+      <website>http://www.darkernemesis.com/2013/01/weekly-tech-and-science-links-4/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Pingback from darkernemesis.com
+
+Weekly Tech and Science Links (#4)  |  Darker Nemesis</content>
+    </comment>
+    <comment id="ac87d9e7-cb6b-419e-ad80-21fdccea7d23" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-01-19 20:51:52</date>
+      <author>xEAuX4Cr</author>
+      <email>Simser@aol.com</email>
+      <country>us</country>
+      <ip>5.135.85.88</ip>
+      <website>http://www.xeaux4crrlel.gov/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>72247 9797What platform and theme are you employing if I could ask? Exactly where can I buy them?  x 774973</content>
+    </comment>
+    <comment id="00e58fb8-26ee-46db-bb6e-95b521c304df" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-22 04:16:57</date>
+      <author>Lennart</author>
+      <email>lennart@thesedays.com</email>
+      <country>be</country>
+      <ip>84.199.83.129</ip>
+      <website>http://labs.thesedays.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>I can&amp;#39;t access the website either, our company&amp;#39;s security software is blocking it. This is the message I&amp;#39;m getting:
+Access has been blocked as the threat Mal/HTMLGen-A has been found on this website.
+
+Grtz
+L</content>
+    </comment>
+    <comment id="9fb99746-e9cc-4cf0-8d93-43de07c3c98c" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-23 01:30:05</date>
+      <author>SEO Firm</author>
+      <email>innovative9999@gmail.com</email>
+      <country>in</country>
+      <ip>122.167.68.250</ip>
+      <website>http://www.bangalorewebdesigncompany.in/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>I am always looking online for articles that can help me. Thank you!
+http://www.bangalorewebdesigncompany.in/services.html</content>
+    </comment>
+    <comment id="3aac022f-bb38-4f89-badd-10ad18f16e78" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-01-23 01:37:54</date>
+      <author>Online Marketing</author>
+      <email>webteq123@gmail.com</email>
+      <country>in</country>
+      <ip>122.167.68.250</ip>
+      <website>http://www.search-engineoptimization.in/</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <avatar />
+      <content>Nice blog:):)
+http://www.search-engineoptimization.in</content>
+    </comment>
+    <comment id="7acc4a2f-adfc-4bfb-b9e5-f9409ad147f7" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-01-25 02:32:09</date>
+      <author>Atlanta web design</author>
+      <email>05marchsk@gmail.com</email>
+      <country>us</country>
+      <ip>122.161.227.138</ip>
+      <website>http://www.k3tech.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Hey mads can you describe me about the PHP MVC ones? please share information if you have the best suggestion.
+
+thanks for the .NET check list. such a very informative news in this blog.
+
+</content>
+    </comment>
+    <comment id="d00ccbfc-cb76-4094-9e54-58482403f614" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-06 03:37:01</date>
+      <author>Mobile website design</author>
+      <email>charliealexander214@yahoo.com</email>
+      <country>ph</country>
+      <ip>112.198.64.39</ip>
+      <website>http://www.spiderwebmobi.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Probably one of the most reliable source of information on the web today.</content>
+    </comment>
+    <comment id="2b801c2a-6f00-472f-b2a9-4ad2d665b5db" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-19 15:09:48</date>
+      <author>Houston</author>
+      <email>jsimm98@aol.com</email>
+      <country>us</country>
+      <ip>98.196.83.34</ip>
+      <website>http://preferreddoorservice.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Thanks for your time.  This helps me.  </content>
+    </comment>
+    <comment id="b323ad7b-dc39-4528-8c40-1edf35822276" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-02-20 05:53:47</date>
+      <author>adsfasd</author>
+      <email>asdfasdf@fadsads.com</email>
+      <country>us</country>
+      <ip>115.241.24.130</ip>
+      <website>http://asdfasdfasd.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>adsfasdfasdfasd</content>
+    </comment>
+    <comment id="c54ae2a1-c480-42c8-b3d9-3d2b48ad7ecc" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-01 06:16:24</date>
+      <author>garage door repair phoenix</author>
+      <email>devidjr@gmail.com</email>
+      <country>us</country>
+      <ip>117.199.191.214</ip>
+      <website>http://garagedoorrepair-phoenix.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>I have found this topic on many blog. Acctually i&amp;#39;m finding best result after searching half an hour i get your blog .It was too difficult to get it because your blog is not on first page most people think first result is best but i believe in searching quality content today i needs this topic and start searching at last i get your blog i think it is not best post but good .
+http://garagedoorrepair-phoenix.com</content>
+    </comment>
+    <comment id="5cdcc99c-b172-4824-9145-64f367a4e726" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-03-01 14:27:13</date>
+      <author>Jim Baker</author>
+      <email>jim@bestcorsos.com</email>
+      <country>us</country>
+      <ip>72.208.165.164</ip>
+      <website>http://canecorsoforsale.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>hey i read through this and i am new to asp.net...  i am trying to develop my first app in it and this is very helpful.  Thank you for the time you spent to write this checklist.  your awesome. 
+
+</content>
+    </comment>
+    <comment id="1d33d9db-1837-4cc4-8f27-fe447890c3f6" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-01 15:53:00</date>
+      <author>friv</author>
+      <email>tugcekayitmaz@gmail.com</email>
+      <country>tr</country>
+      <ip>78.190.181.153</ip>
+      <website>http://www.friv.gs/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>I would recommend the most beautiful I&amp;#39;ve ever seen a flash game site</content>
+    </comment>
+    <comment id="dd0865a3-981d-46df-a36f-3fd7e12389f6" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-01 16:00:24</date>
+      <author>friv</author>
+      <email>tugcekayitmaz@gmail.com</email>
+      <country>tr</country>
+      <ip>78.190.181.153</ip>
+      <website>http://www.friv.gs/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Awesome checklist. The asp.net check list comprises MVC however is there any separate check point?</content>
+    </comment>
+    <comment id="5381b2f7-f972-4e46-bec5-4f0cc379743a" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-03-02 01:48:18</date>
+      <author>Antoine</author>
+      <email>antroine@gmail.com</email>
+      <country>th</country>
+      <ip>101.108.150.50</ip>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>I would love a Java checklist :) 
+[b]http://www.antoinemagnan.com[/b]</content>
+    </comment>
+    <comment id="fa92f98a-ecdc-4050-87d1-52e926a884f0" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-03 00:05:50</date>
+      <author>garage door repair phoenix</author>
+      <email>devidjr@gmail.com</email>
+      <country>us</country>
+      <ip>117.199.187.241</ip>
+      <website>http://garagedoorrepair-phoenix.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>I have found this topic on many blog. Actually i&amp;#39;m finding best result after searching half an hour i get your blog .It was too difficult to get it because your blog is not on first page most people think first result is best but i believe in searching quality content today i needs this topic and start searching at last i get your blog i think it is not best post but good .
+</content>
+    </comment>
+    <comment id="d59fb5a3-cf47-4368-bc7b-b64a55a6fb0c" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-03 01:16:39</date>
+      <author>referencement local</author>
+      <email>zppvi2ppd3@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://upsurgesolutions.com/fr/referencement-marketing-local-montreal-quebec/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>I am no longer certain the place you are getting your information, but great topic. I must spend some time finding out much more or figuring out more. Thank you for wonderful info I was searching for this info for my mission.</content>
+    </comment>
+    <comment id="97f8afce-1347-45f7-8d85-f23877e8721a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-03 01:17:37</date>
+      <author>Upsurge Solutions</author>
+      <email>zppvi2ppd1@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://upsurgesolutions.com/fr/referencement-marketing-local-montreal-quebec/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>You post awsome posts. Bookmarked !</content>
+    </comment>
+    <comment id="b944da27-b716-43bf-9860-46e1ec329f17" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-03 14:51:57</date>
+      <author>Upsurge Solutions</author>
+      <email>zzeru2ppd6@yzhoo.co.uk</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://upsurgesolutions.com/social-media-marketing-montreal-canada/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>It is my pleasure to be a merber in your biog,and thank you so much that you allow me to share the article,it is my true feeling that I want to share this with others.Thanks again for everything, but most especially your friendship.</content>
+    </comment>
+    <comment id="07593c25-d152-4e1c-b2ed-7d0558b2b248" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:07:35</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd4@yzhoo.co.uk</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Thanks for that</content>
+    </comment>
+    <comment id="7571c3da-dece-4dcc-954f-0998974c7c98" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:07:39</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd6@yzhoo.co.uk</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Mint is good for consolidating bank &amp;amp; investment statements into 1 place &amp;amp; it does allow modification of bank data so that it makes sense &amp;amp; uses real words, even create splits &amp;amp; it remembers what you change as rules so that similar transactions in the future do not require adjusting . It doesn\\\&amp;#39;t handle budgeting all that well, doesn\\\&amp;#39;t offer forecasting, lacks any investment insight, no bill pay, etc. Of the many annoying deficiencies is that the standard transaction categories cannot be deleted or hidden, this can create confusion if you\\\&amp;#39;ve created similar custom categories. Also, Mint\\\&amp;#39;s business model is to sell you financial products. Quite simply, the advice Mint offers is not like that of a personal money manager, it\\\&amp;#39;s generic &amp;amp; designed to sell anything to make Intuit money. Personally, I prefer to pay for the software &amp;amp; for better features &amp;amp; less advertising</content>
+    </comment>
+    <comment id="08b1fcb6-0b00-433b-af58-046572b30c0d" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:09:00</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd1@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>No, its not a typo, but it is still about 2 or 2 times less than in the U.S. !Guild Wars 2 Gold</content>
+    </comment>
+    <comment id="4d4f9bff-bb68-481b-8ce0-9279ca75ddb7" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:09:07</date>
+      <author>google rocks</author>
+      <email>zppvi2ppd3@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>I like using Talk Penny Stocks. Its got a live chat that lets me talk with other investors any time I want. They just released an light version to which still has the chat and the tools but only costs .99 cents.</content>
+    </comment>
+    <comment id="56447bb4-c986-452e-9e7d-568523ffd20d" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:10:31</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd1@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Thanks for posting the good reads. I simply love the topics you discuss on your blog. They evoke a sense of responsibility in today\\\&amp;#39;s youth.</content>
+    </comment>
+    <comment id="dc65e1b4-723a-48d8-b8cb-e2f7ead66f85" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:10:36</date>
+      <author>google rocks</author>
+      <email>zppvi2ppd3@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>It is my pleasure to be a merber in your biog,and thank you so much that you allow me to share the article,it is my true feeling that I want to share this with others.Thanks again for everything, but most especially your friendship.</content>
+    </comment>
+    <comment id="9e4bd2ff-3b60-46ac-b343-e2bcbc93b9ac" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:11:14</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd8@yzhoo.co.uk</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Really a nice post. Thx for this article</content>
+    </comment>
+    <comment id="18ac036c-31f7-4463-aec2-8892fd32aa22" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:11:30</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd2@yzhoo.co.uk</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Thanks for posting the good reads. I simply love the topics you discuss on your blog. They evoke a sense of responsibility in today\\\&amp;#39;s youth.</content>
+    </comment>
+    <comment id="d735d2a1-023c-477f-98b5-2589c36e6d1b" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:11:36</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd2@yzhoo.co.uk</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Very nice and informative.It is just i was looking for.</content>
+    </comment>
+    <comment id="0697d838-8fad-4ee3-aebc-591faaf1618a" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:11:44</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd5@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>the answer to the question how is your childcare situation working for you?\\\&amp;quot; is that it isn\\\&amp;#39;t! we hired a young woman in college to take care of our twin three year olds so my husband and I can work more hours which we have to do owing to our financial situation which is pretty dire and keeps us awake at night. anyway she didn\\\&amp;#39;t show half the time. on to a local grandmotherly type. she had to quit when her health began to fail and she needed medical insurance. next the local daycare center. horrible, I won\\\&amp;#39;t go into it.</content>
+    </comment>
+    <comment id="eda983ba-3526-410a-85ba-5048c331a740" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:12:27</date>
+      <author>google rocks</author>
+      <email>zppvi2ppd1@gmzil.com</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>My recommendation is Piggie. It is very simple to use and best of all, it is free!</content>
+    </comment>
+    <comment id="fb822cf6-6ca1-4873-9fa4-24b0ad2c9489" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-06 05:12:55</date>
+      <author>google rocks</author>
+      <email>zzeru2ppd6@yzhoo.co.uk</email>
+      <country />
+      <ip>168.144.144.121</ip>
+      <website>http://www.google.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Hi, this is a well written post. I just bookmarked your site. To be truthful, although I read a lot in this area. I still picked up quite a lot today. Kindly continue the amazingly good post and I will tell my friends about it.</content>
+    </comment>
+    <comment id="326b0da9-e39b-4602-a72b-feabe23123b6" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-08 01:18:09</date>
+      <author>garage door repair phoenix</author>
+      <email>devidjr@gmail.com</email>
+      <country>us</country>
+      <ip>117.199.188.77</ip>
+      <website>http://garagedoorrepair-phoenix.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>I have found this topic on many blogs. Actually i&amp;#39;m finding best result after searching half an hour i get your blog .It was too difficult to get it because your blog is not on first page of google most people think first result is best but i believe in searching quality content today i needs this topic and start searching at last i get your blog i think it is not best post but good .
+&amp;lt;a href=&amp;quot;http://garagedoorrepair-phoenix.com&amp;quot;&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;b&amp;gt;garage door repair phoenix&amp;lt;/b&amp;gt;&amp;lt;/strong&amp;gt;&amp;lt;/a&amp;gt;</content>
+    </comment>
+    <comment id="a946c067-d2ba-47ea-a966-7385438053f3" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-08 13:32:27</date>
+      <author>Mike</author>
+      <email>krish@gmail.com</email>
+      <country>pl</country>
+      <ip>77.254.225.152</ip>
+      <website>http://www.papers247.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Nice blog about developers
+</content>
+    </comment>
+    <comment id="2cef786f-9a22-47dc-9ca0-ca7152c60c53" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-10 19:47:46</date>
+      <author>Java</author>
+      <email>crashinghandler@gmail.com</email>
+      <country>us</country>
+      <ip>83.49.237.68</ip>
+      <website>http://crashinghandler.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Great post</content>
+    </comment>
+    <comment id="d7b1f4e0-232e-4723-a28b-8f3702cb82e2" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-13 06:25:06</date>
+      <author>business directory</author>
+      <email>jqqr@gmail.com</email>
+      <country>us</country>
+      <ip>90.60.252.131</ip>
+      <website>http://jqqr.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Great Comment and Great Post , blog , you can see my sit if you want ;thank alot &amp;lt;a href=&amp;quot;http://jqqr.com&amp;quot; title=&amp;quot;business directory &amp;quot;&amp;gt;business directory&amp;lt;/a&amp;gt;.
+http://jqqr.com
+business directory</content>
+    </comment>
+    <comment id="f9aaf166-11e5-459d-9e94-40b52019b256" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-13 11:59:02</date>
+      <author>englewood florida hotels</author>
+      <email>florida47@yahoo.com</email>
+      <country>us</country>
+      <ip>76.123.72.105</ip>
+      <website>http://www.englewoodfloridahotels.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Can I just say what a relief to search out anyone who really knows exactly what they are discussing on the internet. You actually recognize how to take a major issue to light and allow it to important. Even more people require to read this particular and know it side of the story. I cant believe you are not very popular because you obviously have the gift.</content>
+    </comment>
+    <comment id="e7c20703-672b-4b3b-bf39-1c860c37014f" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-19 01:20:38</date>
+      <author>Alec Hutchinson</author>
+      <email>ishmael.cortez@hotmail.com</email>
+      <country>gb</country>
+      <ip>115.118.174.64</ip>
+      <website>http://ishmaelcortez.blog.com/2013/03/15/coding-standards-boost-the-readability-of-a-code-for-net-development/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Actually i am looking for this kind of information.You made various nice point in your post.Your post was truly impressive. Have a nice day.. </content>
+    </comment>
+    <comment id="b781ec51-0b5c-4f1b-95d1-7e05a52040d6" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-03-20 21:47:32</date>
+      <author>corporate video production </author>
+      <email>airachzil@yahoo.com.ph</email>
+      <country>au</country>
+      <ip>112.207.154.255</ip>
+      <website>http://www.lickmedia.com.au/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>thanks for this awesome checklist for asp.net, I will take note on this.</content>
+    </comment>
+    <comment id="65f9e20b-0f76-4de4-b44f-081b7879afde" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-25 06:02:51</date>
+      <author>vishal bagchi</author>
+      <email>sharonstone623@gmail.com</email>
+      <country>us</country>
+      <ip>122.168.114.255</ip>
+      <website>http://www.facebook.com/vishal.bagchi</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>I actually added your blog to my favorites and will look forward for more updates. Great Job, Keep it up.</content>
+    </comment>
+    <comment id="cdfab72c-fb55-49a1-85a4-ef69c6a9cc08" parentid="00000000-0000-0000-0000-000000000000" approved="True" spam="False" deleted="False">
+      <date>2013-03-25 15:32:57</date>
+      <author>Support Engineer Days Online</author>
+      <email>trackback</email>
+      <country />
+      <ip>65.55.59.10</ip>
+      <website>http://blogs.msdn.com/b/omnia/archive/2013/03/25/web-developer-checklist.aspx</website>
+      <moderatedby>Rule:white list</moderatedby>
+      <content>Web Developer Checklist
+
+I wanted to quickly share with you this great checklist from the IIS\Asp.Net Team. It is hosted at http</content>
+    </comment>
+    <comment id="cda2c14f-856f-40d6-92a2-04f8ac4d1318" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-26 05:12:39</date>
+      <author>cams for free</author>
+      <email>chalsbroun2@gmail.com</email>
+      <country>us</country>
+      <ip>122.175.140.185</ip>
+      <website>http://pussycamxxx.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>I have known very important things over here. I admire the valuable advice you make available in your expertly written content. I want to thank you for this Informative read; I really appreciate sharing this great.</content>
+    </comment>
+    <comment id="49079b43-fd81-4d70-905e-30ba9a0c8289" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-26 06:35:37</date>
+      <author>Computer Repair Guy</author>
+      <email>help@mycomputerrepairguy.co.uk</email>
+      <country>gb</country>
+      <ip>82.46.210.7</ip>
+      <website>http://www.mycomputerrepairguy.co.uk/</website>
+      <moderatedby>App_Code.Extensions.TypePadFilter</moderatedby>
+      <avatar />
+      <content>Cool checklist, we all love checklists in the &amp;lt;a href=&amp;quot;www.mycomputerrepairguy.co.uk&amp;quot;&amp;gt;it services&amp;lt;/a&amp;gt; industry. Looking forward to more from you.</content>
+    </comment>
+    <comment id="85059b4a-f8fc-492e-a2a2-3f768b5cdc99" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-03-27 13:46:02</date>
+      <author>Bracelets For Women</author>
+      <email>johnlfigueroa12@gmail.com</email>
+      <country>us</country>
+      <ip>14.97.240.7</ip>
+      <website>http://www.jewelrygalore.com/wholesale-bracelets.html</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>With this useful checklist developer can always look for the best can do with their project. Nice sharing in between.</content>
+    </comment>
+    <comment id="b90c92e2-2b57-498e-b858-aaa990442abe" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-04-03 20:35:52</date>
+      <author>Bikram Yoga Poses</author>
+      <email>assvi2spd3@gmail.com</email>
+      <country />
+      <ip>184.173.236.58</ip>
+      <website>https://www.youtube.com/watch?v=gupsAli9SeA</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>Thanks for posting the good reads. I simply love the topics you discuss on your blog. They evoke a sense of responsibility in today\&amp;#39;s youth.</content>
+    </comment>
+    <comment id="9486a9b9-8f49-46ce-88dc-a4f709e82542" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-04-03 20:49:38</date>
+      <author>ditmas park coffee shop</author>
+      <email>assvi2spd1@gmail.com</email>
+      <country />
+      <ip>184.173.236.58</ip>
+      <website>http://coffeemob.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>Is there a mint app for UK people that links into your bank? Thanks</content>
+    </comment>
+    <comment id="5b2e8280-ba57-46d9-849b-646cbff7d845" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-04-03 23:53:05</date>
+      <author>matchmaker in New York</author>
+      <email>assvi2spd3@gmail.com</email>
+      <country />
+      <ip>184.173.236.58</ip>
+      <website>http://www.perfect10introductions.com/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>I enjoyed your security posts, I\&amp;#39;m going to set up some cameras to keep an eye on my ducks.</content>
+    </comment>
+    <comment id="02067492-48fa-4fc6-8c5f-5828bfb2aaf2" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-04-05 19:48:04</date>
+      <author>Rafii Dj</author>
+      <email>parto_6@hotmail.com</email>
+      <country>es</country>
+      <ip>80.31.254.38</ip>
+      <website>http://www.todopelys.es/</website>
+      <moderatedby>Rule:black list</moderatedby>
+      <avatar />
+      <content>gracias por molestarse en compartirlo</content>
+    </comment>
+    <comment id="8dd446bf-a0b8-4e92-8cb4-dbf6891e10db" parentid="78c10a12-60d4-4ae1-8d14-f85759113a8e" approved="True" spam="False" deleted="False">
+      <date>2013-04-06 22:21:27</date>
+      <author>George Temerit</author>
+      <email>georget34@gmail.com</email>
+      <country>gb</country>
+      <ip>146.90.92.206</ip>
+      <website>http://iphoneemulatorforpc.com/</website>
+      <moderatedby>Auto</moderatedby>
+      <avatar />
+      <content>Any chance of an Java one?</content>
+    </comment>
+    <comment id="39600278-c079-4375-bc93-587f2d674358" parentid="00000000-0000-0000-0000-000000000000" approved="False" spam="True" deleted="False">
+      <date>2013-04-14 12:29:12</date>
+      <author>streetwear clothing</author>
+      <email>hdgraph@live.co.uk</email>
+      <country>us</country>
+      <ip>2.217.221.144</ip>
+      <website>http://www.phatkidlaundry.com/</website>
+      <moderatedby>App_Code.Extensions.AkismetFilter</moderatedby>
+      <avatar />
+      <content>would love a java version</content>
+    </comment>
+  </comments>
+  <categories>
+    <category>cfcd9812-476b-43a0-ae90-69085cd9baf1</category>
+  </categories>
+  <notifications>
+    <email>lodnert@gmail.com</email>
+    <email>nikola.iliev@hotmail.com</email>
+    <email>lennart@thesedays.com</email>
+    <email>innovative9999@gmail.com</email>
+    <email>webteq123@gmail.com</email>
+    <email>johnlfigueroa12@gmail.com</email>
+  </notifications>
+</post>

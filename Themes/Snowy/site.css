@@ -1,0 +1,42 @@
+﻿html, body{
+    height: 100%;
+}
+
+body {
+    font: 1em/1.4 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
+}
+
+.page-header a{
+    color: black;
+}
+
+.container{
+    min-height: 100%;
+    height: 100%;
+    margin: 0 auto -60px;
+}
+
+.post {
+    margin-bottom: 3em;
+}
+
+    .post h1 {
+        font-size: 2em;
+        margin: 0 0 .5em 0;
+    }
+
+    .post h2 {
+        font-size: 1.4em;
+        margin-bottom: 0;
+    }
+
+    .post p {
+        padding: .2em 0;
+    }
+
+footer {
+    clear: both;
+    height: 60px;
+    background-color: #f1f1f1;
+    line-height: 60px;
+}
