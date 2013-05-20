@@ -1,16 +1,16 @@
 ﻿@{
-    Page.ShowComments = false;    
+    Page.ShowComments = false;
     Layout = "/themes/" + Blog.Theme + "/_layout.cshtml";
     bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
 }
 
 @if (showPostList)
-{   
+{
     Page.Title = Blog.Title;
     @RenderPage("/themes/" + Blog.Theme + "/PostList.cshtml")
 }
 else if (Request.RawUrl.Trim('/') == "login")
-{    
+{
     Page.Title = "Sign in | " + Blog.Title;
     @RenderPage("~/login.cshtml")
 }
@@ -21,4 +21,16 @@ else
     Page.ShowComments = true;
         
     @RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
+
+    if (User.Identity.IsAuthenticated)
+    { 
+    <div role="toolbar" class="navbar navbar-fixed-bottom">
+        <nav class="navbar-inner">
+            <ul class="nav">
+                <li><a href="/edit/@post.Slug">Edit</a></li>
+                <li><a href="/delete/@post.Slug" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a></li>
+            </ul>
+        </nav>
+    </div>
+    }
 }

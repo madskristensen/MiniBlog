@@ -36,7 +36,7 @@
         padding: .2em 0;
     }
 
-    .post #disqus_thread{
+    .post #disqus_thread {
         margin-top: 3em;
         min-height: 350px;
     }
@@ -57,5 +57,10 @@ footer {
 
     footer .login {
         float: right;
-        margin-right: 1em;
+        margin-right: 2em;
     }
+
+[contenteditable] {
+    outline: thin dashed #181818;
+    width: 100%;
+}

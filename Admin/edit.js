@@ -7,7 +7,7 @@
 
     $(function () {
         
-        txtTitle = $("[itemprop~='name']");
+        txtTitle = $("[itemprop~='blogpost'] [itemprop~='name']");
         txtContent = $("[itemprop~='articleBody']");        
 
         txtTitle.attr('contentEditable', true);

@@ -40,7 +40,10 @@
     <footer itemscope itemtype="http://schema.org/Person" itemprop="author">
         @if (!User.Identity.IsAuthenticated)
         { 
-            <span class="login"><a href="/login/?return=@Request.RawUrl">Sign in</a></span>
+            <span class="login">
+                <a href="/login/?return=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
+
+            </span>
         }
 
         <span>Copyright &copy; @DateTime.Now.Year

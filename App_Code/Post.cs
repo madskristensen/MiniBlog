@@ -24,6 +24,7 @@ public class Post
                 Content = doc.Element("content").Value,
                 PubDate = DateTime.Parse(doc.Element("pubDate").Value),
                 LastModified = DateTime.Parse(doc.Element("lastModified").Value),
+                IsPublished = bool.Parse(doc.Element("ispublished").Value),
             };
 
             Posts.Add(post);
@@ -38,6 +39,7 @@ public class Post
     public string Content { get; set; }
     public DateTime PubDate { get; set; }
     public DateTime LastModified { get; set; }
+    public bool IsPublished { get; set; }
 
     public static IEnumerable<Post> GetPosts(int postsPerPage)
     {
