@@ -1,0 +1,17 @@
+﻿@{
+    Page.ShowComments = false;
+    Layout = "/themes/" + Blog.Theme + "/_layout.cshtml";
+
+    Post post = Post.GetPosts(1).ElementAt(0);
+    Page.Title = post.Title + " | " + Blog.Title;
+}
+
+@RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
+
+<div role="toolbar" style="position: fixed; bottom: 0; left: 0; background: black; width:100%; padding: 8px 2em; z-index: 1;">
+    <button class="btn" id="btnSave">Save</button>&nbsp;
+    <button class="btn" id="btnCancel">Cancel</button>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="/admin/edit.js"></script>
