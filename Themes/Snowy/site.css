@@ -10,13 +10,13 @@
     margin-bottom: 2em;
 }
 
-.user {
+/*.user {
     text-align: right;
 }
 
     .user span {
         margin-right: 1em;
-    }
+    }*/
 
 .post {
     margin-bottom: 3em;
@@ -68,8 +68,14 @@ footer {
     position: fixed;
 }
 
+#admin form{
+    margin: 0;
+}
+
     #admin button {
         outline: 0;
+        white-space: nowrap;
+        display: inline;
     }
 
     #admin #tools {

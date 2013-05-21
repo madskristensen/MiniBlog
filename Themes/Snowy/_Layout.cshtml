@@ -15,16 +15,7 @@
 
         <header class="page-header row-fluid">
             <h1 class="span7"><a href="/" itemprop="url name">@Blog.Title</a></h1>
-
-            @if (User.Identity.IsAuthenticated)
-            {
-                <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post" class="span5 user">
-                    <span>@User.Identity.Name</span>
-                    <button type="submit" class="btn btn-small">Sign out</button>
-                </form>
-            }
         </header>
-
 
         <div class="row-fluid">
             <div role="main" class="span8">
@@ -42,7 +33,6 @@
         { 
             <span class="login">
                 <a href="/login/?return=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
-
             </span>
         }
 

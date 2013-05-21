@@ -38,6 +38,11 @@ else
                 <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
                 <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
                 <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
+                <li>
+                    <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post">
+                        <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link">Sign out <i class="icon-lock"></i></button>
+                    </form>
+                </li>
             </ul>
 
             <div id="tools">
