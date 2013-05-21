@@ -52,8 +52,8 @@
 
         btnNew.removeAttr("disabled");
         btnEdit.removeAttr("disabled");
-        btnSave.attr("disabled");
-        btnCancel.attr("disabled");
+        btnSave.attr("disabled", true);
+        btnCancel.attr("disabled", true);
         $("#tools").fadeOut();
 
         if (isNew) {
