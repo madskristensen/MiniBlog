@@ -81,14 +81,22 @@
 
     function execCommand(e) {
         var command = $(this).attr("data-cmd");
-        document.execCommand(command, true, "http://");
+
+        if (command === "createLink" || command === "insertImage") {
+            var link = prompt("Please specify the link", "http://");
+            if (link)
+                document.execCommand(command, false, link);
+        }
+        else {
+            document.execCommand(command);
+        }
     }
 
     $(function () {
         $("body").css({ marginTop: "50px" });
         $("#tools button").on("click", execCommand);
-        
-        isNew = location.pathname == "/new/";
+
+        isNew = location.pathname.replace(/\//g, "") === "new";
         postId = $("[itemprop~='blogpost']").attr("data-id");
 
         txtTitle = $("[itemprop~='blogpost'] [itemprop~='name']");

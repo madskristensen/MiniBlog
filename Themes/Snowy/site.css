@@ -68,9 +68,9 @@ footer {
     position: fixed;
 }
 
-    /*#admin a {
+    #admin button {
         outline: 0;
-    }*/
+    }
 
     #admin #tools {
         position: relative;
