@@ -60,7 +60,36 @@ footer {
         margin-right: 2em;
     }
 
+
+
+/*#region Admin toolbar */
+
+#admin {
+    position: fixed;
+}
+
+    /*#admin a {
+        outline: 0;
+    }*/
+
+    #admin #tools {
+        position: relative;
+        top: 5px;
+        margin: 0 1em;
+        display: none;
+    }
+
+    #admin .message {
+        display: none;
+        position: absolute;
+        right: 2em;
+        top: 8px;
+    }
+
 [contenteditable] {
     outline: thin dashed #181818;
     width: 100%;
+    display: inline-block;
 }
+
+/*#endregion */
