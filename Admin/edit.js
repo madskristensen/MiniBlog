@@ -14,7 +14,6 @@
         txtTitle.attr('contentEditable', true);
         txtContent.attr('contentEditable', true);
         txtContent.css({ minHeight: "400px" });
-        txtContent.focus();
 
         btnNew.attr("disabled", true);
         btnEdit.attr("disabled", true);
