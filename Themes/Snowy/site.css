@@ -68,14 +68,20 @@ footer {
     position: fixed;
 }
 
-#admin form{
-    margin: 0;
-}
+    #admin form {
+        margin: 0;
+        position: absolute;
+        right: 1em;
+        top: 0;
+    }
+
+    #admin .nav {
+        margin-left: 1em;
+    }
 
     #admin button {
         outline: 0;
         white-space: nowrap;
-        display: inline;
     }
 
     #admin #tools {
@@ -85,15 +91,21 @@ footer {
         display: none;
     }
 
-    #admin .message {
-        display: none;
+    #admin aside {
         position: absolute;
-        right: 2em;
-        top: 8px;
+        top: 3em;
+        text-align: center;
+        width: 100%;
+        display: none;
     }
 
+        #admin aside .alert {
+            display: inline-block;
+            padding: 8px 1em;
+        }
+
 [contenteditable] {
-    outline: thin dashed #181818;
+    outline: thin dashed #ccc;
     width: 100%;
     display: inline-block;
 }

@@ -22,7 +22,7 @@ else
         post = Post.GetPosts(1).ElementAt(0);
         Page.ShowComments = true;
     }
-    
+
     Page.Title = post.Title + " | " + Blog.Title;    
 
     @RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
@@ -38,11 +38,6 @@ else
                 <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
                 <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
                 <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
-                <li>
-                    <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post">
-                        <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link">Sign out <i class="icon-lock"></i></button>
-                    </form>
-                </li>
             </ul>
 
             <div id="tools">
@@ -66,16 +61,28 @@ else
                 </div>
 
                 <div class="btn-group">
-                    <button class="btn btn-mini" data-cmd="insertImage" title="Insert Image"><i class="icon-picture"></i></button>
                     <button class="btn btn-mini" data-cmd="createLink" title="Hyperlink"><i class="icon-globe"></i></button>
                     <button class="btn btn-mini" data-cmd="unlink" title="Remove hyperlink"><i class="icon-remove"></i></button>
-                </div>
-            </div>
 
-            <span class="message"></span>
+                    <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-picture"></i>  &nbsp;<span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><button class="btn btn-link" data-cmd="insertImage">Insert link</button></li>
+                        <li><button class="btn btn-link" data-cmd="uploadImage">Upload image</button></li>
+                    </ul>
+                </div>
+            </div>           
         </div>
+
+        <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post">
+            <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link">Sign out <i class="icon-lock"></i></button>
+        </form> 
+
+        <aside>
+           <p class="alert"></p>
+        </aside>
     </div>
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="@Blog.InsertLink("/admin/edit.js")"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="@Blog.InsertLink("/admin/edit.js")" async></script>
 }

@@ -1,8 +1,8 @@
 ﻿/// <reference path="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" />
 
-(function ($) {
+(function ($, window) {
 
-    var postId, isNew, tools,
+    var postId, isNew, tools, toolbarButtons,
         txtTitle, txtContent, txtMessage,
         btnNew, btnEdit, btnDelete, btnSave, btnCancel;
 
@@ -14,6 +14,7 @@
         txtTitle.attr('contentEditable', true);
         txtContent.attr('contentEditable', true);
         txtContent.css({ minHeight: "400px" });
+        txtContent.focus();
 
         btnNew.attr("disabled", true);
         btnEdit.attr("disabled", true);
@@ -70,38 +71,90 @@
     }
 
     function showMessage(success, message) {
-        txtMessage.css(success ? { color: "green" } : { color: "red" });
+        var className = success ? "alert-success" : "alert-error";
+        txtMessage.addClass(className);
         txtMessage.text(message);
-        txtMessage.fadeIn();
+        txtMessage.parent().fadeIn();
 
         setTimeout(function () {
-            txtMessage.fadeOut();
-        }, 5000);
+            txtMessage.parent().fadeOut("slow", function () {
+                txtMessage.removeClass(className);
+            });
+        }, 4000);
     }
 
     function execCommand(e) {
         var command = $(this).attr("data-cmd");
+        if (command === undefined)
+            return;
 
         if (command === "createLink" || command === "insertImage") {
             var link = prompt("Please specify the link", "http://");
             if (link)
-                document.execCommand(command, false, link);
+                execCommandOnElement(txtContent.get(0), command, link);
+        }
+        else if (command === "uploadImage") {
+            showMessage(true, "Coming soon...");
         }
         else {
-            document.execCommand(command);
+            execCommandOnElement(txtContent.get(0), command);
         }
+    }
+
+    function execCommandOnElement(el, commandName, value) {
+        if (typeof window.getSelection != "undefined") {
+            var sel = window.getSelection();
+
+            // Save the current selection
+            var savedRanges = [];
+            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                savedRanges[i] = sel.getRangeAt(i).cloneRange();
+            }
+
+            // Temporarily enable designMode so that
+            // document.execCommand() will work
+            el.designMode = "on";
+
+            // Select the element's content
+            sel = window.getSelection();
+            var range = sel.getRangeAt(0); // document.createRange();
+            //range.selectNodeContents(el);
+            //sel.removeAllRanges();
+            sel.addRange(range);
+
+            // Execute the command
+            document.execCommand(commandName, false, value);
+
+            // Disable designMode
+            el.designMode = "off";
+
+            // Restore the previous selection
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            for (var i = 0, len = savedRanges.length; i < len; ++i) {
+                sel.addRange(savedRanges[i]);
+            }
+        }
+        //else if (typeof document.body.createTextRange != "undefined") {
+        //    // IE case
+        //    var textRange = document.body.createTextRange();
+        //    textRange.moveToElementText(el);
+        //    textRange.execCommand(commandName, false, value);
+        //}
     }
 
     $(function () {
         $("body").css({ marginTop: "50px" });
-        $("#tools button").on("click", execCommand);
+
+        toolbarButtons = $("#tools button[data-cmd], #tools button[data-toggle]");
+        //toolbarButtons.attr("disabled", true);
 
         isNew = location.pathname.replace(/\//g, "") === "new";
         postId = $("[itemprop~='blogpost']").attr("data-id");
 
         txtTitle = $("[itemprop~='blogpost'] [itemprop~='name']");
         txtContent = $("[itemprop~='articleBody']");
-        txtMessage = $("#admin .message");
+        txtMessage = $("#admin .alert");
 
         btnNew = $("#btnNew");
         btnEdit = $("#btnEdit");
@@ -114,6 +167,10 @@
         btnDelete.bind("click", deleteClicked);
         btnSave.bind("click", saveClicked);
         btnCancel.bind("click", cancelClicked);
+        toolbarButtons.on("click", execCommand);
+
+        txtTitle.bind("blur", function () { toolbarButtons.removeAttr("disabled"); });
+        txtTitle.bind("focus", function () { toolbarButtons.attr("disabled", true); });
 
         if (isNew) {
             editClicked();
@@ -124,4 +181,4 @@
         }
     });
 
-})(jQuery);
+})(jQuery, window);
