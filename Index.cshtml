@@ -4,16 +4,12 @@
     bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
 }
 
+@* Show the post list or a single post *@
 @if (showPostList)
 {
     Page.Title = Blog.Title;
     @RenderPage("/themes/" + Blog.Theme + "/PostList.cshtml")
 }
-@*else if (Request.RawUrl.Trim('/') == "login")
-{
-    Page.Title = "Sign in | " + Blog.Title;
-    @RenderPage("~/login.cshtml")
-}*@
 else
 {
     Post post = new Post();
@@ -28,6 +24,7 @@ else
     @RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
 }
 
+@* Show admin menu *@
 @if (User.Identity.IsAuthenticated)
 { 
     <div role="toolbar" class="navbar navbar-fixed-top" id="admin">
@@ -90,5 +87,5 @@ else
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="@Blog.InsertLink("/admin/edit.js")" async></script>
+    <script src="@Blog.FingerPrint("/admin/edit.js")" async></script>
 }

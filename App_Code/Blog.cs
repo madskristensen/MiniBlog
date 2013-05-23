@@ -26,7 +26,7 @@ public class Blog
         return 1;
     }
 
-    public static string InsertLink(string rootRelativePath)
+    public static string FingerPrint(string rootRelativePath)
     {
         if (HttpRuntime.Cache[rootRelativePath] == null)
         {

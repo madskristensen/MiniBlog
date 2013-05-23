@@ -9,11 +9,11 @@ using System.Xml.Linq;
 public class Post
 {
     public static List<Post> Posts = new List<Post>();
-    private static string _folder = HostingEnvironment.MapPath("~/App_Data/posts/");
+    private static string _folder = HostingEnvironment.MapPath("~/Data/posts/");
 
     static Post()
     {
-        foreach (string file in Directory.GetFiles(HostingEnvironment.MapPath("~/App_Data/posts/"), "*.xml"))
+        foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.AllDirectories))
         {
             XElement doc = XElement.Load(file);
 
@@ -21,10 +21,10 @@ public class Post
             {
                 ID = Path.GetFileNameWithoutExtension(file),
                 Title = doc.Element("title").Value,
-                Slug = doc.Element("slug").Value.Replace(" ", "-").ToLowerInvariant(),
+                Slug = Path.GetFileNameWithoutExtension(Path.GetDirectoryName(file)),
                 Content = doc.Element("content").Value,
-                PubDate = DateTime.Parse(doc.Element("pubDate").Value),
-                LastModified = DateTime.Parse(doc.Element("lastModified").Value),
+                PubDate = File.GetCreationTimeUtc(file),
+                LastModified = File.GetLastWriteTimeUtc(file),
             };
 
             Posts.Add(post);
@@ -38,8 +38,6 @@ public class Post
         ID = Guid.NewGuid().ToString();
         Title = "My new post";
         Content = "the content";
-        PubDate = DateTime.UtcNow;
-        LastModified = DateTime.UtcNow;
     }
 
     public string ID { get; set; }
@@ -51,40 +49,40 @@ public class Post
 
     public void Save()
     {
-        string file = Path.Combine(_folder, ID + ".xml");
+        string file = Path.Combine(_folder, Slug, ID + ".xml");
         XDocument doc;
 
         if (File.Exists(file))
         {
             doc = XDocument.Load(file);
             XElement root = doc.Element("post");
-            root.Element("slug").SetValue(Slug);
             root.Element("title").SetValue(Title);
             root.Element("content").SetValue(Content);
-            root.Element("lastModified").SetValue(DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
         }
         else
         {
             doc = new XDocument(
                 new XElement("post",
                     new XElement("title", Title),
-                    new XElement("slug", Slug),
-                    new XElement("content", Content),
-                    new XElement("pubDate", DateTime.Now.ToString("yyyy-MM-dd HH:mm")),
-                    new XElement("lastModified", DateTime.Now.ToString("yyyy-MM-dd HH:mm"))
+                    new XElement("content", Content)
                 )
             );
 
             Post.Posts.Insert(0, this);
         }
 
+        string directory = Path.GetDirectoryName(file);
+
+        if (!Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+
         doc.Save(file);
     }
 
     public void Delete()
     {
-        string file = Path.Combine(_folder, ID + ".xml");
-        File.Delete(file);
+        string directory = Path.Combine(_folder, Slug);
+        Directory.Delete(directory, true);
         Post.Posts.Remove(this);
     }
 

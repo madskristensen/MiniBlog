@@ -125,7 +125,8 @@
                 return function (e) {
                     $.post('/admin/edit.ashx?mode=upload', {
                         data: e.target.result,
-                        name: theFile.name
+                        name: theFile.name,
+                        id : postId
                     })
                      .success(function (data) {
                          txtContent.focus();

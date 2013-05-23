@@ -1,6 +1,7 @@
 ﻿<%@ WebHandler Language="C#" Class="Edit" %>
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -9,13 +10,13 @@ public class Edit : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
+        if (!context.User.Identity.IsAuthenticated || context.Request.RequestType != "POST")
+            throw new HttpException(403, "No access");
+
         string mode = context.Request.QueryString["mode"];
         string id = context.Request.Form["id"];
         string title = context.Request.Form["title"];
         string content = context.Request.Form["content"];
-
-        if (!context.User.Identity.IsAuthenticated || context.Request.RequestType != "POST" || string.IsNullOrEmpty(mode))
-            throw new HttpException(403, "No access");
 
         if (mode == "delete")
         {
@@ -27,14 +28,31 @@ public class Edit : IHttpHandler
         }
         else if (mode == "upload")
         {
-            context.Response.Write("http://madskristensen.net/themes/standard/madskristensen.jpg");
+            UploadImage(context.Request.Form["data"], context.Request.Form["name"], id);
         }
+    }
+
+    private void UploadImage(string data, string name, string id)
+    {
+        Post post = Post.Posts.FirstOrDefault(p => p.ID == id);
+        
+        if (post == null)
+            throw new HttpException(404, "Not found");
+             
+        string file = Path.Combine(HttpContext.Current.Server.MapPath("~/Data/Posts/"), post.Slug, name);
+
+        int index = data.IndexOf("base64,", StringComparison.Ordinal) + 7;
+        byte[] imageBytes = Convert.FromBase64String(data.Substring(index));
+        File.WriteAllBytes(file, imageBytes);
+
+        string relative = "/data/posts/" + post.Slug + "/" + name;
+        HttpContext.Current.Response.Write(relative);
     }
 
     private void DeletePost(string id)
     {
         Post post = Post.Posts.FirstOrDefault(p => p.ID == id);
-        
+
         if (post == null)
             throw new HttpException(404, "Not found");
 
@@ -55,7 +73,7 @@ public class Edit : IHttpHandler
             post = new Post();
             post.Slug = CreateSlug(title);
             post.Title = title;
-            post.Content = content;            
+            post.Content = content;
             HttpContext.Current.Response.Write(post.Slug);
         }
 
