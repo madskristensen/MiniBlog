@@ -63,12 +63,18 @@ else
                 <div class="btn-group">
                     <button class="btn btn-mini" data-cmd="createLink" title="Hyperlink"><i class="icon-globe"></i></button>
                     <button class="btn btn-mini" data-cmd="unlink" title="Remove hyperlink"><i class="icon-remove"></i></button>
-
+                    
                     <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-picture"></i>  &nbsp;<span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><button class="btn btn-link" data-cmd="insertImage">Insert link</button></li>
-                        <li><button class="btn btn-link" data-cmd="uploadImage">Upload image</button></li>
+                        <li><button class="btn btn-link" id="btnUpload">Upload image</button>
+                            <input type="file" id="txtImage" style="width:0; height: 0;position:absolute" />
+                        </li>
                     </ul>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-mini" data-cmd="source" title="Toggle source/design view"><i class="icon-edit"></i></button>
                 </div>
             </div>           
         </div>

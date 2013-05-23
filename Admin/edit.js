@@ -3,7 +3,7 @@
 (function ($, window) {
 
     var postId, isNew, tools, toolbarButtons,
-        txtTitle, txtContent, txtMessage,
+        txtTitle, txtContent, txtMessage, txtImage,
         btnNew, btnEdit, btnDelete, btnSave, btnCancel;
 
     function newClicked(e) {
@@ -47,6 +47,8 @@
     }
 
     function cancelClicked(e) {
+        if (isNew) history.back();
+
         txtTitle.removeAttr('contentEditable');
         txtContent.removeAttr('contentEditable');
 
@@ -54,11 +56,8 @@
         btnEdit.removeAttr("disabled");
         btnSave.attr("disabled", true);
         btnCancel.attr("disabled", true);
-        $("#tools").fadeOut();
 
-        if (isNew) {
-            history.back();
-        }
+        $("#tools").fadeOut();
     }
 
     function deleteClicked(e) {
@@ -90,56 +89,63 @@
         if (command === "createLink" || command === "insertImage") {
             var link = prompt("Please specify the link", "http://");
             if (link)
-                execCommandOnElement(txtContent.get(0), command, link);
+                execCommandOnElement(command, link);
         }
-        else if (command === "uploadImage") {
-            showMessage(true, "Coming soon...");
+        else if (command === "source") {
+            txtContent.text(txtContent.html());
+            $(this).attr("data-cmd", "design");
+        }
+        else if (command === "design") {
+            txtContent.html(txtContent.text());
+            $(this).attr("data-cmd", "source");
         }
         else {
-            execCommandOnElement(txtContent.get(0), command);
+            execCommandOnElement(command);
         }
     }
 
-    function execCommandOnElement(el, commandName, value) {
-        if (typeof window.getSelection != "undefined") {
-            var sel = window.getSelection();
+    function execCommandOnElement(commandName, value) {
+        var sel = window.getSelection();
+        sel = window.getSelection();
 
-            // Save the current selection
-            var savedRanges = [];
-            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-                savedRanges[i] = sel.getRangeAt(i).cloneRange();
-            }
+        var range = sel.getRangeAt(0);
+        sel.addRange(range);
 
-            // Temporarily enable designMode so that
-            // document.execCommand() will work
-            el.designMode = "on";
+        document.execCommand(commandName, false, value);
+    }
 
-            // Select the element's content
-            sel = window.getSelection();
-            var range = sel.getRangeAt(0); // document.createRange();
-            //range.selectNodeContents(el);
-            //sel.removeAllRanges();
-            sel.addRange(range);
+    function handleFileUpload(evt) {
+        var files = evt.target.files;
 
-            // Execute the command
-            document.execCommand(commandName, false, value);
+        for (var i = 0, f; f = files[i]; i++) {
 
-            // Disable designMode
-            el.designMode = "off";
+            var reader = new FileReader();
 
-            // Restore the previous selection
-            sel = window.getSelection();
-            sel.removeAllRanges();
-            for (var i = 0, len = savedRanges.length; i < len; ++i) {
-                sel.addRange(savedRanges[i]);
-            }
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    $.post('/admin/edit.ashx?mode=upload', {
+                        data: e.target.result,
+                        name: theFile.name
+                    })
+                     .success(function (data) {
+                         txtContent.focus();
+                         insertHtmlAtCursor('<img alt="" src="' + data + '" />');
+                     })
+                    .fail(function (data){
+                        showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
+                    });
+                };
+            })(f);
+
+            reader.readAsDataURL(f);
         }
-        //else if (typeof document.body.createTextRange != "undefined") {
-        //    // IE case
-        //    var textRange = document.body.createTextRange();
-        //    textRange.moveToElementText(el);
-        //    textRange.execCommand(commandName, false, value);
-        //}
+    }
+
+    function insertHtmlAtCursor(html) {
+        var sel = window.getSelection();
+        var range = sel.getRangeAt(0);
+        var node = range.createContextualFragment(html);
+        range.insertNode(node);
     }
 
     $(function () {
@@ -154,6 +160,7 @@
         txtTitle = $("[itemprop~='blogpost'] [itemprop~='name']");
         txtContent = $("[itemprop~='articleBody']");
         txtMessage = $("#admin .alert");
+        txtImage = $("#admin #txtImage");
 
         btnNew = $("#btnNew");
         btnEdit = $("#btnEdit");
@@ -167,9 +174,16 @@
         btnSave.bind("click", saveClicked);
         btnCancel.bind("click", cancelClicked);
         toolbarButtons.on("click", execCommand);
+        txtImage.on("change", handleFileUpload);
 
         txtTitle.bind("blur", function () { toolbarButtons.removeAttr("disabled"); });
         txtTitle.bind("focus", function () { toolbarButtons.attr("disabled", true); });
+
+        $('#btnUpload').click(function (e) {
+            e.preventDefault();
+            $('#txtImage').click();
+        }
+    );
 
         if (isNew) {
             editClicked();

@@ -25,6 +25,10 @@ public class Edit : IHttpHandler
         {
             EditPost(id, title, content);
         }
+        else if (mode == "upload")
+        {
+            context.Response.Write("http://madskristensen.net/themes/standard/madskristensen.jpg");
+        }
     }
 
     private void DeletePost(string id)
