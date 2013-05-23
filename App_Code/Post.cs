@@ -8,7 +8,6 @@ using System.Xml.Linq;
 
 public class Post
 {
-    public static List<Post> Posts = new List<Post>();
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
 
     static Post()
@@ -21,10 +20,9 @@ public class Post
             {
                 ID = Path.GetFileNameWithoutExtension(file),
                 Title = doc.Element("title").Value,
-                Slug = Path.GetFileNameWithoutExtension(Path.GetDirectoryName(file)),
                 Content = doc.Element("content").Value,
+                Slug = Path.GetFileNameWithoutExtension(Path.GetDirectoryName(file)),
                 PubDate = File.GetCreationTimeUtc(file),
-                LastModified = File.GetLastWriteTimeUtc(file),
             };
 
             Posts.Add(post);
@@ -40,43 +38,32 @@ public class Post
         Content = "the content";
     }
 
+    public static List<Post> Posts = new List<Post>();
     public string ID { get; set; }
     public string Title { get; set; }
     public string Slug { get; set; }
     public string Content { get; set; }
     public DateTime PubDate { get; set; }
-    public DateTime LastModified { get; set; }
 
     public void Save()
     {
         string file = Path.Combine(_folder, Slug, ID + ".xml");
-        XDocument doc;
+        string directory = Path.GetDirectoryName(file);
 
-        if (File.Exists(file))
-        {
-            doc = XDocument.Load(file);
-            XElement root = doc.Element("post");
-            root.Element("title").SetValue(Title);
-            root.Element("content").SetValue(Content);
-        }
-        else
-        {
-            doc = new XDocument(
-                new XElement("post",
-                    new XElement("title", Title),
-                    new XElement("content", Content)
-                )
-            );
+        XDocument doc = doc = new XDocument(
+                        new XElement("post",
+                            new XElement("title", Title),
+                            new XElement("content", Content)
+                        ));
 
+
+        if (!Directory.Exists(directory)) // New post
+        {
+            Directory.CreateDirectory(directory);
             Post.Posts.Insert(0, this);
         }
 
-        string directory = Path.GetDirectoryName(file);
-
-        if (!Directory.Exists(directory))
-            Directory.CreateDirectory(directory);
-
-        doc.Save(file);
+        doc.Save(file);        
     }
 
     public void Delete()

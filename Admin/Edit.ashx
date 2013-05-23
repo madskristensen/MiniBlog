@@ -15,8 +15,6 @@ public class Edit : IHttpHandler
 
         string mode = context.Request.QueryString["mode"];
         string id = context.Request.Form["id"];
-        string title = context.Request.Form["title"];
-        string content = context.Request.Form["content"];
 
         if (mode == "delete")
         {
@@ -24,38 +22,29 @@ public class Edit : IHttpHandler
         }
         else if (mode == "save")
         {
-            EditPost(id, title, content);
+            EditPost(id, context.Request.Form["title"], context.Request.Form["content"]);
         }
         else if (mode == "upload")
         {
-            UploadImage(context.Request.Form["data"], context.Request.Form["name"], id);
+            UploadImage(id, context.Request.Form["data"], context.Request.Form["name"]);
         }
     }
 
-    private void UploadImage(string data, string name, string id)
+    private void UploadImage(string id, string data, string name)
     {
-        Post post = Post.Posts.FirstOrDefault(p => p.ID == id);
-        
-        if (post == null)
-            throw new HttpException(404, "Not found");
-             
-        string file = Path.Combine(HttpContext.Current.Server.MapPath("~/Posts/"), post.Slug, name);
+        Post post = Post.Posts.First(p => p.ID == id);
 
+        string file = Path.Combine(HttpContext.Current.Server.MapPath("~/Posts/"), post.Slug, name);
         int index = data.IndexOf("base64,", StringComparison.Ordinal) + 7;
         byte[] imageBytes = Convert.FromBase64String(data.Substring(index));
         File.WriteAllBytes(file, imageBytes);
 
-        string relative = "/posts/" + post.Slug + "/" + name;
-        HttpContext.Current.Response.Write(relative);
+        HttpContext.Current.Response.Write("/posts/" + post.Slug + "/" + name);
     }
 
     private void DeletePost(string id)
     {
-        Post post = Post.Posts.FirstOrDefault(p => p.ID == id);
-
-        if (post == null)
-            throw new HttpException(404, "Not found");
-
+        Post post = Post.Posts.First(p => p.ID == id);
         post.Delete();
     }
 
@@ -70,10 +59,7 @@ public class Edit : IHttpHandler
         }
         else
         {
-            post = new Post();
-            post.Slug = CreateSlug(title);
-            post.Title = title;
-            post.Content = content;
+            post = new Post() { Title = title, Content = content, Slug = CreateSlug(title) };
             HttpContext.Current.Response.Write(post.Slug);
         }
 
@@ -95,5 +81,4 @@ public class Edit : IHttpHandler
     {
         get { return false; }
     }
-
 }
