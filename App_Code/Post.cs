@@ -9,7 +9,7 @@ using System.Xml.Linq;
 public class Post
 {
     public static List<Post> Posts = new List<Post>();
-    private static string _folder = HostingEnvironment.MapPath("~/Data/posts/");
+    private static string _folder = HostingEnvironment.MapPath("~/posts/");
 
     static Post()
     {

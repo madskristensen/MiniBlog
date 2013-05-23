@@ -39,13 +39,13 @@ public class Edit : IHttpHandler
         if (post == null)
             throw new HttpException(404, "Not found");
              
-        string file = Path.Combine(HttpContext.Current.Server.MapPath("~/Data/Posts/"), post.Slug, name);
+        string file = Path.Combine(HttpContext.Current.Server.MapPath("~/Posts/"), post.Slug, name);
 
         int index = data.IndexOf("base64,", StringComparison.Ordinal) + 7;
         byte[] imageBytes = Convert.FromBase64String(data.Substring(index));
         File.WriteAllBytes(file, imageBytes);
 
-        string relative = "/data/posts/" + post.Slug + "/" + name;
+        string relative = "/posts/" + post.Slug + "/" + name;
         HttpContext.Current.Response.Write(relative);
     }
 
