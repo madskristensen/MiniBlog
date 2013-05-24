@@ -24,68 +24,8 @@ else
     @RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
 }
 
-@* Show admin menu *@
 @if (User.Identity.IsAuthenticated)
-{ 
-    <div role="toolbar" class="navbar navbar-fixed-top" id="admin">
-        <div class="navbar-inner">
-            <ul class="nav">
-                <li><button class="btn btn-link" id="btnNew">New post</button></li>
-                <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
-                <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
-                <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
-                <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
-            </ul>
-
-            <div id="tools">
-                <div class="btn-group">
-                    <button class="btn btn-mini" data-cmd="italic"><i class="icon-italic"></i></button>
-                    <button class="btn btn-mini" data-cmd="bold"><i class="icon-bold"></i></button>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn btn-mini" data-cmd="justifyleft"><i class="icon-align-left"></i></button>
-                    <button class="btn btn-mini" data-cmd="justifycenter"><i class="icon-align-center"></i></button>
-                    <button class="btn btn-mini" data-cmd="justifyright"><i class="icon-align-right"></i></button>
-                    <button class="btn btn-mini" data-cmd="justifyfull"><i class="icon-align-justify"></i></button>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn btn-mini" data-cmd="insertunorderedlist" title="Bullet points"><i class="icon-list"></i></button>
-                    <button class="btn btn-mini" data-cmd="insertorderedlist" title="Numbered bullet points"><i class="icon-th-list"></i></button>
-                    <button class="btn btn-mini" data-cmd="outdent" title="Indent left"><i class="icon-indent-left"></i></button>
-                    <button class="btn btn-mini" data-cmd="indent" title="Indent right"><i class="icon-indent-right"></i></button>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn btn-mini" data-cmd="createLink" title="Hyperlink"><i class="icon-globe"></i></button>
-                    <button class="btn btn-mini" data-cmd="unlink" title="Remove hyperlink"><i class="icon-remove"></i></button>
-                    
-                    <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-picture"></i>  &nbsp;<span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><button class="btn btn-link" data-cmd="insertImage">Insert link</button></li>
-                        <li><button class="btn btn-link" id="btnUpload">Upload image</button>
-                            <input type="file" id="txtImage" style="width:0; height: 0;position:absolute" />
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn btn-mini" data-cmd="source" title="Toggle source/design view"><i class="icon-edit"></i></button>
-                </div>
-            </div>           
-        </div>
-
-        <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post">
-            <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link">Sign out <i class="icon-lock"></i></button>
-        </form> 
-
-        <aside>
-           <p class="alert"></p>
-        </aside>
-    </div>
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js" async></script>
-    <script src="@Blog.FingerPrint("/admin/edit.js")" async></script>
+{
+    Page.AdminClass = "admin";
+    @RenderPage("~/admin/menu.cshtml")
 }

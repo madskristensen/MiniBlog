@@ -63,7 +63,22 @@ public class Edit : IHttpHandler
             HttpContext.Current.Response.Write(post.Slug);
         }
 
+        SaveImagesToDisk(post);
+        
         post.Save();
+    }
+
+    private void SaveImagesToDisk(Post post)
+    {
+        foreach (Match match in Regex.Matches(post.Content, "src=\"(data:([^\"]+))\""))
+        {
+            string extension = Regex.Match(match.Value, "data:image/([a-z]+);base64").Groups[1].Value;
+            string fileName = Guid.NewGuid() + "." + extension;
+            string image = string.Format("src=\"/posts/{0}/{1}\" alt=\"\" /", post.Slug, fileName);
+            UploadImage(post.ID, match.Groups[1].Value, fileName);
+
+            post.Content = post.Content.Replace(match.Value, image);
+        }        
     }
 
     private string CreateSlug(string title)

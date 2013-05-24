@@ -1,18 +1,18 @@
 ﻿/// <reference path="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" />
+/// <reference path="bootstrap-wysiwyg.js" />
 
 (function ($, window) {
-
+    
     var postId, isNew, tools, toolbarButtons,
         txtTitle, txtContent, txtMessage, txtImage,
-        btnNew, btnEdit, btnDelete, btnSave, btnCancel;
+        btnNew, btnEdit, btnDelete, btnSave, btnCancel,
 
-    function newClicked(e) {
+    newClicked = function (e) {
         location.href = "/new/";
-    }
-
-    function editClicked(e) {
+    },
+    editClicked = function (e) {
         txtTitle.attr('contentEditable', true);
-        txtContent.attr('contentEditable', true);
+        txtContent.wysiwyg({ activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
 
         btnNew.attr("disabled", true);
@@ -20,10 +20,30 @@
         btnSave.removeAttr("disabled");
         btnCancel.removeAttr("disabled");
 
-        $("#tools").fadeIn();
-    }
+        toggleSourceView();
 
-    function saveClicked(e) {
+        $("#tools").fadeIn().css("display", "inline-block");
+    },
+    toggleSourceView = function () {
+        $(".source").bind("click", function (e) {
+            var self = $(this);
+            if (self.attr("data-cmd") === "source") {
+                self.attr("data-cmd", "design");
+                txtContent.text(txtContent.html());
+            }
+            else {
+                self.attr("data-cmd", "source");
+                txtContent.html(txtContent.text());
+            }
+        });
+    },
+    saveClicked = function (e) {
+        if ($(".source").attr("data-cmd") === "design") {
+            $(".source").click();
+        }
+
+        txtContent.cleanHtml();
+
         $.post("/admin/edit.ashx?mode=save", {
             id: postId,
             title: txtTitle.text(),
@@ -44,9 +64,8 @@
               else
                   showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
           });
-    }
-
-    function cancelClicked(e) {
+    },
+    cancelClicked = function (e) {
         if (isNew) history.back();
 
         txtTitle.removeAttr('contentEditable');
@@ -58,17 +77,15 @@
         btnCancel.attr("disabled", true);
 
         $("#tools").fadeOut();
-    }
-
-    function deleteClicked(e) {
+    },
+    deleteClicked = function (e) {
         if (confirm("Are you sure you want to delete this post?")) {
             $.post("/admin/edit.ashx?mode=delete", { id: postId })
                 .success(function (data) { location.href = "/"; })
                 .fail(function (data) { showMessage(false, "Something went wrong. Please try again"); });
         }
-    }
-
-    function showMessage(success, message) {
+    },
+    showMessage = function (success, message) {
         var className = success ? "alert-success" : "alert-error";
         txtMessage.addClass(className);
         txtMessage.text(message);
@@ -79,82 +96,9 @@
                 txtMessage.removeClass(className);
             });
         }, 4000);
-    }
-
-    function execCommand(e) {
-        var command = $(this).attr("data-cmd");
-        if (command === undefined)
-            return;
-
-        if (command === "createLink" || command === "insertImage") {
-            var link = prompt("Please specify the link", "http://");
-            if (link)
-                execCommandOnElement(command, link);
-        }
-        else if (command === "source") {
-            txtContent.text(txtContent.html());
-            $(this).attr("data-cmd", "design");
-        }
-        else if (command === "design") {
-            txtContent.html(txtContent.text());
-            $(this).attr("data-cmd", "source");
-        }
-        else {
-            execCommandOnElement(command);
-        }
-    }
-
-    function execCommandOnElement(commandName, value) {
-        var sel = window.getSelection();
-        sel = window.getSelection();
-
-        var range = sel.getRangeAt(0);
-        sel.addRange(range);
-
-        document.execCommand(commandName, false, value);
-    }
-
-    function handleFileUpload(evt) {
-        var files = evt.target.files;
-
-        for (var i = 0, f; f = files[i]; i++) {
-
-            var reader = new FileReader();
-
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    $.post('/admin/edit.ashx?mode=upload', {
-                        data: e.target.result,
-                        name: theFile.name,
-                        id : postId
-                    })
-                     .success(function (data) {
-                         txtContent.focus();
-                         insertHtmlAtCursor('<img alt="" src="' + data + '" />');
-                     })
-                    .fail(function (data){
-                        showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
-                    });
-                };
-            })(f);
-
-            reader.readAsDataURL(f);
-        }
-    }
-
-    function insertHtmlAtCursor(html) {
-        var sel = window.getSelection();
-        var range = sel.getRangeAt(0);
-        var node = range.createContextualFragment(html);
-        range.insertNode(node);
-    }
+    };
 
     $(function () {
-        $("body").css({ marginTop: "50px" });
-
-        toolbarButtons = $("#tools button[data-cmd], #tools button[data-toggle]");
-        //toolbarButtons.attr("disabled", true);
-
         isNew = location.pathname.replace(/\//g, "") === "new";
         postId = $("[itemprop~='blogpost']").attr("data-id");
 
@@ -174,17 +118,11 @@
         btnDelete.bind("click", deleteClicked);
         btnSave.bind("click", saveClicked);
         btnCancel.bind("click", cancelClicked);
-        toolbarButtons.on("click", execCommand);
-        txtImage.on("change", handleFileUpload);
 
-        txtTitle.bind("blur", function () { toolbarButtons.removeAttr("disabled"); });
-        txtTitle.bind("focus", function () { toolbarButtons.attr("disabled", true); });
-
-        $('#btnUpload').click(function (e) {
+        $('.uploadimage').click(function (e) {
             e.preventDefault();
             $('#txtImage').click();
-        }
-    );
+        });
 
         if (isNew) {
             editClicked();

@@ -20,6 +20,8 @@
 
 .post {
     margin-bottom: 3em;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 
     .post h2:first-child {
@@ -62,45 +64,55 @@ footer {
 
 /*#region Admin toolbar */
 
-#admin {
-    position: fixed;
+.admin {
+    margin-top: 40px;
 }
 
-    #admin form {
-        position: absolute;
-        top: 0;
-        right: 1em;
-        margin: 0;
+#admin form {
+    position: absolute;
+    top: 0;
+    right: 1em;
+    margin: 0;
+}
+
+#admin .nav {
+    margin-left: 1em;
+}
+
+#admin button {
+    outline: 0;
+    white-space: nowrap;
+}
+
+#admin #tools {
+    position: relative;
+    top: 5px;
+    margin: 0 1em;
+    display: none;
+}
+
+    #admin #tools a {
+        font-size: 14px;
+        font-weight: bold;
+        min-width: 10px;
     }
 
-    #admin .nav {
-        margin-left: 1em;
+    #admin #tools [class^="icon-"] {
+        margin-top: 2px;
     }
 
-    #admin button {
-        outline: 0;
-        white-space: nowrap;
-    }
+#admin aside {
+    position: absolute;
+    top: 3em;
+    text-align: center;
+    width: 100%;
+    display: none;
+}
 
-    #admin #tools {
-        position: relative;
-        top: 5px;
-        margin: 0 1em;
-        display: none;
+    #admin aside .alert {
+        display: inline-block;
+        padding: 8px 1em;
     }
-
-    #admin aside {
-        position: absolute;
-        top: 3em;
-        text-align: center;
-        width: 100%;
-        display: none;
-    }
-
-        #admin aside .alert {
-            display: inline-block;
-            padding: 8px 1em;
-        }
 
 [contenteditable] {
     outline: thin dashed #ccc;
@@ -108,8 +120,8 @@ footer {
     display: inline-block;
 }
 
-[contenteditable] img {
-    cursor: move;
-}
+    [contenteditable] img {
+        cursor: move;
+    }
 
 /*#endregion */
