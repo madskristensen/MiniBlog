@@ -27,11 +27,14 @@
 			    if (options.activeToolbarClass) {
 			        $(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 			            var command = $(this).data(options.commandRole);
-			            if (document.queryCommandState(command)) {
-			                $(this).addClass(options.activeToolbarClass);
-			            } else {
-			                $(this).removeClass(options.activeToolbarClass);
+			            try{
+			                if (document.queryCommandState(command)) {
+			                    $(this).addClass(options.activeToolbarClass);
+			                } else {
+			                    $(this).removeClass(options.activeToolbarClass);
+			                }
 			            }
+			            catch(ex){};
 			        });
 			    }
 			},

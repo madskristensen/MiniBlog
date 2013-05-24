@@ -2,17 +2,17 @@
 /// <reference path="bootstrap-wysiwyg.js" />
 
 (function ($, window) {
-    
+
     var postId, isNew, tools, toolbarButtons,
         txtTitle, txtContent, txtMessage, txtImage,
         btnNew, btnEdit, btnDelete, btnSave, btnCancel,
 
-    newClicked = function (e) {
+    newPost = function (e) {
         location.href = "/new/";
     },
-    editClicked = function (e) {
+    editPost = function (e) {
         txtTitle.attr('contentEditable', true);
-        txtContent.wysiwyg({ activeToolbarClass: "active" });
+        txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
 
         btnNew.attr("disabled", true);
@@ -29,15 +29,17 @@
             var self = $(this);
             if (self.attr("data-cmd") === "source") {
                 self.attr("data-cmd", "design");
+                self.addClass("active");
                 txtContent.text(txtContent.html());
             }
             else {
                 self.attr("data-cmd", "source");
+                self.removeClass("active");
                 txtContent.html(txtContent.text());
             }
         });
     },
-    saveClicked = function (e) {
+    savePost = function (e) {
         if ($(".source").attr("data-cmd") === "design") {
             $(".source").click();
         }
@@ -56,7 +58,7 @@
               }
 
               showMessage(true, "The post was saved successfully");
-              cancelClicked(e);
+              cancelEdit(e);
           })
           .fail(function (data) {
               if (data.status === 409)
@@ -65,7 +67,7 @@
                   showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
           });
     },
-    cancelClicked = function (e) {
+    cancelEdit = function (e) {
         if (isNew) history.back();
 
         txtTitle.removeAttr('contentEditable');
@@ -78,7 +80,7 @@
 
         $("#tools").fadeOut();
     },
-    deleteClicked = function (e) {
+    deletePost = function (e) {
         if (confirm("Are you sure you want to delete this post?")) {
             $.post("/admin/edit.ashx?mode=delete", { id: postId })
                 .success(function (data) { location.href = "/"; })
@@ -113,11 +115,11 @@
         btnSave = $("#btnSave");
         btnCancel = $("#btnCancel");
 
-        btnNew.bind("click", newClicked);
-        btnEdit.bind("click", editClicked);
-        btnDelete.bind("click", deleteClicked);
-        btnSave.bind("click", saveClicked);
-        btnCancel.bind("click", cancelClicked);
+        btnNew.bind("click", newPost);
+        btnEdit.bind("click", editPost);
+        btnDelete.bind("click", deletePost);
+        btnSave.bind("click", savePost);
+        btnCancel.bind("click", cancelEdit);
 
         $('.uploadimage').click(function (e) {
             e.preventDefault();
@@ -125,7 +127,7 @@
         });
 
         if (isNew) {
-            editClicked();
+            editPost();
         }
         else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
             btnEdit.removeAttr("disabled");
