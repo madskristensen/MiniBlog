@@ -3,11 +3,20 @@
 <head>
     <title>@Page.Title</title>
     <meta charset="utf-8" />
+    <meta name="keywords" content="@Page.Keywords" />
     <meta name="description" content="@Page.Title" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="@Blog.FingerPrint("/themes/snowy/site.css")" rel="stylesheet" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <meta name="application-name" content="@Blog.Title" />
+    
+    <meta name="twitter:title" content="@Page.Title" /> 
+
+    <meta name="og:title" content="@Page.Title" /> 
+    <meta name="og:type" content="website" /> 
+    <meta name="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />  
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@Page.AdminClass">
 

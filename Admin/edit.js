@@ -109,17 +109,11 @@
         txtMessage = $("#admin .alert");
         txtImage = $("#admin #txtImage");
 
-        btnNew = $("#btnNew");
-        btnEdit = $("#btnEdit");
-        btnDelete = $("#btnDelete");
-        btnSave = $("#btnSave");
-        btnCancel = $("#btnCancel");
-
-        btnNew.bind("click", newPost);
-        btnEdit.bind("click", editPost);
-        btnDelete.bind("click", deletePost);
-        btnSave.bind("click", savePost);
-        btnCancel.bind("click", cancelEdit);
+        btnNew = $("#btnNew").bind("click", newPost);
+        btnEdit = $("#btnEdit").bind("click", editPost);;
+        btnDelete = $("#btnDelete").bind("click", deletePost);
+        btnSave = $("#btnSave").bind("click", savePost);
+        btnCancel = $("#btnCancel").bind("click", cancelEdit);
 
         $('.uploadimage').click(function (e) {
             e.preventDefault();
