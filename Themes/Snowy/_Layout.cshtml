@@ -22,7 +22,7 @@
     <div class="container">
 
         <header class="page-header row-fluid">
-            <h1 class="span7"><a href="/" itemprop="url name">@Blog.Title</a></h1>
+            <h1 class="span7"><a href="~/" itemprop="url name">@Blog.Title</a></h1>
         </header>
 
         <div class="row-fluid">
@@ -40,12 +40,12 @@
         @if (!User.Identity.IsAuthenticated)
         { 
             <span class="login">
-                <a href="/login/?return=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
+                <a href="~/login/?return=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
             </span>
         }
 
         <span>Copyright &copy; @DateTime.Now.Year
-            <a href="/" rel="me" itemprop="name url">Mads Kristensen</a>
+            <a href="~/" rel="me" itemprop="name url">Mads Kristensen</a>
         </span>
     </footer>
 
