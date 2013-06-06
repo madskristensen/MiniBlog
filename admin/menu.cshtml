@@ -1,0 +1,66 @@
+﻿ 
+<div role="toolbar" data-role="editor-toolbar" class="navbar navbar-fixed-top" id="admin">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><button class="btn btn-link" id="btnNew">New post</button></li>
+            <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
+            <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
+            <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
+            <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
+        </ul>
+
+        <div id="tools">
+
+            <div class="btn-group">
+                <a class="btn btn-mini" data-edit="formatBlock <h1>">H1</a>
+                <a class="btn btn-mini" data-edit="formatBlock <h1>">H2</a>
+                <a class="btn btn-mini" data-edit="formatBlock <h1>">H3</a>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-mini" data-edit="italic"><em>I</em></a>
+                <a class="btn btn-mini" data-edit="bold"><strong>B</strong></a>
+                <a class="btn btn-mini" data-edit="underline"><ins>U</ins></a>
+                <a class="btn btn-mini" data-edit="strikethrough"><s>S</s></a>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-mini" data-edit="justifyleft"><i class="icon-align-left"></i></a>
+                <a class="btn btn-mini" data-edit="justifycenter"><i class="icon-align-center"></i></a>
+                <a class="btn btn-mini" data-edit="justifyright"><i class="icon-align-right"></i></a>
+                <a class="btn btn-mini" data-edit="justifyfull"><i class="icon-align-justify"></i></a>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-mini" data-edit="insertunorderedlist" title="Bullet points"><i class="icon-list"></i></a>
+                <a class="btn btn-mini" data-edit="insertorderedlist" title="Numbered bullet points"><i class="icon-th-list"></i></a>
+                <a class="btn btn-mini" data-edit="outdent" title="Indent left"><i class="icon-indent-left"></i></a>
+                <a class="btn btn-mini" data-edit="indent" title="Indent right"><i class="icon-indent-right"></i></a>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-mini" data-edit="createLink" title="Hyperlink"><i class="icon-globe"></i></a>
+                <a class="btn btn-mini" data-edit="unlink" title="Remove hyperlink"><i class="icon-remove"></i></a>
+                <a class="btn btn-mini uploadimage"><i class="icon-picture"></i></a>
+            </div>
+
+            <input type="file" id="txtImage" data-edit="insertImage" style="width:0; height: 0;position:absolute" />
+
+            <div class="btn-group">
+                <a class="btn btn-mini source" data-cmd="source" title="Toggle source/design view"><i class="icon-eye-open"></i></a>
+            </div>
+        </div>           
+    </div>
+
+    <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post">
+        <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link">Sign out <i class="icon-lock"></i></button>
+    </form> 
+
+    <aside>
+       <p class="alert"></p>
+    </aside>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="@Blog.FingerPrint("/admin/bootstrap-wysiwyg.js")"></script>
+<script src="@Blog.FingerPrint("/admin/edit.js")"></script>
