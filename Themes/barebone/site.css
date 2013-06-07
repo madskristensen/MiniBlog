@@ -1,0 +1,122 @@
+﻿body, button, input {
+}
+
+.page-header a {
+    color: black;
+}
+
+.container {
+    margin-bottom: 2em;
+    width: 650px;
+    margin: 0 auto;
+    font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
+}
+
+.post {
+    margin: 0 .8em 3em;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    text-align: justify;
+}
+
+    .post h2:first-child {
+        margin: 0 0 .5em 0;
+        font-size: 2em;
+    }
+
+    .post h2 {
+        margin-bottom: 0;
+        font-size: 1.3em;
+    }
+
+    .post p {
+        padding: .2em 0;
+    }
+
+    .post #disqus_thread {
+        margin-top: 3em;
+        min-height: 350px;
+    }
+
+#login {
+    margin: auto;
+    width: 300px;
+}
+
+footer {
+    background-color: #181818;
+    color: white;
+    text-align: center;
+    font-size: .9em;
+    opacity: .9;
+    padding: 8px 0;
+}
+
+    footer .login {
+        float: right;
+        margin-right: 2em;
+    }
+
+/*#region Admin toolbar */
+
+.admin {
+    margin-top: 40px;
+}
+
+#admin form {
+    position: absolute;
+    top: 0;
+    right: 1em;
+    margin: 0;
+}
+
+#admin .nav {
+    margin-left: 1em;
+}
+
+#admin button {
+    outline: 0;
+    white-space: nowrap;
+}
+
+#admin #tools {
+    position: relative;
+    top: 5px;
+    margin: 0 1em;
+    display: none;
+}
+
+    #admin #tools a {
+        font-size: 14px;
+        font-weight: bold;
+        min-width: 10px;
+    }
+
+    #admin #tools [class^="icon-"] {
+        margin-top: 2px;
+    }
+
+#admin aside {
+    position: absolute;
+    top: 3em;
+    text-align: center;
+    width: 100%;
+    display: none;
+}
+
+    #admin aside .alert {
+        display: inline-block;
+        padding: 8px 1em;
+    }
+
+[contenteditable] {
+    outline: thin dashed #ccc;
+    width: 100%;
+    display: inline-block;
+}
+
+    [contenteditable] img {
+        cursor: move;
+    }
+
+/*#endregion */

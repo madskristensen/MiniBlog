@@ -1,0 +1,22 @@
+﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogpost">
+    <header>
+        <h2>
+            <a href="~/@Model.Slug" itemprop="url name">@Model.Title</a>
+        </h2>
+    </header>
+
+    <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+    
+    @if (Page.ShowComments)
+    {   
+        <section id="disqus_thread"></section>
+        <script>
+            var disqus_shortname = '@System.Configuration.ConfigurationManager.AppSettings.Get("disqus:shortname")';
+            (function () {
+                var dsq = document.createElement('script'); dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+    }
+</article>

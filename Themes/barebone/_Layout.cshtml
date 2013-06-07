@@ -6,45 +6,40 @@
     <meta name="keywords" content="@Page.Keywords" />
     <meta name="description" content="@Page.Title" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" rel="stylesheet" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <meta name="application-name" content="@Blog.Title" />
-    <meta name="twitter:title" content="@Page.Title" /> 
-    <meta name="og:title" content="@Page.Title" /> 
-    <meta name="og:type" content="website" /> 
-    <meta name="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />  
+    <meta name="twitter:title" content="@Page.Title" />
+    <meta name="og:title" content="@Page.Title" />
+    <meta name="og:type" content="website" />
+    <meta name="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@Page.AdminClass">
 
     <div class="container">
 
-        <header class="page-header row-fluid">
-            <h1 class="span7"><a href="~/" itemprop="url name">@Blog.Title</a></h1>
+        <header class="page-header">
+            <h1><a href="~/" itemprop="url name">@Blog.Title</a></h1>
         </header>
 
-        <div class="row-fluid">
-            <div role="main" class="span8">
-                @RenderBody()
-            </div>
-
-            <aside class="span4">
-                @RenderPage("_Sidebar.cshtml")
-            </aside>
+        <div role="main">
+            @RenderBody()
         </div>
     </div>
 
     <footer id="pagefooter" itemscope itemtype="http://schema.org/Person" itemprop="author">
         @if (!User.Identity.IsAuthenticated)
-        { 
+        {
             <span class="login">
                 <a href="~/login/?return=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
             </span>
         }
 
-        <span>Copyright &copy; @DateTime.Now.Year
+        <span>
+            Copyright &copy; @DateTime.Now.Year
             <a href="~/" rel="me" itemprop="name url">Mads Kristensen</a>
         </span>
     </footer>
