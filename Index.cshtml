@@ -1,6 +1,6 @@
 ﻿@{
     Page.ShowComments = false;
-    Layout = "/themes/" + Blog.Theme + "/_layout.cshtml";
+    Layout = "~/Themes/" + Blog.Theme + "/_layout.cshtml";
     bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
 }
 
@@ -8,7 +8,7 @@
 @if (showPostList)
 {
     Page.Title = Blog.Title;
-    @RenderPage("/themes/" + Blog.Theme + "/PostList.cshtml")
+    @RenderPage("~/Themes/" + Blog.Theme + "/PostList.cshtml")
 }
 else
 {
@@ -21,7 +21,7 @@ else
 
     Page.Title = post.Title + " | " + Blog.Title;    
 
-    @RenderPage("/themes/" + Blog.Theme + "/Post.cshtml", post)
+    @RenderPage("~/Themes/" + Blog.Theme + "/Post.cshtml", post)
 }
 
 @if (User.Identity.IsAuthenticated)
