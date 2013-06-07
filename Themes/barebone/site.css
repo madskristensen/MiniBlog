@@ -22,7 +22,6 @@
 .post h1 a {
     font-size: .7em;
     color: black;
-    padding-left: 10px;
 }
 
 .post h2 {
@@ -31,7 +30,6 @@
 }
 
 .post > div {
-    padding-left: 10px;
     border-bottom: 1px solid #d8d8d8;
 }
 
