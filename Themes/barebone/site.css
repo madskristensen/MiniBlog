@@ -3,7 +3,7 @@
 }
 
 .page-header {
-    border: none;    
+    border: none;
     text-align: center;
 }
 
@@ -20,24 +20,19 @@
 }
 
 .post h1 a {
-    font-size: .6em;
+    font-size: .7em;
     color: black;
     padding-left: 10px;
 }
 
-.post h2:first-child {
-    margin: 0 0 .5em 0;
-    font-size: 2em;
-}
-
 .post h2 {
     margin-bottom: 0;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 .post > div {
     padding-left: 10px;
-    border-left: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
 }
 
 .post p {

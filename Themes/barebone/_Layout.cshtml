@@ -22,7 +22,7 @@
     <div class="container">
 
         <header class="page-header">
-            <span><a href="~/" itemprop="url name">@Blog.Title</a></span>
+            <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span>
             <br />
             <em>By Mads Kristensen</em>
         </header>
@@ -42,7 +42,9 @@
 
         <span>
             Copyright &copy; @DateTime.Now.Year
-            <a href="~/" rel="me" itemprop="name url">Mads Kristensen</a>
+            <span itemprop="name">
+                <a href="http://madskristensen.net" rel="me" itemprop="url">Mads Kristensen</a>
+            </span>
         </span>
     </footer>
 
