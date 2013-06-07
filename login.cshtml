@@ -1,6 +1,6 @@
 ﻿@{
     Page.Title = "Sign in";
-    Layout = "~/themes/" + Blog.Theme + "/_layout.cshtml";
+    Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     
     string returnUrl = Request.QueryString["return"] ?? VirtualPathUtility.ToAbsolute("~/");
     bool loginFailed = false;

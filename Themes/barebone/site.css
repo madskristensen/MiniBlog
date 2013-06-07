@@ -1,9 +1,16 @@
-﻿body, button, input {
+﻿body {
+    background-color: white;
 }
 
-.page-header a {
-    color: black;
+.page-header {
+    border: none;    
+    text-align: center;
 }
+
+    .page-header a {
+        font-size: 3em;
+        color: black;
+    }
 
 .container {
     margin-bottom: 2em;
@@ -12,34 +19,42 @@
     font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
 }
 
-.post {
-    margin: 0 .8em 3em;
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    text-align: justify;
+.post h1 a {
+    font-size: .6em;
+    color: black;
+    padding-left: 10px;
 }
 
-    .post h2:first-child {
-        margin: 0 0 .5em 0;
-        font-size: 2em;
-    }
+.post h2:first-child {
+    margin: 0 0 .5em 0;
+    font-size: 2em;
+}
 
-    .post h2 {
-        margin-bottom: 0;
-        font-size: 1.3em;
-    }
+.post h2 {
+    margin-bottom: 0;
+    font-size: 1.2em;
+}
 
-    .post p {
-        padding: .2em 0;
-    }
+.post > div {
+    padding-left: 10px;
+    border-left: 1px solid #d8d8d8;
+}
 
-    .post #disqus_thread {
-        margin-top: 3em;
-        min-height: 350px;
-    }
+.post p {
+    padding: .2em 0;
+}
+
+.post li {
+    line-height: 1.5;
+}
+
+.post #disqus_thread {
+    margin-top: 3em;
+    min-height: 350px;
+}
 
 #login {
-    margin: auto;
+    margin: 3em auto 10em auto;
     width: 300px;
 }
 
