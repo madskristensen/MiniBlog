@@ -5,7 +5,7 @@
         </h1>
         <p>
             <i class="icon-calendar"></i> <abbr title="@Model.PubDate" itemtype="datePublished">@Model.PubDate.ToString("d. MMMM yyyy")</abbr>
-            <i class="icon-comment"></i> @Model.Comments.Count Comments             
+            <i class="icon-comment"></i> @Model.Comments.Count Comments
         </p>
     </header>
 
@@ -13,22 +13,23 @@
 
     @if (Page.ShowComments)
     {
-        <section id="comments" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
+        <section id="comments">
             <h2>Comments</h2>
 
-            @if (Model.Comments.Count == 0){
+            @if (Model.Comments.Count == 0)
+            {
                 <p>Be the first to post a comment</p>
             }
-            
+
             @foreach (Comment comment in Model.Comments)
             {
-                <article itemprop="comment">
+                <article itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
                     <img src="@comment.GravatarUrl(50)" alt="@comment.Author" />
                     <div>
                         <time datetime="@comment.PubDate" itemprop="commentTime">@comment.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
                         <p itemprop="commentText">@Html.Raw(comment.Content)</p>
                         <strong itemprop="creator">@comment.Author</strong>
-                        
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <button class="deletecomment btn btn-link" data-id="@comment.ID">Delete</button>
