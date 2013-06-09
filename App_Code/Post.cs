@@ -44,19 +44,25 @@ public class Post
         PubDate = DateTime.UtcNow;
         Comments = new List<Comment>();
     }
-
+    
     public static List<Post> Posts = new List<Post>();
+    
     [XmlRpcMember("postid")]
     public string ID { get; set; }
+    
     [XmlRpcMember("title")]
     public string Title { get; set; }
-    [XmlRpcMember("wp-slug")]
+    
+    [XmlRpcMember("wp_slug")]
     public string Slug { get; set; }
+
     [XmlRpcMember("description")]
     public string Content { get; set; }
+
     [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
 
+    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public List<Comment> Comments { get; set; }
 
     public void Save()
