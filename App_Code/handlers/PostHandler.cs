@@ -87,7 +87,7 @@ public class PostHandler : IHttpHandler
         if (Post.Posts.Any(p => string.Equals(p.Slug, title)))
             throw new HttpException(409, "Already in use");
 
-        return title;
+        return title.ToLowerInvariant();
     }
 
     public bool IsReusable

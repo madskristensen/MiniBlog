@@ -2,7 +2,6 @@
 using System.Web;
 public class CommentHandler : IHttpHandler
 {
-
     public void ProcessRequest(HttpContext context)
     {
         Post post = Post.Posts.SingleOrDefault(p => p.ID == context.Request.Form["postId"]);
@@ -27,16 +26,20 @@ public class CommentHandler : IHttpHandler
         string name = context.Request.Form["name"];
         string content = context.Request.Form["content"];
 
+        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(content))
+            throw new HttpException(500, "Comment not valid");
+
         Comment comment = new Comment()
         {
             Author = name,
             Email = email,
-            Content = content,
+            Content = HttpUtility.HtmlEncode(content).Replace("\n", "<br />"),
         };
 
         post.Comments.Add(comment);
         post.Save();
-}
+        context.Response.Write(comment.ID);
+    }
 
     private static void Delete(HttpContext context, Post post)
     {

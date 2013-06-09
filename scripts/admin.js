@@ -7,7 +7,7 @@
         btnNew, btnEdit, btnDelete, btnSave, btnCancel,
 
     newPost = function (e) {
-        location.href = "/new/";
+        location.href = "/post/new/";
     },
     editPost = function (e) {
         txtTitle.attr('contentEditable', true);
@@ -99,11 +99,11 @@
         }, 4000);
     };
 
-    isNew = location.pathname.replace(/\//g, "") === "new";
+    isNew = location.pathname.replace(/\//g, "") === "postnew";
 
-    postId = $("[itemprop~='blogpost']").attr("data-id");
+    postId = $("[itemprop~='blogPost']").attr("data-id");
 
-    txtTitle = $("[itemprop~='blogpost'] [itemprop~='name']");
+    txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
     txtContent = $("[itemprop~='articleBody']");
     txtMessage = $("#admin .alert");
     txtImage = $("#admin #txtImage");

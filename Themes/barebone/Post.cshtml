@@ -1,7 +1,7 @@
 ﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <header>
         <h1 itemprop="headline name">
-            <a href="~/@Model.Slug" itemprop="url">@Model.Title</a>
+            <a href="~/post/@Model.Slug" itemprop="url">@Model.Title</a>
         </h1>
         <p>
             <i class="icon-calendar"></i> <abbr title="@Model.PubDate" itemtype="datePublished">@Model.PubDate.ToString("d. MMMM yyyy")</abbr>
@@ -23,7 +23,7 @@
 
             @foreach (Comment comment in Model.Comments)
             {
-                <article itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
+                <article data-id="@comment.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
                     <img src="@comment.GravatarUrl(50)" alt="@comment.Author" />
                     <div>
                         <time datetime="@comment.PubDate" itemprop="commentTime">@comment.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
@@ -32,14 +32,13 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <button class="deletecomment btn btn-link" data-id="@comment.ID">Delete</button>
+                            <button class="deletecomment btn btn-link">Delete</button>
                         }
                     </div>
                 </article>
             }
-
-            @RenderPage("~/commentform.cshtml")
-
         </section>
+        
+        @RenderPage("~/commentform.cshtml")
     }
 </article>

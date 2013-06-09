@@ -1,5 +1,5 @@
 ﻿
-<form id="commentform">
+<div id="commentform" role="form">
     <fieldset>
         <legend>Post comment</legend>
         <ul>
@@ -12,11 +12,13 @@
                 <input id="commentemail" type="email" placeholder="Email" required />
             </li>
             <li>
+                <label for="commentContent">Comment (no HTML allowed)</label>
                 <textarea id="commentcontent" placeholder="Comment" required></textarea>
             </li>
             <li>
-                <button id="commentSave" class="btn">Post comment</button>
+                <button class="btn">Post comment</button>
+                <span id="status" class="info"></span>
             </li>
         </ul>
     </fieldset>
-</form>
+</div>

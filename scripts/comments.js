@@ -1,13 +1,17 @@
 ﻿(function ($) {
 
-    function deleteComment(commentId, postId) {
+    function deleteComment(commentId, postId, element) {
 
-        if (!confirm("Do you want to delete this comment?"))
-            return;
-
-        $.post("/comment.ashx?mode=delete", { postId: postId, commentId: commentId })
-         .success(function (data) { location.reload(false); })
-         .fail(function (data) { alert("Something went wrong. Please try again"); });
+        if (confirm("Do you want to delete this comment?")) {
+            $.post("/comment.ashx?mode=delete", { postId: postId, commentId: commentId })
+             .success(function (data) {
+                 console.log(element);
+                 element.slideUp();
+             })
+             .fail(function (data) {
+                 alert("Something went wrong. Please try again");
+             });
+        }
     }
 
     function saveComment(name, email, content, postId) {
@@ -17,31 +21,39 @@
             localStorage.setItem("email", email);
         }
 
-        $.post("/comment.ashx?mode=save", {
-            postId: postId,
-            name: name,
-            email: email,
-            content: content
-        }).success(function (data) { location.reload(false); })
-          .fail(function (data) { alert("Something went wrong. Please try again"); });
+        $.post("/comment.ashx?mode=save", { postId: postId, name: name, email: email, content: content })
+         .success(function (data) {
+             $("#status").text("Your comment has been added").attr("class", "info");
+             $("#commentcontent").val("");
+
+             $.get(location.pathname, function (html) {
+                 var comment = $(html).find("[data-id=" + data + "]").hide();
+                 $("#comments").append(comment);
+                 comment.slideDown();
+             });
+         })
+         .fail(function (data) {
+             $("#status").attr("class", "error").text("Remember to fill out all the fields");
+         });
     }
 
     function initialize() {
 
-        var postId = $("[itemprop='blogpost']").attr("data-id");
+        var postId = $("[itemprop='blogPost']").attr("data-id");
         var email = $("#commentemail");
         var name = $("#commentname");
         var content = $("#commentcontent");
 
-        $("#commentform").bind("submit", function (e) {
+        $(document).on("click", "#commentform button", function (e) {
             e.preventDefault();
             saveComment(name.val(), email.val(), content.val(), postId);
         });
 
-        $(".deletecomment").bind("click", function (e) {
+        $(document).on("click", ".deletecomment", function (e) {
             e.preventDefault();
-            var commentId = e.target.getAttribute("data-id");
-            deleteComment(commentId, postId);
+            var button = $(e.target);
+            var element = button.parents("[itemprop='comment']");
+            deleteComment(element.attr("data-id"), postId, element);
         });
 
         if (localStorage) {

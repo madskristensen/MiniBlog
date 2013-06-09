@@ -13,7 +13,7 @@
 else
 {
     Post post = new Post();
-    if (Request.RawUrl.Trim('/') != "new")
+    if (Request.RawUrl.Trim('/') != "post/new")
     {
         post = Post.GetPosts(1).ElementAt(0);
         Page.ShowComments = true;

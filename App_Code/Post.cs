@@ -22,7 +22,7 @@ public class Post
                 ID = Path.GetFileNameWithoutExtension(file),
                 Title = doc.Element("title").Value,
                 Content = doc.Element("content").Value,
-                Slug = doc.Element("slug").Value,
+                Slug = doc.Element("slug").Value.ToLowerInvariant(),
                 PubDate = DateTime.Parse(doc.Element("pubDate").Value),
             };
 
@@ -131,22 +131,11 @@ public class Post
                 ID = node.Attribute("id").Value,
                 Author = node.Element("author").Value,
                 Email = node.Element("email").Value,
-                Content = node.Element("content").Value,
+                Content = node.Element("content").Value.Replace("\n", "<br />"),
                 PubDate = DateTime.Parse(node.Element("date").Value),
             };
 
             post.Comments.Add(comment);
-        }
-    }
-
-    public void DeleteComment(string id)
-    {
-        Comment comment = Comments.FirstOrDefault(c => c.ID == id);
-
-        if (comment != null)
-        {
-            Comments.Remove(comment);
-            Save();
         }
     }
 }

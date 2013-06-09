@@ -19,7 +19,7 @@
     font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
 }
 
-label, input[type], textarea {
+label, input[type], button, textarea {
     font: inherit;
 }
 
@@ -53,7 +53,7 @@ label, input[type], textarea {
     font-size: 1.1em;
 }
 
-.post > div {
+.post div[articleBody] {
     border-bottom: 1px solid #d8d8d8;
 }
 
@@ -116,29 +116,42 @@ footer {
         font-size: .7em;
     }
 
-#comments form ul {
+#commentform ul {
     list-style: none;
     margin: 0;
 }
 
-#comments form li {
+#commentform li {
     margin: 5px 0;
 }
 
-#comments form label {
+#commentform label {
     display: inline-block;
-    width: 70px;
+    min-width: 70px;
     position: relative;
-    top: -7px;
+    /*top: -7px;*/
 }
 
-#comments form input {
+#commentform input {
     width: 280px;
+    line-height: 100%;
 }
 
-#comments form textarea {
+#commentform textarea {
     width: 98%;
     height: 100px;
+}
+
+#status{
+    margin-left: 1em;
+}
+
+#status.info{
+    color: green;
+}
+
+#status.error{
+    color: red;
 }
 
 /*#region Admin toolbar */
