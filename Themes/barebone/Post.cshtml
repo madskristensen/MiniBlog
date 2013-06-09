@@ -1,22 +1,44 @@
-﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogpost">
+﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <header>
-        <h1>
-            <a href="~/@Model.Slug" itemprop="url name">@Model.Title</a>
+        <h1 itemprop="headline name">
+            <a href="~/@Model.Slug" itemprop="url">@Model.Title</a>
         </h1>
+        <p>
+            <i class="icon-calendar"></i> <abbr title="@Model.PubDate" itemtype="datePublished">@Model.PubDate.ToString("d. MMMM yyyy")</abbr>
+            <i class="icon-comment"></i> @Model.Comments.Count Comments             
+        </p>
     </header>
 
     <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
-    
+
     @if (Page.ShowComments)
-    {   
-        <section id="disqus_thread"></section>
-        <script>
-            var disqus_shortname = '@System.Configuration.ConfigurationManager.AppSettings.Get("disqus:shortname")';
-            (function () {
-                var dsq = document.createElement('script'); dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
+    {
+        <section id="comments" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
+            <h2>Comments</h2>
+
+            @if (Model.Comments.Count == 0){
+                <p>Be the first to post a comment</p>
+            }
+            
+            @foreach (Comment comment in Model.Comments)
+            {
+                <article itemprop="comment">
+                    <img src="@comment.GravatarUrl(50)" alt="@comment.Author" />
+                    <div>
+                        <time datetime="@comment.PubDate" itemprop="commentTime">@comment.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
+                        <p itemprop="commentText">@Html.Raw(comment.Content)</p>
+                        <strong itemprop="creator">@comment.Author</strong>
+                        
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <button class="deletecomment btn btn-link" data-id="@comment.ID">Delete</button>
+                        }
+                    </div>
+                </article>
+            }
+
+            @RenderPage("~/commentform.cshtml")
+
+        </section>
     }
 </article>

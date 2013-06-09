@@ -1,0 +1,22 @@
+﻿
+<form id="commentform">
+    <fieldset>
+        <legend>Post comment</legend>
+        <ul>
+            <li>
+                <label for="commentname">Name</label>
+                <input id="commentname" type="text" placeholder="Name" value="@User.Identity.Name" required />
+            </li>
+            <li>
+                <label for="commentemail">Email</label>
+                <input id="commentemail" type="email" placeholder="Email" required />
+            </li>
+            <li>
+                <textarea id="commentcontent" placeholder="Comment" required></textarea>
+            </li>
+            <li>
+                <button id="commentSave" class="btn">Post comment</button>
+            </li>
+        </ul>
+    </fieldset>
+</form>

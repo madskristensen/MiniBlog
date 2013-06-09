@@ -1,6 +1,6 @@
 ﻿@{
     Page.ShowComments = false;
-    Layout = "~/Themes/" + Blog.Theme + "/_Layout.cshtml";
+    Layout = "~/Themes/" + Blog.Theme + "/_layout.cshtml";
     bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
 }
 
@@ -19,13 +19,27 @@ else
         Page.ShowComments = true;
     }
 
-    Page.Title = post.Title + " | " + Blog.Title;    
+    Page.Title = post.Title + " | " + Blog.Title;
 
     @RenderPage("~/Themes/" + Blog.Theme + "/Post.cshtml", post)
+}
+
+@section scripts{
+
+    @if (!showPostList){
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="@Blog.FingerPrint("/scripts/comments.js")"></script>
+        
+        if (User.Identity.IsAuthenticated)
+        {
+           <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")"></script>
+           <script src="@Blog.FingerPrint("/scripts/admin.js")"></script>
+        }
+    }
 }
 
 @if (User.Identity.IsAuthenticated)
 {
     Page.AdminClass = "admin";
-    @RenderPage("~/admin/menu.cshtml")
+    @RenderPage("~/adminmenu.cshtml")
 }

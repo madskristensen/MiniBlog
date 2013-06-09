@@ -1,8 +1,8 @@
-﻿ 
+﻿
 <div role="toolbar" data-role="editor-toolbar" class="navbar navbar-fixed-top" id="admin">
     <div class="navbar-inner">
         <ul class="nav">
-            <li><button class="btn btn-link" id="btnNew">New post</button></li>
+            <li><button onclick="location.href='/new/'" class="btn btn-link" id="btnNew">New post</button></li>
             <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
             <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
             <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
@@ -49,18 +49,14 @@
             <div class="btn-group">
                 <a class="btn btn-mini source" data-cmd="source" title="Toggle source/design view"><i class="icon-eye-open"></i></a>
             </div>
-        </div>           
+        </div>
     </div>
 
     <form action="/login/?signout=true&amp;return=@Request.RawUrl" method="post">
         <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link">Sign out <i class="icon-lock"></i></button>
-    </form> 
+    </form>
 
     <aside>
-       <p class="alert"></p>
+        <p class="alert"></p>
     </aside>
 </div>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<script src="@Blog.FingerPrint("/admin/bootstrap-wysiwyg.js")"></script>
-<script src="@Blog.FingerPrint("/admin/edit.js")"></script>

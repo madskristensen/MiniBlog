@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
+using System.Xml.XPath;
 using System.Xml.Linq;
 
 public class Post
@@ -12,7 +13,7 @@ public class Post
 
     static Post()
     {
-        foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.AllDirectories))
+        foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
             XElement doc = XElement.Load(file);
 
@@ -21,9 +22,11 @@ public class Post
                 ID = Path.GetFileNameWithoutExtension(file),
                 Title = doc.Element("title").Value,
                 Content = doc.Element("content").Value,
-                Slug = Path.GetFileNameWithoutExtension(Path.GetDirectoryName(file)),
-                PubDate = File.GetCreationTimeUtc(file),
+                Slug = doc.Element("slug").Value,
+                PubDate = DateTime.Parse(doc.Element("pubDate").Value),
             };
+
+            LoadComments(post, doc);
 
             Posts.Add(post);
         }
@@ -36,6 +39,8 @@ public class Post
         ID = Guid.NewGuid().ToString();
         Title = "My new post";
         Content = "the content";
+        PubDate = DateTime.UtcNow;
+        Comments = new List<Comment>();
     }
 
     public static List<Post> Posts = new List<Post>();
@@ -45,31 +50,50 @@ public class Post
     public string Content { get; set; }
     public DateTime PubDate { get; set; }
 
+    public List<Comment> Comments { get; set; }
+
     public void Save()
     {
-        string file = Path.Combine(_folder, Slug, ID + ".xml");
-        string directory = Path.GetDirectoryName(file);
+        string file = Path.Combine(_folder, ID + ".xml");
 
-        XDocument doc = doc = new XDocument(
+        XDocument doc = new XDocument(
                         new XElement("post",
                             new XElement("title", Title),
-                            new XElement("content", Content)
+                            new XElement("slug", Slug),
+                            new XElement("pubDate", PubDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                            new XElement("content", Content),
+                            new XElement("comments", string.Empty)
                         ));
 
+        XElement comments = doc.XPathSelectElement("post/comments");
+        
+        if (comments == null && Comments.Count > 0)
+            doc.Element("post").Add(new XElement("comments"));
 
-        if (!Directory.Exists(directory)) // New post
+        foreach (Comment comment in Comments)
         {
-            Directory.CreateDirectory(directory);
+            comments.Add(
+                new XElement("comment",
+                    new XElement("author", comment.Author),
+                    new XElement("email", comment.Email),
+                    new XElement("date", comment.PubDate.ToString("yyyy-MM-dd HH:m:ss")),
+                    new XElement("content", comment.Content),
+                    new XAttribute("id", comment.ID)
+                ));
+        }
+
+        if (!File.Exists(file)) // New post
+        {
             Post.Posts.Insert(0, this);
         }
 
-        doc.Save(file);        
+        doc.Save(file);
     }
 
     public void Delete()
     {
-        string directory = Path.Combine(_folder, Slug);
-        Directory.Delete(directory, true);
+        string file = Path.Combine(_folder, ID + ".xml");
+        File.Delete(file);
         Post.Posts.Remove(this);
     }
 
@@ -91,5 +115,38 @@ public class Post
         int page = Blog.CurrentPage(new HttpRequestWrapper(request));
 
         return Posts.Skip(postsPerPage * (page - 1)).Take(postsPerPage);
+    }
+
+    private static void LoadComments(Post post, XElement doc)
+    {
+        var comments = doc.Element("comments");
+
+        if (comments == null)
+            return;
+
+        foreach (var node in comments.Elements("comment"))
+        {
+            Comment comment = new Comment()
+            {
+                ID = node.Attribute("id").Value,
+                Author = node.Element("author").Value,
+                Email = node.Element("email").Value,
+                Content = node.Element("content").Value,
+                PubDate = DateTime.Parse(node.Element("date").Value),
+            };
+
+            post.Comments.Add(comment);
+        }
+    }
+
+    public void DeleteComment(string id)
+    {
+        Comment comment = Comments.FirstOrDefault(c => c.ID == id);
+
+        if (comment != null)
+        {
+            Comments.Remove(comment);
+            Save();
+        }
     }
 }

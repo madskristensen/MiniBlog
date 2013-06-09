@@ -1,16 +1,14 @@
-﻿<%@ WebHandler Language="C#" Class="Edit" %>
-
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-public class Edit : IHttpHandler
+public class PostHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        if (!context.User.Identity.IsAuthenticated || context.Request.RequestType != "POST")
+        if (!context.User.Identity.IsAuthenticated)
             throw new HttpException(403, "No access");
 
         string mode = context.Request.QueryString["mode"];
@@ -64,7 +62,7 @@ public class Edit : IHttpHandler
         }
 
         SaveImagesToDisk(post);
-        
+
         post.Save();
     }
 
@@ -78,7 +76,7 @@ public class Edit : IHttpHandler
             UploadImage(post.ID, match.Groups[1].Value, fileName);
 
             post.Content = post.Content.Replace(match.Value, image);
-        }        
+        }
     }
 
     private string CreateSlug(string title)

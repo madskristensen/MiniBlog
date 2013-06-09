@@ -14,14 +14,38 @@
 
 .container {
     margin-bottom: 2em;
-    width: 650px;
+    max-width: 650px;
     margin: 0 auto;
     font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
 }
 
-.post h1 a {
-    font-size: .7em;
-    color: black;
+label, input[type], textarea {
+    font: inherit;
+}
+
+.post header {
+    position: relative;
+}
+
+    .post header h1 {
+        margin-bottom: 0px;
+    }
+
+    .post header a {
+        font-size: .7em;
+        color: black;
+    }
+
+    .post header p {
+        font-size: .7em;
+    }
+
+        .post header p abbr {
+            margin-right: 10px;
+        }
+
+.post abbr {
+    border: none;
 }
 
 .post h2 {
@@ -58,12 +82,64 @@ footer {
     font-size: .9em;
     opacity: .9;
     padding: 8px 0;
+    margin-top: 4em;
 }
 
     footer .login {
         float: right;
         margin-right: 2em;
     }
+
+#comments article {
+    margin: 1.5em 0;
+    clear: both;
+    position: relative;
+}
+
+    #comments article div {
+        padding-left: 70px;
+    }
+
+    #comments article [itemprop='commentText'] {
+        margin: 0;
+    }
+
+    #comments article img {
+        border-radius: 5px;
+        position: absolute;
+        top: 28px;
+    }
+
+    #comments article [itemprop='commentTime'] {
+        display: block;
+        text-align: right;
+        font-size: .7em;
+    }
+
+#comments form ul {
+    list-style: none;
+    margin: 0;
+}
+
+#comments form li {
+    margin: 5px 0;
+}
+
+#comments form label {
+    display: inline-block;
+    width: 70px;
+    position: relative;
+    top: -7px;
+}
+
+#comments form input {
+    width: 280px;
+}
+
+#comments form textarea {
+    width: 98%;
+    height: 100px;
+}
 
 /*#region Admin toolbar */
 

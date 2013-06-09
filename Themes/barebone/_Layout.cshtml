@@ -27,7 +27,7 @@
             <em>By Mads Kristensen</em>
         </header>
 
-        <div role="main">
+        <div role="main" itemprop="blogPostings" itemscope itemtype="http://schema.org/BlogPosting">
             @RenderBody()
         </div>
     </div>
@@ -47,6 +47,8 @@
             </span>
         </span>
     </footer>
+
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

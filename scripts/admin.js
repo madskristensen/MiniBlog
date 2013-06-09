@@ -1,5 +1,4 @@
-﻿/// <reference path="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" />
-/// <reference path="bootstrap-wysiwyg.js" />
+﻿/// <reference path="bootstrap-wysiwyg.js" />
 
 (function ($, window) {
 
@@ -46,7 +45,7 @@
 
         txtContent.cleanHtml();
 
-        $.post("/admin/edit.ashx?mode=save", {
+        $.post("/post.ashx?mode=save", {
             id: postId,
             title: txtTitle.text(),
             content: txtContent.html()
@@ -82,7 +81,7 @@
     },
     deletePost = function (e) {
         if (confirm("Are you sure you want to delete this post?")) {
-            $.post("/admin/edit.ashx?mode=delete", { id: postId })
+            $.post("/post.ashx?mode=delete", { id: postId })
                 .success(function (data) { location.href = "/"; })
                 .fail(function (data) { showMessage(false, "Something went wrong. Please try again"); });
         }
@@ -100,33 +99,32 @@
         }, 4000);
     };
 
-    $(function () {
-        isNew = location.pathname.replace(/\//g, "") === "new";
-        postId = $("[itemprop~='blogpost']").attr("data-id");
+    isNew = location.pathname.replace(/\//g, "") === "new";
 
-        txtTitle = $("[itemprop~='blogpost'] [itemprop~='name']");
-        txtContent = $("[itemprop~='articleBody']");
-        txtMessage = $("#admin .alert");
-        txtImage = $("#admin #txtImage");
+    postId = $("[itemprop~='blogpost']").attr("data-id");
 
-        btnNew = $("#btnNew").bind("click", newPost);
-        btnEdit = $("#btnEdit").bind("click", editPost);;
-        btnDelete = $("#btnDelete").bind("click", deletePost);
-        btnSave = $("#btnSave").bind("click", savePost);
-        btnCancel = $("#btnCancel").bind("click", cancelEdit);
+    txtTitle = $("[itemprop~='blogpost'] [itemprop~='name']");
+    txtContent = $("[itemprop~='articleBody']");
+    txtMessage = $("#admin .alert");
+    txtImage = $("#admin #txtImage");
 
-        $('.uploadimage').click(function (e) {
-            e.preventDefault();
-            $('#txtImage').click();
-        });
+    btnNew = $("#btnNew").bind("click", newPost);
+    btnEdit = $("#btnEdit").bind("click", editPost);;
+    btnDelete = $("#btnDelete").bind("click", deletePost);
+    btnSave = $("#btnSave").bind("click", savePost);
+    btnCancel = $("#btnCancel").bind("click", cancelEdit);
 
-        if (isNew) {
-            editPost();
-        }
-        else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
-            btnEdit.removeAttr("disabled");
-            btnDelete.removeAttr("disabled");
-        }
+    $('.uploadimage').click(function (e) {
+        e.preventDefault();
+        $('#txtImage').click();
     });
+
+    if (isNew) {
+        editPost();
+    }
+    else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
+        btnEdit.removeAttr("disabled");
+        btnDelete.removeAttr("disabled");
+    }
 
 })(jQuery, window);
