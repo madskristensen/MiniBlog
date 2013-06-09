@@ -14,7 +14,7 @@
         }
     }
 
-    function saveComment(name, email, content, postId) {
+    function saveComment(name, email, content, postId, callback) {
 
         if (localStorage) {
             localStorage.setItem("name", name);
@@ -30,10 +30,12 @@
                  var comment = $(html).find("[data-id=" + data + "]").hide();
                  $("#comments").append(comment);
                  comment.slideDown();
+                 callback(true);
              });
          })
          .fail(function (data) {
              $("#status").attr("class", "error").text("Remember to fill out all the fields");
+             callback(false);
          });
     }
 
@@ -44,9 +46,14 @@
         var name = $("#commentname");
         var content = $("#commentcontent");
 
-        $(document).on("click", "#commentform button", function (e) {
+        $(document).on("submit", "#commentform", function (e) {
             e.preventDefault();
-            saveComment(name.val(), email.val(), content.val(), postId);
+            var button = $(e.target);
+            button.attr("disabled", true);
+
+            saveComment(name.val(), email.val(), content.val(), postId, function (success) {
+                button.removeAttr("disabled");
+            });
         });
 
         $(document).on("click", ".deletecomment", function (e) {

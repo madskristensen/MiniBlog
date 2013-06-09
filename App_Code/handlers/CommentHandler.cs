@@ -31,9 +31,9 @@ public class CommentHandler : IHttpHandler
 
         Comment comment = new Comment()
         {
-            Author = name,
-            Email = email,
-            Content = HttpUtility.HtmlEncode(content).Replace("\n", "<br />"),
+            Author = name.Trim(),
+            Email = email.Trim(),
+            Content = HttpUtility.HtmlEncode(content.Trim()).Replace("\n", "<br />"),
         };
 
         post.Comments.Add(comment);

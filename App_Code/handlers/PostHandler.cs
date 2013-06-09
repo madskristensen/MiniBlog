@@ -79,7 +79,7 @@ public class PostHandler : IHttpHandler
         }
     }
 
-    private string CreateSlug(string title)
+    public static string CreateSlug(string title)
     {
         title = title.ToLowerInvariant().Replace(" ", "-");
         title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);

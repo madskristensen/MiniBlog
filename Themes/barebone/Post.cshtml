@@ -4,7 +4,7 @@
             <a href="~/post/@Model.Slug" itemprop="url">@Model.Title</a>
         </h1>
         <p>
-            <i class="icon-calendar"></i> <abbr title="@Model.PubDate" itemtype="datePublished">@Model.PubDate.ToString("d. MMMM yyyy")</abbr>
+            <i class="icon-calendar"></i> <abbr title="@Model.PubDate.ToLocalTime()" itemtype="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
             <i class="icon-comment"></i> @Model.Comments.Count Comments
         </p>
     </header>

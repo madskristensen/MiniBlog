@@ -53,8 +53,9 @@ label, input[type], button, textarea {
     font-size: 1.1em;
 }
 
-.post div[articleBody] {
+.post div[itemprop='articleBody'] {
     border-bottom: 1px solid #d8d8d8;
+    padding-bottom: .5em;
 }
 
 .post p {
@@ -89,10 +90,8 @@ footer {
         float: right;
         margin-right: 2em;
     }
-
+ 
 #comments article {
-    margin: 1.5em 0;
-    clear: both;
     position: relative;
 }
 
@@ -129,7 +128,6 @@ footer {
     display: inline-block;
     min-width: 70px;
     position: relative;
-    /*top: -7px;*/
 }
 
 #commentform input {
@@ -142,18 +140,18 @@ footer {
     height: 100px;
 }
 
-#status{
+#status {
     margin-left: 1em;
 }
 
-#status.info{
-    color: green;
-}
+    #status.info {
+        color: green;
+    }
 
-#status.error{
-    color: red;
-}
-
+    #status.error {
+        color: red;
+    }
+    
 /*#region Admin toolbar */
 
 .admin {
