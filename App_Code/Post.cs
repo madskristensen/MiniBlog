@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Hosting;
 using System.Xml.XPath;
 using System.Xml.Linq;
+using CookComputing.XmlRpc;
 
+[XmlRpcMissingMapping(MappingAction.Ignore)]
 public class Post
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
@@ -44,10 +46,15 @@ public class Post
     }
 
     public static List<Post> Posts = new List<Post>();
+    [XmlRpcMember("postid")]
     public string ID { get; set; }
+    [XmlRpcMember("title")]
     public string Title { get; set; }
+    [XmlRpcMember("wp-slug")]
     public string Slug { get; set; }
+    [XmlRpcMember("description")]
     public string Content { get; set; }
+    [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
 
     public List<Comment> Comments { get; set; }
