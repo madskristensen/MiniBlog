@@ -47,12 +47,12 @@
 
         $.post("/post.ashx?mode=save", {
             id: postId,
-            title: txtTitle.text(),
+            title: txtTitle.text().trim(),
             content: txtContent.html()
         })
           .success(function (data) {
               if (isNew) {
-                  location.href = "/" + data;
+                  location.href = "/post/" + data;
                   return;
               }
 
