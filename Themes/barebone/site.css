@@ -90,7 +90,7 @@ footer {
         float: right;
         margin-right: 2em;
     }
- 
+
 #comments article {
     position: relative;
 }
@@ -115,30 +115,34 @@ footer {
         font-size: .7em;
     }
 
-#commentform ul {
-    list-style: none;
-    margin: 0;
+#commentform {
+    margin-top: 2em;
 }
 
-#commentform li {
-    margin: 5px 0;
-}
+    #commentform ul {
+        list-style: none;
+        margin: 0;
+    }
 
-#commentform label {
-    display: inline-block;
-    min-width: 70px;
-    position: relative;
-}
+    #commentform li {
+        margin: 5px 0;
+    }
 
-#commentform input {
-    width: 280px;
-    line-height: 100%;
-}
+    #commentform label {
+        display: inline-block;
+        min-width: 70px;
+        position: relative;
+    }
 
-#commentform textarea {
-    width: 98%;
-    height: 100px;
-}
+    #commentform input {
+        width: 280px;
+        line-height: 100%;
+    }
+
+    #commentform textarea {
+        width: 98%;
+        height: 100px;
+    }
 
 #status {
     margin-left: 1em;
@@ -151,7 +155,7 @@ footer {
     #status.error {
         color: red;
     }
-    
+
 /*#region Admin toolbar */
 
 .admin {

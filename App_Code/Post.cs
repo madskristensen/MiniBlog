@@ -28,13 +28,13 @@ public class Post
         PubDate = DateTime.UtcNow;
         Comments = new List<Comment>();
     }
-    
+
     [XmlRpcMember("postid")]
     public string ID { get; set; }
-    
+
     [XmlRpcMember("title")]
     public string Title { get; set; }
-    
+
     [XmlRpcMember("wp_slug")]
     public string Slug { get; set; }
 
@@ -58,10 +58,7 @@ public class Post
 
     public Uri Url
     {
-        get
-        {
-            return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative);
-        }
+        get { return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative); }
     }
 
     public void Save()
@@ -78,7 +75,7 @@ public class Post
                         ));
 
         XElement comments = doc.XPathSelectElement("post/comments");
-        
+
         if (comments == null && Comments.Count > 0)
             doc.Element("post").Add(new XElement("comments"));
 
