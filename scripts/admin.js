@@ -52,7 +52,7 @@
         })
           .success(function (data) {
               if (isNew) {
-                  location.href = "/post/" + data;
+                  location.href = data;
                   return;
               }
 

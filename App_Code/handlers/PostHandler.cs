@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Hosting;
 
 public class PostHandler : IHttpHandler
 {
@@ -22,22 +23,6 @@ public class PostHandler : IHttpHandler
         {
             EditPost(id, context.Request.Form["title"], context.Request.Form["content"]);
         }
-        else if (mode == "upload")
-        {
-            UploadImage(id, context.Request.Form["data"], context.Request.Form["name"]);
-        }
-    }
-
-    private void UploadImage(string id, string data, string name)
-    {
-        Post post = Post.Posts.First(p => p.ID == id);
-
-        string file = Path.Combine(HttpContext.Current.Server.MapPath("~/Posts/"), post.Slug, name);
-        int index = data.IndexOf("base64,", StringComparison.Ordinal) + 7;
-        byte[] imageBytes = Convert.FromBase64String(data.Substring(index));
-        File.WriteAllBytes(file, imageBytes);
-
-        HttpContext.Current.Response.Write("/posts/" + post.Slug + "/" + name);
     }
 
     private void DeletePost(string id)
@@ -58,7 +43,7 @@ public class PostHandler : IHttpHandler
         else
         {
             post = new Post() { Title = title, Content = content, Slug = CreateSlug(title) };
-            HttpContext.Current.Response.Write(post.Slug);
+            HttpContext.Current.Response.Write(post.Url);
         }
 
         SaveImagesToDisk(post);
@@ -71,12 +56,25 @@ public class PostHandler : IHttpHandler
         foreach (Match match in Regex.Matches(post.Content, "src=\"(data:([^\"]+))\""))
         {
             string extension = Regex.Match(match.Value, "data:image/([a-z]+);base64").Groups[1].Value;
-            string fileName = Guid.NewGuid() + "." + extension;
-            string image = string.Format("src=\"/posts/{0}/{1}\" alt=\"\" /", post.Slug, fileName);
+            string fileName = "/posts/files/" + Guid.NewGuid() + "." + extension;
+            string image = string.Format("src=\"{0}\" alt=\"\" /", fileName);
+
             UploadImage(post.ID, match.Groups[1].Value, fileName);
 
             post.Content = post.Content.Replace(match.Value, image);
         }
+    }
+
+    private void UploadImage(string id, string data, string name)
+    {
+        Post post = Post.Posts.First(p => p.ID == id);
+
+        string relative = "~" + name;
+        string file = HostingEnvironment.MapPath(relative);
+        int index = data.IndexOf("base64,", StringComparison.Ordinal) + 7;
+
+        byte[] imageBytes = Convert.FromBase64String(data.Substring(index));
+        File.WriteAllBytes(file, imageBytes);
     }
 
     public static string CreateSlug(string title)
