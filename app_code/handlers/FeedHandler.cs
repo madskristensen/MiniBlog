@@ -9,8 +9,6 @@ public class FeedHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        context.Response.ContentType = "application/rss+xml";
-
         SyndicationFeed feed = new SyndicationFeed()
         {
             Title = new TextSyndicationContent(Blog.Title),
@@ -41,9 +39,11 @@ public class FeedHandler : IHttpHandler
 
         if (index > -1 && path.Substring(index + 1) == "atom")
         {
+            context.Response.ContentType = "application/atom+xml";
             return new Atom10FeedFormatter(feed);
         }
 
+        context.Response.ContentType = "application/rss+xml";
         return new Rss20FeedFormatter(feed);
     }
 
