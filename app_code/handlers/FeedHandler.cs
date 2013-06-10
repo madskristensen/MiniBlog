@@ -11,25 +11,26 @@ public class FeedHandler : IHttpHandler
     {
         context.Response.ContentType = "application/rss+xml";
 
-        List<SyndicationItem> items = new List<SyndicationItem>();
-
-        foreach (Post post in Post.Posts.Take(10))
-        {
-            var item = new SyndicationItem(post.Title, post.Content, post.AbsoluteUrl, post.ID, post.PubDate);
-            items.Add(item);
-        }
-
-        var feed = new SyndicationFeed(items)
+        SyndicationFeed feed = new SyndicationFeed()
         {
             Title = new TextSyndicationContent(Blog.Title),
             Description = new TextSyndicationContent("Latest blog posts"),
-            BaseUri = new Uri(context.Request.Url.Scheme + "://" + context.Request.Url.Authority)
+            BaseUri = new Uri(context.Request.Url.Scheme + "://" + context.Request.Url.Authority),
+            Items = GetItems()
         };
 
         using (var writer = new XmlTextWriter(context.Response.Output))
         {
             var formatter = new Rss20FeedFormatter(feed);
             formatter.WriteTo(writer);
+        }
+    }
+
+    private IEnumerable<SyndicationItem> GetItems()
+    {
+        foreach (Post p in Post.Posts.Take(10))
+        {
+            yield return new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.ID, p.PubDate);
         }
     }
 
