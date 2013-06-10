@@ -1,6 +1,6 @@
 ﻿<!doctype html>
 <html lang="en-us">
-<head>
+<head prefix="og: http://ogp.me/ns#">
     <title>@Page.Title</title>
     <meta charset="utf-8" />
     <meta name="description" content="@Page.Title" />
@@ -15,9 +15,9 @@
 
     <meta name="application-name" content="@Blog.Title" />
     <meta name="twitter:title" content="@Page.Title" />
-    <meta name="og:title" content="@Page.Title" />
-    <meta name="og:type" content="website" />
-    <meta name="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
+    <meta property="og:title" content="@Page.Title" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@Page.AdminClass">
 
