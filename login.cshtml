@@ -1,8 +1,9 @@
 ﻿@{
     Page.Title = "Sign in";
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
-    
-    string returnUrl = Request.QueryString["return"] ?? VirtualPathUtility.ToAbsolute("~/");
+    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+    string returnUrl = Request.QueryString["ReturnUrl"] ?? VirtualPathUtility.ToAbsolute("~/");
     bool loginFailed = false;
 
     if (Request.HttpMethod == "POST")
@@ -33,7 +34,7 @@
         <fieldset>
             @if (loginFailed)
             {
-                <p class="text-warning">Username or password is incorrect</p> 
+                <p class="text-warning">Username or password is incorrect</p>
             }
 
             <div class="control-group">
@@ -52,6 +53,6 @@
     </form>
 }
 else
-{ 
+{
     <h3>You are already signed in</h3>
 }

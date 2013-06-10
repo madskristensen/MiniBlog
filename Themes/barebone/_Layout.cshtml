@@ -6,7 +6,8 @@
     <meta name="description" content="@Page.Title" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link type="application/rsd+xml" rel="edituri" title="RSD" href="~/rsd" />
-    <link type="application/rss+xml" rel="alternate" title="@Blog.Title" href="~/rss/" />
+    <link type="application/rss+xml" rel="alternate" title="@Blog.Title" href="~/feed/rss/" />
+    <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" rel="stylesheet" />
@@ -37,7 +38,7 @@
         @if (!User.Identity.IsAuthenticated)
         {
             <span class="login">
-                <a href="~/login/?return=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
+                <a href="~/login/?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
             </span>
         }
 

@@ -18,22 +18,28 @@ else
         post = Post.GetPosts(1).ElementAt(0);
         Page.ShowComments = true;
     }
+    else if (!User.Identity.IsAuthenticated)
+    {
+        FormsAuthentication.RedirectToLoginPage();
+    }
 
     Page.Title = post.Title + " | " + Blog.Title;
 
     @RenderPage("~/Themes/" + Blog.Theme + "/Post.cshtml", post)
 }
 
+
 @section scripts{
 
-    @if (!showPostList){
+    @if (!showPostList)
+    {
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="@Blog.FingerPrint("/scripts/comments.js")"></script>
-        
+
         if (User.Identity.IsAuthenticated)
         {
-           <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")"></script>
-           <script src="@Blog.FingerPrint("/scripts/admin.js")"></script>
+            <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")"></script>
+            <script src="@Blog.FingerPrint("/scripts/admin.js")"></script>
         }
     }
 }

@@ -21,7 +21,7 @@ public class FeedHandler : IHttpHandler
 
         using (var writer = new XmlTextWriter(context.Response.Output))
         {
-            var formatter = new Rss20FeedFormatter(feed);
+            var formatter = GetFormatter(context, feed);
             formatter.WriteTo(writer);
         }
     }
@@ -32,6 +32,19 @@ public class FeedHandler : IHttpHandler
         {
             yield return new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.ID, p.PubDate);
         }
+    }
+
+    private SyndicationFeedFormatter GetFormatter(HttpContext context, SyndicationFeed feed)
+    {
+        string path = context.Request.Path.Trim('/');
+        int index = path.LastIndexOf('/');
+
+        if (index > -1 && path.Substring(index + 1) == "atom")
+        {
+            return new Atom10FeedFormatter(feed);
+        }
+
+        return new Rss20FeedFormatter(feed);
     }
 
     public bool IsReusable
