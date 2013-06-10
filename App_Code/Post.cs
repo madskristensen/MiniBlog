@@ -44,7 +44,6 @@ public class Post
     [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
 
-    [XmlRpcMissingMapping(MappingAction.Ignore)]
     public List<Comment> Comments { get; set; }
 
     public Uri AbsoluteUrl
@@ -76,8 +75,8 @@ public class Post
 
         XElement comments = doc.XPathSelectElement("post/comments");
 
-        if (comments == null && Comments.Count > 0)
-            doc.Element("post").Add(new XElement("comments"));
+        //if (comments == null && Comments.Count > 0)
+        //    doc.Element("post").Add(new XElement("comments"));
 
         foreach (Comment comment in Comments)
         {

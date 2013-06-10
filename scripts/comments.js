@@ -5,7 +5,6 @@
         if (confirm("Do you want to delete this comment?")) {
             $.post("/comment.ashx?mode=delete", { postId: postId, commentId: commentId })
              .success(function (data) {
-                 console.log(element);
                  element.slideUp();
              })
              .fail(function (data) {

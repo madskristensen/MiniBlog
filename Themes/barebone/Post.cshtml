@@ -4,7 +4,7 @@
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
         </h1>
         <p>
-            <i class="icon-calendar"></i> <abbr title="@Model.PubDate.ToLocalTime()" itemtype="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
+            <i class="icon-calendar"></i> <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
             <i class="icon-comment"></i> @Model.Comments.Count Comments
         </p>
     </header>
@@ -26,7 +26,7 @@
                 <article data-id="@comment.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
                     <img src="@comment.GravatarUrl(50)" alt="@comment.Author" />
                     <div>
-                        <time datetime="@comment.PubDate" itemprop="commentTime">@comment.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
+                        <time datetime="@comment.PubDate.ToString("yyyy-dd-MMTHH:mm")" itemprop="commentTime">@comment.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
                         <p itemprop="commentText">@Html.Raw(comment.Content)</p>
                         <strong itemprop="creator">@comment.Author</strong>
 
