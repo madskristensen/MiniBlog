@@ -41,7 +41,7 @@ public interface IMetaWeblog
     #endregion
 }
 
-public class MetaWeblog : XmlRpcService, IMetaWeblog
+public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
 {
     string IMetaWeblog.AddPost(string blogid, string username, string password, Post post, bool publish)
     {

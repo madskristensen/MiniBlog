@@ -1,38 +1,22 @@
-﻿using System;
+﻿using CookComputing.XmlRpc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
-using System.Xml.XPath;
 using System.Xml.Linq;
-using CookComputing.XmlRpc;
+using System.Xml.XPath;
 
 [XmlRpcMissingMapping(MappingAction.Ignore)]
 public class Post
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
+    public static List<Post> Posts;
 
     static Post()
     {
-        foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
-        {
-            XElement doc = XElement.Load(file);
-
-            Post post = new Post()
-            {
-                ID = Path.GetFileNameWithoutExtension(file),
-                Title = doc.Element("title").Value,
-                Content = doc.Element("content").Value,
-                Slug = doc.Element("slug").Value.ToLowerInvariant(),
-                PubDate = DateTime.Parse(doc.Element("pubDate").Value),
-            };
-
-            LoadComments(post, doc);
-
-            Posts.Add(post);
-        }
-
+        Posts = new List<Post>(LoadPosts());
         Posts = Posts.OrderByDescending(p => p.PubDate).ToList();
     }
 
@@ -44,8 +28,6 @@ public class Post
         PubDate = DateTime.UtcNow;
         Comments = new List<Comment>();
     }
-    
-    public static List<Post> Posts = new List<Post>();
     
     [XmlRpcMember("postid")]
     public string ID { get; set; }
@@ -64,6 +46,23 @@ public class Post
 
     [XmlRpcMissingMapping(MappingAction.Ignore)]
     public List<Comment> Comments { get; set; }
+
+    public Uri AbsoluteUrl
+    {
+        get
+        {
+            Uri requestUrl = HttpContext.Current.Request.Url;
+            return new Uri(requestUrl.Scheme + "://" + requestUrl.Authority + Url, UriKind.Absolute);
+        }
+    }
+
+    public Uri Url
+    {
+        get
+        {
+            return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative);
+        }
+    }
 
     public void Save()
     {
@@ -96,9 +95,7 @@ public class Post
         }
 
         if (!File.Exists(file)) // New post
-        {
             Post.Posts.Insert(0, this);
-        }
 
         doc.Save(file);
     }
@@ -128,6 +125,27 @@ public class Post
         int page = Blog.CurrentPage(new HttpRequestWrapper(request));
 
         return Posts.Skip(postsPerPage * (page - 1)).Take(postsPerPage);
+    }
+
+    private static IEnumerable<Post> LoadPosts()
+    {
+        foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
+        {
+            XElement doc = XElement.Load(file);
+
+            Post post = new Post()
+            {
+                ID = Path.GetFileNameWithoutExtension(file),
+                Title = doc.Element("title").Value,
+                Content = doc.Element("content").Value,
+                Slug = doc.Element("slug").Value.ToLowerInvariant(),
+                PubDate = DateTime.Parse(doc.Element("pubDate").Value),
+            };
+
+            LoadComments(post, doc);
+
+            yield return post;
+        }
     }
 
     private static void LoadComments(Post post, XElement doc)
