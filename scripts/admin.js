@@ -13,6 +13,7 @@
         txtTitle.attr('contentEditable', true);
         txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
+        txtContent.focus();
 
         btnNew.attr("disabled", true);
         btnEdit.attr("disabled", true);

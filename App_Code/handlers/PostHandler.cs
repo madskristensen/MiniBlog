@@ -67,8 +67,6 @@ public class PostHandler : IHttpHandler
 
     private void UploadImage(string id, string data, string name)
     {
-        Post post = Post.Posts.First(p => p.ID == id);
-
         string relative = "~" + name;
         string file = HostingEnvironment.MapPath(relative);
         int index = data.IndexOf("base64,", StringComparison.Ordinal) + 7;
