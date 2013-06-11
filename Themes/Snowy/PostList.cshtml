@@ -1,11 +1,11 @@
 ﻿@{
     int postsPerPage = 5;
-    int pageNum = Blog.CurrentPage(Request);
+    int pageNum = Blog.CurrentPage;
     string prevDisabled = pageNum < 2 ? "disabled" : "";
     string nextDisabled = pageNum * postsPerPage >= Post.Posts.Count ? "disabled" : "";
 }
 
-@foreach (var post in Post.GetPosts(postsPerPage))
+@foreach (var post in Blog.GetPosts(postsPerPage))
 {
     @RenderPage("Post.cshtml", post);
 }

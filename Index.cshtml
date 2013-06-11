@@ -1,21 +1,23 @@
 ﻿@{
+    Page.Title = Blog.Title;
     Page.ShowComments = false;
     Layout = "~/Themes/" + Blog.Theme + "/_layout.cshtml";
+    
     bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
+    bool isNewPost = Request.RawUrl.Trim('/') == "post/new";
 }
 
-@* Show the post list or a single post *@
 @if (showPostList)
-{
-    Page.Title = Blog.Title;
+{   
     @RenderPage("~/Themes/" + Blog.Theme + "/PostList.cshtml")
 }
 else
 {
     Post post = new Post();
-    if (Request.RawUrl.Trim('/') != "post/new")
+    
+    if (!isNewPost)
     {
-        post = Post.GetPosts(1).ElementAt(0);
+        post = Blog.CurrentPost;
         Page.ShowComments = true;
     }
     else if (!User.Identity.IsAuthenticated)
@@ -23,7 +25,9 @@ else
         FormsAuthentication.RedirectToLoginPage();
     }
 
-    Page.Title = post.Title + " | " + Blog.Title;
+    if (post == null) { throw new HttpException(404, "Post not found"); }
+
+    Page.Title = post.Title + " | " + Page.Title;
 
     @RenderPage("~/Themes/" + Blog.Theme + "/Post.cshtml", post)
 }
@@ -32,7 +36,7 @@ else
 
     @if (!showPostList)
     {
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" async></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="@Blog.FingerPrint("/scripts/comments.js")" async></script>
 
         if (User.Identity.IsAuthenticated)
@@ -46,5 +50,5 @@ else
 @if (User.Identity.IsAuthenticated)
 {
     Page.AdminClass = "admin";
-    @RenderPage("~/adminmenu.cshtml")
+    @RenderPage("~/views/adminmenu.cshtml")
 }

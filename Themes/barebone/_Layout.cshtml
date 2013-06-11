@@ -38,7 +38,7 @@
         @if (!User.Identity.IsAuthenticated)
         {
             <span class="login">
-                <a href="~/login/?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
+                <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
             </span>
         }
 

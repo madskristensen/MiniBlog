@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Hosting;
@@ -17,13 +19,30 @@ public class Blog
         get { return ConfigurationManager.AppSettings.Get("blog:theme"); }
     }
 
-    public static int CurrentPage(HttpRequestBase request)
+    public static Post CurrentPost
     {
-        int page = 0;
-        if (int.TryParse(request.QueryString["page"], out page))
-            return page;
+        get
+        {
+            string slug = HttpContext.Current.Request.QueryString["slug"] ?? string.Empty;
+            return Post.Posts.FirstOrDefault(p => p.Slug.Equals(slug.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+    }
 
-        return 1;
+    public static int CurrentPage
+    {
+        get
+        {
+            int page = 0;
+            if (int.TryParse(HttpContext.Current.Request.QueryString["page"], out page))
+                return page;
+
+            return 1;
+        }
+    }
+
+    public static IEnumerable<Post> GetPosts(int postsPerPage)
+    {
+        return Post.Posts.Skip(postsPerPage * (Blog.CurrentPage - 1)).Take(postsPerPage);
     }
 
     public static string FingerPrint(string rootRelativePath)

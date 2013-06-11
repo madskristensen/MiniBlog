@@ -103,26 +103,6 @@ public class Post
         Post.Posts.Remove(this);
     }
 
-    public static IEnumerable<Post> GetPosts(int postsPerPage)
-    {
-        HttpRequest request = HttpContext.Current.Request;
-        string slug = request.QueryString["slug"];
-
-        if (!string.IsNullOrEmpty(slug))
-        {
-            var post = Posts.FirstOrDefault(p => p.Slug.Equals(slug.Trim(), StringComparison.OrdinalIgnoreCase));
-
-            if (post == null)
-                throw new HttpException(404, "Blog post does not exist");
-
-            return new[] { post };
-        }
-
-        int page = Blog.CurrentPage(new HttpRequestWrapper(request));
-
-        return Posts.Skip(postsPerPage * (page - 1)).Take(postsPerPage);
-    }
-
     private static IEnumerable<Post> LoadPosts()
     {
         foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))

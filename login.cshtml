@@ -2,28 +2,23 @@
     Page.Title = "Sign in";
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     Response.Cache.SetCacheability(HttpCacheability.NoCache);
-
-    string returnUrl = Request.QueryString["ReturnUrl"] ?? VirtualPathUtility.ToAbsolute("~/");
-    bool loginFailed = false;
-
+    
     if (Request.HttpMethod == "POST")
     {
-        if (!string.IsNullOrEmpty(Request.Form["username"]) && !string.IsNullOrEmpty(Request.Form["password"]))
+        string username = Request.Form["username"];
+        string password = Request.Form["password"];
+        
+        if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
         {
-            if (FormsAuthentication.Authenticate(Request.Form["username"], Request.Form["password"]))
+            if (FormsAuthentication.Authenticate(username, password))
             {
-                FormsAuthentication.SetAuthCookie(Request.Form["username"], true);
-                Response.Redirect(returnUrl, true);
-            }
-            else
-            {
-                loginFailed = true;
+                FormsAuthentication.RedirectFromLoginPage(username, true);
             }
         }
         else if (!string.IsNullOrEmpty(Request.QueryString["signout"]))
         {
             FormsAuthentication.SignOut();
-            Response.Redirect(returnUrl, true);
+            Response.Redirect(Request.QueryString["ReturnUrl"], true);
         }
     }
 }
@@ -32,7 +27,7 @@
 {
     <form action="@Request.RawUrl" method="post" id="login">
         <fieldset>
-            @if (loginFailed)
+            @if (Request.HttpMethod == "POST")
             {
                 <p class="text-warning">Username or password is incorrect</p>
             }
@@ -47,7 +42,6 @@
 
             <div class="control-group">
                 <button type="submit" class="btn btn-primary">Sign in</button>
-                <a href="@returnUrl" class="btn">Cancel</a>
             </div>
         </fieldset>
     </form>
