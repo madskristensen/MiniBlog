@@ -9,7 +9,7 @@ public class MinifyHandler : IHttpHandler
     public void ProcessRequest(HttpContext context)
     {
         string file = context.Server.MapPath(context.Request.CurrentExecutionFilePath);
-        string extension = Path.GetExtension(file);
+        string ext = Path.GetExtension(file);
 
         if (context.IsDebuggingEnabled)
         {
@@ -17,41 +17,35 @@ public class MinifyHandler : IHttpHandler
         }
         else
         {
-            Minify(context.Response, file, extension);
+            Minify(context.Response, file, ext);
         }
 
-        SetHeaders(context.Response, file, extension);
+        SetHeaders(context.Response, file, ext);
     }
 
-    private static void SetHeaders(HttpResponse response, string file, string extension)
+    private static void SetHeaders(HttpResponse response, string file, string ext)
     {
-        if (extension == ".css")
-        {
-            response.ContentType = "text/css";
-        }
-        else if (extension == ".js")
-        {
-            response.ContentType = "text/javascript";
-        }
+        response.ContentType = ext == ".css" ? "text/css" : "text/javascript";
 
         response.Cache.SetLastModified(File.GetLastWriteTimeUtc(file));
         response.Cache.SetValidUntilExpires(true);
         response.Cache.SetExpires(DateTime.Now.AddYears(1));
         response.Cache.SetCacheability(HttpCacheability.Public);
+        
         response.AddCacheDependency(new CacheDependency(file));
     }
 
-    private static void Minify(HttpResponse response, string file, string extension)
+    private static void Minify(HttpResponse response, string file, string ext)
     {
         string content = File.ReadAllText(file);
         Minifier minifier = new Minifier();
 
-        if (extension == ".css")
+        if (ext == ".css")
         {
             CssSettings settings = new CssSettings() { CommentMode = CssComment.None };
             response.Write(minifier.MinifyStyleSheet(content, settings));
         }
-        else if (extension == ".js")
+        else if (ext == ".js")
         {
             CodeSettings settings = new CodeSettings() { PreserveImportantComments = false };
             response.Write(minifier.MinifyJavaScript(content, settings));

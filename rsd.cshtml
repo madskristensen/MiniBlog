@@ -8,7 +8,7 @@
         <enginelink>http://madskristensen.net/</enginelink>
         <homepagelink>http://madskristensen.net/</homepagelink>
         <apis>
-            <api name="MetaWeblog" preferred="true" apilink="http://@Request.Url.Authority/metaweblog" blogid="1" />
+            <api name="MetaWeblog" preferred="true" apilink="@Request.Url.Scheme://@Request.Url.Authority/metaweblog" blogid="1" />
         </apis>
     </service>
 </rsd>
