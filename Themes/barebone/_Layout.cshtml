@@ -8,10 +8,15 @@
     <link type="application/rsd+xml" rel="edituri" title="RSD" href="~/rsd" />
     <link type="application/rss+xml" rel="alternate" title="@Blog.Title" href="~/feed/rss/" />
     <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
-
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" rel="stylesheet" />
+    
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="@Blog.FingerPrint("/Content/bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Blog.FingerPrint("/Content/bootstrap-responsive.min.css")" rel="stylesheet" />
+    <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" rel="stylesheet" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <link href="@Blog.FingerPrint("/content/admin.css")" rel="stylesheet" />
+    }
 
     <meta name="application-name" content="@Blog.Title" />
     <meta name="twitter:title" content="@Page.Title" />

@@ -28,18 +28,17 @@ else
     @RenderPage("~/Themes/" + Blog.Theme + "/Post.cshtml", post)
 }
 
-
 @section scripts{
 
     @if (!showPostList)
     {
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-        <script src="@Blog.FingerPrint("/scripts/comments.js")"></script>
+        <script src="@Blog.FingerPrint("/scripts/jquery-2.0.2.min.js")" async></script>
+        <script src="@Blog.FingerPrint("/scripts/comments.js")" async></script>
 
         if (User.Identity.IsAuthenticated)
         {
-            <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")"></script>
-            <script src="@Blog.FingerPrint("/scripts/admin.js")"></script>
+            <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")" async></script>
+            <script src="@Blog.FingerPrint("/scripts/admin.js")" async></script>
         }
     }
 }
