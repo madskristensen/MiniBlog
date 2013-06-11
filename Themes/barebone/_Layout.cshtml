@@ -46,7 +46,7 @@
         </span>
     </footer>
 
-    @if (Blog.CurrentPost != null)
+    @if (!string.IsNullOrEmpty(Blog.CurrentSlug))
     {
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="@Blog.FingerPrint("/scripts/comments.js")" async></script>
@@ -56,6 +56,5 @@
     {
         @RenderPage("~/views/adminmenu.cshtml")
     }
-
 </body>
 </html>

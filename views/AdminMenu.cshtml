@@ -61,5 +61,8 @@
     </aside>
 </div>
 
-<script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")"></script>
-<script src="@Blog.FingerPrint("/scripts/admin.js")" async></script>
+@if (!string.IsNullOrEmpty(Blog.CurrentSlug))
+{
+    <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")"></script>
+    <script src="@Blog.FingerPrint("/scripts/admin.js")" async></script>
+}

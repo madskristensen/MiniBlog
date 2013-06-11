@@ -75,9 +75,6 @@ public class Post
 
         XElement comments = doc.XPathSelectElement("post/comments");
 
-        //if (comments == null && Comments.Count > 0)
-        //    doc.Element("post").Add(new XElement("comments"));
-
         foreach (Comment comment in Comments)
         {
             comments.Add(

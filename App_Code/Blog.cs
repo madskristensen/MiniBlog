@@ -49,7 +49,7 @@ public class Blog
 
     public static IEnumerable<Post> GetPosts(int postsPerPage)
     {
-        return Post.Posts.Skip(postsPerPage * (Blog.CurrentPage - 1)).Take(postsPerPage);
+        return Post.Posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
     }
 
     public static string FingerPrint(string rootRelativePath)
