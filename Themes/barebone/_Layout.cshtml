@@ -9,7 +9,7 @@
     <link type="application/rsd+xml" rel="edituri" title="RSD" href="~/rsd" />
     <link type="application/rss+xml" rel="alternate" title="@Blog.Title" href="~/feed/rss/" />
     <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
-    
+
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" rel="stylesheet" />
@@ -19,13 +19,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
 </head>
-<body itemscope itemtype="http://schema.org/Blog" class="@Page.AdminClass">
+<body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
 
-    <div class="container">
+    <div class=" container">
 
         <header class="page-header">
-            <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span>
-            <br />
+            <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
             <em>By Mads Kristensen</em>
         </header>
 
@@ -35,12 +34,9 @@
     </div>
 
     <footer id="pagefooter" itemscope itemtype="http://schema.org/Person" itemprop="author">
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <span class="login">
-                <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
-            </span>
-        }
+        <span class="login">
+            <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
+        </span>
 
         <span>
             Copyright &copy; @DateTime.Now.Year
@@ -50,7 +46,16 @@
         </span>
     </footer>
 
-    @RenderSection("scripts", required: false)
+    @if (Blog.CurrentPost != null)
+    {
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="@Blog.FingerPrint("/scripts/comments.js")" async></script>
+    }
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @RenderPage("~/views/adminmenu.cshtml")
+    }
 
 </body>
 </html>

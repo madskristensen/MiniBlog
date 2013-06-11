@@ -19,12 +19,19 @@ public class Blog
         get { return ConfigurationManager.AppSettings.Get("blog:theme"); }
     }
 
+    public static string CurrentSlug
+    {
+        get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }
+    }
+
     public static Post CurrentPost
     {
         get
         {
-            string slug = HttpContext.Current.Request.QueryString["slug"] ?? string.Empty;
-            return Post.Posts.FirstOrDefault(p => p.Slug.Equals(slug.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (HttpContext.Current.Items["currentpost"] == null)
+                HttpContext.Current.Items["currentpost"] = Post.Posts.FirstOrDefault(p => p.Slug == CurrentSlug);
+
+            return HttpContext.Current.Items["currentpost"] as Post;
         }
     }
 

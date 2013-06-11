@@ -3,11 +3,10 @@
     Page.ShowComments = false;
     Layout = "~/Themes/" + Blog.Theme + "/_layout.cshtml";
     
-    bool showPostList = string.IsNullOrEmpty(Request.QueryString["slug"]);
     bool isNewPost = Request.RawUrl.Trim('/') == "post/new";
 }
 
-@if (showPostList)
+@if (string.IsNullOrEmpty(Blog.CurrentSlug))
 {   
     @RenderPage("~/Themes/" + Blog.Theme + "/PostList.cshtml")
 }
@@ -30,25 +29,4 @@ else
     Page.Title = post.Title + " | " + Page.Title;
 
     @RenderPage("~/Themes/" + Blog.Theme + "/Post.cshtml", post)
-}
-
-@section scripts{
-
-    @if (!showPostList)
-    {
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script src="@Blog.FingerPrint("/scripts/comments.js")" async></script>
-
-        if (User.Identity.IsAuthenticated)
-        {
-            <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")" async></script>
-            <script src="@Blog.FingerPrint("/scripts/admin.js")" async></script>
-        }
-    }
-}
-
-@if (User.Identity.IsAuthenticated)
-{
-    Page.AdminClass = "admin";
-    @RenderPage("~/views/adminmenu.cshtml")
 }
