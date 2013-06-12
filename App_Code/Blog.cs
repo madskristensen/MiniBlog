@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Hosting;
 
-public class Blog
+public static class Blog
 {
     public static string Title
     {
@@ -34,7 +34,12 @@ public class Blog
         get
         {
             if (HttpContext.Current.Items["currentpost"] == null)
-                HttpContext.Current.Items["currentpost"] = Post.Posts.FirstOrDefault(p => p.Slug == CurrentSlug);
+            {
+                var post = Post.Posts.FirstOrDefault(p => p.Slug == CurrentSlug);
+
+                if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated))
+                    HttpContext.Current.Items["currentpost"] = Post.Posts.FirstOrDefault(p => p.Slug == CurrentSlug);
+            }
 
             return HttpContext.Current.Items["currentpost"] as Post;
         }
@@ -54,7 +59,11 @@ public class Blog
 
     public static IEnumerable<Post> GetPosts(int postsPerPage)
     {
-        return Post.Posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
+        var posts = from p in Post.Posts
+                    where p.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated
+                    select p;
+
+        return posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
     }
 
     public static string SaveFileToDisk(byte[] bytes, string extension)

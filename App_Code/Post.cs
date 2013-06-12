@@ -44,6 +44,8 @@ public class Post
     [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
 
+    public bool IsPublished { get; set; }
+
     public List<Comment> Comments { get; set; }
 
     public Uri AbsoluteUrl
@@ -70,6 +72,7 @@ public class Post
                             new XElement("slug", Slug),
                             new XElement("pubDate", PubDate.ToString("yyyy-MM-dd HH:mm:ss")),
                             new XElement("content", Content),
+                            new XElement("ispublished", IsPublished),
                             new XElement("comments", string.Empty)
                         ));
 
@@ -109,10 +112,11 @@ public class Post
             Post post = new Post()
             {
                 ID = Path.GetFileNameWithoutExtension(file),
-                Title = doc.Element("title").Value,
-                Content = doc.Element("content").Value,
-                Slug = doc.Element("slug").Value.ToLowerInvariant(),
-                PubDate = DateTime.Parse(doc.Element("pubDate").Value),
+                Title = ReadValue(doc, "title"),
+                Content = ReadValue(doc, "content"),
+                Slug = ReadValue(doc, "slug").ToLowerInvariant(),
+                PubDate = DateTime.Parse(ReadValue(doc,"pubDate")),
+                IsPublished = bool.Parse(ReadValue(doc, "ispublished", "true")),
             };
 
             LoadComments(post, doc);
@@ -133,13 +137,21 @@ public class Post
             Comment comment = new Comment()
             {
                 ID = node.Attribute("id").Value,
-                Author = node.Element("author").Value,
-                Email = node.Element("email").Value,
-                Content = node.Element("content").Value.Replace("\n", "<br />"),
-                PubDate = DateTime.Parse(node.Element("date").Value),
+                Author = ReadValue(node, "author"),
+                Email = ReadValue(node, "email"),
+                Content = ReadValue(node, "content").Replace("\n", "<br />"),
+                PubDate = DateTime.Parse(ReadValue(node, "date", "false")),
             };
 
             post.Comments.Add(comment);
         }
+    }
+
+    private static string ReadValue(XElement doc, XName name, string defaultValue = "")
+    {
+        if (doc.Element(name) != null)
+            return doc.Element(name).Value;
+
+        return defaultValue;
     }
 }

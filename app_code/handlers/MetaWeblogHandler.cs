@@ -46,6 +46,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         ValidateUser(username, password);
 
         post.Slug = PostHandler.CreateSlug(post.Title);
+        post.IsPublished = publish;
         post.Save();
 
         return post.ID;
@@ -62,6 +63,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Title = post.Title;
             match.Content = post.Content;
             match.Slug = post.Slug;
+            match.IsPublished = publish;
             match.Save();
         }
 
