@@ -23,19 +23,7 @@
 
             @foreach (Comment comment in Model.Comments)
             {
-                <article data-id="@comment.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
-                    <img src="@comment.GravatarUrl(50)" width="50" height="50" alt="@comment.Author" />
-                    <div>
-                        <time datetime="@comment.PubDate.ToString("yyyy-dd-MMTHH:mm")" itemprop="commentTime">@comment.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
-                        <p itemprop="commentText">@Html.Raw(comment.Content)</p>
-                        <strong itemprop="creator">@comment.Author</strong>
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <button class="deletecomment btn btn-link">Delete</button>
-                        }
-                    </div>
-                </article>
+                @RenderPage("Comment.cshtml", comment)
             }
         </section>
         

@@ -1,0 +1,14 @@
+﻿
+<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
+    <img src="@Model.GravatarUrl(50)" width="50" height="50" alt="@Model.Author" />
+    <div>
+        <time datetime="@Model.PubDate.ToString("yyyy-dd-MMTHH:mm")" itemprop="commentTime">@Model.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
+        <p itemprop="commentText">@Html.Raw(Model.Content)</p>
+        <strong itemprop="creator">@Model.Author</strong>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button class="deletecomment btn btn-link">Delete</button>
+        }
+    </div>
+</article>

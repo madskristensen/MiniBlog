@@ -2,8 +2,6 @@
     Page.Title = Blog.Title;
     Page.ShowComments = false;
     Layout = "~/Themes/" + Blog.Theme + "/_layout.cshtml";
-    
-    bool isNewPost = Request.RawUrl.Trim('/') == "post/new";
 }
 
 @if (string.IsNullOrEmpty(Blog.CurrentSlug))
@@ -14,7 +12,7 @@ else
 {
     Post post = new Post();
     
-    if (!isNewPost)
+    if (!Blog.IsNewPost)
     {
         post = Blog.CurrentPost;
         Page.ShowComments = true;

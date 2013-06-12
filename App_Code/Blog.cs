@@ -24,6 +24,11 @@ public class Blog
         get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }
     }
 
+    public static bool IsNewPost
+    {
+        get { return HttpContext.Current.Request.RawUrl.Trim('/') == "post/new"; }
+    }
+
     public static Post CurrentPost
     {
         get
