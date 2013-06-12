@@ -57,6 +57,16 @@ public class Blog
         return Post.Posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
     }
 
+    public static string SaveFileToDisk(byte[] bytes, string extension)
+    {
+        string relative = "~/posts/files/" + Guid.NewGuid() + "." + extension;
+        string file = HostingEnvironment.MapPath(relative);
+
+        File.WriteAllBytes(file, bytes);
+
+        return VirtualPathUtility.ToAbsolute(relative);
+    }
+
     public static string FingerPrint(string rootRelativePath)
     {
         if (HttpRuntime.Cache[rootRelativePath] == null)

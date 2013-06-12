@@ -56,23 +56,20 @@ public class PostHandler : IHttpHandler
         foreach (Match match in Regex.Matches(post.Content, "src=\"(data:([^\"]+))\""))
         {
             string extension = Regex.Match(match.Value, "data:image/([a-z]+);base64").Groups[1].Value;
-            string fileName = "/posts/files/" + Guid.NewGuid() + "." + extension;
-            string image = string.Format("src=\"{0}\" alt=\"\" /", fileName);
-
-            UploadImage(post.ID, match.Groups[1].Value, fileName);
+     
+            byte[] bytes = ConvertToBytes(match.Groups[1].Value);
+            string path = Blog.SaveFileToDisk(bytes, extension);
+            
+            string image = string.Format("src=\"{0}\" alt=\"\" /", path);
 
             post.Content = post.Content.Replace(match.Value, image);
         }
     }
 
-    private void UploadImage(string id, string data, string name)
+    private byte[] ConvertToBytes(string base64)
     {
-        string relative = "~" + name;
-        string file = HostingEnvironment.MapPath(relative);
-        int index = data.IndexOf("base64,", StringComparison.Ordinal) + 7;
-
-        byte[] imageBytes = Convert.FromBase64String(data.Substring(index));
-        File.WriteAllBytes(file, imageBytes);
+        int index = base64.IndexOf("base64,", StringComparison.Ordinal) + 7;
+        return Convert.FromBase64String(base64.Substring(index));
     }
 
     public static string CreateSlug(string title)

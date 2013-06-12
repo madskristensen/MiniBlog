@@ -1,10 +1,8 @@
 ﻿using CookComputing.XmlRpc;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.Security;
 
 public interface IMetaWeblog
@@ -126,17 +124,13 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         return list.ToArray();
     }
 
-    object IMetaWeblog.NewMediaObject(string blogid, string username, string password, MediaObject mediaObject)
+    object IMetaWeblog.NewMediaObject(string blogid, string username, string password, MediaObject media)
     {
         ValidateUser(username, password);
 
-        string folder = Context.Server.MapPath("~/posts/files/");
-        string fileName = Guid.NewGuid() + Path.GetExtension(mediaObject.name);
-        string path = Path.Combine(folder, fileName);
-
-        File.WriteAllBytes(path, mediaObject.bits);
-
-        return new { url = VirtualPathUtility.ToAbsolute("~/posts/files/" + fileName) };
+        string path = Blog.SaveFileToDisk(media.bits, Path.GetExtension(media.name));
+        
+        return new { url = path };
     }
 
     object[] IMetaWeblog.GetUsersBlogs(string key, string username, string password)
