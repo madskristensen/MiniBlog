@@ -59,10 +59,13 @@ public class Blog
 
     public static string SaveFileToDisk(byte[] bytes, string extension)
     {
-        string relative = "~/posts/files/" + Guid.NewGuid() + "." + extension;
+        string relative = "~/posts/files/" + Guid.NewGuid() + "." + extension.Trim('.');
         string file = HostingEnvironment.MapPath(relative);
 
         File.WriteAllBytes(file, bytes);
+
+        var cruncher = new ImageCruncher.Cruncher();
+        cruncher.CrunchImages(file);
 
         return VirtualPathUtility.ToAbsolute(relative);
     }
