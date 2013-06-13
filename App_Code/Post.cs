@@ -89,6 +89,7 @@ public class Post
                     new XElement("userAgent", comment.UserAgent),
                     new XElement("date", comment.PubDate.ToString("yyyy-MM-dd HH:m:ss")),
                     new XElement("content", comment.Content),
+                    new XElement("isAdmin", comment.IsAdmin),
                     new XAttribute("id", comment.ID)
                 ));
         }
@@ -145,8 +146,9 @@ public class Post
                 Website = ReadValue(node, "website"),
                 Ip = ReadValue(node, "ip"),
                 UserAgent = ReadValue(node, "userAgent"),
+                IsAdmin =  bool.Parse(ReadValue(node, "isAdmin", "false")),
                 Content = ReadValue(node, "content").Replace("\n", "<br />"),
-                PubDate = DateTime.Parse(ReadValue(node, "date", "false")),
+                PubDate = DateTime.Parse(ReadValue(node, "date", "2000-01-01")),
             };
 
             post.Comments.Add(comment);

@@ -99,6 +99,41 @@ footer {
         padding-left: 70px;
     }
 
+        #comments article div p {
+            border: 1px solid #d3d3d3;
+            border-radius: 5px;
+            padding: 7px;
+            position: relative;
+        }
+
+            #comments article div p:before {
+                content: "";
+                position: absolute;
+                top: 10px;
+                left: -10px;
+                border-style: solid;
+                border-width: 9px 9px 9px 0;
+                border-color: transparent #d3d3d3;
+            }
+
+            #comments article div p:after {
+                content: "";
+                position: absolute;
+                top: 10px;
+                left: -9px;
+                border-style: solid;
+                border-width: 9px 9px 9px 0;
+                border-color: transparent #ffffff;
+            }
+
+    #comments article.admin div p {
+        background: #f7f7f7;
+    }
+
+        #comments article.admin div p:after {
+            border-color: transparent #f7f7f7;
+        }
+
     #comments article [itemprop='commentText'] {
         margin: 0;
     }
@@ -106,13 +141,18 @@ footer {
     #comments article img {
         border-radius: 5px;
         position: absolute;
-        top: 28px;
+        top: 19px;
     }
 
     #comments article [itemprop='commentTime'] {
         display: block;
         text-align: right;
         font-size: .7em;
+    }
+
+    #comments article [itemprop='creator'] {
+        font-size: .9em;
+        margin-left: 7px;
     }
 
 #commentform {

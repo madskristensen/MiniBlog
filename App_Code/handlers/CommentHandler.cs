@@ -38,6 +38,7 @@ public class CommentHandler : IHttpHandler
             Website = GetUrl(website),
             Ip = context.Request.UserHostAddress,
             UserAgent = context.Request.UserAgent,
+            IsAdmin = context.User.Identity.IsAuthenticated,
             Content = HttpUtility.HtmlEncode(content.Trim()).Replace("\n", "<br />"),
         };
 

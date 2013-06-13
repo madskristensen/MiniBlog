@@ -14,6 +14,7 @@
       <userAgent></userAgent>
       <date>2013-06-06 12:14:47</date>
       <content>Very useful extension. In the few minutes I&amp;#39;ve played with it so far I&amp;#39;ve found a few items that can be improved on my site. I&amp;#39;d love to see some guidance baked into the tool. For example, for &amp;quot;Add meaning with Microdata&amp;quot; it would be beneficial to provide a link for further reading/some rudimentary tips, etc. &lt;br /&gt;&lt;br /&gt;Great work - I look forward to seeing this extension evolving!</content>
+      <isAdmin>false</isAdmin>
     </comment>
     <comment id="5edbaac8-eddf-4e52-90fb-c6cc40e3dad8">
       <author>Mads Kristensen</author>
@@ -23,6 +24,7 @@
       <userAgent></userAgent>
       <date>2013-06-06 12:23:46</date>
       <content>Yes, I should update the roadmap because that is exactly what we are planning for as well. Thanks for the heads up!</content>
+      <isAdmin>false</isAdmin>
     </comment>
     <comment id="cb6f1e5f-d42c-444f-aa47-4ad7b2bd91fa">
       <author>Maiis</author>
@@ -32,6 +34,7 @@
       <userAgent></userAgent>
       <date>2013-06-06 12:55:53</date>
       <content>This page dosen&amp;#39;t get a green status :p</content>
+      <isAdmin>false</isAdmin>
     </comment>
     <comment id="ec20fc8c-f2e5-43ec-81d7-f66fcc35e7ee">
       <author>Mads Kristensen</author>
@@ -41,15 +44,27 @@
       <userAgent></userAgent>
       <date>2013-06-06 13:12:43</date>
       <content>Yeah, that is rather ironic :)</content>
+      <isAdmin>false</isAdmin>
     </comment>
-    <comment id="4264c5b2-19a4-45d9-b20c-16455a9b533f">
-      <author>Mads Kristensen</author>
+    <comment id="e3e1665a-2a54-4e71-978f-cf60b7d1a289">
+      <author>mads kristensen</author>
       <email>post@madskristensen.net</email>
       <website>http://madsk.net/</website>
       <ip>::1</ip>
-      <userAgent>Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36</userAgent>
-      <date>2013-06-13 01:45:48</date>
+      <userAgent>Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0; Touch)</userAgent>
+      <date>2013-06-13 16:15:26</date>
       <content>test</content>
+      <isAdmin>true</isAdmin>
+    </comment>
+    <comment id="f9b43149-f8e2-4f5e-a24c-8bfcdad4d1a2">
+      <author>mads kristensen</author>
+      <email>post@madskristensen.net</email>
+      <website>http://madsk.net/</website>
+      <ip>::1</ip>
+      <userAgent>Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0; Touch)</userAgent>
+      <date>2013-06-13 16:18:38</date>
+      <content>this sadldsakj dsf&lt;br /&gt;dasdkkjdflsdflkjds</content>
+      <isAdmin>true</isAdmin>
     </comment>
   </comments>
 </post>

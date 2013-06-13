@@ -23,6 +23,7 @@ public class Comment
     public DateTime PubDate { get; set; }
     public string Ip { get; set; }
     public string UserAgent { get; set; }
+    public bool IsAdmin { get; set; }
 
     public string GravatarUrl (int imgSize)
     {
