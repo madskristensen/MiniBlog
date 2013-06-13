@@ -21,6 +21,7 @@
       <email>post@madskristensen.dk</email>
       <website></website>
       <ip></ip>
+      <isAdmin>true</isAdmin>
       <userAgent></userAgent>
       <date>2013-06-06 12:23:46</date>
       <content>Yes, I should update the roadmap because that is exactly what we are planning for as well. Thanks for the heads up!</content>
@@ -41,30 +42,11 @@
       <email>post@madskristensen.dk</email>
       <website></website>
       <ip></ip>
+      <isAdmin>true</isAdmin>
       <userAgent></userAgent>
       <date>2013-06-06 13:12:43</date>
       <content>Yeah, that is rather ironic :)</content>
       <isAdmin>false</isAdmin>
-    </comment>
-    <comment id="e3e1665a-2a54-4e71-978f-cf60b7d1a289">
-      <author>mads kristensen</author>
-      <email>post@madskristensen.net</email>
-      <website>http://madsk.net/</website>
-      <ip>::1</ip>
-      <userAgent>Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0; Touch)</userAgent>
-      <date>2013-06-13 16:15:26</date>
-      <content>test</content>
-      <isAdmin>true</isAdmin>
-    </comment>
-    <comment id="f9b43149-f8e2-4f5e-a24c-8bfcdad4d1a2">
-      <author>mads kristensen</author>
-      <email>post@madskristensen.net</email>
-      <website>http://madsk.net/</website>
-      <ip>::1</ip>
-      <userAgent>Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0; Touch)</userAgent>
-      <date>2013-06-13 16:18:38</date>
-      <content>this sadldsakj dsf&lt;br /&gt;dasdkkjdflsdflkjds</content>
-      <isAdmin>true</isAdmin>
     </comment>
   </comments>
 </post>

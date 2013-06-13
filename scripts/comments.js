@@ -26,12 +26,12 @@
              $("#status").text("Your comment has been added").attr("class", "info");
              $("#commentcontent").val("");
 
-             $.get(location.pathname, function (html) {
-                 var comment = $(html).find("[data-id=" + data + "]").hide();
-                 $("#comments").append(comment);
-                 comment.slideDown();
-                 callback(true);
-             });
+             //$.get(location.pathname, function (html) {
+             //    var comment = $(html).find("[data-id=" + data + "]").hide();
+             //    $("#comments").append(comment);
+             //    comment.slideDown();
+             //    callback(true);
+             //});
          })
          .fail(function (data) {
              $("#status").attr("class", "error").text("Remember to fill out all the fields");

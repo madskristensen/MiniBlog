@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using System.Xml.Linq;
@@ -17,7 +16,7 @@ public class Post
     static Post()
     {
         Posts = new List<Post>(LoadPosts());
-        Posts = Posts.OrderByDescending(p => p.PubDate).ToList();
+        Post.Posts.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
     }
 
     public Post()
@@ -95,7 +94,10 @@ public class Post
         }
 
         if (!File.Exists(file)) // New post
+        {
             Post.Posts.Insert(0, this);
+            Post.Posts.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
+        }
 
         doc.Save(file);
     }
@@ -159,7 +161,7 @@ public class Post
     {
         if (doc.Element(name) != null)
             return doc.Element(name).Value;
-
+        
         return defaultValue;
     }
 }

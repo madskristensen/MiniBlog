@@ -1,6 +1,5 @@
 ﻿@{
     Page.Title = Blog.Title;
-    Page.ShowComments = false;
     Layout = "~/Themes/" + Blog.Theme + "/_layout.cshtml";
 }
 
@@ -10,14 +9,9 @@
 }
 else
 {
-    Post post = new Post();
+    Post post = Blog.IsNewPost ? new Post() : Blog.CurrentPost;
     
-    if (!Blog.IsNewPost)
-    {
-        post = Blog.CurrentPost;
-        Page.ShowComments = true;
-    }
-    else if (!User.Identity.IsAuthenticated)
+    if (Blog.IsNewPost && !User.Identity.IsAuthenticated)
     {
         FormsAuthentication.RedirectToLoginPage();
     }

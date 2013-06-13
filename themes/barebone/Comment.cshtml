@@ -1,4 +1,4 @@
-﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "admin" : null)">
+﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "self" : null)">
     @Gravatar(50)
     <div>
         @Date()
