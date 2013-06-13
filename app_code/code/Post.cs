@@ -11,13 +11,7 @@ using System.Xml.XPath;
 public class Post
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
-    public static List<Post> Posts;
-
-    static Post()
-    {
-        Posts = new List<Post>(LoadPosts());
-        Post.Posts.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
-    }
+    public static List<Post> Posts = LoadPosts();
 
     public Post()
     {
@@ -109,8 +103,9 @@ public class Post
         Post.Posts.Remove(this);
     }
 
-    private static IEnumerable<Post> LoadPosts()
+    private static List<Post> LoadPosts()
     {
+        List<Post> list = new List<Post>();
         foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
             XElement doc = XElement.Load(file);
@@ -126,9 +121,11 @@ public class Post
             };
 
             LoadComments(post, doc);
-
-            yield return post;
+            list.Add(post);
         }
+
+        list.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
+        return list;
     }
 
     private static void LoadComments(Post post, XElement doc)

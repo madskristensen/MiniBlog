@@ -1,11 +1,11 @@
 ﻿@{
     Page.Title = Blog.Title;
-    Layout = "~/Themes/" + Blog.Theme + "/_layout.cshtml";
+    Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
 }
 
 @if (string.IsNullOrEmpty(Blog.CurrentSlug))
 {   
-    @RenderPage("~/Themes/" + Blog.Theme + "/PostList.cshtml")
+    @RenderPage("~/themes/" + Blog.Theme + "/PostList.cshtml")
 }
 else
 {
@@ -20,5 +20,5 @@ else
 
     Page.Title = post.Title + " | " + Page.Title;
 
-    @RenderPage("~/Themes/" + Blog.Theme + "/Post.cshtml", post)
+    @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
 }

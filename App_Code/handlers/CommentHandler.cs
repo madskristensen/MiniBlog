@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
+
 public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
@@ -11,6 +12,7 @@ public class CommentHandler : IHttpHandler
             throw new HttpException(404, "The post does not exist");
 
         string mode = context.Request.QueryString["mode"];
+
         if (mode == "save")
         {
             Save(context, post);
