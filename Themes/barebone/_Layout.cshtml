@@ -11,8 +11,9 @@
     <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="@Blog.FingerPrint("/css/bootstrap-combined.css")" rel="stylesheet" />
     <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" rel="stylesheet" />
+    @AdminCss()
 
     <meta name="application-name" content="@Blog.Title" />
     <meta property="og:title" content="@Page.Title" />
@@ -48,7 +49,7 @@
 
     @if (Blog.CurrentPost != null || Blog.IsNewPost)
     {
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="~/scripts/jquery-2.0.2.js"></script>
         <script src="@Blog.FingerPrint("/scripts/comments.js")" async></script>
     }
 
@@ -58,3 +59,11 @@
     }
 </body>
 </html>
+
+@helper AdminCss()
+{   
+    if (User.Identity.IsAuthenticated)
+    {
+        <link href="@Blog.FingerPrint("/css/admin.css")" rel="stylesheet" />
+    }
+}

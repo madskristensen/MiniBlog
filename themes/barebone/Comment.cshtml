@@ -10,7 +10,7 @@
 
 @helper Date()
 {
-    var title = Model.PubDate.ToString("yyyy-dd-MMTHH:mm");
+    var title = Model.PubDate.ToString("yyyy-MM-ddTHH:mm");
     var display = Model.PubDate.ToString("d. MMMM yyyy HH:mm");
     <time datetime="@title" itemprop="commentTime">@display</time>
 }
