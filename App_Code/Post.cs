@@ -84,6 +84,9 @@ public class Post
                 new XElement("comment",
                     new XElement("author", comment.Author),
                     new XElement("email", comment.Email),
+                    new XElement("website", comment.Website),
+                    new XElement("ip", comment.Ip),
+                    new XElement("userAgent", comment.UserAgent),
                     new XElement("date", comment.PubDate.ToString("yyyy-MM-dd HH:m:ss")),
                     new XElement("content", comment.Content),
                     new XAttribute("id", comment.ID)
@@ -139,6 +142,9 @@ public class Post
                 ID = node.Attribute("id").Value,
                 Author = ReadValue(node, "author"),
                 Email = ReadValue(node, "email"),
+                Website = ReadValue(node, "website"),
+                Ip = ReadValue(node, "ip"),
+                UserAgent = ReadValue(node, "userAgent"),
                 Content = ReadValue(node, "content").Replace("\n", "<br />"),
                 PubDate = DateTime.Parse(ReadValue(node, "date", "false")),
             };

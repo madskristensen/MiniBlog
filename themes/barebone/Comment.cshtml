@@ -1,14 +1,43 @@
-﻿
-<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
-    <img src="@Model.GravatarUrl(50)" width="50" height="50" alt="@Model.Author" />
+﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment">
+    @Gravatar(50)
     <div>
-        <time datetime="@Model.PubDate.ToString("yyyy-dd-MMTHH:mm")" itemprop="commentTime">@Model.PubDate.ToString("d. MMMM yyyy HH:mm")</time>
+        @Date()
         <p itemprop="commentText">@Html.Raw(Model.Content)</p>
-        <strong itemprop="creator">@Model.Author</strong>
-
-        @if (User.Identity.IsAuthenticated)
-        {
-            <button class="deletecomment btn btn-link">Delete</button>
-        }
+        @Author()
+        @DeleteButton()
     </div>
 </article>
+
+@helper Date()
+{
+    var title = Model.PubDate.ToString("yyyy-dd-MMTHH:mm");
+    var display = Model.PubDate.ToString("d. MMMM yyyy HH:mm");
+    <time datetime="@title" itemprop="commentTime">@display</time>
+}
+
+@helper Author()
+{
+    if (string.IsNullOrEmpty(Model.Website))
+    {
+        <strong itemprop="creator">@Model.Author</strong>
+    }
+    else
+    {
+        <strong itemprop="creator"><a href="@Model.Website" rel="nofollow">@Model.Author</a></strong>
+    }
+}
+
+@helper DeleteButton()
+{
+    if (User.Identity.IsAuthenticated)
+    {
+        <button class="deletecomment btn btn-link">Delete</button>
+    }
+}
+
+@helper Gravatar(int size)
+{
+    var hash = FormsAuthentication.HashPasswordForStoringInConfigFile(Model.Email.ToLowerInvariant(), "MD5").ToLowerInvariant();
+    var imageUrl = string.Format("http://www.gravatar.com/avatar/{0}?s={1}&d=retro&r=g", hash, size);
+    <img src="@imageUrl" width="@size" height="@size" alt="@Model.Author" />
+}

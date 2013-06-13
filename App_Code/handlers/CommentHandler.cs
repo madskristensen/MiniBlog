@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web;
 public class CommentHandler : IHttpHandler
 {
@@ -24,6 +25,7 @@ public class CommentHandler : IHttpHandler
     {
         string email = context.Request.Form["email"];
         string name = context.Request.Form["name"];
+        string website = context.Request.Form["website"];
         string content = context.Request.Form["content"];
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(content))
@@ -33,12 +35,27 @@ public class CommentHandler : IHttpHandler
         {
             Author = name.Trim(),
             Email = email.Trim(),
+            Website = GetUrl(website),
+            Ip = context.Request.UserHostAddress,
+            UserAgent = context.Request.UserAgent,
             Content = HttpUtility.HtmlEncode(content.Trim()).Replace("\n", "<br />"),
         };
 
         post.Comments.Add(comment);
         post.Save();
         context.Response.Write(comment.ID);
+    }
+
+    private static string GetUrl(string website)
+    {
+        if (!website.Contains("://"))
+            website = "http://" + website;
+
+        Uri url;
+        if (Uri.TryCreate(website, UriKind.Absolute, out url))
+            return url.ToString();
+        
+        return string.Empty;
     }
 
     private static void Delete(HttpContext context, Post post)

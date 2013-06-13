@@ -13,14 +13,15 @@
         }
     }
 
-    function saveComment(name, email, content, postId, callback) {
+    function saveComment(name, email, website, content, postId, callback) {
 
         if (localStorage) {
             localStorage.setItem("name", name);
             localStorage.setItem("email", email);
+            localStorage.setItem("website", website);
         }
 
-        $.post("/comment.ashx?mode=save", { postId: postId, name: name, email: email, content: content })
+        $.post("/comment.ashx?mode=save", { postId: postId, name: name, email: email, website: website, content: content })
          .success(function (data) {
              $("#status").text("Your comment has been added").attr("class", "info");
              $("#commentcontent").val("");
@@ -43,6 +44,7 @@
         var postId = $("[itemprop='blogPost']").attr("data-id");
         var email = $("#commentemail");
         var name = $("#commentname");
+        var website = $("#commenturl");
         var content = $("#commentcontent");
 
         $(document).on("submit", "#commentform", function (e) {
@@ -50,7 +52,7 @@
             var button = $(e.target);
             button.attr("disabled", true);
 
-            saveComment(name.val(), email.val(), content.val(), postId, function (success) {
+            saveComment(name.val(), email.val(), website.val(), content.val(), postId, function (success) {
                 button.removeAttr("disabled");
             });
         });
@@ -64,6 +66,7 @@
 
         if (localStorage) {
             email.val(localStorage.getItem("email"));
+            website.val(localStorage.getItem("website"));
 
             if (name.val().length === 0)
                 name.val(localStorage.getItem("name"));
