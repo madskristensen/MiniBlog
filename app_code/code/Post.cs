@@ -21,6 +21,7 @@ public class Post
         PubDate = DateTime.UtcNow;
         Categories = new string[0];
         Comments = new List<Comment>();
+        IsPublished = true;
     }
 
     [XmlRpcMember("postid")]
