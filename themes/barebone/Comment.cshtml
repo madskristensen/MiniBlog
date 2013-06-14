@@ -14,7 +14,6 @@
     var display = Model.PubDate.ToString("d. MMMM yyyy HH:mm");
     <time datetime="@title" itemprop="commentTime">@display</time>
 }
-
 @helper Author()
 {
     if (string.IsNullOrEmpty(Model.Website))
@@ -26,7 +25,6 @@
         <strong itemprop="creator"><a href="@Model.Website" rel="nofollow">@Model.Author</a></strong>
     }
 }
-
 @helper DeleteButton()
 {
     if (User.Identity.IsAuthenticated)
@@ -34,7 +32,6 @@
         <button class="deletecomment btn btn-link">Delete</button>
     }
 }
-
 @helper Gravatar(int size)
 {
     var hash = FormsAuthentication.HashPasswordForStoringInConfigFile(Model.Email.ToLowerInvariant(), "MD5").ToLowerInvariant();

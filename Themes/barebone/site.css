@@ -19,6 +19,10 @@
     font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
 }
 
+    .container .pager {
+        margin-top: 2em;
+    }
+
 label, input[type], button, textarea {
     font: inherit;
 }
@@ -31,18 +35,33 @@ label, input[type], button, textarea {
         margin-bottom: 0px;
     }
 
-    .post header a {
-        font-size: .7em;
-        color: black;
+        .post header h1 a {
+            font-size: .8em;
+            color: black;
+        }
+
+    .post header div {
+        font-size: .75em;
+        margin-bottom: 1em;
+        opacity: .7;
     }
 
-    .post header p {
-        font-size: .7em;
-    }
-
-        .post header p abbr {
+        .post header div abbr {
             margin-right: 10px;
         }
+
+        .post header div .categories {
+            margin-left: 10px;
+            display: inline;
+        }
+
+            .post header div .categories li {
+                display: inline-block;
+            }
+
+                .post header div .categories li:not(:first-child):not(:last-child):after {
+                    content: ", ";
+                }
 
 .post abbr {
     border: none;
@@ -64,11 +83,6 @@ label, input[type], button, textarea {
 
 .post li {
     line-height: 1.5;
-}
-
-.post #disqus_thread {
-    margin-top: 3em;
-    min-height: 350px;
 }
 
 #login {

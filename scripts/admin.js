@@ -72,13 +72,14 @@
 
         txtTitle.removeAttr('contentEditable');
         txtContent.removeAttr('contentEditable');
+        btnCancel.focus();
 
         btnNew.removeAttr("disabled");
         btnEdit.removeAttr("disabled");
         btnSave.attr("disabled", true);
         btnCancel.attr("disabled", true);
 
-        $("#tools").fadeOut();
+        $("#tools").fadeOut();        
     },
     deletePost = function (e) {
         if (confirm("Are you sure you want to delete this post?")) {
@@ -114,6 +115,9 @@
     btnDelete = $("#btnDelete").bind("click", deletePost);
     btnSave = $("#btnSave").bind("click", savePost);
     btnCancel = $("#btnCancel").bind("click", cancelEdit);
+
+    $(document).on("keyup", function (e) { if (e.which == 46) deletePost(); });
+    $(document).on("keyup", function (e) { if (e.which == 27) cancelEdit(); });
 
     $('.uploadimage').click(function (e) {
         e.preventDefault();

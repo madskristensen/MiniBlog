@@ -18,12 +18,14 @@ public interface IMetaWeblog
     [XmlRpcMethod("metaWeblog.getPost")]
     object GetPost(string postid, string username, string password);
 
+    [XmlRpcMethod("metaWeblog.getCategories")]
+    object[] GetCategories(string blogid, string username, string password);
+
     [XmlRpcMethod("metaWeblog.getRecentPosts")]
     object[] GetRecentPosts(string blogid, string username, string password, int numberOfPosts);
 
     [XmlRpcMethod("metaWeblog.newMediaObject")]
-    object NewMediaObject(string blogid, string username, string password,
-        MediaObject mediaObject);
+    object NewMediaObject(string blogid, string username, string password, MediaObject mediaObject);
 
     #endregion
 
@@ -63,6 +65,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Title = post.Title;
             match.Content = post.Content;
             match.Slug = post.Slug;
+            match.Categories = post.Categories;
             match.IsPublished = publish;
             match.Save();
         }
@@ -99,6 +102,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             title = post.Title,
             dateCreated = post.PubDate,
             wp_slug = post.Slug,
+            categories = post.Categories.ToArray(),
             postid = post.ID
         };
     }
@@ -126,12 +130,27 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         return list.ToArray();
     }
 
+    object[] IMetaWeblog.GetCategories(string blogid, string username, string password)
+    {
+        ValidateUser(username, password);
+
+        var list = new List<object>();
+        var categories = Post.Posts.SelectMany(p => p.Categories);
+
+        foreach (string category in categories.Distinct())
+        {
+            list.Add(new { title = category });
+        }
+
+        return list.ToArray();
+    }
+
     object IMetaWeblog.NewMediaObject(string blogid, string username, string password, MediaObject media)
     {
         ValidateUser(username, password);
 
         string path = Blog.SaveFileToDisk(media.bits, Path.GetExtension(media.name));
-        
+
         return new { url = path };
     }
 

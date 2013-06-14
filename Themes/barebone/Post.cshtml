@@ -3,10 +3,11 @@
         <h1 itemprop="headline name">
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
         </h1>
-        <p>
+        <div>
             <i class="icon-calendar"></i> <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
             <i class="icon-comment"></i> @Model.Comments.Count Comments
-        </p>
+            @Categories()
+        </div>
     </header>
 
     <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
@@ -28,3 +29,19 @@
         @RenderPage("~/views/CommentForm.cshtml")
     }
 </article>
+
+@helper Categories()
+{
+    if (Model.Categories.Length > 0)
+    {
+        <ul class="categories">
+            <li><i class="icon-bookmark"></i> Posted in: </li>
+            @foreach (string cat in Model.Categories)
+            {
+                <li itemprop="articleSection" title="@cat">
+                    <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+                </li>
+            }
+        </ul>
+    }
+}

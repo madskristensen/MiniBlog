@@ -4,8 +4,8 @@
     <clientType>Metaweblog</clientType>
     <supportsEmbeds>Yes</supportsEmbeds>
     <supportsKeywords>No</supportsKeywords>
-    <supportsNewCategories>No</supportsNewCategories>
-    <supportsNewCategoriesInline>No</supportsNewCategoriesInline>
+    <supportsNewCategories>Yes</supportsNewCategories>
+    <supportsNewCategoriesInline>Yes</supportsNewCategoriesInline>
     <supportsCommentPolicy>No</supportsCommentPolicy>
     <supportsSlug>Yes</supportsSlug>
     <supportsExcerpt>No</supportsExcerpt>

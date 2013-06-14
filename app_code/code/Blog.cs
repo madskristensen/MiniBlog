@@ -19,9 +19,19 @@ public static class Blog
         get { return ConfigurationManager.AppSettings.Get("blog:theme"); }
     }
 
+    public static int PostsPerPage
+    {
+        get { return int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage")); }
+    }
+
     public static string CurrentSlug
     {
         get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }
+    }
+
+    public static string CurrentCategory
+    {
+        get { return (HttpContext.Current.Request.QueryString["category"] ?? string.Empty).Trim().ToLowerInvariant(); }
     }
 
     public static bool IsNewPost
@@ -62,6 +72,13 @@ public static class Blog
         var posts = from p in Post.Posts
                     where p.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated
                     select p;
+
+        string category = HttpContext.Current.Request.QueryString["category"];
+
+        if (!string.IsNullOrEmpty(category))
+        {
+            posts = posts.Where(p => p.Categories.Any(c => string.Equals(c, category, StringComparison.OrdinalIgnoreCase)));
+        }
 
         return posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
     }

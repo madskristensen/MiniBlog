@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 public class CommentHandler : IHttpHandler
@@ -25,13 +26,12 @@ public class CommentHandler : IHttpHandler
 
     private static void Save(HttpContext context, Post post)
     {
-        string email = context.Request.Form["email"];
         string name = context.Request.Form["name"];
+        string email = context.Request.Form["email"];        
         string website = context.Request.Form["website"];
         string content = context.Request.Form["content"];
 
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(content))
-            throw new HttpException(500, "Comment not valid");
+        Validate(name, email, content);
 
         Comment comment = new Comment()
         {
@@ -46,7 +46,28 @@ public class CommentHandler : IHttpHandler
 
         post.Comments.Add(comment);
         post.Save();
+        
         context.Response.Write(comment.ID);
+    }
+
+    private static void Validate(string name, string email, string content)
+    {
+        bool isName = !string.IsNullOrEmpty(name);        
+        bool isMail = !string.IsNullOrEmpty(email) && Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        bool isContent = !string.IsNullOrEmpty(content);
+
+        if (!isName || !isMail || !isContent)
+        {
+            if (!isName)
+                HttpContext.Current.Response.Write("Please enter a valid name");
+            else if (!isMail)
+                HttpContext.Current.Response.Write("Please enter a valid e-mail address");
+            else if (!isContent)
+                HttpContext.Current.Response.Write("Please enter a valid comment");
+
+            HttpContext.Current.Response.StatusCode = 403;
+            HttpContext.Current.Response.End();
+        }
     }
 
     private static string GetUrl(string website)
@@ -57,7 +78,7 @@ public class CommentHandler : IHttpHandler
         Uri url;
         if (Uri.TryCreate(website, UriKind.Absolute, out url))
             return url.ToString();
-        
+
         return string.Empty;
     }
 

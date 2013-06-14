@@ -19,6 +19,7 @@ public class Post
         Title = "My new post";
         Content = "the content";
         PubDate = DateTime.UtcNow;
+        Categories = new string[0];
         Comments = new List<Comment>();
     }
 
@@ -39,7 +40,9 @@ public class Post
 
     public bool IsPublished { get; set; }
 
-    public List<Comment> Comments { get; set; }
+    [XmlRpcMember("categories")]
+    public string[] Categories { get; set; }
+    public List<Comment> Comments { get; private set; }
 
     public Uri AbsoluteUrl
     {
@@ -66,11 +69,17 @@ public class Post
                             new XElement("pubDate", PubDate.ToString("yyyy-MM-dd HH:mm:ss")),
                             new XElement("content", Content),
                             new XElement("ispublished", IsPublished),
+                            new XElement("categories", string.Empty),
                             new XElement("comments", string.Empty)
                         ));
 
-        XElement comments = doc.XPathSelectElement("post/comments");
+        XElement categories = doc.XPathSelectElement("post/categories");
+        foreach (string category in Categories)
+        {
+            categories.Add(new XElement("category", category));
+        }
 
+        XElement comments = doc.XPathSelectElement("post/comments");
         foreach (Comment comment in Comments)
         {
             comments.Add(
@@ -82,7 +91,7 @@ public class Post
                     new XElement("userAgent", comment.UserAgent),
                     new XElement("date", comment.PubDate.ToString("yyyy-MM-dd HH:m:ss")),
                     new XElement("content", comment.Content),
-                    new XElement("isAdmin", comment.IsAdmin),
+                    new XAttribute("isAdmin", comment.IsAdmin),
                     new XAttribute("id", comment.ID)
                 ));
         }
@@ -120,6 +129,7 @@ public class Post
                 IsPublished = bool.Parse(ReadValue(doc, "ispublished", "true")),
             };
 
+            LoadCategories(post, doc);
             LoadComments(post, doc);
             list.Add(post);
         }
@@ -128,6 +138,21 @@ public class Post
         return list;
     }
 
+    private static void LoadCategories(Post post, XElement doc)
+    {
+        XElement categories = doc.Element("categories");
+        if (categories == null)
+            return;
+
+        List<string> list = new List<string>();
+        
+        foreach (var node in categories.Elements("category"))
+        {
+            list.Add(node.Value);
+        }
+
+        post.Categories = list.ToArray();
+    }
     private static void LoadComments(Post post, XElement doc)
     {
         var comments = doc.Element("comments");
@@ -139,13 +164,13 @@ public class Post
         {
             Comment comment = new Comment()
             {
-                ID = node.Attribute("id").Value,
+                ID = ReadAttribute(node, "id"),
                 Author = ReadValue(node, "author"),
                 Email = ReadValue(node, "email"),
                 Website = ReadValue(node, "website"),
                 Ip = ReadValue(node, "ip"),
                 UserAgent = ReadValue(node, "userAgent"),
-                IsAdmin =  bool.Parse(ReadValue(node, "isAdmin", "false")),
+                IsAdmin =  bool.Parse(ReadAttribute(node, "isAdmin", "false")),
                 Content = ReadValue(node, "content").Replace("\n", "<br />"),
                 PubDate = DateTime.Parse(ReadValue(node, "date", "2000-01-01")),
             };
@@ -159,6 +184,14 @@ public class Post
         if (doc.Element(name) != null)
             return doc.Element(name).Value;
         
+        return defaultValue;
+    }
+
+    private static string ReadAttribute(XElement element, XName name, string defaultValue = "")
+    {
+        if (element.Attribute(name) != null)
+            return element.Attribute(name).Value;
+
         return defaultValue;
     }
 }

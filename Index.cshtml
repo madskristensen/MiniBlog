@@ -1,24 +1,29 @@
 ﻿@{
     Page.Title = Blog.Title;
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
-}
 
-@if (string.IsNullOrEmpty(Blog.CurrentSlug))
-{   
-    @RenderPage("~/themes/" + Blog.Theme + "/PostList.cshtml")
-}
-else
-{
-    Post post = Blog.IsNewPost ? new Post() : Blog.CurrentPost;
-    
-    if (Blog.IsNewPost && !User.Identity.IsAuthenticated)
+    if (string.IsNullOrEmpty(Blog.CurrentSlug))
     {
-        FormsAuthentication.RedirectToLoginPage();
+        Page.ShowPaging = true;
+        
+        foreach (var post in Blog.GetPosts(Blog.PostsPerPage))
+        {
+            @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post);
+        }
     }
+    else
+    {
+        Post post = Blog.IsNewPost ? new Post() : Blog.CurrentPost;
 
-    if (post == null) { throw new HttpException(404, "Post not found"); }
+        if (Blog.IsNewPost && !User.Identity.IsAuthenticated)
+        {
+            FormsAuthentication.RedirectToLoginPage();
+        }
 
-    Page.Title = post.Title + " | " + Page.Title;
+        if (post == null) { throw new HttpException(404, "Post not found"); }
 
-    @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
+        Page.Title = post.Title + " | " + Page.Title;
+
+        @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
+    }
 }

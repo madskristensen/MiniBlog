@@ -31,6 +31,11 @@
 
         <div role="main">
             @RenderBody()
+
+            @if (Page.ShowPaging != null)
+            {
+                @RenderPage("Paging.cshtml")
+            }
         </div>
     </div>
 
@@ -61,7 +66,7 @@
 </html>
 
 @helper AdminCss()
-{   
+{
     if (User.Identity.IsAuthenticated)
     {
         <link href="@Blog.FingerPrint("/css/admin.css")" rel="stylesheet" />
