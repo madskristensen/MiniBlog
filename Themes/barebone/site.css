@@ -46,8 +46,8 @@ label, input[type], button, textarea {
         opacity: .7;
     }
 
-        .post header div abbr {
-            margin-right: 10px;
+        .post header div i:not(:first-child) {
+            margin-left: 10px;
         }
 
         .post header div .categories {
