@@ -2,6 +2,16 @@
     margin-top: 40px;
 }
 
+#admin {
+    position: absolute;
+    top: 0;
+}
+
+    #admin .navbar-inner {
+        min-height: 0;
+        padding: 5px;
+    }
+
 #admin form {
     position: absolute;
     top: 0;
@@ -18,9 +28,22 @@
     white-space: nowrap;
 }
 
+#ispublished {
+    display: none;
+    position: relative;
+    top: 7px;
+    left: 10px;
+}
+
+    #ispublished label {
+        display: inline;
+        position: relative;
+        top: 3px;
+    }
+
 #admin #tools {
     position: relative;
-    top: 2px;
+    top: 3px;
     margin: 0 1em;
     display: none;
 }

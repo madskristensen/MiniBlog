@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Hosting;
 
 public class PostHandler : IHttpHandler
 {
@@ -19,19 +21,8 @@ public class PostHandler : IHttpHandler
         }
         else if (mode == "save")
         {
-            EditPost(id, context.Request.Form["title"], context.Request.Form["content"]);
+            EditPost(id, context.Request.Form["title"], context.Request.Form["content"], bool.Parse(context.Request.Form["isPublished"]));
         }
-        else if (mode == "publish")
-        {
-            PublishPost(id, bool.Parse(context.Request.Form["publish"]));
-        }
-    }
-
-    private void PublishPost(string id, bool publish)
-    {
-        Post post = Post.Posts.First(p => p.ID == id);
-        post.IsPublished = publish;
-        post.Save();
     }
 
     private void DeletePost(string id)
@@ -40,7 +31,7 @@ public class PostHandler : IHttpHandler
         post.Delete();
     }
 
-    private void EditPost(string id, string title, string content)
+    private void EditPost(string id, string title, string content, bool isPublished)
     {
         Post post = Post.Posts.FirstOrDefault(p => p.ID == id);
 
@@ -57,6 +48,7 @@ public class PostHandler : IHttpHandler
 
         SaveImagesToDisk(post);
 
+        post.IsPublished = isPublished;
         post.Save();
     }
 
