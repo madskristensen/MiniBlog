@@ -3,8 +3,8 @@
 (function ($, window) {
 
     var postId, isNew, tools, toolbarButtons,
-        txtTitle, txtContent, txtMessage, txtImage,
-        btnNew, btnEdit, btnDelete, btnSave, btnCancel,
+        txtTitle, txtContent, txtMessage, txtImage, isPublished,
+        btnNew, btnEdit, btnDelete, btnSave, btnPublish, btnCancel,
 
     newPost = function (e) {
         location.href = "/post/new/";
@@ -67,6 +67,21 @@
                   showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
           });
     },
+    publishPost = function (e) {
+        $.post("/post.ashx?mode=publish", {
+            id: postId,
+            publish: !isPublished,
+        })
+          .success(function (data) {
+              isPublished = !isPublished;
+              showMessage(true, isPublished ? "The post has been unpublished" : "The post is published");
+              btnPublish.text(isPublished ? "Unpublish" : "Publish")
+              cancelEdit(e);
+          })
+          .fail(function (data) {
+              showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
+          });
+    },
     cancelEdit = function (e) {
         if (isNew) history.back();
 
@@ -79,7 +94,7 @@
         btnSave.attr("disabled", true);
         btnCancel.attr("disabled", true);
 
-        $("#tools").fadeOut();        
+        $("#tools").fadeOut();
     },
     deletePost = function (e) {
         if (confirm("Are you sure you want to delete this post?")) {
@@ -104,6 +119,7 @@
     isNew = location.pathname.replace(/\//g, "") === "postnew";
 
     postId = $("[itemprop~='blogPost']").attr("data-id");
+    isPublished = $("#admin").attr("data-ispublished") === "True";
 
     txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
     txtContent = $("[itemprop~='articleBody']");
@@ -114,10 +130,15 @@
     btnEdit = $("#btnEdit").bind("click", editPost);;
     btnDelete = $("#btnDelete").bind("click", deletePost);
     btnSave = $("#btnSave").bind("click", savePost);
+    btnPublish = $("#btnPublish").bind("click", publishPost);
     btnCancel = $("#btnCancel").bind("click", cancelEdit);
 
-    $(document).on("keyup", function (e) { if (e.which == 46) deletePost(); });
-    $(document).on("keyup", function (e) { if (e.which == 27) cancelEdit(); });
+    $(document).keyup(function (e) {
+        if (e.keyCode == 46) // Delete key
+            deletePost();
+        else if (e.keyCode == 27) // ESC key
+            cancelEdit();
+    });
 
     $('.uploadimage').click(function (e) {
         e.preventDefault();
@@ -130,6 +151,7 @@
     else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
         btnEdit.removeAttr("disabled");
         btnDelete.removeAttr("disabled");
+        btnPublish.removeAttr("disabled");
     }
 
 })(jQuery, window);

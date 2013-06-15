@@ -12,7 +12,7 @@ public class CommentHandler : IHttpHandler
         if (post == null)
             throw new HttpException(404, "The post does not exist");
 
-        string mode = context.Request.QueryString["mode"];
+        string mode = context.Request.Form["mode"];
 
         if (mode == "save")
         {
@@ -46,8 +46,9 @@ public class CommentHandler : IHttpHandler
 
         post.Comments.Add(comment);
         post.Save();
-        
-        context.Response.Write(comment.ID);
+
+        string wrapper = VirtualPathUtility.ToAbsolute("~/views/commentwrapper") + "?postid=" + post.ID + "&commentid=" + comment.ID;
+        context.Response.Write(wrapper);
     }
 
     private static void Validate(string name, string email, string content)

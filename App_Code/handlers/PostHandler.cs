@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Hosting;
 
 public class PostHandler : IHttpHandler
 {
@@ -23,6 +21,17 @@ public class PostHandler : IHttpHandler
         {
             EditPost(id, context.Request.Form["title"], context.Request.Form["content"]);
         }
+        else if (mode == "publish")
+        {
+            PublishPost(id, bool.Parse(context.Request.Form["publish"]));
+        }
+    }
+
+    private void PublishPost(string id, bool publish)
+    {
+        Post post = Post.Posts.First(p => p.ID == id);
+        post.IsPublished = publish;
+        post.Save();
     }
 
     private void DeletePost(string id)

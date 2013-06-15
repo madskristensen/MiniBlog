@@ -1,5 +1,8 @@
-﻿
-<div role="toolbar" data-role="editor-toolbar" class="navbar navbar-fixed-top" id="admin">
+﻿@{
+    var isPublished = Blog.CurrentPost != null && Blog.CurrentPost.IsPublished;
+}
+
+<div id="admin" role="toolbar" data-role="editor-toolbar" class="navbar navbar-fixed-top" data-ispublished="@isPublished">
     <div class="navbar-inner">
         <ul class="nav">
             <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
@@ -7,6 +10,7 @@
             <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
             <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
             <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
+            <li><button class="btn btn-link" id="btnPublish" disabled>@(isPublished ? "Unpublish" : "Publish")</button></li>
         </ul>
 
         <div id="tools">
