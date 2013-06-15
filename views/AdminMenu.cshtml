@@ -11,8 +11,10 @@
             <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
             <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
             <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
-            <li id="ispublished"><input type="checkbox" checked="@(isPublished ? "checked" : null)" disabled /> <label for="ispublished">Publish</label></li>
-            @*<li><button class="btn btn-link" id="btnPublish" disabled>@(isPublished ? "Unpublish" : "Publish")</button></li>*@
+            <li id="ispublished">
+                <input type="checkbox" checked="@(isPublished ? "checked" : null)" disabled />
+                <label for="ispublished">Publish</label>
+            </li>
         </ul>
 
         <div id="tools">

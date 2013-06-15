@@ -6,9 +6,6 @@
         txtTitle, txtContent, txtMessage, txtImage, chkPublish, isPublished,
         btnNew, btnEdit, btnDelete, btnSave, btnCancel,
 
-    newPost = function (e) {
-        location.href = "/post/new/";
-    },
     editPost = function (e) {
         txtTitle.attr('contentEditable', true);
         txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
@@ -26,19 +23,23 @@
         $("#tools").fadeIn().css("display", "inline-block");
     },
     cancelEdit = function (e) {
-        if (isNew) history.back();
+        if (isNew) {
+            if (confirm("Do you want to leave this page?"))
+                history.back();
+        }
+        else {
+            txtTitle.removeAttr('contentEditable');
+            txtContent.removeAttr('contentEditable');
+            btnCancel.focus();
 
-        txtTitle.removeAttr('contentEditable');
-        txtContent.removeAttr('contentEditable');
-        btnCancel.focus();
+            btnNew.removeAttr("disabled");
+            btnEdit.removeAttr("disabled");
+            btnSave.attr("disabled", true);
+            btnCancel.attr("disabled", true);
+            chkPublish.attr("disabled", true);
 
-        btnNew.removeAttr("disabled");
-        btnEdit.removeAttr("disabled");
-        btnSave.attr("disabled", true);
-        btnCancel.attr("disabled", true);
-        chkPublish.attr("disabled", true);
-
-        $("#tools").fadeOut();
+            $("#tools").fadeOut();
+        }
     },
     toggleSourceView = function () {
         $(".source").bind("click", function (e) {
@@ -113,7 +114,7 @@
     txtMessage = $("#admin .alert");
     txtImage = $("#admin #txtImage");
 
-    btnNew = $("#btnNew").bind("click", newPost);
+    btnNew = $("#btnNew");
     btnEdit = $("#btnEdit").bind("click", editPost);
     btnDelete = $("#btnDelete").bind("click", deletePost);
     btnSave = $("#btnSave").bind("click", savePost);
