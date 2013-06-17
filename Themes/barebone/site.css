@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: white;
+    background-color: #fff;
 }
 
 .page-header {
@@ -9,7 +9,7 @@
 
     .page-header a {
         font-size: 3em;
-        color: black;
+        color: #000;
     }
 
 .container {
@@ -17,6 +17,7 @@
     max-width: 650px;
     margin: 0 auto;
     font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    height: 100%;
 }
 
     .container .pager {
@@ -75,7 +76,7 @@ label, input[type], button, textarea {
 }
 
 .post div[itemprop='articleBody'] {
-    border-bottom: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d3d3d3;
     padding-bottom: .5em;
 }
 
@@ -206,7 +207,7 @@ label, input[type], button, textarea {
 
 #pagefooter {
     background-color: #181818;
-    color: white;
+    color: #fff;
     text-align: center;
     font-size: .9em;
     opacity: .9;
