@@ -27,6 +27,8 @@ label, input[type], button, textarea {
     font: inherit;
 }
 
+/*#region Post */
+
 .post header {
     position: relative;
 }
@@ -37,7 +39,7 @@ label, input[type], button, textarea {
 
         .post header h1 a {
             font-size: .8em;
-            color: black;
+            color: #000;
         }
 
     .post header div {
@@ -85,25 +87,9 @@ label, input[type], button, textarea {
     line-height: 1.5;
 }
 
-#login {
-    margin: 3em auto 10em auto;
-    width: 300px;
-}
+/*#endregion */
 
-#pagefooter {
-    background-color: #181818;
-    color: white;
-    text-align: center;
-    font-size: .9em;
-    opacity: .9;
-    padding: 8px 0;
-    margin-top: 4em;
-}
-
-    #pagefooter .login {
-        float: right;
-        margin-right: 2em;
-    }
+/*#region Comments */
 
 #comments article {
     position: relative;
@@ -169,6 +155,10 @@ label, input[type], button, textarea {
         margin-left: 7px;
     }
 
+/*#endregion */
+
+/*#region Comment form */
+
 #commentform {
     margin-top: 2em;
 }
@@ -209,3 +199,41 @@ label, input[type], button, textarea {
     #status.error {
         color: red;
     }
+
+/*#endregion */
+
+/*#region Footer */
+
+#pagefooter {
+    background-color: #181818;
+    color: white;
+    text-align: center;
+    font-size: .9em;
+    opacity: .9;
+    padding: 8px 0;
+    margin-top: 4em;
+    width: 100%;
+    position: absolute;
+    left: 0;
+}
+
+    #pagefooter .login {
+        float: right;
+        margin-right: 2em;
+    }
+
+/*#endregion */
+
+/*#region Login page */
+
+#login {
+    margin: 3em auto 10em auto;
+    width: 230px;
+}
+
+    #login input {
+        height: 25px;
+        width: 100%;
+    }
+
+/*#endregion */
