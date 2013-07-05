@@ -6,10 +6,10 @@
 
         if (confirm("Do you want to delete this comment?")) {
             $.post(endpoint, { mode: "delete",  postId: postId, commentId: commentId })
-             .success(function (data) {
+             .success(function () {
                  element.slideUp(function () { element.remove(); });
              })
-             .fail(function (data) {
+             .fail(function () {
                  alert("Something went wrong. Please try again");
              });
         }
@@ -55,7 +55,7 @@
             var button = $(e.target);
             button.attr("disabled", true);
 
-            saveComment(name.val(), email.val(), website.val(), content.val(), postId, function (success) {
+            saveComment(name.val(), email.val(), website.val(), content.val(), postId, function () {
                 button.removeAttr("disabled");
             });
         });

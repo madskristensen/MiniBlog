@@ -1,12 +1,12 @@
 ﻿/// <reference path="bootstrap-wysiwyg.js" />
 
-(function ($, window) {
+(function ($) {
 
-    var postId, isNew, tools, toolbarButtons,
+    var postId, isNew,
         txtTitle, txtContent, txtMessage, txtImage, chkPublish, isPublished,
         btnNew, btnEdit, btnDelete, btnSave, btnCancel,
 
-    editPost = function (e) {
+    editPost = function () {
         txtTitle.attr('contentEditable', true);
         txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
@@ -22,7 +22,7 @@
 
         $("#tools").fadeIn().css("display", "inline-block");
     },
-    cancelEdit = function (e) {
+    cancelEdit = function () {
         if (isNew) {
             if (confirm("Do you want to leave this page?"))
                 history.back();
@@ -42,7 +42,7 @@
         }
     },
     toggleSourceView = function () {
-        $(".source").bind("click", function (e) {
+        $(".source").bind("click", function () {
             var self = $(this);
             if (self.attr("data-cmd") === "source") {
                 self.attr("data-cmd", "design");
@@ -85,11 +85,11 @@
                   showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
           });
     },
-    deletePost = function (e) {
+    deletePost = function () {
         if (confirm("Are you sure you want to delete this post?")) {
             $.post("/post.ashx?mode=delete", { id: postId })
-                .success(function (data) { location.href = "/"; })
-                .fail(function (data) { showMessage(false, "Something went wrong. Please try again"); });
+                .success(function () { location.href = "/"; })
+                .fail(function () { showMessage(false, "Something went wrong. Please try again"); });
         }
     },
     showMessage = function (success, message) {
@@ -144,4 +144,4 @@
         $("#ispublished").show();
     }
 
-})(jQuery, window);
+})(jQuery);
