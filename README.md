@@ -22,3 +22,13 @@ Perfect for the blogger who wants to selfhost a blog.
 * Based on jQuery and Bootstrap
 * Best-in-class performance
 * Works on on any host including Azure Websites
+
+### Why another blog engine?
+7 years have past since I started the BlogEngine.NET project. 
+It was using cutting edge technology for its time and quickly became the 
+most popular blogging platform using ASP.NET.
+
+The MiniBlog was born as a test to see what a modern blog engine could
+look like today with the latest ASP.NET and HTML 5 technologies. 
+
+This is the result.
