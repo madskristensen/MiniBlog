@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>xmlrpcnet</id>
+    <version>3.0.0.266</version>
+    <title>XML-RPC.NET - Client 3.0.0.266</title>
+    <authors>Charles Cook</authors>
+    <owners>Charles Cook</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>http://www.xml-rpc.net/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>XML-RPC.NET - an XML-RPC client library for .Net (see xmlrpcnet-server for the server package).
+       NOTE: this is a pre-release development snapshot of the 3.0.0 release.
+       The recommended stable release is version 2.5.0 which supports both client and server applications.</description>
+    <summary>XML-RPC.NET - an XML-RPC client library for .Net</summary>
+    <copyright>Copyright Charles Cook 2011</copyright>
+    <tags>xml-rpc xml rpc .net20 .net35 .net40</tags>
+  </metadata>
+</package>

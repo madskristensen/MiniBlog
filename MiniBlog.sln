@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20604.0 WPT
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MiniBlog", "http://localhost:36123", "{3D10EDC4-D7A0-4912-84F1-853B6E694CE5}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_36123"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\Websites\MiniBlog\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_36123\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_36123"
+		Release.AspNetCompiler.PhysicalPath = "MiniBlog\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_36123\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "MiniBlog\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D10EDC4-D7A0-4912-84F1-853B6E694CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D10EDC4-D7A0-4912-84F1-853B6E694CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D10EDC4-D7A0-4912-84F1-853B6E694CE5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D10EDC4-D7A0-4912-84F1-853B6E694CE5}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal
