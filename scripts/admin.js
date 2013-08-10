@@ -3,7 +3,7 @@
 (function ($) {
 
     var postId, isNew,
-        txtTitle, txtContent, txtMessage, txtImage, chkPublish, isPublished,
+        txtTitle, txtContent, txtMessage, txtImage, chkPublish,
         btnNew, btnEdit, btnDelete, btnSave, btnCancel,
 
     editPost = function () {
@@ -65,7 +65,7 @@
 
         $.post("/post.ashx?mode=save", {
             id: postId,
-            isPublished: isPublished,
+            isPublished: chkPublish[0].checked,
             title: txtTitle.text().trim(),
             content: txtContent.html(),
         })
@@ -121,8 +121,6 @@
     btnCancel = $("#btnCancel").bind("click", cancelEdit);
     chkPublish = $("#ispublished").find("input[type=checkbox]");
 
-    chkPublish.on("change", function (e) { isPublished = e.target.checked; });
-
     $(document).keyup(function (e) {
         if (e.keyCode === 46) // Delete key
             deletePost();
@@ -137,11 +135,13 @@
 
     if (isNew) {
         editPost();
+        $("#ispublished").fadeIn();
+        chkPublish[0].checked = true;
     }
     else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
         btnEdit.removeAttr("disabled");
         btnDelete.removeAttr("disabled");
-        $("#ispublished").show();
+        $("#ispublished").fadeIn();
     }
 
 })(jQuery);
