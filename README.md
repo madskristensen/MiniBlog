@@ -4,7 +4,7 @@
 A minimal yet full featured blog engine using ASP.NET Razor Web Pages. Perfect for the blogger who 
 wants to selfhost a blog. 
 
-## Features
+### Features
 
 * Gets a perfect score of 100/100 on Google Page Speed
 * Windows Live Writer support
