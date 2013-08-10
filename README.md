@@ -1,4 +1,8 @@
-# ASP.NET MiniBlog
+# MiniBlog
+
+A blogging engine built using HTML5 and ASP.NET.
+
+## Simple, flexible and powerful
 
 A minimal, yet full featured blog engine using ASP.NET Razor Web Pages. 
 Perfect for the blogger who wants to selfhost a blog. 
@@ -16,3 +20,5 @@ Perfect for the blogger who wants to selfhost a blog.
 * Automatically optimizes uploaded images
 * OpenGraph enabled
 * Based on jQuery and Bootstrap
+* Best-in-class performance
+* Works on on any host including Azure Websites
