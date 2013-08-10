@@ -22,6 +22,7 @@ Perfect for the blogger who wants to selfhost a blog.
 * Based on jQuery and Bootstrap
 * Best-in-class performance
 * Works on on any host including Azure Websites
+* Themes can easily be added through NuGet
 
 ### Why another blog engine?
 7 years have past since I started the BlogEngine.NET project. 
