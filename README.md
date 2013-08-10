@@ -15,6 +15,7 @@ Perfect for the blogger who wants to selfhost a blog.
 * SEO optimized
 * Theming support
 * Inline editing of blog posts
+* Comments support. Can easily be replaced by 3rd-party commenting system
 * Drag 'n drop images to upload
 * Uses HTML 5 microdata to add semantic meaning
 * Automatically optimizes uploaded images
