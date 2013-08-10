@@ -14,6 +14,7 @@ Perfect for the blogger who wants to selfhost a blog.
 * RSS and ATOM feeds
 * SEO optimized
 * Theming support
+* Doesn't require a database
 * Inline editing of blog posts
 * Comments support. Can easily be replaced by 3rd-party commenting system
 * Drag 'n drop images to upload
@@ -22,8 +23,9 @@ Perfect for the blogger who wants to selfhost a blog.
 * OpenGraph enabled
 * Based on jQuery and Bootstrap
 * Best-in-class performance
-* Works on on any host including Azure Websites
+* Works on any host including Azure Websites
 * Themes can easily be added through NuGet
+* Uses the same XML format as BlogEngine.NET
 
 ### Why another blog engine?
 7 years have past since I started the BlogEngine.NET project. 
