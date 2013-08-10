@@ -29,6 +29,8 @@ It was using cutting edge technology for its time and quickly became the
 most popular blogging platform using ASP.NET.
 
 The MiniBlog was born as a test to see what a modern blog engine could
-look like today with the latest ASP.NET and HTML 5 technologies. 
+look like today with the latest ASP.NET and HTML 5 technologies. Just like
+with BlognEngine.NET, the goal was to see how small and simple such a 
+blog engine could be. 
 
 This is the result.
