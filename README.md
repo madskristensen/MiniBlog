@@ -3,8 +3,9 @@
 A blogging engine built using HTML5 and ASP.NET.
 
 __Live demo__: http://miniblog.azurewebsites.net/  
-Username: demo  
-Password: demo
+Username: _demo_  
+Password: _demo_  
+
 
 ## Simple, flexible and powerful
 
