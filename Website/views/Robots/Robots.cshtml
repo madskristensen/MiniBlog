@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /views/
+
+sitemap: @(Request.Url.Scheme + "://" + Request.Url.Authority)/sitemap.xml
+
+@{
+    Response.ContentType = "text/plain";
+}

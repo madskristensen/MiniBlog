@@ -1,6 +1,5 @@
 ﻿@* Used to render new comments throgh AJAX calls.  *@
 @{
-    @*Response.ContentType = "text/plain";*@
     string postId = Request.QueryString["postid"];
     string commentId = Request.QueryString["commentid"];
     Post post = Post.Posts.SingleOrDefault(p => p.ID == postId);

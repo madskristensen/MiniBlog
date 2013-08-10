@@ -22,6 +22,7 @@ Perfect for the blogger who wants to selfhost a blog.
 * RSS and ATOM feeds
 * SEO optimized
  * Uses HTML 5 microdata to add semantic meaning
+ * Support for robots.txt and sitemap.xml
 * Theming support
  * Themes can easily be added through NuGet
 * Doesn't require a database
