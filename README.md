@@ -1,7 +1,7 @@
-#MiniBlog - simple, flexible and powerful
+# ASP.NET MiniBlog
 
-A minimal yet full featured blog engine using ASP.NET Razor Web Pages. Perfect for the blogger who 
-wants to selfhost a blog. 
+A minimal, yet full featured blog engine using ASP.NET Razor Web Pages. 
+Perfect for the blogger who wants to selfhost a blog. 
 
 ### Features
 
