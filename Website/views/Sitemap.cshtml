@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+@{
+    Response.ContentType = "text/xml";
+}
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    @foreach (Post post in Post.Posts)
+    {
+        <url>
+            <loc>@post.AbsoluteUrl</loc>
+        </url>
+    }
+</urlset>

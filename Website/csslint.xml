@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+   Read more about the individual rules at https://github.com/stubbornella/csslint/wiki/Rules
+-->
+<csslint>
+  <version>1.0</version>
+  <settings>
+    <treatWarningsAsErrors>false</treatWarningsAsErrors>
+  </settings>
+  <rules>
+    <rule id="adjoining-classes">true</rule>
+    <rule id="box-model">false</rule>
+    <rule id="box-sizing">true</rule>
+    <rule id="compatible-vendor-prefixes">true</rule>
+    <rule id="display-property-grouping">true</rule>
+    <rule id="duplicate-properties">true</rule>
+    <rule id="empty-rules">true</rule>
+    <rule id="errors">true</rule>
+    <rule id="floats">true</rule>
+    <rule id="font-faces">true</rule>
+    <rule id="font-sizes">true</rule>
+    <rule id="gradients">true</rule>
+    <rule id="ids">false</rule>
+    <rule id="import">true</rule>
+    <rule id="important">true</rule>
+    <rule id="known-properties">true</rule>
+    <rule id="outline-none">true</rule>
+    <rule id="overqualified-elements">true</rule>
+    <rule id="qualified-headings">true</rule>
+    <rule id="regex-selectors">true</rule>
+    <rule id="shorthand">true</rule>
+    <rule id="text-indent">true</rule>
+    <rule id="unique-headings">true</rule>
+    <rule id="universal-selector">true</rule>
+    <rule id="vendor-prefix">true</rule>
+    <rule id="zero-units">true</rule>
+  </rules>
+</csslint>

@@ -23,7 +23,7 @@
     margin-left: 1em;
 }
 
-#admin button {
+#admin button:focus {
     outline: 0;
     white-space: nowrap;
 }

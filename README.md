@@ -36,6 +36,8 @@ Perfect for the blogger who wants to selfhost a blog.
  * OpenGraph enabled
  * Based on jQuery and Bootstrap
 * Best-in-class performance
+* Best-in-class accessibility
+* Mobile friendly
 * Works on any host including Windows Azure Websites
 
 ### Why another blog engine?
