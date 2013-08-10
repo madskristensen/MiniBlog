@@ -2,6 +2,10 @@
 
 A blogging engine built using HTML5 and ASP.NET.
 
+__Live demo__: http://miniblog.azurewebsites.net/  
+Username: demo  
+Password: demo
+
 ## Simple, flexible and powerful
 
 A minimal, yet full featured blog engine using ASP.NET Razor Web Pages. 
