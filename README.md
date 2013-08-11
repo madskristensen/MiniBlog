@@ -14,33 +14,33 @@ Perfect for the blogger who wants to selfhost a blog.
 
 ### Features
 
-* Best-in-class performance
+* Best-in-class __performance__
  * Gets a perfect score of 100/100 on Google Page Speed
  * Uses CDN for Bootstrap and jQuery in release mode (debug="false")
-* Windows Live Writer (WLW) support
+* __Windows Live Writer__ (WLW) support
  * Optimized for WLW
  * Assumes WLW is the main way to write posts
  * You don't have to use WLW (but you should)
-* RSS and ATOM feeds
-* SEO optimized
- * Uses HTML 5 microdata to add semantic meaning
+* RSS and ATOM __feeds__
+* __SEO__ optimized
+ * Uses HTML 5 __microdata__ to add semantic meaning
  * Support for robots.txt and sitemap.xml
 * Theming support
- * Themes can easily be added through NuGet
-* Doesn't require a database
+ * Themes can easily be added through __NuGet__
+* __No database__ required
  * Uses the same XML format as BlogEngine.NET
-* Inline editing of blog posts
+* __Inline editing__ of blog posts
 * Comments support
- * Gravatar support 
+ * __Gravatar__ support 
  * Can easily be replaced by 3rd-party commenting system
-* Drag 'n drop images to upload
- * Automatically optimizes uploaded images
+* __Drag 'n drop__ images to upload
+ * Automatically __optimizes uploaded images__
 * Uses latest technologies
- * OpenGraph enabled
+ * __OpenGraph__ enabled
  * Based on jQuery and Bootstrap
-* Best-in-class accessibility
-* Mobile friendly
-* Works on any host including Windows Azure Websites
+* Best-in-class __accessibility__
+* __Mobile__ friendly
+* Works on any host including __Windows Azure__ Websites
 
 ### Why another blog engine?
 7 years have past since I started the BlogEngine.NET project. 
