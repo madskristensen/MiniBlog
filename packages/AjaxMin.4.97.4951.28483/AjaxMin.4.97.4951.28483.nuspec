@@ -10,7 +10,9 @@
     <projectUrl>http://ajaxmin.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>JavaScript and CSS minification Library for use in .NET applications that want to provide minification or parsing functionality.</description>
+    <releaseNotes />
     <copyright>Copyright 2012 by Microsoft Corp. All rights reserved.</copyright>
+    <language />
     <tags>JavaScript CSS minification crunch parser ast ajaxmin</tags>
   </metadata>
 </package>

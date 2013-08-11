@@ -30,8 +30,6 @@ public class Comment
         var hash = FormsAuthentication.HashPasswordForStoringInConfigFile(Email.ToLowerInvariant(), "MD5").ToLower();
 
         // build Gravatar Image URL
-        var imageUrl = string.Format("http://www.gravatar.com/avatar/{0}?s={1}&d=mm&r=g", hash, imgSize);
-
-        return imageUrl;
+        return string.Format("http://www.gravatar.com/avatar/{0}?s={1}&d=mm&r=g", hash, imgSize);
     }
 }
