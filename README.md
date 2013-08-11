@@ -1,6 +1,6 @@
 # MiniBlog
 
-A blogging engine built using HTML5 and ASP.NET.
+A blogging engine based on HTML5 and ASP.NET.
 
 __Live demo__: http://miniblog.azurewebsites.net/  
 Username: _demo_  

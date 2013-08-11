@@ -46,14 +46,5 @@
       <date>2013-06-06 13:12:43</date>
       <content>Yeah, that is rather ironic :)</content>
     </comment>
-    <comment isAdmin="false" id="c2ac208d-a098-451e-b71f-c58fb369d28b">
-      <author>Mads Kristensen</author>
-      <email>post@madskristensen.net</email>
-      <website>http://madsk.net/</website>
-      <ip>::1</ip>
-      <userAgent>Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36</userAgent>
-      <date>2013-07-05 21:20:43</date>
-      <content>test</content>
-    </comment>
   </comments>
 </post>
