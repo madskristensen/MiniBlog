@@ -24,7 +24,7 @@ Perfect for the blogger who wants to selfhost a blog.
 * RSS and ATOM __feeds__
 * __SEO__ optimized
  * Uses HTML 5 __microdata__ to add semantic meaning
- * Support for robots.txt and sitemap.xml
+ * Support for __robots.txt__ and __sitemap.xml__
 * Theming support
  * Themes can easily be added through __NuGet__
 * __No database__ required
