@@ -14,7 +14,9 @@ Perfect for the blogger who wants to selfhost a blog.
 
 ### Features
 
-* Gets a perfect score of 100/100 on Google Page Speed
+* Best-in-class performance
+ * Gets a perfect score of 100/100 on Google Page Speed
+ * Uses CDN for Bootstrap and jQuery in release mode (debug="false")
 * Windows Live Writer (WLW) support
  * Optimized for WLW
  * Assumes WLW is the main way to write posts
@@ -28,7 +30,7 @@ Perfect for the blogger who wants to selfhost a blog.
 * Doesn't require a database
  * Uses the same XML format as BlogEngine.NET
 * Inline editing of blog posts
-* Comments support. 
+* Comments support
  * Gravatar support 
  * Can easily be replaced by 3rd-party commenting system
 * Drag 'n drop images to upload
@@ -36,7 +38,6 @@ Perfect for the blogger who wants to selfhost a blog.
 * Uses latest technologies
  * OpenGraph enabled
  * Based on jQuery and Bootstrap
-* Best-in-class performance
 * Best-in-class accessibility
 * Mobile friendly
 * Works on any host including Windows Azure Websites

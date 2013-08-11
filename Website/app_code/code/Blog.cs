@@ -96,8 +96,13 @@ public static class Blog
         return VirtualPathUtility.ToAbsolute(relative);
     }
 
-    public static string FingerPrint(string rootRelativePath)
+    public static string FingerPrint(string rootRelativePath, string cdnPath = "")
     {
+        if (!string.IsNullOrEmpty(cdnPath) && !HttpContext.Current.IsDebuggingEnabled)
+        {
+            return cdnPath;
+        }
+
         if (HttpRuntime.Cache[rootRelativePath] == null)
         {
             string absolute = HostingEnvironment.MapPath("~" + rootRelativePath);
