@@ -43,7 +43,7 @@ Perfect for the blogger who wants to selfhost a blog.
 * Works on any host including __Windows Azure__ Websites
 
 ### Why another blog engine?
-7 years have past since I started the BlogEngine.NET project. 
+7 years have past since I started the [BlogEngine.NET](http://dotnetblogengine.net) project. 
 It was using cutting edge technology for its time and quickly became the 
 most popular blogging platform using ASP.NET.
 
