@@ -16,7 +16,7 @@ Perfect for the blogger who wants to selfhost a blog.
 
 * Best-in-class __performance__
  * Gets a perfect score of 100/100 on Google Page Speed
- * Uses CDN for Bootstrap and jQuery in release mode (debug="false")
+ * Uses __CDN__ for Bootstrap and jQuery in release mode (debug="false")
 * __Windows Live Writer__ (WLW) support
  * Optimized for WLW
  * Assumes WLW is the main way to write posts
