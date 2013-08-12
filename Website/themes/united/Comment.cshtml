@@ -1,0 +1,40 @@
+﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "self" : null)">
+    @Gravatar(50)
+    <div>
+        @Date()
+        <p itemprop="commentText">@Html.Raw(Model.Content)</p>
+        @Author()
+        @DeleteButton()
+    </div>
+</article>
+
+@helper Date()
+{
+    var title = Model.PubDate.ToString("yyyy-MM-ddTHH:mm");
+    var display = Model.PubDate.ToString("d. MMMM yyyy HH:mm");
+    <time datetime="@title" itemprop="commentTime">@display</time>
+}
+@helper Author()
+{
+    if (string.IsNullOrEmpty(Model.Website))
+    {
+        <strong itemprop="creator">@Model.Author</strong>
+    }
+    else
+    {
+        <strong itemprop="creator"><a href="@Model.Website" rel="nofollow">@Model.Author</a></strong>
+    }
+}
+@helper DeleteButton()
+{
+    if (User.Identity.IsAuthenticated)
+    {
+        <button class="deletecomment btn btn-link">Delete</button>
+    }
+}
+@helper Gravatar(int size)
+{
+    var hash = FormsAuthentication.HashPasswordForStoringInConfigFile(Model.Email.ToLowerInvariant(), "MD5").ToLowerInvariant();
+    var imageUrl = string.Format("http://www.gravatar.com/avatar/{0}?s={1}&d=retro&r=g", hash, size);
+    <img src="@imageUrl" width="@size" height="@size" alt="@Model.Author" />
+}
