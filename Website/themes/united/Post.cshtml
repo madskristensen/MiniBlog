@@ -1,7 +1,7 @@
 ﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <header>
         <h1 itemprop="headline name">
-            <a href="@Model.Url" itemprop="url">@Model.Title</a>
+            <a href="@Model.Url" itemprop="url">@HttpUtility.UrlDecode(Model.Title)</a>
         </h1>
         <div>
             <i class="icon-calendar"></i> <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
