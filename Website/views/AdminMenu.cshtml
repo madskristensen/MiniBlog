@@ -5,11 +5,11 @@
 <div id="admin" role="toolbar" data-role="editor-toolbar" class="navbar navbar-fixed-top" data-ispublished="@isPublished">
     <div class="navbar-inner">
         <ul class="nav">
-            <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew"><i class="icon-file"></i> New post</button></li>
-            <li><button class="btn btn-link" id="btnEdit" disabled><i class="icon-pencil"></i> Edit</button></li>
-            <li><button class="btn btn-link" id="btnDelete" disabled><i class="icon-remove"></i> Delete</button></li>
-            <li><button class="btn btn-link" id="btnSave" disabled><i class="icon-save"></i> Save</button></li>
-            <li><button class="btn btn-link" id="btnCancel" disabled><i class="icon-ban"></i> Cancel</button></li>
+            <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
+            <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
+            <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
+            <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
+            <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
             <li id="ispublished">
                 <input type="checkbox" checked="@(isPublished ? "checked" : null)" disabled />
                 <label for="ispublished">Publish</label>
