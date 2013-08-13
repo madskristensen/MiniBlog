@@ -12,6 +12,7 @@
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="@Blog.FingerPrint("/css/bootstrap-combined.css", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css")" />
+    <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/bootstrap.min.css")" />
     <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" />
     
     @AdminCss()
@@ -24,14 +25,13 @@
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
-
-    <div class=" container">
-
-        <header class="page-header">
+    <header class="page-header">
+        <div class="container">
             <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
-            <em>By Mads Kristensen</em>
-        </header>
-
+                <em>By Mads Kristensen</em>
+        </div>
+    </header>
+    <div class="container">     
         <div role="main">
             @RenderBody()
 
@@ -41,7 +41,11 @@
             }
         </div>
     </div>
-
+    <aside>
+        <div class="container">
+            @RenderPage("Categories.cshtml")
+        </div>
+    </aside>
     <footer id="pagefooter" itemscope itemtype="http://schema.org/Person" itemprop="author">
         @if (!User.Identity.IsAuthenticated)
         {
