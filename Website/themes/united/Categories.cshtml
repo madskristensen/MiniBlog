@@ -1,0 +1,10 @@
+﻿<h3>Categories</h3>
+<ul class="categories">
+@{var cl = Post.Posts.Where(p => p.IsPublished).SelectMany(c => new List<string>(c.Categories)).Distinct();}
+    @foreach (var cat in cl)
+    {
+        <li itemprop="articleSection" title="@cat">
+            <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+        </li>
+    }
+</ul>
