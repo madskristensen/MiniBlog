@@ -1,6 +1,4 @@
-﻿/// <reference path="bootstrap-wysiwyg.js" />
-
-(function ($) {
+﻿(function ($) {
 
     var postId, isNew,
         txtTitle, txtContent, txtMessage, txtImage, chkPublish,
