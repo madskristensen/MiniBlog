@@ -8,7 +8,7 @@
             
             @if (Model.Comments.Count > 0)
             {
-                <a href="#comments"><i class="icon-comment"></i> @Model.Comments.Count Comments</a>
+                <a href="@Model.Url#comments"><i class="icon-comment"></i> @Model.Comments.Count Comments</a>
             }
             else
             {
