@@ -27,13 +27,13 @@ public class PostHandler : IHttpHandler
 
     private void DeletePost(string id)
     {
-        Post post = Post.Posts.First(p => p.ID == id);
+        Post post = Post.GetAllPosts().First(p => p.ID == id);
         post.Delete();
     }
 
     private void EditPost(string id, string title, string content, bool isPublished)
     {
-        Post post = Post.Posts.FirstOrDefault(p => p.ID == id);
+        Post post = Post.GetAllPosts().FirstOrDefault(p => p.ID == id);
 
         if (post != null)
         {
@@ -78,7 +78,7 @@ public class PostHandler : IHttpHandler
         title = title.ToLowerInvariant().Replace(" ", "-");
         title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);
 
-        if (Post.Posts.Any(p => string.Equals(p.Slug, title)))
+        if (Post.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();

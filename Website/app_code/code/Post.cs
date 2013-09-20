@@ -1,14 +1,22 @@
 ﻿using CookComputing.XmlRpc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
+using System.Linq;
 using System.Web;
-using System.Web.Hosting;
 
 [XmlRpcMissingMapping(MappingAction.Ignore)]
 public class Post
 {
-    public static List<Post> Posts = XmlStorage.Posts;
-    private static XmlStorage _storage = new XmlStorage();
+    private static IBlogStorage _storage;
+
+    static Post()
+    {
+        AssemblyCatalog catalog = new AssemblyCatalog(typeof(Post).Assembly);
+        CompositionContainer container = new CompositionContainer(catalog);
+        var storage = container.GetExports<IBlogStorage>();
+        _storage = storage.ElementAt(0).Value;
+    }
 
     public Post()
     {
@@ -54,6 +62,11 @@ public class Post
     public Uri Url
     {
         get { return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative); }
+    }
+
+    public static List<Post> GetAllPosts()
+    {
+        return _storage.GetAllPosts();
     }
 
     public void Save()

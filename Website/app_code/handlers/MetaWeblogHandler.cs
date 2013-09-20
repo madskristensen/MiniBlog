@@ -58,7 +58,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post match = Post.Posts.FirstOrDefault(p => p.ID == postid);
+        Post match = Post.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (match != null)
         {
@@ -77,7 +77,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post post = Post.Posts.FirstOrDefault(p => p.ID == postid);
+        Post post = Post.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (post != null)
         {
@@ -91,7 +91,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post post = Post.Posts.FirstOrDefault(p => p.ID == postid);
+        Post post = Post.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (post == null)
             throw new XmlRpcFaultException(0, "Post does not exist");
@@ -113,7 +113,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
 
         List<object> list = new List<object>();
 
-        foreach (var post in Post.Posts.Take(numberOfPosts))
+        foreach (var post in Post.GetAllPosts().Take(numberOfPosts))
         {
             var info = new
             {
@@ -135,7 +135,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         ValidateUser(username, password);
 
         var list = new List<object>();
-        var categories = Post.Posts.SelectMany(p => p.Categories);
+        var categories = Post.GetAllPosts().SelectMany(p => p.Categories);
 
         foreach (string category in categories.Distinct())
         {

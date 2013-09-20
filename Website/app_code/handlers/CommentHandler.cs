@@ -7,7 +7,7 @@ public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        Post post = Post.Posts.SingleOrDefault(p => p.ID == context.Request.Form["postId"]);
+        Post post = Post.GetAllPosts().SingleOrDefault(p => p.ID == context.Request.Form["postId"]);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");

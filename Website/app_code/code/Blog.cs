@@ -45,10 +45,10 @@ public static class Blog
         {
             if (HttpContext.Current.Items["currentpost"] == null)
             {
-                var post = Post.Posts.FirstOrDefault(p => p.Slug == CurrentSlug);
+                var post = Post.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
 
                 if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated))
-                    HttpContext.Current.Items["currentpost"] = Post.Posts.FirstOrDefault(p => p.Slug == CurrentSlug);
+                    HttpContext.Current.Items["currentpost"] = Post.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
             }
 
             return HttpContext.Current.Items["currentpost"] as Post;
@@ -69,7 +69,7 @@ public static class Blog
 
     public static IEnumerable<Post> GetPosts(int postsPerPage)
     {
-        var posts = from p in Post.Posts
+        var posts = from p in Post.GetAllPosts()
                     where p.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated
                     select p;
 

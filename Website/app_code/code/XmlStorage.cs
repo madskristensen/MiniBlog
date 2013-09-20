@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Web.Hosting;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-public class XmlStorage
+[Export(typeof(IBlogStorage))]
+public class XmlStorage : IBlogStorage
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
-    public static List<Post> Posts = LoadPosts();
+    private static List<Post> Posts = LoadPosts();
+    
+    public List<Post> GetAllPosts()
+    {
+        return Posts;
+    }
 
     public void Save(Post post)
     {
