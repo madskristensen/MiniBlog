@@ -64,7 +64,7 @@
         $.post("/post.ashx?mode=save", {
             id: postId,
             isPublished: chkPublish[0].checked,
-            title: encodeURIComponent(txtTitle.text().trim()),
+            title: txtTitle.text().trim(),
             content: txtContent.html(),
         })
           .success(function (data) {
