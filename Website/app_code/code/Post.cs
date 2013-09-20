@@ -14,8 +14,7 @@ public class Post
     {
         AssemblyCatalog catalog = new AssemblyCatalog(typeof(Post).Assembly);
         CompositionContainer container = new CompositionContainer(catalog);
-        var storage = container.GetExports<IBlogStorage>();
-        _storage = storage.ElementAt(0).Value;
+        _storage = container.GetExportedValueOrDefault<IBlogStorage>();
     }
 
     public Post()
