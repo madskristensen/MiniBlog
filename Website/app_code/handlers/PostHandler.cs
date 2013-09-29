@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
@@ -76,12 +78,30 @@ public class PostHandler : IHttpHandler
     public static string CreateSlug(string title)
     {
         title = title.ToLowerInvariant().Replace(" ", "-");
+        title = RemoveDiacritics(title);
         title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);
 
         if (Post.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();
+    }
+
+    static string RemoveDiacritics(string text)
+    {
+        var normalizedString = text.Normalize(NormalizationForm.FormD);
+        var stringBuilder = new StringBuilder();
+
+        foreach (var c in normalizedString)
+        {
+            var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+            if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+            {
+                stringBuilder.Append(c);
+            }
+        }
+
+        return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
     }
 
     public bool IsReusable
