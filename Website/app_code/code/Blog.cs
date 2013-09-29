@@ -43,7 +43,7 @@ public static class Blog
     {
         get
         {
-            if (HttpContext.Current.Items["currentpost"] == null)
+            if (HttpContext.Current.Items["currentpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
             {
                 var post = Post.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
 
