@@ -116,12 +116,7 @@ public static class Blog
             int index = rootRelativePath.LastIndexOf('/');
 
             string result = rootRelativePath.Insert(index, "/v-" + date.Ticks);
-
-            if (ConfigurationManager.AppSettings.Get("blog:enableCDN").Equals("true", StringComparison.OrdinalIgnoreCase))
-            {
-                result = "//" + HttpContext.Current.Request.Url.Authority.Replace(":", ".") + ".nyud.net" + result;
-            }
-            
+                        
             HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute));
         }
 
