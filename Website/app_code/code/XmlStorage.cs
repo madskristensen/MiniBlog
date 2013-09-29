@@ -25,6 +25,7 @@ public class XmlStorage : IBlogStorage
                         new XElement("post",
                             new XElement("title", post.Title),
                             new XElement("slug", post.Slug),
+                            new XElement("author", post.Author),
                             new XElement("pubDate", post.PubDate.ToString("yyyy-MM-dd HH:mm:ss")),
                             new XElement("content", post.Content),
                             new XElement("ispublished", post.IsPublished),
@@ -82,6 +83,7 @@ public class XmlStorage : IBlogStorage
             {
                 ID = Path.GetFileNameWithoutExtension(file),
                 Title = ReadValue(doc, "title"),
+                Author = ReadValue(doc, "author"),
                 Content = ReadValue(doc, "content"),
                 Slug = ReadValue(doc, "slug").ToLowerInvariant(),
                 PubDate = DateTime.Parse(ReadValue(doc, "pubDate")),

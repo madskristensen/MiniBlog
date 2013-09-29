@@ -21,6 +21,7 @@ public class Post
     {
         ID = Guid.NewGuid().ToString();
         Title = "My new post";
+        Author = HttpContext.Current.User.Identity.Name;
         Content = "the content";
         PubDate = DateTime.UtcNow;
         Categories = new string[0];
@@ -33,6 +34,9 @@ public class Post
 
     [XmlRpcMember("title")]
     public string Title { get; set; }
+
+    [XmlRpcMember("author")]
+    public string Author { get; set; }
 
     [XmlRpcMember("wp_slug")]
     public string Slug { get; set; }
