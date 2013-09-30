@@ -47,7 +47,7 @@ public class CommentHandler : IHttpHandler
         post.Comments.Add(comment);
         post.Save();
 
-        string wrapper = VirtualPathUtility.ToAbsolute("~/views/commentwrapper") + "?postid=" + post.ID + "&commentid=" + comment.ID;
+        string wrapper = VirtualPathUtility.ToAbsolute("~/views/commentwrapper.cshtml") + "?postid=" + post.ID + "&commentid=" + comment.ID;
         context.Response.Write(wrapper);
     }
 
