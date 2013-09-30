@@ -27,16 +27,4 @@
 
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
-
-    if (!Context.IsDebuggingEnabled && !User.Identity.IsAuthenticated)
-    {
-        Response.Cache.SetValidUntilExpires(true);
-        Response.Cache.SetCacheability(HttpCacheability.Public);
-        Response.Cache.VaryByHeaders["Cookie"] = true;
-        Response.Cache.VaryByHeaders["Accept-Encoding"] = true;
-        Response.Cache.VaryByParams["page"] = true;
-        Response.Cache.VaryByParams["slug"] = true;
-        Response.Cache.VaryByParams["category"] = true;
-        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/")));
-    }
 }
