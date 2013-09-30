@@ -5,8 +5,8 @@
 <rsd version="1.0">
     <service>
         <enginename>MiniBlog</enginename>
-        <enginelink>http://madskristensen.net/</enginelink>
-        <homepagelink>http://madskristensen.net/</homepagelink>
+        <enginelink>http://github.com/madskristensen/miniblog/</enginelink>
+        <homepagelink>@Request.Url.Scheme://@Request.Url.Authority</homepagelink>
         <apis>
             <api name="MetaWeblog" preferred="true" apilink="@Request.Url.Scheme://@Request.Url.Authority/metaweblog" blogid="1" />
         </apis>

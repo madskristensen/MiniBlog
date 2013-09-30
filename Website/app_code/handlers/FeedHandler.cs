@@ -22,6 +22,8 @@ public class FeedHandler : IHttpHandler
             var formatter = GetFormatter(context, feed);
             formatter.WriteTo(writer);
         }
+
+        context.Response.ContentType = "text/xml";
     }
 
     private IEnumerable<SyndicationItem> GetItems()
