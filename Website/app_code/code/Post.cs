@@ -24,6 +24,7 @@ public class Post
         Author = HttpContext.Current.User.Identity.Name;
         Content = "the content";
         PubDate = DateTime.UtcNow;
+        LastModified = DateTime.UtcNow;
         Categories = new string[0];
         Comments = new List<Comment>();
         IsPublished = true;
@@ -46,6 +47,9 @@ public class Post
 
     [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
+
+    [XmlRpcMember("dateModified")]
+    public DateTime LastModified { get; set; }
 
     public bool IsPublished { get; set; }
 
@@ -74,6 +78,7 @@ public class Post
 
     public void Save()
     {
+        LastModified = DateTime.UtcNow;
         _storage.Save(this);
     }
 

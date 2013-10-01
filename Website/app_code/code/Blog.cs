@@ -122,4 +122,24 @@ public static class Blog
 
         return HttpRuntime.Cache[rootRelativePath] as string;
     }
+
+    public static void SetConditionalGetHeaders(DateTime lastModified, HttpContextBase context)
+    {
+        HttpResponseBase response = context.Response;
+        HttpRequestBase request = context.Request;
+        lastModified = new DateTime(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second);
+
+        string incomingDate = request.Headers["If-Modified-Since"];
+
+        response.Cache.SetLastModified(lastModified);
+
+        DateTime testDate = DateTime.MinValue;
+
+        if (DateTime.TryParse(incomingDate, out testDate) && testDate == lastModified)
+        {
+            response.ClearContent();
+            response.StatusCode = (int)System.Net.HttpStatusCode.NotModified;
+            response.SuppressContent = true;
+        }
+    }
 }

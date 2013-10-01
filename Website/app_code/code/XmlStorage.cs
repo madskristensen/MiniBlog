@@ -87,6 +87,7 @@ public class XmlStorage : IBlogStorage
                 Content = ReadValue(doc, "content"),
                 Slug = ReadValue(doc, "slug").ToLowerInvariant(),
                 PubDate = DateTime.Parse(ReadValue(doc, "pubDate")),
+                LastModified = File.GetLastWriteTimeUtc(file),
                 IsPublished = bool.Parse(ReadValue(doc, "ispublished", "true")),
             };
 
