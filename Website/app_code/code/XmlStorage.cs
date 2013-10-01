@@ -11,7 +11,7 @@ public class XmlStorage : IBlogStorage
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
     private static List<Post> Posts = LoadPosts();
-    
+
     public List<Post> GetAllPosts()
     {
         return Posts;
@@ -27,6 +27,7 @@ public class XmlStorage : IBlogStorage
                             new XElement("slug", post.Slug),
                             new XElement("author", post.Author),
                             new XElement("pubDate", post.PubDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                            new XElement("lastModified", post.LastModified.ToString("yyyy-MM-dd HH:mm:ss")),
                             new XElement("content", post.Content),
                             new XElement("ispublished", post.IsPublished),
                             new XElement("categories", string.Empty),
@@ -87,7 +88,7 @@ public class XmlStorage : IBlogStorage
                 Content = ReadValue(doc, "content"),
                 Slug = ReadValue(doc, "slug").ToLowerInvariant(),
                 PubDate = DateTime.Parse(ReadValue(doc, "pubDate")),
-                LastModified = File.GetLastWriteTimeUtc(file),
+                LastModified = DateTime.Parse(ReadValue(doc, "lastModified")),
                 IsPublished = bool.Parse(ReadValue(doc, "ispublished", "true")),
             };
 

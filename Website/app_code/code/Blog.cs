@@ -139,6 +139,7 @@ public static class Blog
         {
             response.ClearContent();
             response.StatusCode = (int)System.Net.HttpStatusCode.NotModified;
+            response.Cache.SetVaryByCustom("Accept-Encoding");
             response.SuppressContent = true;
         }
     }
