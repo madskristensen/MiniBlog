@@ -9,19 +9,23 @@ using System.Web.Hosting;
 
 public static class Blog
 {
+    private static string _theme = ConfigurationManager.AppSettings.Get("blog:theme");
+    private static string _title = ConfigurationManager.AppSettings.Get("blog:name");
+    private static int _postsPerPage = int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage"));
+
     public static string Title
     {
-        get { return ConfigurationManager.AppSettings.Get("blog:name"); }
+        get { return _title; }
     }
 
     public static string Theme
     {
-        get { return ConfigurationManager.AppSettings.Get("blog:theme"); }
+        get { return _theme; }
     }
 
     public static int PostsPerPage
     {
-        get { return int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage")); }
+        get { return _postsPerPage; }
     }
 
     public static string CurrentSlug
@@ -116,7 +120,7 @@ public static class Blog
             int index = rootRelativePath.LastIndexOf('/');
 
             string result = rootRelativePath.Insert(index, "/v-" + date.Ticks);
-                        
+
             HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute));
         }
 
