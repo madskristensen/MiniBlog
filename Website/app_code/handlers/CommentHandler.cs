@@ -60,13 +60,12 @@ public class CommentHandler : IHttpHandler
         if (!isName || !isMail || !isContent)
         {
             if (!isName)
-                HttpContext.Current.Response.Write("Please enter a valid name");
+                HttpContext.Current.Response.Status = "403 Please enter a valid name";
             else if (!isMail)
-                HttpContext.Current.Response.Write("Please enter a valid e-mail address");
+                HttpContext.Current.Response.Status = "403 Please enter a valid e-mail address";
             else if (!isContent)
-                HttpContext.Current.Response.Write("Please enter a valid comment");
+                HttpContext.Current.Response.Status = "403 Please enter a valid comment";
 
-            HttpContext.Current.Response.StatusCode = 403;
             HttpContext.Current.Response.End();
         }
     }
