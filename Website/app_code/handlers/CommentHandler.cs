@@ -14,7 +14,7 @@ public class CommentHandler : IHttpHandler
 
         string mode = context.Request.Form["mode"];
 
-        if (mode == "save" && post.PubDate < DateTime.UtcNow.AddDays(-Blog.DaysToComment))
+        if (mode == "save" && post.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment))
         {
             Save(context, post);
         }

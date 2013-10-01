@@ -37,7 +37,7 @@
          })
          .fail(function (data) {
              console.log(data);
-             $("#status").attr("class", "error").text(data.statusText);
+             $("#status").attr("class", "error").text(data.responseText);
              callback(false);
          });
     }
