@@ -2,6 +2,10 @@
     background-color: #fff;
 }
 
+img, video, iframe {
+    max-width: 100%;
+}
+
 .page-header {
     border: none;
     text-align: center;
