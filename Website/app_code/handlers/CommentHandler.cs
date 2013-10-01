@@ -14,7 +14,7 @@ public class CommentHandler : IHttpHandler
 
         string mode = context.Request.Form["mode"];
 
-        if (mode == "save")
+        if (mode == "save" && post.PubDate < DateTime.UtcNow.AddDays(-Blog.DaysToComment))
         {
             Save(context, post);
         }
@@ -27,7 +27,7 @@ public class CommentHandler : IHttpHandler
     private static void Save(HttpContext context, Post post)
     {
         string name = context.Request.Form["name"];
-        string email = context.Request.Form["email"];        
+        string email = context.Request.Form["email"];
         string website = context.Request.Form["website"];
         string content = context.Request.Form["content"];
 
@@ -53,7 +53,7 @@ public class CommentHandler : IHttpHandler
 
     private static void Validate(string name, string email, string content)
     {
-        bool isName = !string.IsNullOrEmpty(name);        
+        bool isName = !string.IsNullOrEmpty(name);
         bool isMail = !string.IsNullOrEmpty(email) && Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
         bool isContent = !string.IsNullOrEmpty(content);
 

@@ -12,6 +12,7 @@ public static class Blog
     private static string _theme = ConfigurationManager.AppSettings.Get("blog:theme");
     private static string _title = ConfigurationManager.AppSettings.Get("blog:name");
     private static int _postsPerPage = int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage"));
+    private static int _commentDays = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
 
     public static string Title
     {
@@ -26,6 +27,11 @@ public static class Blog
     public static int PostsPerPage
     {
         get { return _postsPerPage; }
+    }
+
+    public static int DaysToComment
+    {
+        get { return _commentDays; }
     }
 
     public static string CurrentSlug
