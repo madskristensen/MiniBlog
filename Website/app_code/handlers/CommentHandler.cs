@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -7,14 +9,14 @@ public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        Post post = Post.GetAllPosts().SingleOrDefault(p => p.ID == context.Request.Form["postId"]);
+        Post post = Post.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");
 
-        string mode = context.Request.Form["mode"];
+        string mode = context.Request["mode"];
 
-        if (mode == "save" && post.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment))
+        if (mode == "save" && context.Request.HttpMethod == "POST" && (post.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || context.User.Identity.IsAuthenticated))
         {
             Save(context, post);
         }
@@ -49,6 +51,41 @@ public class CommentHandler : IHttpHandler
 
         string wrapper = VirtualPathUtility.ToAbsolute("~/views/commentwrapper.cshtml") + "?postid=" + post.ID + "&commentid=" + comment.ID;
         context.Response.Write(wrapper);
+
+        //if (!context.User.Identity.IsAuthenticated)
+        System.Threading.ThreadPool.QueueUserWorkItem((s) => SendEmail(comment, post, context.Request));
+    }
+
+    private static void SendEmail(Comment comment, Post post, HttpRequest request)
+    {
+        try
+        {
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(comment.Email, comment.Author);
+            mail.ReplyToList.Add(comment.Email);
+            mail.To.Add(ConfigurationManager.AppSettings.Get("blog:email"));
+            mail.Subject = "Blog comment: " + post.Title;
+            mail.IsBodyHtml = true;
+
+            string absoluteUrl = request.Url.Scheme + "://" + request.Url.Authority;
+            string deleteUrl = absoluteUrl + request.RawUrl + "?postId=" + post.ID + "&commentId=" + comment.ID + "&mode=delete";
+            mail.Body = "<div style=\"font: 11pt/1.5 calibri, arial;\">" +
+                            comment.Author + " on <a href=\"" + absoluteUrl + post.Url + "\">" + post.Title + "</a>:<br /><br />" +
+                            comment.Content + "<br /><br />" +
+                            "<a href=\"" + deleteUrl + "\">Delete comment</a>" +
+                            "<br /><br /><hr />" +
+                            "Website: " + comment.Website + "<br />" +
+                            "E-mail: " + comment.Email + "<br />" +
+                            "IP-address: " + comment.Ip + "<br />" +
+                            request.UserAgent +
+                        "</div>";
+
+
+            SmtpClient client = new SmtpClient();
+            client.Send(mail);
+        }
+        catch
+        { }
     }
 
     private static void Validate(string name, string email, string content)
@@ -87,7 +124,7 @@ public class CommentHandler : IHttpHandler
         if (!context.User.Identity.IsAuthenticated)
             throw new HttpException(403, "No access");
 
-        string commentId = context.Request.Form["commentId"];
+        string commentId = context.Request["commentId"];
         Comment comment = post.Comments.SingleOrDefault(c => c.ID == commentId);
 
         if (comment != null)
@@ -98,6 +135,11 @@ public class CommentHandler : IHttpHandler
         else
         {
             throw new HttpException(404, "Comment could not be found");
+        }
+
+        if (context.Request.HttpMethod == "GET")
+        {
+            context.Response.Redirect(post.AbsoluteUrl.ToString() + "#comments", true);
         }
     }
 
