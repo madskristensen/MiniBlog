@@ -142,6 +142,8 @@ public static class Blog
         string incomingDate = request.Headers["If-Modified-Since"];
 
         response.Cache.SetLastModified(lastModified);
+        response.Cache.VaryByHeaders["Accept-Encoding"] = true;
+        response.Cache.VaryByHeaders["If-Modified-Since"] = true;
 
         DateTime testDate = DateTime.MinValue;
 
@@ -150,7 +152,6 @@ public static class Blog
             response.ClearContent();
             response.StatusCode = (int)System.Net.HttpStatusCode.NotModified;
             response.SuppressContent = true;
-            response.AppendHeader("vary", "Accept-Encoding");
         }
     }
 }

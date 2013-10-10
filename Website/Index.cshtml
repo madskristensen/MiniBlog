@@ -1,7 +1,9 @@
-﻿@{
+﻿@using System.Web.Caching;
+@{
     Page.Title = Blog.Title;
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     DateTime lastModified = DateTime.MinValue;
+    CacheDependency dependency = new CacheDependency(Server.MapPath("~/posts/")); ;
 
     if (string.IsNullOrEmpty(Blog.CurrentSlug))
     {
@@ -12,6 +14,7 @@
         {
             @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post);
         }
+
         if (posts.Any())
         {
             lastModified = posts.Max(p => p.LastModified);
@@ -30,8 +33,25 @@
 
         Page.Title = post.Title + " | " + Page.Title;
         lastModified = post.LastModified;
+        dependency = new CacheDependency(Server.MapPath("~/posts/" + post.ID + ".xml"));
 
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
+    }
+
+    if (!Context.IsDebuggingEnabled)
+    {
+        Response.Cache.AppendCacheExtension("max-age=600");
+        Response.Cache.SetValidUntilExpires(true);
+        Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
+        Response.Cache.SetVaryByCustom("authenticated");
+        Response.Cache.VaryByParams["page"] = true;
+        Response.Cache.VaryByParams["slug"] = true;
+        Response.Cache.VaryByParams["category"] = true;
+        Response.Cache.SetOmitVaryStar(true);
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
+        Response.AddCacheDependency(dependency);
     }
 
     Blog.SetConditionalGetHeaders(lastModified, Context);
