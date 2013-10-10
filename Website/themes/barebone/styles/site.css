@@ -222,6 +222,7 @@ label, input[type], button, textarea {
     width: 100%;
     position: absolute;
     left: 0;
+    max-height: 14px !important;
 }
 
     #pagefooter .login {

@@ -27,6 +27,7 @@
 {
     <form action="@Request.RawUrl" method="post" id="login">
         <fieldset>
+            <legend>Sign in</legend>
             @if (Request.HttpMethod == "POST")
             {
                 <p class="text-warning">Username or password is incorrect</p>
@@ -41,7 +42,7 @@
             </div>
 
             <div class="control-group">
-                <button type="submit" class="btn">Sign in</button>
+                <button type="submit" class="btn button right">Sign in</button>
             </div>
         </fieldset>
     </form>

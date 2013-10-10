@@ -1,0 +1,70 @@
+﻿<article class="row" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <div class="large-12 columns">
+        <div class="row">
+            <header class="large-12 columns">
+                <h3 itemprop="headline name">
+                    <a href="@Model.Url" itemprop="url">@Model.Title</a>
+                </h3>
+                <div>
+                    @Categories()
+                </div>
+            </header>
+        </div>
+
+        <div class="row">
+            <div class="large-12 columns" itemprop="articleBody">@Html.Raw(Model.Content)</div>
+        </div>
+
+        @if (Blog.CurrentPost != null)
+        {
+            <section class="row" id="comments">
+                <div class="large-12 columns">
+                    @if (Model.Comments.Count > 0)
+                    {
+                        <h2>Comments</h2>
+                    }
+
+                    @foreach (Comment comment in Model.Comments)
+                    {
+                        @RenderPage("Comment.cshtml", comment)
+                    }
+                </div>
+            </section>
+
+            <section class="row">
+                <div class="large-6 columns large-centered">
+                    @if (Blog.CurrentPost.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || Context.User.Identity.IsAuthenticated)
+                    {
+                        @RenderPage("CommentForm.cshtml")
+                    }
+                </div>
+            </section>
+        }
+    </div>
+</article>
+
+@helper Categories()
+{
+    if (Model.Categories.Length > 0)
+    {
+    <ul class="inline-list">
+        <li>
+            <i class="icon-calendar"></i>
+            <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
+        </li>
+        <li>
+            <i class="icon-comment"></i>
+            @Model.Comments.Count Comments
+        </li>
+        <li>
+            <i class="icon-bookmark"></i>Posted in: 
+        </li>
+        @foreach (string cat in Model.Categories)
+        {
+            <li itemprop="articleSection" title="@cat">
+                <a class="label" href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+            </li>
+        }
+    </ul>
+    }
+}

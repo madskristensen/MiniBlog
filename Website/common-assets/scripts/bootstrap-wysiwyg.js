@@ -27,14 +27,14 @@
 			    if (options.activeToolbarClass) {
 			        $(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 			            var command = $(this).data(options.commandRole);
-			            try{
+			            try {
 			                if (document.queryCommandState(command)) {
 			                    $(this).addClass(options.activeToolbarClass);
 			                } else {
 			                    $(this).removeClass(options.activeToolbarClass);
 			                }
 			            }
-			            catch(ex){};
+			            catch (ex) { };
 			        });
 			    }
 			},
@@ -201,4 +201,3 @@
         fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
     };
 }(window.jQuery));
-
