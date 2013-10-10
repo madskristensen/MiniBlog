@@ -10,15 +10,15 @@
         txtContent.css({ minHeight: "400px" });
         txtContent.focus();
 
-        btnNew.attr("disabled", true);
-        btnEdit.attr("disabled", true);
-        btnSave.removeAttr("disabled");
-        btnCancel.removeAttr("disabled");
-        chkPublish.removeAttr("disabled");
+        btnNew.addClass('disabled');
+        btnEdit.addClass('disabled');
+        btnSave.removeClass('disabled');
+        btnCancel.removeClass('disabled');
+        chkPublish.removeClass('disabled');
 
         toggleSourceView();
 
-        $("#tools").fadeIn().css("display", "inline-block");
+        $("#tools").fadeIn();
     },
     cancelEdit = function () {
         if (isNew) {
@@ -30,11 +30,11 @@
             txtContent.removeAttr('contentEditable');
             btnCancel.focus();
 
-            btnNew.removeAttr("disabled");
-            btnEdit.removeAttr("disabled");
-            btnSave.attr("disabled", true);
-            btnCancel.attr("disabled", true);
-            chkPublish.attr("disabled", true);
+            btnNew.removeClass('disabled');
+            btnEdit.removeClass('disabled');
+            btnSave.addClass('disabled');
+            btnCancel.addClass('disabled');
+            chkPublish.addClass('disabled');
 
             $("#tools").fadeOut();
         }
@@ -91,7 +91,7 @@
         }
     },
     showMessage = function (success, message) {
-        var className = success ? "alert-success" : "alert-error";
+        var className = success ? "success alert-success" : "alert alert-error";
         txtMessage.addClass(className);
         txtMessage.text(message);
         txtMessage.parent().fadeIn();
@@ -109,7 +109,7 @@
 
     txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
     txtContent = $("[itemprop~='articleBody']");
-    txtMessage = $("#admin .alert");
+    txtMessage = $("#admin .alert, .status .alert");
     txtImage = $("#admin #txtImage");
 
     btnNew = $("#btnNew");
@@ -137,8 +137,8 @@
         chkPublish[0].checked = true;
     }
     else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
-        btnEdit.removeAttr("disabled");
-        btnDelete.removeAttr("disabled");
+        btnEdit.removeClass('disabled');
+        btnDelete.removeClass('disabled');
         $("#ispublished").fadeIn();
     }
 

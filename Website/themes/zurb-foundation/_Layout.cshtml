@@ -1,5 +1,11 @@
 ﻿<!doctype html>
-<html lang="en-us">
+<!--[if IE 8]>
+    <html class="no-js lt-ie9" lang="en" >
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en-us">
+<!--<![endif]-->
+
 <head prefix="og: http://ogp.me/ns#">
 
     <!--
@@ -37,11 +43,9 @@
     <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
 
     <link rel="shortcut icon" href="@Blog.FingerPrint("/favicon.ico")" type="image/x-icon" />
-    <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/styles/bootstrap-combined.css", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css")" />
+    <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/styles/foundation.min.css")" />
     <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/styles/site.css")" />
     <link rel="stylesheet" href="@Blog.FingerPrint("/common-assets/styles/commons.css")" />
-
-    @AdminCss()
 
     <meta name="application-name" content="@Blog.Title" />
     <meta name="msapplication-TileColor" content="#ffffff" />
@@ -49,42 +53,54 @@
     <meta property="og:title" content="@Page.Title" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="@(Request.Url.Scheme + "://" + Request.Url.Authority + Request.RawUrl)" />
+
+    <script src="@Blog.FingerPrint("/themes/" + Blog.Theme + "/scripts/custom.modernizr.js")"></script>
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin" : null)">
 
-    <div class="container-box">
-        <div class="main-box container">
-            <header class="page-header">
-                <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
-                <em>By Mads Kristensen</em>
-            </header>
+    <div class="container-box row">
+        <div class="main-box columns large-12">
+            <div class="row">
+                <header class="large-5 small-5 columns large-centered small-centered center">
+                    <h1 itemprop="name">
+                        <a href="~/" itemprop="url">@Blog.Title</a>
+                    </h1>
+                    <em>By Mads Kristensen</em>
+                </header>
+            </div>
 
-            <div role="main">
-                @RenderBody()
+            <div class="row">
+                <div class="large-12 columns" role="main">
+                    @RenderBody()
 
-                @if (Page.ShowPaging != null)
-                {
-                    @RenderPage("Paging.cshtml")
-                }
+                    @if (Page.ShowPaging != null)
+                    {
+                        @RenderPage("Paging.cshtml")
+                    }
+                </div>
             </div>
         </div>
     </div>
 
     <footer id="pagefooter" itemscope itemtype="http://schema.org/Person" itemprop="author">
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <span class="login">
-                <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
-            </span>            
-        }
-        <span>Copyright &copy; @DateTime.Now.Year
-            <span itemprop="name">
-                <a href="http://madskristensen.net" itemprop="url">Mads Kristensen</a>
+        <section>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <span class="login">
+                    <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
+                </span>            
+            }
+            <span>Copyright &copy; @DateTime.Now.Year
+                <span itemprop="name">
+                    <a href="http://madskristensen.net" itemprop="url">Mads Kristensen</a>
+                </span>
             </span>
-        </span>
+        </section>
     </footer>
 
     <script src="@Blog.FingerPrint("/common-assets/scripts/jquery-2.0.2.js", "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")"></script>
+    <script src="@Blog.FingerPrint("/themes/" + Blog.Theme + "/scripts/foundation.min.js")" async></script>
+    <script src="@Blog.FingerPrint("/themes/" + Blog.Theme + "/scripts/application.js")" async></script>
     <script src="@Blog.FingerPrint("/common-assets/scripts/commons.js")"></script>
 
     @if (Blog.CurrentPost != null || Blog.IsNewPost)
@@ -96,13 +112,6 @@
     {
         @RenderPage("/themes/" + Blog.Theme + "/AdminMenu.cshtml")
     }
+
 </body>
 </html>
-
-@helper AdminCss()
-{
-    if (User.Identity.IsAuthenticated)
-    {
-    <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/styles/admin.css")" rel="stylesheet" />
-    }
-}

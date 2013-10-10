@@ -6,10 +6,10 @@
     <div class="navbar-inner">
         <ul class="nav">
             <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
-            <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
-            <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
-            <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
-            <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
+            <li><button class="btn btn-link disabled" id="btnEdit">Edit</button></li>
+            <li><button class="btn btn-link disabled" id="btnDelete">Delete</button></li>
+            <li><button class="btn btn-link disabled" id="btnSave">Save</button></li>
+            <li><button class="btn btn-link disabled" id="btnCancel">Cancel</button></li>
             <li id="ispublished">
                 <input type="checkbox" id="chkispublished" checked="@(isPublished ? "checked" : null)" disabled />
                 <label for="chkispublished">Publish</label>
@@ -70,6 +70,6 @@
 
 @if (!string.IsNullOrEmpty(Blog.CurrentSlug))
 {
-    <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")" async></script>
-    <script src="@Blog.FingerPrint("/scripts/admin.js")" async></script>
+    <script src="@Blog.FingerPrint("/common-assets/scripts/bootstrap-wysiwyg.js")" async></script>
+    <script src="@Blog.FingerPrint("/common-assets/scripts/admin.js")" async></script>
 }
