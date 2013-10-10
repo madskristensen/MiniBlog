@@ -2,6 +2,10 @@
     background-color: #fff;
 }
 
+img, video, iframe {
+    max-width: 100%;
+}
+
 .page-header {
     border: none;
     text-align: center;
@@ -105,6 +109,8 @@ label, input[type], button, textarea {
             border-radius: 5px;
             padding: 7px;
             position: relative;
+            -ms-word-break: break-all;
+            word-break: break-all;
         }
 
             #comments article div p:before {

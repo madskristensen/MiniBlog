@@ -1,16 +1,19 @@
-﻿@using System.Web.Caching;
-@{
+﻿@{
     Page.Title = Blog.Title;
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
-    
+    DateTime lastModified = DateTime.MinValue;
+
     if (string.IsNullOrEmpty(Blog.CurrentSlug))
     {
         Page.ShowPaging = true;
+        var posts = Blog.GetPosts(Blog.PostsPerPage);
 
-        foreach (var post in Blog.GetPosts(Blog.PostsPerPage))
+        foreach (var post in posts)
         {
             @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post);
         }
+
+        lastModified = posts.Max(p => p.LastModified);
     }
     else
     {
@@ -24,19 +27,10 @@
         if (post == null) { throw new HttpException(404, "Post not found"); }
 
         Page.Title = post.Title + " | " + Page.Title;
+        lastModified = post.LastModified;
 
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
 
-    if (!Context.IsDebuggingEnabled && !User.Identity.IsAuthenticated)
-    {
-        Response.Cache.SetValidUntilExpires(true);
-        Response.Cache.SetCacheability(HttpCacheability.Public);
-        Response.Cache.VaryByHeaders["Cookie"] = true;
-        Response.Cache.VaryByHeaders["Accept-Encoding"] = true;
-        Response.Cache.VaryByParams["page"] = true;
-        Response.Cache.VaryByParams["slug"] = true;
-        Response.Cache.VaryByParams["category"] = true;
-        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/")));
-    }
+    Blog.SetConditionalGetHeaders(lastModified, Context);
 }

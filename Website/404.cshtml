@@ -1,0 +1,15 @@
+﻿@{
+    Page.Title = "The page does not exist";
+    Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
+    Response.StatusCode = 404;
+}
+
+<article>
+    <h1>The page doesn't exist</h1>
+
+    <p>Sorry about that. </p>
+
+    <p>
+        <a href="~/">Go to the front page</a>
+    </p>
+</article>

@@ -26,7 +26,10 @@
             }
         </section>
 
-        @RenderPage("~/views/CommentForm.cshtml")
+        if (Blog.CurrentPost.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || Context.User.Identity.IsAuthenticated)
+        {
+            @RenderPage("~/views/CommentForm.cshtml")
+        }
     }
 </article>
 

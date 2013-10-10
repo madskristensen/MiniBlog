@@ -22,11 +22,13 @@ public class FeedHandler : IHttpHandler
             var formatter = GetFormatter(context, feed);
             formatter.WriteTo(writer);
         }
+
+        context.Response.ContentType = "text/xml";
     }
 
     private IEnumerable<SyndicationItem> GetItems()
     {
-        foreach (Post p in Post.Posts.Take(10))
+        foreach (Post p in Post.GetAllPosts().Take(10))
         {
             yield return new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.ID, p.PubDate);
         }

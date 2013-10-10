@@ -2,7 +2,7 @@
 @{
     string postId = Request.QueryString["postid"];
     string commentId = Request.QueryString["commentid"];
-    Post post = Post.Posts.SingleOrDefault(p => p.ID == postId);
+    Post post = Post.GetAllPosts().SingleOrDefault(p => p.ID == postId);
 
     if (post != null)
     {
