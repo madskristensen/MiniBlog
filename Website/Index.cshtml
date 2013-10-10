@@ -12,8 +12,10 @@
         {
             @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post);
         }
-
-        lastModified = posts.Max(p => p.LastModified);
+        if (posts.Any())
+        {
+            lastModified = posts.Max(p => p.LastModified);
+        }
     }
     else
     {
