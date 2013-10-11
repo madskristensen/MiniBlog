@@ -18,7 +18,7 @@
 
         toggleSourceView();
 
-        $("#tools").fadeIn().css("display", "inline-block");
+        $("#tools").fadeIn();
     },
     cancelEdit = function () {
         if (isNew) {
@@ -91,7 +91,7 @@
         }
     },
     showMessage = function (success, message) {
-        var className = success ? "alert-success" : "alert-error";
+        var className = success ? "success alert-success" : "alert alert-error";
         txtMessage.addClass(className);
         txtMessage.text(message);
         txtMessage.parent().fadeIn();
@@ -109,7 +109,7 @@
 
     txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
     txtContent = $("[itemprop~='articleBody']");
-    txtMessage = $("#admin .alert");
+    txtMessage = $("#admin .alert, .status .alert");
     txtImage = $("#admin #txtImage");
 
     btnNew = $("#btnNew");

@@ -1,6 +1,32 @@
 ﻿<!doctype html>
 <html lang="en-us">
 <head prefix="og: http://ogp.me/ns#">
+
+    <!--
+        ___  ___ _         _ ______  _               
+        |  \/  |(_)       (_)| ___ \| |              
+        | .  . | _  _ __   _ | |_/ /| |  ___    __ _ 
+        | |\/| || || '_ \ | || ___ \| | / _ \  / _` |
+        | |  | || || | | || || |_/ /| || (_) || (_| |
+        \_|  |_/|_||_| |_||_|\____/ |_| \___/  \__, |
+                                                __/ |
+                                               |___/ 
+                        __                                                            _                               _      
+       ____ ___  ____ _/ /_____     __  ______  __  _______   ____ _      ______     (_)___ ___  ________  __________(_)___  ____ 
+      / __ `__ \/ __ `/ //_/ _ \   / / / / __ \/ / / / ___/  / __ \ | /| / / __ \   / / __ `__ \/ ___/ _ \/ ___/ ___/ / __ \/ __ \
+     / / / / / / /_/ / ,< /  __/  / /_/ / /_/ / /_/ / /     / /_/ / |/ |/ / / / /  / / / / / / / /  /  __(__  |__  ) / /_/ / / / /
+    /_/ /_/ /_/\__,_/_/|_|\___/   \__, /\____/\__,_/_/      \____/|__/|__/_/ /_/  /_/_/ /_/ /_/_/   \___/____/____/_/\____/_/ /_/ 
+                                 /____/                                                                                          
+
+
+
+        ..............................................................
+     ___ _        _     __  ___ __      _   ___ _ ___________    __  _____     
+    | |_) \_/    | |\/|/ /\| | ( (`    | |_/ |_) ( (`| | |_| |\ ( (`| |_| |\ | 
+    |_|_)|_|     |_|  /_/--\_|_/)_)    |_| \_| \_|)_)|_|_|_|_| \|)_)|_|_|_| \| 
+
+    -->
+
     <title>@Page.Title</title>
     <meta charset="utf-8" />
     <meta name="description" content="@Page.Title" />
@@ -11,34 +37,36 @@
     <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
 
     <link rel="shortcut icon" href="@Blog.FingerPrint("/favicon.ico")" type="image/x-icon" />
-    <link rel="stylesheet" href="@Blog.FingerPrint("/css/bootstrap-combined.css", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css")" />
-    <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" />
-    
+    <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/styles/bootstrap-combined.css", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css")" />
+    <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/styles/site.css")" />
+    <link rel="stylesheet" href="@Blog.FingerPrint("/common-assets/styles/commons.css")" />
+
     @AdminCss()
 
     <meta name="application-name" content="@Blog.Title" />
     <meta name="msapplication-TileColor" content="#ffffff" />
-    
+
     <meta property="og:title" content="@Page.Title" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
+    <meta property="og:url" content="@(Request.Url.Scheme + "://" + Request.Url.Authority + Request.RawUrl)" />
 </head>
-<body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
+<body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin" : null)">
 
-    <div class="container">
+    <div class="container-box">
+        <div class="main-box container">
+            <header class="page-header">
+                <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
+                <em>By Mads Kristensen</em>
+            </header>
 
-        <header class="page-header">
-            <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
-            <em>By Mads Kristensen</em>
-        </header>
+            <div role="main">
+                @RenderBody()
 
-        <div role="main">
-            @RenderBody()
-
-            @if (Page.ShowPaging != null)
-            {
-                @RenderPage("Paging.cshtml")
-            }
+                @if (Page.ShowPaging != null)
+                {
+                    @RenderPage("Paging.cshtml")
+                }
+            </div>
         </div>
     </div>
 
@@ -49,23 +77,23 @@
                 <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
             </span>            
         }
-        <span>
-            Copyright &copy; @DateTime.Now.Year
+        <span>Copyright &copy; @DateTime.Now.Year
             <span itemprop="name">
                 <a href="http://madskristensen.net" itemprop="url">Mads Kristensen</a>
             </span>
         </span>
     </footer>
 
+    <script src="@Blog.FingerPrint("/common-assets/scripts/jquery-2.0.2.js", "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")"></script>
+
     @if (Blog.CurrentPost != null || Blog.IsNewPost)
     {
-        <script src="@Blog.FingerPrint("/scripts/jquery-2.0.2.js", "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")"></script>
-        <script src="@Blog.FingerPrint("/scripts/comments.js")" async></script>
+        <script src="@Blog.FingerPrint("/common-assets/scripts/comments.js")" async></script>
     }
 
     @if (User.Identity.IsAuthenticated)
     {
-        @RenderPage("~/views/AdminMenu.cshtml")
+        @RenderPage("/themes/" + Blog.Theme + "/AdminMenu.cshtml")
     }
 </body>
 </html>
@@ -74,6 +102,6 @@
 {
     if (User.Identity.IsAuthenticated)
     {
-        <link href="@Blog.FingerPrint("/css/admin.css")" rel="stylesheet" />
+    <link href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/styles/admin.css")" rel="stylesheet" />
     }
 }
