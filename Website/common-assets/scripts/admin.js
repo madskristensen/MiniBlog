@@ -10,11 +10,11 @@
         txtContent.css({ minHeight: "400px" });
         txtContent.focus();
 
-        btnNew.addClass('disabled');
-        btnEdit.addClass('disabled');
-        btnSave.removeClass('disabled');
-        btnCancel.removeClass('disabled');
-        chkPublish.removeClass('disabled');
+        btnNew.attr("disabled", true);
+        btnEdit.attr("disabled", true);
+        btnSave.removeAttr("disabled");
+        btnCancel.removeAttr("disabled");
+        chkPublish.removeAttr("disabled");
 
         toggleSourceView();
 
@@ -30,11 +30,11 @@
             txtContent.removeAttr('contentEditable');
             btnCancel.focus();
 
-            btnNew.removeClass('disabled');
-            btnEdit.removeClass('disabled');
-            btnSave.addClass('disabled');
-            btnCancel.addClass('disabled');
-            chkPublish.addClass('disabled');
+            btnNew.removeAttr("disabled");
+            btnEdit.removeAttr("disabled");
+            btnSave.attr("disabled", true);
+            btnCancel.attr("disabled", true);
+            chkPublish.attr("disabled", true);
 
             $("#tools").fadeOut();
         }
@@ -137,8 +137,8 @@
         chkPublish[0].checked = true;
     }
     else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
-        btnEdit.removeClass('disabled');
-        btnDelete.removeClass('disabled');
+        btnEdit.removeAttr("disabled");
+        btnDelete.removeAttr("disabled");
         $("#ispublished").fadeIn();
     }
 
