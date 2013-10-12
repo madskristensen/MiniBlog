@@ -49,7 +49,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
 
         post.Slug = PostHandler.CreateSlug(post.Title);
         post.IsPublished = publish;
-        post.Save();
+        Storage.Save(post);
 
         return post.ID;
     }
@@ -58,7 +58,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post match = Post.GetAllPosts().FirstOrDefault(p => p.ID == postid);
+        Post match = Storage.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (match != null)
         {
@@ -67,7 +67,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Slug = post.Slug;
             match.Categories = post.Categories;
             match.IsPublished = publish;
-            match.Save();
+            Storage.Save(match);
         }
 
         return match != null;
@@ -77,11 +77,11 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post post = Post.GetAllPosts().FirstOrDefault(p => p.ID == postid);
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (post != null)
         {
-            post.Delete();
+            Storage.Delete(post);
         }
 
         return post != null;
@@ -91,7 +91,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post post = Post.GetAllPosts().FirstOrDefault(p => p.ID == postid);
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (post == null)
             throw new XmlRpcFaultException(0, "Post does not exist");
@@ -113,7 +113,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
 
         List<object> list = new List<object>();
 
-        foreach (var post in Post.GetAllPosts().Take(numberOfPosts))
+        foreach (var post in Storage.GetAllPosts().Take(numberOfPosts))
         {
             var info = new
             {
@@ -135,7 +135,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         ValidateUser(username, password);
 
         var list = new List<object>();
-        var categories = Post.GetAllPosts().SelectMany(p => p.Categories);
+        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
 
         foreach (string category in categories.Distinct())
         {

@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.IO;
+using System.Web;
 using System.Web.Hosting;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-[Export(typeof(IBlogStorage))]
-public class XmlStorage : IBlogStorage
+public static class Storage
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
-    private static List<Post> Posts = LoadPosts();
 
-    public List<Post> GetAllPosts()
+    public static List<Post> GetAllPosts()
     {
-        return Posts;
+        if (HttpRuntime.Cache["posts"] == null)
+            LoadPosts();
+
+        return (List<Post>)HttpRuntime.Cache["posts"];
     }
 
-    public void Save(Post post)
+    public static void Save(Post post)
     {
         string file = Path.Combine(_folder, post.ID + ".xml");
+        post.LastModified = DateTime.UtcNow;
 
         XDocument doc = new XDocument(
                         new XElement("post",
@@ -59,21 +61,24 @@ public class XmlStorage : IBlogStorage
 
         if (!File.Exists(file)) // New post
         {
-            Posts.Insert(0, post);
-            Posts.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
+            var posts = GetAllPosts();
+            posts.Insert(0, post);
+            posts.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
+            HttpRuntime.Cache.Insert("posts", posts);
         }
 
         doc.Save(file);
     }
 
-    public void Delete(Post post)
+    public static void Delete(Post post)
     {
+        var posts = GetAllPosts();
         string file = Path.Combine(_folder, post.ID + ".xml");
         File.Delete(file);
-        Posts.Remove(post);
+        posts.Remove(post);
     }
 
-    private static List<Post> LoadPosts()
+    private static void LoadPosts()
     {
         List<Post> list = new List<Post>();
         foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
@@ -88,7 +93,7 @@ public class XmlStorage : IBlogStorage
                 Content = ReadValue(doc, "content"),
                 Slug = ReadValue(doc, "slug").ToLowerInvariant(),
                 PubDate = DateTime.Parse(ReadValue(doc, "pubDate")),
-                LastModified = DateTime.Parse(ReadValue(doc, "lastModified", File.GetLastWriteTimeUtc(file).ToString())),
+                LastModified = DateTime.Parse(ReadValue(doc, "lastModified", DateTime.Now.ToString())),
                 IsPublished = bool.Parse(ReadValue(doc, "ispublished", "true")),
             };
 
@@ -98,7 +103,7 @@ public class XmlStorage : IBlogStorage
         }
 
         list.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
-        return list;
+        HttpRuntime.Cache.Insert("posts", list);
     }
 
     private static void LoadCategories(Post post, XElement doc)

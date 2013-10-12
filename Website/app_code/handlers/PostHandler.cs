@@ -29,13 +29,17 @@ public class PostHandler : IHttpHandler
 
     private void DeletePost(string id)
     {
-        Post post = Post.GetAllPosts().First(p => p.ID == id);
-        post.Delete();
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
+
+        if (post == null)
+            throw new HttpException(404, "The post does not exist");
+
+        Storage.Delete(post);
     }
 
     private void EditPost(string id, string title, string content, bool isPublished)
     {
-        Post post = Post.GetAllPosts().FirstOrDefault(p => p.ID == id);
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
 
         if (post != null)
         {
@@ -51,7 +55,7 @@ public class PostHandler : IHttpHandler
         SaveImagesToDisk(post);
 
         post.IsPublished = isPublished;
-        post.Save();
+        Storage.Save(post);
     }
 
     private void SaveImagesToDisk(Post post)
@@ -59,10 +63,10 @@ public class PostHandler : IHttpHandler
         foreach (Match match in Regex.Matches(post.Content, "src=\"(data:([^\"]+))\""))
         {
             string extension = Regex.Match(match.Value, "data:image/([a-z]+);base64").Groups[1].Value;
-     
+
             byte[] bytes = ConvertToBytes(match.Groups[1].Value);
             string path = Blog.SaveFileToDisk(bytes, extension);
-            
+
             string image = string.Format("src=\"{0}\" alt=\"\" /", path);
 
             post.Content = post.Content.Replace(match.Value, image);
@@ -81,7 +85,7 @@ public class PostHandler : IHttpHandler
         title = RemoveDiacritics(title);
         title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);
 
-        if (Post.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
+        if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();

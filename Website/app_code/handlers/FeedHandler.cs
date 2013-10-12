@@ -14,7 +14,7 @@ public class FeedHandler : IHttpHandler
             Title = new TextSyndicationContent(Blog.Title),
             Description = new TextSyndicationContent("Latest blog posts"),
             BaseUri = new Uri(context.Request.Url.Scheme + "://" + context.Request.Url.Authority),
-            Items = GetItems()
+            Items = GetItems(),
         };
 
         using (var writer = new XmlTextWriter(context.Response.Output))
@@ -28,9 +28,9 @@ public class FeedHandler : IHttpHandler
 
     private IEnumerable<SyndicationItem> GetItems()
     {
-        foreach (Post p in Post.GetAllPosts().Take(10))
+        foreach (Post p in Storage.GetAllPosts().Take(10))
         {
-            yield return new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.ID, p.PubDate);
+            yield return new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.ID, p.LastModified);
         }
     }
 

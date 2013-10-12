@@ -9,7 +9,7 @@ public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        Post post = Post.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
+        Post post = Storage.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");
@@ -47,7 +47,7 @@ public class CommentHandler : IHttpHandler
         };
 
         post.Comments.Add(comment);
-        post.Save();
+        Storage.Save(post);
 
         string wrapper = VirtualPathUtility.ToAbsolute("~/views/commentwrapper.cshtml") + "?postid=" + post.ID + "&commentid=" + comment.ID;
         context.Response.Write(wrapper);
@@ -130,7 +130,7 @@ public class CommentHandler : IHttpHandler
         if (comment != null)
         {
             post.Comments.Remove(comment);
-            post.Save();
+            Storage.Save(post);
         }
         else
         {
