@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>AjaxMin</id>
-    <version>4.97.4951.28483</version>
+    <version>5.2.5021.15814</version>
     <title>Microsoft Ajax Minifier</title>
     <authors>Microsoft Corporation, Ron Logan</authors>
     <owners>Microsoft Corporation, Ron Logan</owners>
@@ -10,9 +10,7 @@
     <projectUrl>http://ajaxmin.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>JavaScript and CSS minification Library for use in .NET applications that want to provide minification or parsing functionality.</description>
-    <releaseNotes />
-    <copyright>Copyright 2012 by Microsoft Corp. All rights reserved.</copyright>
-    <language />
+    <copyright>Copyright 2013 by Microsoft Corp. All rights reserved.</copyright>
     <tags>JavaScript CSS minification crunch parser ast ajaxmin</tags>
   </metadata>
 </package>
