@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Security;
 
-/// <summary>
-/// Summary description for Comment
-/// </summary>
 public class Comment
 {
     public Comment()
@@ -25,11 +19,10 @@ public class Comment
     public string UserAgent { get; set; }
     public bool IsAdmin { get; set; }
 
-    public string GravatarUrl (int imgSize)
+    public string GravatarUrl(int size)
     {
         var hash = FormsAuthentication.HashPasswordForStoringInConfigFile(Email.ToLowerInvariant(), "MD5").ToLower();
 
-        // build Gravatar Image URL
-        return string.Format("http://www.gravatar.com/avatar/{0}?s={1}&d=mm&r=g", hash, imgSize);
+        return string.Format("http://gravatar.com/avatar/{0}?s={1}&d=mm", hash, size);
     }
 }
