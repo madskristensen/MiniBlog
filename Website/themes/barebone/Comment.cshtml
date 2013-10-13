@@ -1,5 +1,5 @@
 ﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "self" : null)">
-    @Gravatar(50)
+    <img src="@Model.GravatarUrl(50)" width="50" height="50" alt="@Model.Author" />
     <div>
         @Date()
         <p itemprop="commentText">@Html.Raw(Model.Content)</p>
@@ -31,10 +31,4 @@
     {
         <button class="deletecomment btn btn-link">Delete</button>
     }
-}
-@helper Gravatar(int size)
-{
-    var hash = FormsAuthentication.HashPasswordForStoringInConfigFile(Model.Email.ToLowerInvariant(), "MD5").ToLowerInvariant();
-    var imageUrl = string.Format("http://www.gravatar.com/avatar/{0}?s={1}&d=retro&r=g", hash, size);
-    <img src="@imageUrl" width="@size" height="@size" alt="@Model.Author" />
 }
