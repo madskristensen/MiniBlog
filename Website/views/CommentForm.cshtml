@@ -1,25 +1,25 @@
-﻿<form id="commentform" novalidate>
+﻿<form id="commentform" class="input-group" novalidate>
     <fieldset>
         <legend>Post comment</legend>
         <ul>
             <li>
                 <label for="commentname">Name</label>
-                <input id="commentname" type="text" placeholder="Name" required />
+                <input id="commentname" class="form-control" type="text" placeholder="Name" required />
             </li>
             <li>
                 <label for="commentemail">Email</label>
-                <input id="commentemail" type="email" placeholder="Email" required />
+                <input id="commentemail" class="form-control" type="email" placeholder="Email" required />
             </li>
             <li>
                 <label for="commenturl">Website</label>
-                <input id="commenturl" type="text" pattern="(https?://)?(www\.)?([a-zA-Z0-9_%]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((/[a-zA-Z0-9_%]*)+)?(\.[a-z]*)?" placeholder="Website URL" />
+                <input id="commenturl" class="form-control" type="text" pattern="(https?://)?(www\.)?([a-zA-Z0-9_%]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((/[a-zA-Z0-9_%]*)+)?(\.[a-z]*)?" placeholder="Website URL" />
             </li>
             <li>
                 <label for="commentcontent">Comment (no HTML allowed)</label>
-                <textarea id="commentcontent" placeholder="Comment" required></textarea>
+                <textarea id="commentcontent" class="form-control" placeholder="Comment" required></textarea>
             </li>
             <li>
-                <button class="btn">Post comment</button>
+                <button class="btn btn-primary">Post comment</button>
                 <span id="status" class="info"></span>
             </li>
         </ul>

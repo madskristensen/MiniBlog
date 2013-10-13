@@ -2,12 +2,12 @@
     Page.Title = "Sign in";
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     Response.Cache.SetCacheability(HttpCacheability.NoCache);
-    
+
     if (Request.HttpMethod == "POST")
     {
         string username = Request.Form["username"];
         string password = Request.Form["password"];
-        
+
         if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
         {
             if (FormsAuthentication.Authenticate(username, password))
@@ -26,23 +26,21 @@
 @if (!User.Identity.IsAuthenticated)
 {
     <form action="@Request.RawUrl" method="post" id="login">
-        <fieldset>
+        <fieldset class="input-group">
             @if (Request.HttpMethod == "POST")
             {
                 <p class="text-warning">Username or password is incorrect</p>
             }
 
-            <div class="control-group">
+            <div>
                 <label for="username" class="control-label">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username" required autofocus />
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus />
 
                 <label for="password" class="control-label">Password</label>
-                <input type="password" id="password" name="password" placeholder="password" required />
+                <input type="password" class="form-control" id="password" name="password" placeholder="password" required />
             </div>
 
-            <div class="control-group">
-                <button type="submit" class="btn">Sign in</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
         </fieldset>
     </form>
 }

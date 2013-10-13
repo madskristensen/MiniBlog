@@ -168,31 +168,39 @@ label, input[type], button, textarea {
 
 #commentform {
     margin-top: 2em;
+    width: 100%;
 }
 
     #commentform ul {
         list-style: none;
         margin: 0;
+        padding: 0;
     }
 
     #commentform li {
-        margin: 5px 0;
+        margin: 10px 0;
     }
 
     #commentform label {
         display: inline-block;
-        min-width: 70px;
+        min-width: 80px;
         position: relative;
     }
 
     #commentform input {
         width: 280px;
         line-height: 100%;
+        display: inline-block;
     }
 
     #commentform textarea {
         width: 98%;
         height: 100px;
+        font: inherit;
+    }
+
+    #commentform textarea, #commentform input {
+        border-radius: 4px;
     }
 
 #status {
@@ -239,8 +247,8 @@ label, input[type], button, textarea {
 }
 
     #login input {
-        height: 25px;
-        width: 100%;
+        border-radius: 4px;
+        margin-bottom: 10px;
     }
 
 /*#endregion */
