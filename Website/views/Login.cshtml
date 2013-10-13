@@ -7,12 +7,13 @@
     {
         string username = Request.Form["username"];
         string password = Request.Form["password"];
+        string remember = Request.Form["remember"];
 
         if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
         {
             if (FormsAuthentication.Authenticate(username, password))
             {
-                FormsAuthentication.RedirectFromLoginPage(username, true);
+                FormsAuthentication.RedirectFromLoginPage(username, remember == "on");
             }
         }
         else if (!string.IsNullOrEmpty(Request.QueryString["signout"]))
@@ -32,13 +33,14 @@
                 <p class="text-warning">Username or password is incorrect</p>
             }
 
-            <div>
-                <label for="username" class="control-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus />
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus />
 
-                <label for="password" class="control-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="password" required />
-            </div>
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
+
+            <label for="remember">Remember me</label>
+            <input type="checkbox" id="rememeber" name="remember" />
 
             <button type="submit" class="btn btn-primary">Sign in</button>
         </fieldset>
