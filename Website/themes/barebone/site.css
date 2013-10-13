@@ -244,3 +244,41 @@ label, input[type], button, textarea {
     }
 
 /*#endregion */
+
+/* #region Sticky footer */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.container-box {
+    min-height: 100%;
+}
+
+.main-box {
+    overflow: auto;
+    padding-bottom: 30px;
+}
+
+footer {
+    position: relative !important;
+    margin-top: -30px !important;
+    max-height: 30px;
+    clear: both;
+}
+
+/*Opera Fix*/
+body:before {
+    content: "";
+    height: 100%;
+    float: left;
+    width: 0;
+    margin-top: -32767px;
+}
+
+/* #endregion */
