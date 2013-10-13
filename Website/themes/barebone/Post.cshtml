@@ -26,7 +26,7 @@
             }
         </section>
 
-        if (Blog.CurrentPost.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || Context.User.Identity.IsAuthenticated)
+        if (Model.AreCommentsOpen(Context))
         {
             @RenderPage("~/views/CommentForm.cshtml")
         }

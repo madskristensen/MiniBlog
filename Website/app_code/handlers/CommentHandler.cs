@@ -16,7 +16,7 @@ public class CommentHandler : IHttpHandler
 
         string mode = context.Request["mode"];
 
-        if (mode == "save" && context.Request.HttpMethod == "POST" && (post.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || context.User.Identity.IsAuthenticated))
+        if (mode == "save" && context.Request.HttpMethod == "POST" && post.AreCommentsOpen(new HttpContextWrapper(context)))
         {
             Save(context, post);
         }

@@ -62,4 +62,9 @@ public class Post
             return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative);
         }
     }
+
+    public bool AreCommentsOpen(HttpContextBase context)
+    {
+        return PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || context.User.Identity.IsAuthenticated;
+    }
 }
