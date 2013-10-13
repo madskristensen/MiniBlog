@@ -43,15 +43,16 @@
     }
 
 
-    Response.Cache.AppendCacheExtension("max-age=0");
-    Response.Cache.SetValidUntilExpires(true);
-    Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
-    Response.Cache.SetVaryByCustom("authenticated");
-    Response.Cache.SetOmitVaryStar(true);
-    Response.Cache.VaryByParams["slug"] = true;
-    Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
-    Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
-    Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
-
+    if (!Request.IsLocal) { 
+        Response.Cache.SetValidUntilExpires(true);
+        Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
+        Response.Cache.SetVaryByCustom("authenticated");
+        Response.Cache.SetOmitVaryStar(true);
+        Response.Cache.VaryByParams["slug"] = true;
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
+    }
+    
     Blog.SetConditionalGetHeaders(lastModified, Context);
 }
