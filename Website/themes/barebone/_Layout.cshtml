@@ -27,7 +27,7 @@
 
     <div class="container">
 
-        <header class="page-header">
+        <header class="page-header" role="banner">
             <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
             <em>By Mads Kristensen</em>
         </header>
@@ -42,12 +42,12 @@
         </div>
     </div>
 
-    <footer id="pagefooter" itemscope itemtype="http://schema.org/Person" itemprop="author">
+    <footer id="pagefooter" role="contentinfo" itemscope itemtype="http://schema.org/Person" itemprop="author">
         @if (!User.Identity.IsAuthenticated)
         {
             <span class="login">
                 <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
-            </span>            
+            </span>
         }
         <span>
             Copyright &copy; @DateTime.Now.Year

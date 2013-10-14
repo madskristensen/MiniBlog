@@ -1,4 +1,4 @@
-﻿<ul class="pager">
+﻿<ul class="pager" role="navigation">
     @if (Blog.GetPosts(Blog.PostsPerPage * 2).Count() > Blog.PostsPerPage)
     {
         <li class="previous"><a href="@PagingUrl(1)" rel="prev">&larr; Older</a></li>
