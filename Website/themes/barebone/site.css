@@ -6,6 +6,10 @@ img, video, iframe {
     max-width: 100%;
 }
 
+a {
+    color: #3278b3;
+}
+
 .page-header {
     border: none;
     text-align: center;
@@ -28,8 +32,8 @@ img, video, iframe {
         margin-top: 2em;
     }
 
-label, input[type], button, textarea {
-    font: inherit;
+input[type], button, textarea {
+    font: inherit !important;
 }
 
 /*#region Post */
@@ -60,6 +64,7 @@ label, input[type], button, textarea {
         .post header div .categories {
             margin-left: 10px;
             display: inline;
+            padding: 0;
         }
 
             .post header div .categories li {
@@ -168,52 +173,11 @@ label, input[type], button, textarea {
 
 #commentform {
     margin-top: 2em;
-    width: 100%;
 }
-
-    #commentform ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    #commentform li {
-        margin: 10px 0;
-    }
-
-    #commentform label {
-        display: inline-block;
-        min-width: 80px;
-        position: relative;
-    }
-
-    #commentform input {
-        width: 280px;
-        line-height: 100%;
-        display: inline-block;
-    }
-
-    #commentform textarea {
-        width: 98%;
-        height: 100px;
-        font: inherit;
-    }
-
-    #commentform textarea, #commentform input {
-        border-radius: 4px;
-    }
 
 #status {
     margin-left: 1em;
 }
-
-    #status.info {
-        color: green;
-    }
-
-    #status.error {
-        color: red;
-    }
 
 /*#endregion */
 
@@ -235,25 +199,6 @@ label, input[type], button, textarea {
     #pagefooter .login {
         float: right;
         margin-right: 2em;
-    }
-
-/*#endregion */
-
-/*#region Login page */
-
-#login {
-    margin: 3em auto 10em auto;
-    width: 230px;
-}
-
-    #login input {
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
-
-    #login button{
-        margin-top: 1em;
-        display: block;
     }
 
 /*#endregion */

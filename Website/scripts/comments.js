@@ -25,7 +25,7 @@
 
         $.post(endpoint, { mode: "save", postId: postId, name: name, email: email, website: website, content: content })
          .success(function (data) {
-             $("#status").text("Your comment has been added").attr("class", "info");
+             $("#status").text("Your comment has been added").removeClass("alert-danger").addClass("alert-success");
              $("#commentcontent").val("");
 
              $.get(data, function (html) {
@@ -36,7 +36,7 @@
              });
          })
          .error(function (data) {
-             $("#status").attr("class", "error").text(data.statusText);
+             $("#status").addClass("alert-danger").text(data.statusText);
              callback(false);
          });
     }

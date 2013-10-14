@@ -4,8 +4,8 @@
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
         </h1>
         <div>
-            <i class="icon-calendar"></i> <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
-            <i class="icon-comment"></i> @Model.Comments.Count Comments
+            <i class="glyphicon glyphicon-calendar"></i> <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("d. MMMM yyyy")</abbr>
+            <i class="glyphicon glyphicon-comment"></i> @Model.Comments.Count Comments
             @Categories()
         </div>
     </header>
@@ -38,7 +38,7 @@
     if (Model.Categories.Length > 0)
     {
         <ul class="categories">
-            <li><i class="icon-bookmark"></i> Posted in: </li>
+            <li><i class="glyphicon glyphicon-bookmark"></i> Posted in: </li>
             @foreach (string cat in Model.Categories)
             {
                 <li itemprop="articleSection" title="@cat">

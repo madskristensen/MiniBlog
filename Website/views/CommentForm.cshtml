@@ -1,27 +1,38 @@
-﻿<form id="commentform" class="input-group" novalidate>
+﻿<form id="commentform" role="form" class="form-horizontal" novalidate>
     <fieldset>
         <legend>Post comment</legend>
-        <ul>
-            <li>
-                <label for="commentname">Name</label>
+
+        <div class="form-group">
+            <label for="commentname" class="control-label col-lg-2">Name</label>
+            <div class="col-lg-7">
                 <input id="commentname" class="form-control" type="text" placeholder="Name" required />
-            </li>
-            <li>
-                <label for="commentemail">Email</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="commentemail" class="control-label col-lg-2">Email</label>
+            <div class="col-lg-7">
                 <input id="commentemail" class="form-control" type="email" placeholder="Email" required />
-            </li>
-            <li>
-                <label for="commenturl">Website</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="commenturl" class="control-label col-lg-2">Website</label>
+            <div class="col-lg-7">
                 <input id="commenturl" class="form-control" type="text" pattern="(https?://)?(www\.)?([a-zA-Z0-9_%]*)\b\.[a-z]{2,4}(\.[a-z]{2})?((/[a-zA-Z0-9_%]*)+)?(\.[a-z]*)?" placeholder="Website URL" />
-            </li>
-            <li>
-                <label for="commentcontent">Comment (no HTML allowed)</label>
-                <textarea id="commentcontent" class="form-control" placeholder="Comment" required></textarea>
-            </li>
-            <li>
-                <button class="btn btn-primary">Post comment</button>
-                <span id="status" class="info" aria-live="polite"></span>
-            </li>
-        </ul>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-12">
+                <label for="commentcontent" class="control-label">Comment (no HTML allowed)</label>
+                <textarea id="commentcontent" class="form-control" rows="4" placeholder="Comment" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-12">
+            <button class="btn btn-primary">Post comment</button>
+            <span id="status" class="alert" role="status" aria-live="polite"></span>
+        </div>
     </fieldset>
 </form>
