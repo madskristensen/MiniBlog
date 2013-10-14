@@ -127,10 +127,15 @@ public static class Blog
 
             string result = rootRelativePath.Insert(index, "/v-" + date.Ticks);
 
-            HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute));
+            HttpRuntime.Cache.Insert(GetResourcePathFromSiteRoot(rootRelativePath), GetResourcePathFromSiteRoot(result), new CacheDependency(absolute));
         }
 
-        return HttpRuntime.Cache[rootRelativePath] as string;
+        return HttpRuntime.Cache[GetResourcePathFromSiteRoot(rootRelativePath)] as string;
+    }
+
+    private static string GetResourcePathFromSiteRoot(string relativePath)
+    {
+        return HttpContext.Current.Request.ApplicationPath != "/" ? HttpContext.Current.Request.ApplicationPath + relativePath : relativePath;
     }
 
     public static void SetConditionalGetHeaders(DateTime lastModified, HttpContextBase context)
