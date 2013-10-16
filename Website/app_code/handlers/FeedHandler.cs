@@ -17,6 +17,8 @@ public class FeedHandler : IHttpHandler
             Items = GetItems(),
         };
 
+        feed.Links.Add(new SyndicationLink(feed.BaseUri));
+
         using (var writer = new XmlTextWriter(context.Response.Output))
         {
             var formatter = GetFormatter(context, feed);
