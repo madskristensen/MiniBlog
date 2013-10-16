@@ -42,8 +42,9 @@
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
 
-    if (!Request.IsLocal) 
-    { 
+    if (!Request.IsLocal)
+    {
+        Response.Cache.AppendCacheExtension("max-age=0");
         Response.Cache.SetValidUntilExpires(true);
         Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
         Response.Cache.SetVaryByCustom("authenticated");
