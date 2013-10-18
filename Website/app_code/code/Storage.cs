@@ -81,7 +81,10 @@ public static class Storage
     private static void LoadPosts()
     {
         if (!Directory.Exists(_folder))
+        {
             Directory.CreateDirectory(_folder);
+            return;
+        }
 
         List<Post> list = new List<Post>();
 
