@@ -1,10 +1,4 @@
-﻿@media only screen and (orientation: portrait) and (max-width: 768px) {
-    @-ms-viewport {
-        width: 500px;
-    }
-}
-
-body {
+﻿body {
     font: 1.8em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
     margin: 0;
 }
