@@ -66,6 +66,11 @@
             deleteComment(element.attr("data-id"), postId, element);
         });
 
+        website.keypress(function () {
+            if (this.value.trim().length >= 4 && this.value.indexOf("http") === -1)
+                this.value = "http://" + this.value;
+        });
+
         if (localStorage) {
             email.val(localStorage.getItem("email"));
             website.val(localStorage.getItem("website"));
