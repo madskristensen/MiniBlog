@@ -1,0 +1,28 @@
+﻿<ul class="pager" role="navigation">
+    @if (Blog.GetPosts(Blog.PostsPerPage * 2).Count() > Blog.PostsPerPage)
+    {
+        <li class="previous"><a href="@PagingUrl(1)" rel="prev">&larr; Older</a></li>
+    }
+
+    @if (Blog.CurrentPage > 1)
+    {
+        <li class="next"><a href="@PagingUrl(-1)" rel="next">Newer &rarr;</a></li>
+    }
+</ul>
+
+@functions
+{
+    string PagingUrl(int move)
+    {
+        string url = "/page/{0}/";
+        string category = Request.QueryString["category"];
+
+        if (!string.IsNullOrEmpty(category))
+        {
+            url = "/category/" + HttpUtility.UrlEncode(category.ToLowerInvariant()) + "/" + url;
+        }
+
+        string relative = string.Format("~" + url, Blog.CurrentPage + move);
+        return VirtualPathUtility.ToAbsolute(relative);
+    }
+}

@@ -1,5 +1,12 @@
-﻿body {
-    background-color: #fff;
+﻿@media only screen and (orientation: portrait) and (max-width: 768px) {
+    @-ms-viewport {
+        width: 530px;
+    }
+}
+
+body {
+    font: 1.8em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    margin: 0;
 }
 
 img, video, iframe {
@@ -7,30 +14,27 @@ img, video, iframe {
 }
 
 a {
-    color: #3278b3;
+    color: #3277b3;
 }
 
 .page-header {
     border: none;
     text-align: center;
+    margin: 0 0 2em 0;
 }
 
     .page-header a {
-        font-size: 3em;
+        font-size: 4em;
         color: #000;
     }
 
-.container {
+div[role=main] {
     margin-bottom: 2em;
-    max-width: 650px;
-    margin: 0 auto;
-    font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
-    height: 100%;
 }
 
-    .container .pager {
-        margin-top: 2em;
-    }
+.pager {
+    margin-top: 2em;
+}
 
 input[type], button, textarea {
     font: inherit !important;
@@ -38,48 +42,52 @@ input[type], button, textarea {
 
 /*#region Post */
 
-.post header {
-    position: relative;
+.post header h1 {
+    margin: 0 0 3px 0;
 }
 
-    .post header h1 {
-        margin-bottom: 0px;
+.post header a {
+    color: #000;
+}
+
+.post header div {
+    font-size: .75em;
+    opacity: .8;
+    margin-bottom: 1em;
+}
+
+    .post header div a {
+        margin-left: 10px;
     }
 
-        .post header h1 a {
-            font-size: .8em;
-            color: #000;
-        }
-
-    .post header div {
-        font-size: .75em;
-        margin-bottom: 1em;
-        opacity: .7;
+    .post header div .categories {
+        margin: 0;
+        padding: 10px;
+        display: inline;
     }
 
-        .post header div i:not(:first-child) {
-            margin-left: 10px;
+        .post header div .categories a {
+            margin: 0;
         }
 
-        .post header div .categories {
-            margin-left: 10px;
+        .post header div .categories li {
             display: inline;
-            padding: 0;
         }
 
-            .post header div .categories li {
-                display: inline-block;
+            .post header div .categories li:not(:first-child):not(:last-child):after {
+                content: ", ";
             }
-
-                .post header div .categories li:not(:first-child):not(:last-child):after {
-                    content: ", ";
-                }
 
 .post abbr {
     border: none;
 }
 
 .post h2 {
+    margin-bottom: 0;
+    font-size: 1.3em;
+}
+
+.post h3 {
     margin-bottom: 0;
     font-size: 1.1em;
 }
@@ -91,10 +99,6 @@ input[type], button, textarea {
 
 .post p {
     padding: .2em 0;
-}
-
-.post li {
-    line-height: 1.5;
 }
 
 /*#endregion */
@@ -114,8 +118,6 @@ input[type], button, textarea {
             border-radius: 5px;
             padding: 7px;
             position: relative;
-            -ms-word-break: break-all;
-            word-break: break-all;
         }
 
             #comments article div p:before {
@@ -186,19 +188,18 @@ input[type], button, textarea {
 #pagefooter {
     background-color: #181818;
     color: #fff;
-    text-align: center;
-    font-size: .9em;
-    opacity: .9;
-    padding: 8px 0;
     margin-top: 4em;
-    width: 100%;
-    position: absolute;
-    left: 0;
+    font-size: .85em;
+    padding: 5px;
 }
 
-    #pagefooter .login {
-        float: right;
-        margin-right: 2em;
+    #pagefooter p {
+        padding: 1em 0;
+        text-align: center;
+    }
+
+    #pagefooter a {
+        color: #a9d2e1;
     }
 
 /*#endregion */
