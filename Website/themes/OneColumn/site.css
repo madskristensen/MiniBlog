@@ -1,4 +1,10 @@
-﻿body {
+﻿@media only screen and (max-width: 768px) {
+    @-ms-viewport {
+        width: 700px;
+    }
+}
+
+body {
     font: 1.8em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
     margin: 0;
 }
@@ -89,6 +95,7 @@ input[type], button, textarea {
 .post div[itemprop='articleBody'] {
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: .5em;
+    -ms-text-size-adjust: 150%;
 }
 
 .post p {
