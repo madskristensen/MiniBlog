@@ -80,7 +80,11 @@ public static class Storage
 
     private static void LoadPosts()
     {
+        if (!Directory.Exists(_folder))
+            Directory.CreateDirectory(_folder);
+
         List<Post> list = new List<Post>();
+
         foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
             XElement doc = XElement.Load(file);
