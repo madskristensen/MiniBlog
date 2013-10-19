@@ -38,7 +38,7 @@
 
 @helper Categories()
 {
-    if (Model.Categories.Length > 0)
+    if (Model.Categories.Length > 0 || User.Identity.IsAuthenticated)
     {
         <ul class="categories">
             <li><em class="glyphicon glyphicon-bookmark"></em> Posted in: </li>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>My new post
+asdasds</title>
+  <slug>my-new-postasdasds</slug>
+  <author>demo</author>
+  <pubDate>2013-10-19 20:24:37</pubDate>
+  <lastModified>2013-10-19 21:09:29</lastModified>
+  <content>the content</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Test</category>
+    <category> Demo</category>
+  </categories>
+  <comments></comments>
+</post>

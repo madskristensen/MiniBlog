@@ -86,3 +86,7 @@
     [contenteditable] img {
         cursor: move;
     }
+
+#txtCategories {
+    width:250px;
+}
