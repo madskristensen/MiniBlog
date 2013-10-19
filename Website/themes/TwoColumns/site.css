@@ -1,4 +1,8 @@
-﻿body {
+﻿html, body{
+    height: 100%;
+}
+
+body {
     font: 1.8em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
     margin: 0;
 }
@@ -11,19 +15,25 @@ a {
     color: #3277b3;
 }
 
-.page-header {
-    border: none;
-    text-align: center;
-    margin: 0 0 2em 0;
+.container {
+    min-height: 100%;
+    padding-bottom: 35px;
 }
 
-    .page-header a {
-        font-size: 4em;
-        color: #000;
+    .container > header {
+        border: none;
+        text-align: center;
+        margin: 0 0 2em 0;
     }
+
+        .container > header a {
+            font-size: 4em;
+            color: #000;
+        }
 
 div[role=main] {
     margin-bottom: 2em;
+    overflow: auto;
 }
 
 .pager {
@@ -179,20 +189,23 @@ input[type], button, textarea {
 
 /*#region Footer */
 
-#pagefooter {
+footer {
     background-color: #181818;
     color: #fff;
-    margin-top: 4em;
     font-size: .85em;
     padding: 5px;
+    clear: both;
+    position: relative;
+    margin: -35px 0 0 0;
+    height: 35px;
 }
 
-    #pagefooter p {
+    footer p {
         padding: 1em 0;
         text-align: center;
     }
 
-    #pagefooter a {
+    footer a {
         color: #a9d2e1;
     }
 
