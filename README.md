@@ -26,9 +26,10 @@ Perfect for the blogger who wants to selfhost a blog.
  * Uses HTML 5 __microdata__ to add semantic meaning
  * Support for __robots.txt__ and __sitemap.xml__
 * Theming support
- * Themes can easily be added through __NuGet__
+ * Based on Bootstrap themes. Makes it easy to customize your blog
 * __No database__ required
  * Uses the same XML format as BlogEngine.NET
+ * Move your existing blog to MiniBlog using [MiniBlog Formatter](https://github.com/madskristensen/MiniBlogFormatter)
 * __Inline editing__ of blog posts
 * Comments support
  * __Gravatar__ support 
