@@ -69,7 +69,7 @@ public class PostHandler : IHttpHandler
             string value = string.Format("src=\"{0}\" alt=\"\" /", path);
 
             if (match.Groups[1].Value == "href")
-                value = string.Format("href=\"{0}\" /", path);
+                value = string.Format("href=\"{0}\"", path);
 
             post.Content = post.Content.Replace(match.Value, value);
         }
