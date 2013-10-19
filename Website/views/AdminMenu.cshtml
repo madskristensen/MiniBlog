@@ -70,6 +70,7 @@
 
 @if (!string.IsNullOrEmpty(Blog.CurrentSlug))
 {
+    <script src="@Blog.FingerPrint("/scripts/jquery-2.0.2.js", "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")"></script>
     <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")" async defer></script>
     <script src="@Blog.FingerPrint("/scripts/admin.js")" async defer></script>
 }
