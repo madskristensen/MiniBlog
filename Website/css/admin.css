@@ -49,7 +49,8 @@
 
 #admin #tools {
     position: relative;
-    top: 3px;
+    top: 5px;
+    left: 10px;
     margin: 0 1em;
     display: none;
 }
@@ -57,11 +58,11 @@
     #admin #tools a {
         font-size: 14px;
         font-weight: bold;
-        min-width: 10px;
+        padding: 0 9px;
     }
 
-    #admin #tools [class^="icon-"] {
-        margin-top: 2px;
+    #admin #tools div:not(:last-child) {
+        border-right: 1px solid gray;
     }
 
 #admin aside {
@@ -86,7 +87,3 @@
     [contenteditable] img {
         cursor: move;
     }
-
-#txtCategories {
-    width:250px;
-}
