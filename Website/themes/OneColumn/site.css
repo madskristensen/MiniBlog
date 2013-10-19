@@ -108,6 +108,12 @@ input[type], button, textarea {
 
 #comments article {
     position: relative;
+    max-height: 9999px;
+    overflow: hidden;
+    -webkit-transition: height 1s ease-in-out;
+    -moz-transition: height 1s ease-in-out;
+    -o-transition: height 1s ease-in-out;
+    transition: height 1s ease-in-out;
 }
 
     #comments article div {
@@ -204,3 +210,46 @@ input[type], button, textarea {
     }
 
 /*#endregion */
+
+/* #region Sticky footer */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+}
+
+.container {
+    overflow: auto;
+    padding-bottom: 30px;
+}
+
+footer {
+    position: relative !important;
+    margin-top: -30px !important;
+    max-height: 30px;
+    clear: both;
+}
+
+/*Opera Fix*/
+body:before {
+    content: "";
+    height: 100%;
+    float: left;
+    width: 0;
+    margin-top: -32767px;
+}
+
+/* #endregion */
+
+
+.slideClone img {
+    float: left;
+}

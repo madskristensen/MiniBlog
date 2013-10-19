@@ -22,44 +22,45 @@
 
     <meta property="og:title" content="@Page.Title" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
+    <meta property="og:url" content="@(Request.Url.Scheme + "://" + Request.Url.Authority + Request.RawUrl)" />
 </head>
-<body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
+<body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin" : null)">
 
-    <header class="page-header" role="banner">
-        <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
-        <em>By Mads Kristensen</em>
-    </header>
+    <div class="wrapper">
+        <header class="page-header" role="banner">
+            <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
+            <em>By Mads Kristensen</em>
+        </header>
 
-    <div class="container">
-        <div role="main" class="col-md-8">
-            @RenderBody()
+        <div class="container">
+            <div role="main" class="col-md-8">
+                @RenderBody()
 
-            @if (Page.ShowPaging != null)
-            {
-                @RenderPage("Paging.cshtml")
-            }
+                @if (Page.ShowPaging != null)
+                {
+                    @RenderPage("Paging.cshtml")
+                }
+            </div>
+
+            <aside class="col-md-3 col-md-offset-1">
+                <section>
+                    <h3>About me</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>My side projects</h3>
+                    <ul>
+                        <li>Project 1</li>
+                        <li>Project 2</li>
+                        <li>Project 3</li>
+                    </ul>
+                </section>
+            </aside>
         </div>
-
-        <aside class="col-md-3 col-md-offset-1">
-            <section>
-                <h3>About me</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper.
-                </p>
-            </section>
-
-            <section>
-                <h3>My side projects</h3>
-                <ul>
-                    <li>Project 1</li>
-                    <li>Project 2</li>
-                    <li>Project 3</li>
-                </ul>
-            </section>
-        </aside>
     </div>
-
     <footer id="pagefooter" class="text-center" role="contentinfo" itemscope itemtype="http://schema.org/Person" itemprop="author">
         @if (!User.Identity.IsAuthenticated)
         {
@@ -67,8 +68,7 @@
                 <a href="@FormsAuthentication.LoginUrl?ReturnUrl=@Request.RawUrl">Sign in <i class="icon-lock icon-white"></i></a>
             </span>
         }
-        <span>
-            Copyright &copy; @DateTime.Now.Year
+        <span>Copyright &copy; @DateTime.Now.Year
             <a href="http://madskristensen.net" itemprop="url name">Mads Kristensen</a>
         </span>
     </footer>
@@ -76,7 +76,6 @@
 
     @if ((Blog.CurrentPost != null && Blog.CurrentPost.AreCommentsOpen(Context)) || Blog.IsNewPost)
     {
-        <script src="@Blog.FingerPrint("/scripts/jquery-2.0.2.js", "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")"></script>
         <script src="@Blog.FingerPrint("/scripts/comments.js")" async defer></script>
     }
 
@@ -92,6 +91,6 @@
 {
     if (User.Identity.IsAuthenticated)
     {
-        <link href="@Blog.FingerPrint("/css/admin.css")" rel="stylesheet" />
+    <link href="@Blog.FingerPrint("/css/admin.css")" rel="stylesheet" />
     }
 }
