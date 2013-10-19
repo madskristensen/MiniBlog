@@ -1,4 +1,15 @@
-﻿.admin {
+﻿@media (max-width: 1024px) {
+    .nav > li {
+        display: inline-block;
+    }
+
+    .nav > li button, #ispublished {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
+.admin {
     margin-top: 50px;
 }
 

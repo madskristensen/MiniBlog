@@ -1,5 +1,22 @@
-﻿body {
-    background-color: #fff;
+﻿@media only screen and (max-width: 1280px) {
+    @-ms-viewport {
+        width: 800px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    @-ms-viewport {
+        width: 600px;
+    }
+}
+
+html, body{
+    height: 100%;
+}
+
+body {
+    font: 1.8em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    margin: 0;
 }
 
 img, video, iframe {
@@ -7,30 +24,33 @@ img, video, iframe {
 }
 
 a {
-    color: #3278b3;
+    color: #3277b3;
 }
-
-.page-header {
-    border: none;
-    text-align: center;
-}
-
-    .page-header a {
-        font-size: 3em;
-        color: #000;
-    }
 
 .container {
-    margin-bottom: 2em;
-    max-width: 650px;
-    margin: 0 auto;
-    font: 1.3em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
-    height: 100%;
+    min-height: 100%;
+    padding-bottom: 35px;
 }
 
-    .container .pager {
-        margin-top: 2em;
+    .container > header {
+        border: none;
+        text-align: center;
+        margin: 0 0 2em 0;
     }
+
+        .container > header a {
+            font-size: 4em;
+            color: #000;
+        }
+
+div[role=main] {
+    margin-bottom: 2em;
+    overflow: auto;
+}
+
+.pager {
+    margin-top: 2em;
+}
 
 input[type], button, textarea {
     font: inherit !important;
@@ -38,42 +58,41 @@ input[type], button, textarea {
 
 /*#region Post */
 
-.post header {
-    position: relative;
+.post header h1 {
+    margin: 0 0 3px 0;
 }
 
-    .post header h1 {
-        margin-bottom: 0px;
+.post header a {
+    color: #000;
+}
+
+.post header div {
+    font-size: .75em;
+    opacity: .8;
+    margin-bottom: 1em;
+}
+
+    .post header div a {
+        margin-left: 10px;
     }
 
-        .post header h1 a {
-            font-size: .8em;
-            color: #000;
-        }
-
-    .post header div {
-        font-size: .75em;
-        margin-bottom: 1em;
-        opacity: .7;
+    .post header div .categories {
+        margin: 0;
+        padding: 10px;
+        display: inline;
     }
 
-        .post header div i:not(:first-child) {
-            margin-left: 10px;
+        .post header div .categories a {
+            margin: 0;
         }
 
-        .post header div .categories {
-            margin-left: 10px;
+        .post header div .categories li {
             display: inline;
-            padding: 0;
         }
 
-            .post header div .categories li {
-                display: inline-block;
+            .post header div .categories li:not(:first-child):not(:last-child):after {
+                content: ", ";
             }
-
-                .post header div .categories li:not(:first-child):not(:last-child):after {
-                    content: ", ";
-                }
 
 .post abbr {
     border: none;
@@ -81,20 +100,22 @@ input[type], button, textarea {
 
 .post h2 {
     margin-bottom: 0;
+    font-size: 1.3em;
+}
+
+.post h3 {
+    margin-bottom: 0;
     font-size: 1.1em;
 }
 
 .post div[itemprop='articleBody'] {
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: .5em;
+    -ms-text-size-adjust: 150%;
 }
 
 .post p {
     padding: .2em 0;
-}
-
-.post li {
-    line-height: 1.5;
 }
 
 /*#endregion */
@@ -103,6 +124,12 @@ input[type], button, textarea {
 
 #comments article {
     position: relative;
+    max-height: 9999px;
+    overflow: hidden;
+    -webkit-transition: height .5s ease-in-out;
+    -moz-transition: height .5s ease-in-out;
+    -o-transition: height .5s ease-in-out;
+    transition: height .5s ease-in-out;
 }
 
     #comments article div {
@@ -114,8 +141,6 @@ input[type], button, textarea {
             border-radius: 5px;
             padding: 7px;
             position: relative;
-            -ms-word-break: break-all;
-            word-break: break-all;
         }
 
             #comments article div p:before {
@@ -183,22 +208,28 @@ input[type], button, textarea {
 
 /*#region Footer */
 
-#pagefooter {
+footer {
     background-color: #181818;
     color: #fff;
-    text-align: center;
-    font-size: .9em;
-    opacity: .9;
-    padding: 8px 0;
-    margin-top: 4em;
-    width: 100%;
-    position: absolute;
-    left: 0;
+    font-size: .85em;
+    padding: 5px;
+    clear: both;
+    position: relative;
+    margin: -35px 0 0 0;
+    height: 35px;
 }
 
-    #pagefooter .login {
-        float: right;
-        margin-right: 2em;
+    footer p {
+        padding: 1em 0;
+        text-align: center;
+    }
+
+    footer a {
+        color: #a9d2e1;
     }
 
 /*#endregion */
+
+.slideClone img {
+    float: left;
+}

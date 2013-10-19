@@ -115,7 +115,8 @@ public static class Blog
 
         if (HttpRuntime.Cache[rootRelativePath] == null)
         {
-            string absolute = HostingEnvironment.MapPath("~" + rootRelativePath);
+            string relative = VirtualPathUtility.ToAbsolute("~" + rootRelativePath);
+            string absolute = HostingEnvironment.MapPath(relative);            
 
             if (!File.Exists(absolute))
             {
@@ -123,9 +124,9 @@ public static class Blog
             }
 
             DateTime date = File.GetLastWriteTime(absolute);
-            int index = rootRelativePath.LastIndexOf('/');
+            int index = relative.LastIndexOf('/');
 
-            string result = rootRelativePath.Insert(index, "/v-" + date.Ticks);
+            string result = relative.Insert(index, "/v-" + date.Ticks);
 
             HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute));
         }
@@ -142,8 +143,6 @@ public static class Blog
         string incomingDate = request.Headers["If-Modified-Since"];
 
         response.Cache.SetLastModified(lastModified);
-        response.Cache.VaryByHeaders["Accept-Encoding"] = true;
-        response.Cache.VaryByHeaders["If-Modified-Since"] = true;
 
         DateTime testDate = DateTime.MinValue;
 

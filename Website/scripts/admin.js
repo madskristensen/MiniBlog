@@ -185,7 +185,7 @@
     else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
         btnEdit.removeAttr("disabled");
         btnDelete.removeAttr("disabled");
-        $("#ispublished").fadeIn();
+        $("#ispublished").css({ "display": "inline" });
     }
 
 })(jQuery);

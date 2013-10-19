@@ -80,7 +80,11 @@ public static class Storage
 
     private static void LoadPosts()
     {
+        if (!Directory.Exists(_folder))
+            Directory.CreateDirectory(_folder);
+
         List<Post> list = new List<Post>();
+
         foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
             XElement doc = XElement.Load(file);
@@ -102,8 +106,11 @@ public static class Storage
             list.Add(post);
         }
 
-        list.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
-        HttpRuntime.Cache.Insert("posts", list);
+        if (list.Count > 0)
+        {
+            list.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
+            HttpRuntime.Cache.Insert("posts", list);
+        }
     }
 
     private static void LoadCategories(Post post, XElement doc)
