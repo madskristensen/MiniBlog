@@ -27,14 +27,14 @@
 			    if (options.activeToolbarClass) {
 			        $(options.toolbarSelector).find(toolbarBtnSelector).each(function () {
 			            var command = $(this).data(options.commandRole);
-			            try{
+			            try {
 			                if (document.queryCommandState(command)) {
 			                    $(this).addClass(options.activeToolbarClass);
 			                } else {
 			                    $(this).removeClass(options.activeToolbarClass);
 			                }
 			            }
-			            catch(ex){};
+			            catch (ex) { };
 			        });
 			    }
 			},
@@ -42,6 +42,8 @@
 			    var commandArr = commandWithArgs.split(' '),
 					command = commandArr.shift(),
 					args = commandArr.join(' ') + (valueArg || '');
+			    if (commandWithArgs === "createLink")
+			        args = prompt("Enter the URL for this link:", "http://");
 			    document.execCommand(command, 0, args);
 			    updateToolbar();
 			},
