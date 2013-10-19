@@ -1,4 +1,6 @@
-﻿window.onload = function () {
+﻿/* globals NodeList, HTMLCollection */
+
+window.onload = function () {
     var postId = null;
 
     //#region Helpers
@@ -33,21 +35,7 @@
 
     AsynObject.getAjaxRequest = function (callback) {
 
-        var ajaxRequest;
-
-        try {
-            ajaxRequest = new XMLHttpRequest();
-        } catch (e) {
-            try {
-                ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch (e1) {
-                try {
-                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-                } catch (e2) {
-                    return null;
-                }
-            }
-        }
+        var ajaxRequest = new XMLHttpRequest();
 
         ajaxRequest.onreadystatechange = function () {
             if (ajaxRequest.readyState > 1 && ajaxRequest.status > 0) {
@@ -55,16 +43,12 @@
             }
         };
 
-
         return ajaxRequest;
-
     };
-
 
     function hasClass(elem, className) {
         return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
     }
-
 
     function addClass(elem, className) {
         if (!hasClass(elem, className)) {
@@ -158,7 +142,7 @@
     function deleteComment(commentId, element) {
 
         if (confirm("Do you want to delete this comment?")) {
-            AsynObject.postAjax(endpoint, function (state, status, data) {
+            AsynObject.postAjax(endpoint, function (state, status) {
                 if (state === 4 && status === 200) {
                     slide(element, "Up", function () {
                         element.remove();
@@ -234,7 +218,7 @@
     }
 
     function initialize() {
-        postId = document.querySelectorAll("[itemprop=blogPost]")[0].getAttribute("data-id");
+        postId = document.querySelector("[itemprop=blogPost]").getAttribute("data-id");
         var email = document.getElementById("commentemail");
         var name = document.getElementById("commentname");
         var website = document.getElementById("commenturl");
@@ -256,12 +240,17 @@
             });
         };
 
+        website.addEventListener("keyup", function (e) {
+            var w = e.target;
+            if (w.value.trim().length >= 4 && w.value.indexOf("http") === -1)
+                w.value = "http://" + w.value;
+        });
+
         var elementsDeleteComments = document.getElementsByClassName('deletecomment');
 
-        for (i = 0, len = elementsDeleteComments.length; i < len; i++) {
-            BindDeleteCommentsEvent(elementsDeleteComments[i]);
+        for (var a = 0, len = elementsDeleteComments.length; a < len; a++) {
+            BindDeleteCommentsEvent(elementsDeleteComments[a]);
         }
-
 
         if (localStorage) {
             email.value = localStorage.getItem("email");
