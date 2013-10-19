@@ -95,7 +95,18 @@
 			                options.fileUploadError("file-reader", e);
 			            });
 			        } else {
-			            options.fileUploadError("unsupported-file-type", fileInfo.type);
+			            $.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
+			                //execCommand('inserthtml', '<a href="' + dataUrl + '">Download</a>');
+			                var frag = document.createDocumentFragment();
+			                var node = document.createElement("a");
+			                node.innerText = fileInfo.name;
+			                node.href = dataUrl;
+			                frag.appendChild(node);
+			                window.getSelection().getRangeAt(0).insertNode(node);
+			            }).fail(function (e) {
+			                options.fileUploadError("file-reader", e);
+			            });
+			            //options.fileUploadError("unsupported-file-type", fileInfo.type);
 			        }
 			    });
 			},

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Hosting;
 
 public class PostHandler : IHttpHandler
 {
@@ -53,24 +51,27 @@ public class PostHandler : IHttpHandler
             HttpContext.Current.Response.Write(post.Url);
         }
 
-        SaveImagesToDisk(post);
+        SaveFilesToDisk(post);
 
         post.IsPublished = isPublished;
         Storage.Save(post);
     }
 
-    private void SaveImagesToDisk(Post post)
+    private void SaveFilesToDisk(Post post)
     {
-        foreach (Match match in Regex.Matches(post.Content, "src=\"(data:([^\"]+))\""))
+        foreach (Match match in Regex.Matches(post.Content, "(src|href)=\"(data:([^\"]+))\""))
         {
-            string extension = Regex.Match(match.Value, "data:image/([a-z]+);base64").Groups[1].Value;
+            string extension = Regex.Match(match.Value, "data:([^/]+)/([a-z]+);base64").Groups[2].Value;
 
-            byte[] bytes = ConvertToBytes(match.Groups[1].Value);
+            byte[] bytes = ConvertToBytes(match.Groups[2].Value);
             string path = Blog.SaveFileToDisk(bytes, extension);
 
-            string image = string.Format("src=\"{0}\" alt=\"\" /", path);
+            string value = string.Format("src=\"{0}\" alt=\"\" /", path);
 
-            post.Content = post.Content.Replace(match.Value, image);
+            if (match.Groups[1].Value == "href")
+                value = string.Format("href=\"{0}\" /", path);
+
+            post.Content = post.Content.Replace(match.Value, value);
         }
     }
 
