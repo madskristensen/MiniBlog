@@ -124,6 +124,12 @@ input[type], button, textarea {
 
 #comments article {
     position: relative;
+    max-height: 9999px;
+    overflow: hidden;
+    -webkit-transition: height 1s ease-in-out;
+    -moz-transition: height 1s ease-in-out;
+    -o-transition: height 1s ease-in-out;
+    transition: height 1s ease-in-out;
 }
 
     #comments article div {
@@ -223,3 +229,7 @@ footer {
     }
 
 /*#endregion */
+
+.slideClone img {
+    float: left;
+}
