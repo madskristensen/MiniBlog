@@ -23,7 +23,7 @@ public class PostHandler : IHttpHandler
         }
         else if (mode == "save")
         {
-            EditPost(id, context.Request.Form["title"], context.Request.Form["content"], bool.Parse(context.Request.Form["isPublished"]));
+            EditPost(id, context.Request.Form["title"], context.Request.Form["content"], bool.Parse(context.Request.Form["isPublished"]), context.Request.Form["categories"].Split(','));
         }
     }
 
@@ -37,7 +37,7 @@ public class PostHandler : IHttpHandler
         Storage.Delete(post);
     }
 
-    private void EditPost(string id, string title, string content, bool isPublished)
+    private void EditPost(string id, string title, string content, bool isPublished, string[] categories)
     {
         Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
 
@@ -45,10 +45,11 @@ public class PostHandler : IHttpHandler
         {
             post.Title = title;
             post.Content = content;
+            post.Categories = categories;
         }
         else
         {
-            post = new Post() { Title = title, Content = content, Slug = CreateSlug(title) };
+            post = new Post() { Title = title, Content = content, Slug = CreateSlug(title), Categories = categories };
             HttpContext.Current.Response.Write(post.Url);
         }
 
