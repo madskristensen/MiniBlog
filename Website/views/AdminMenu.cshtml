@@ -5,16 +5,11 @@
 <nav id="admin" role="toolbar" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished">
     <div class="navbar-inner">
         <ul class="nav navbar-nav">
-            <li>
-                <button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
-            <li>
-                <button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
-            <li>
-                <button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
-            <li>
-                <button class="btn btn-link" id="btnSave" disabled>Save</button></li>
-            <li>
-                <button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
+            <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
+            <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
+            <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
+            <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
+            <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
             <li id="ispublished">
                 <input type="checkbox" id="chkispublished" checked="@(isPublished ? "checked" : null)" disabled />
                 <label for="chkispublished">Publish</label>
@@ -56,7 +51,7 @@
                 <a class="btn btn-mini uploadimage"><i class="glyphicon glyphicon-picture"></i></a>
             </div>
 
-            <input type="file" id="txtImage" data-edit="insertImage" style="width: 0; height: 0; position: absolute" />
+            <input type="file" id="txtImage" data-edit="insertImage" style="width:0; height: 0;position:absolute" />
 
             <div class="btn-group">
                 <a class="btn btn-mini source" data-cmd="source" title="Toggle source/design view"><i class="icon-eye-open"></i></a>
@@ -75,7 +70,6 @@
 
 @if (!string.IsNullOrEmpty(Blog.CurrentSlug))
 {
-    <script src="@Blog.FingerPrint("/scripts/jquery-2.0.2.js", "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")"></script>
     <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")" async defer></script>
     <script src="@Blog.FingerPrint("/scripts/admin.js")" async defer></script>
 }
