@@ -36,9 +36,9 @@
 
         Page.Title = post.Title;
         lastModified = post.LastModified;
-        
+
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/" + post.ID + ".xml")));
-        
+
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
 
@@ -48,12 +48,11 @@
         Response.Cache.SetValidUntilExpires(true);
         Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
         Response.Cache.SetVaryByCustom("authenticated");
-        Response.Cache.SetOmitVaryStar(true);
         Response.Cache.VaryByParams["slug"] = true;
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
-        
+
         Blog.SetConditionalGetHeaders(lastModified, Context);
     }
 }
