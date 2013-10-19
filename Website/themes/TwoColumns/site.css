@@ -1,4 +1,16 @@
-﻿html, body{
+﻿@media only screen and (max-width: 1280px) {
+    @-ms-viewport {
+        width: 800px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    @-ms-viewport {
+        width: 600px;
+    }
+}
+
+html, body{
     height: 100%;
 }
 
@@ -99,6 +111,7 @@ input[type], button, textarea {
 .post div[itemprop='articleBody'] {
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: .5em;
+    -ms-text-size-adjust: 150%;
 }
 
 .post p {
