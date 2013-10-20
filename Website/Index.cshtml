@@ -52,6 +52,7 @@
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/themes/" + Blog.Theme)));
 
         Blog.SetConditionalGetHeaders(lastModified, Context);
     }
