@@ -15,7 +15,11 @@ public static class Storage
         if (HttpRuntime.Cache["posts"] == null)
             LoadPosts();
 
-        return (List<Post>)HttpRuntime.Cache["posts"];
+        if (HttpRuntime.Cache["posts"] != null)
+        {
+            return (List<Post>)HttpRuntime.Cache["posts"];
+        }
+        return new List<Post>();
     }
 
     public static void Save(Post post)
