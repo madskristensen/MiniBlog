@@ -41,8 +41,6 @@
             showCategoriesForDisplay();
 
             $("#tools").fadeOut();
-
-            $(".categoriesControl").fadeOut();
         }
     },
     toggleSourceView = function () {
