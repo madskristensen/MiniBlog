@@ -11,12 +11,18 @@ public static class Blog
 {
     private static string _theme = ConfigurationManager.AppSettings.Get("blog:theme");
     private static string _title = ConfigurationManager.AppSettings.Get("blog:name");
+    private static string _tagLine = ConfigurationManager.AppSettings.Get("blog:tagLine");
     private static int _postsPerPage = int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage"));
     private static int _commentDays = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
 
     public static string Title
     {
         get { return _title; }
+    }
+
+    public static string TagLine
+    {
+        get { return _tagLine; }
     }
 
     public static string Theme
