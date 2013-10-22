@@ -3,36 +3,40 @@
         display: inline-block;
     }
 
-    .nav > li button, #ispublished {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
+        .nav > li button, #ispublished {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
 }
 
 .admin {
     margin-top: 50px;
 }
 
-#admin .navbar-inner {
-    min-height: 0;
-    padding-top: 8px;
+#admin {
+    font: 12pt arial;
 }
 
-#admin form {
-    position: absolute;
-    top: 8px;
-    right: 1em;
-    margin: 0;
-}
+    #admin .navbar-inner {
+        min-height: 0;
+        padding-top: 8px;
+    }
 
-#admin .nav {
-    margin-left: 1em;
-}
+    #admin form {
+        position: absolute;
+        top: 8px;
+        right: 1em;
+        margin: 0;
+    }
 
-#admin button:focus {
-    outline: 0;
-    white-space: nowrap;
-}
+    #admin .nav {
+        margin-left: 1em;
+    }
+
+    #admin button:focus {
+        outline: 0;
+        white-space: nowrap;
+    }
 
 #ispublished {
     display: none;
@@ -45,6 +49,7 @@
         display: inline;
         position: relative;
         left: 4px;
+        font-weight: normal;
     }
 
 #admin #tools {

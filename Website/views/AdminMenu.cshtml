@@ -60,7 +60,9 @@
     </div>
 
     <form action="@FormsAuthentication.LoginUrl?signout=true&amp;ReturnUrl=@Request.RawUrl" method="post">
-        <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link pull-right">Sign out <em class="glyphicon glyphicon-lock"></em></button>
+        <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link pull-right">
+            Sign out &nbsp;<span class="glyphicon glyphicon-lock"></span>
+        </button>
     </form>
 
     <aside>
