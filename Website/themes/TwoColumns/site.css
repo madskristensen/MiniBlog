@@ -35,7 +35,7 @@ a {
     .container > header {
         border: none;
         text-align: center;
-        margin: 0 0 2em 0;
+        margin: 0 0 3em 0;
     }
 
         .container > header a {
@@ -111,6 +111,7 @@ input[type], button, textarea {
 .post div[itemprop='articleBody'] {
     border-bottom: 1px solid #d3d3d3;
     padding-bottom: .5em;
+    margin-bottom: 2em;
     -ms-text-size-adjust: 150%;
 }
 
