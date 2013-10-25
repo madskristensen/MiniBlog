@@ -80,7 +80,7 @@ public static class Blog
     public static IEnumerable<Post> GetPosts(int postsPerPage)
     {
         var posts = from p in Storage.GetAllPosts()
-                    where p.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated
+                    where (p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated
                     select p;
 
         string category = HttpContext.Current.Request.QueryString["category"];
@@ -106,6 +106,20 @@ public static class Blog
         return VirtualPathUtility.ToAbsolute(relative);
     }
 
+    public static string GetPagingUrl(int move)
+    {
+        string url = "/page/{0}/";
+        string category = HttpContext.Current.Request.QueryString["category"];
+
+        if (!string.IsNullOrEmpty(category))
+        {
+            url = "/category/" + HttpUtility.UrlEncode(category.ToLowerInvariant()) + "/" + url;
+        }
+
+        string relative = string.Format("~" + url, Blog.CurrentPage + move);
+        return VirtualPathUtility.ToAbsolute(relative);
+    }
+
     public static string FingerPrint(string rootRelativePath, string cdnPath = "")
     {
         if (!string.IsNullOrEmpty(cdnPath) && !HttpContext.Current.IsDebuggingEnabled)
@@ -116,7 +130,7 @@ public static class Blog
         if (HttpRuntime.Cache[rootRelativePath] == null)
         {
             string relative = VirtualPathUtility.ToAbsolute("~" + rootRelativePath);
-            string absolute = HostingEnvironment.MapPath(relative);            
+            string absolute = HostingEnvironment.MapPath(relative);
 
             if (!File.Exists(absolute))
             {

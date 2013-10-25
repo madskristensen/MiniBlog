@@ -37,7 +37,17 @@
 
             @if (Page.ShowPaging != null)
             {
-                @RenderPage("Paging.cshtml")
+                <ul class="pager">
+                    @if (Blog.GetPosts(Blog.PostsPerPage * 2).Count() > Blog.PostsPerPage)
+                    {
+                        <li class="previous"><a href="@Blog.GetPagingUrl(1)" rel="prev">&larr; Older</a></li>
+                    }
+
+                    @if (Blog.CurrentPage > 1)
+                    {
+                        <li class="next"><a href="@Blog.GetPagingUrl(-1)" rel="next">Newer &rarr;</a></li>
+                    }
+                </ul>
             }
         </div>
     </div>
