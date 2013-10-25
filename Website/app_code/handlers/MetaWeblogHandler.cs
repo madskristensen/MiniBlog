@@ -67,6 +67,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Slug = post.Slug;
             match.Categories = post.Categories;
             match.IsPublished = publish;
+            match.PubDate = post.PubDate;
             Storage.Save(match);
         }
 
