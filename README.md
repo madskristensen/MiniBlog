@@ -22,7 +22,7 @@ Perfect for the blogger who wants to selfhost a blog.
  * Assumes WLW is the main way to write posts
  * You don't have to use WLW (but you should)
 * RSS and ATOM __feeds__
-* Schedule a post to be published on a future date
+* Schedule posts to be published on a future date
 * __SEO__ optimized
  * Uses HTML 5 __microdata__ to add semantic meaning
  * Support for __robots.txt__ and __sitemap.xml__
