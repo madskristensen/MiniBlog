@@ -44,7 +44,7 @@
             <li><em class="glyphicon glyphicon-bookmark"></em> Posted in: </li>
             @foreach (string cat in Model.Categories)
             {
-                <li itemprop="articleSection" title="@cat">
+                <li itemprop="articleSection">
                     <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
                 </li>
             }
