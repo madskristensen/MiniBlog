@@ -1,24 +1,24 @@
-﻿/* Helper method */
+﻿(function ($) {
 
-function ConvertMarkupToValidXhtml(markup) {
-    var docImplementation = document.implementation;
-    var htmlDocument = docImplementation.createHTMLDocument("temp");
-    var xHtmlDocument = docImplementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);
-    var xhtmlBody = xHtmlDocument.createElementNS('http://www.w3.org/1999/xhtml', 'body');
+    // #region Helpers
 
-    htmlDocument.body.innerHTML = "<div>" + markup + "</div>";
+    function ConvertMarkupToValidXhtml(markup) {
+        var docImplementation = document.implementation;
+        var htmlDocument = docImplementation.createHTMLDocument("temp");
+        var xHtmlDocument = docImplementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);
+        var xhtmlBody = xHtmlDocument.createElementNS('http://www.w3.org/1999/xhtml', 'body');
 
-    xHtmlDocument.documentElement.appendChild(xhtmlBody);
-    xHtmlDocument.importNode(htmlDocument.body, true);
-    xhtmlBody.appendChild(htmlDocument.body.firstChild);
+        htmlDocument.body.innerHTML = "<div>" + markup + "</div>";
 
-    /<body.*?><div>(.*?)<\/div><\/body>/im.exec(xHtmlDocument.documentElement.innerHTML);
-    return RegExp.$1;
-}
+        xHtmlDocument.documentElement.appendChild(xhtmlBody);
+        xHtmlDocument.importNode(htmlDocument.body, true);
+        xhtmlBody.appendChild(htmlDocument.body.firstChild);
 
-/* End of Helper method */
+        /<body.*?><div>(.*?)<\/div><\/body>/im.exec(xHtmlDocument.documentElement.innerHTML);
+        return RegExp.$1;
+    }
 
-(function ($) {
+    // #endregion
 
     var postId, isNew,
         txtTitle, txtContent, txtMessage, txtImage, chkPublish,
@@ -82,7 +82,7 @@ function ConvertMarkupToValidXhtml(markup) {
         if ($(".source").attr("data-cmd") === "design") {
             $(".source").click();
         }
-        console.log(txtContent.html());
+
         txtContent.cleanHtml();
 
         var parsedDOM;
