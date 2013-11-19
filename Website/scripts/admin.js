@@ -82,7 +82,7 @@ function ConvertMarkupToValidXhtml(markup) {
         if ($(".source").attr("data-cmd") === "design") {
             $(".source").click();
         }
-        console.log(txtContent.html());
+
         txtContent.cleanHtml();
 
         var parsedDOM;
