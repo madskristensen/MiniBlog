@@ -1,4 +1,24 @@
-﻿(function ($) {
+﻿/* Helper method */
+
+function ConvertMarkupToValidXhtml(markup) {
+    var docImplementation = document.implementation;
+    var htmlDocument = docImplementation.createHTMLDocument("temp");
+    var xHtmlDocument = docImplementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);
+    var xhtmlBody = xHtmlDocument.createElementNS('http://www.w3.org/1999/xhtml', 'body');
+
+    htmlDocument.body.innerHTML = "<div>" + markup + "</div>";
+
+    xHtmlDocument.documentElement.appendChild(xhtmlBody);
+    xHtmlDocument.importNode(htmlDocument.body, true);
+    xhtmlBody.appendChild(htmlDocument.body.firstChild);
+
+    /<body.*?><div>(.*?)<\/div><\/body>/im.exec(xHtmlDocument.documentElement.innerHTML);
+    return RegExp.$1;
+}
+
+/* End of Helper method */
+
+(function ($) {
 
     var postId, isNew,
         txtTitle, txtContent, txtMessage, txtImage, chkPublish,
@@ -62,14 +82,30 @@
         if ($(".source").attr("data-cmd") === "design") {
             $(".source").click();
         }
-
+        console.log(txtContent.html());
         txtContent.cleanHtml();
+
+        var parsedDOM;
+
+        /*  IE9 doesn't support text/html MimeType https://github.com/madskristensen/MiniBlog/issues/35
+        
+            parsedDOM = new DOMParser().parseFromString(txtContent.html(), 'text/html');
+            parsedDOM = new XMLSerializer().serializeToString(parsedDOM);
+
+            /<body>(.*)<\/body>/im.exec(parsedDOM);
+            parsedDOM = RegExp.$1;
+        
+        */
+
+        /* When its time to drop IE9 support toggle commented region with 
+           the following statement and ConvertMarkupToXhtml function */
+        parsedDOM = ConvertMarkupToValidXhtml(txtContent.html());
 
         $.post("/post.ashx?mode=save", {
             id: postId,
             isPublished: chkPublish[0].checked,
             title: txtTitle.text().trim(),
-            content: txtContent.html(),
+            content: parsedDOM,
             categories: getPostCategories(),
         })
           .success(function (data) {
