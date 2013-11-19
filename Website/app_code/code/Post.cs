@@ -1,7 +1,7 @@
-﻿using CookComputing.XmlRpc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using CookComputing.XmlRpc;
 
 [XmlRpcMissingMapping(MappingAction.Ignore)]
 public class Post
@@ -31,8 +31,21 @@ public class Post
     [XmlRpcMember("wp_slug")]
     public string Slug { get; set; }
 
+    [XmlRpcMember("excerpt")]
+    public string Excerpt { get; set; }
+
+    private string _content;
     [XmlRpcMember("description")]
-    public string Content { get; set; }
+    public string Content
+    {
+        get { return _content; }
+        set
+        {
+            Excerpt = value.StripTags().TruncateHtml(235, "..."); /* extension method defined
+                                                                   * in MarkupHelper class */
+            _content = value;
+        }
+    }
 
     [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
