@@ -29,7 +29,6 @@ window.onload = function () {
         var ajaxRequest = AsynObject.getAjaxRequest(callback);
         ajaxRequest.open("POST", url, true);
         ajaxRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ajaxRequest.setRequestHeader("Connection", "close");
         ajaxRequest.send(objectToUrl(data));
     };
 
