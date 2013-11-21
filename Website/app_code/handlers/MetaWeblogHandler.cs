@@ -21,6 +21,9 @@ public interface IMetaWeblog
     [XmlRpcMethod("metaWeblog.getCategories")]
     object[] GetCategories(string blogid, string username, string password);
 
+    [XmlRpcMethod("metaWeblog.getTags")]
+    object[] GetTags(string blogid, string username, string password);
+
     [XmlRpcMethod("metaWeblog.getRecentPosts")]
     object[] GetRecentPosts(string blogid, string username, string password, int numberOfPosts);
 
@@ -66,6 +69,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Content = post.Content;
             match.Slug = post.Slug;
             match.Categories = post.Categories;
+            match.Tags = post.Tags;
             match.IsPublished = publish;
             match.PubDate = post.PubDate;
             Storage.Save(match);
@@ -104,6 +108,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             dateCreated = post.PubDate,
             wp_slug = post.Slug,
             categories = post.Categories.ToArray(),
+            mt_keywords = post.Tags,
             postid = post.ID
         };
     }
@@ -136,11 +141,26 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         ValidateUser(username, password);
 
         var list = new List<object>();
-        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
+        var categories = Blog.GetCategories().Keys;
 
-        foreach (string category in categories.Distinct())
+        foreach (string category in categories)
         {
             list.Add(new { title = category });
+        }
+
+        return list.ToArray();
+    }
+
+    object[] IMetaWeblog.GetTags(string blogid, string username, string password)
+    {
+        ValidateUser(username, password);
+
+        var list = new List<object>();
+        var tags = Blog.GetTags().Keys;
+
+        foreach (string tag in tags)
+        {
+            list.Add(new { title = tag });
         }
 
         return list.ToArray();

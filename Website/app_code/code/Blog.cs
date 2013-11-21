@@ -90,6 +90,13 @@ public static class Blog
             posts = posts.Where(p => p.Categories.Any(c => string.Equals(c, category, StringComparison.OrdinalIgnoreCase)));
         }
 
+        string tag = HttpContext.Current.Request.QueryString["tag"];
+
+        if (!string.IsNullOrEmpty(tag))
+        {
+            posts = posts.Where(p => p.TagsList.Any(c => string.Equals(c, tag, StringComparison.OrdinalIgnoreCase)));
+        }
+
         return posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
     }
 
@@ -114,6 +121,12 @@ public static class Blog
         if (!string.IsNullOrEmpty(category))
         {
             url = "/category/" + HttpUtility.UrlEncode(category.ToLowerInvariant()) + "/" + url;
+        }
+        string tag = HttpContext.Current.Request.QueryString["tag"];
+
+        if (!string.IsNullOrEmpty(tag))
+        {
+            url = "/tag/" + HttpUtility.UrlEncode(category.ToLowerInvariant()) + "/" + url;
         }
 
         string relative = string.Format("~" + url, Blog.CurrentPage + move);
@@ -165,6 +178,46 @@ public static class Blog
             response.ClearContent();
             response.StatusCode = (int)System.Net.HttpStatusCode.NotModified;
             response.SuppressContent = true;
+        }
+    }
+    public static Dictionary<string, int> GetCategories()
+    {
+        var result = new Dictionary<string, int>();
+        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
+
+        foreach (string category in categories.Distinct().OrderBy(o => o))
+        {
+            AddItemToResult(result, category);
+        }
+
+        return result;
+    }
+
+    public static Dictionary<string, int> GetTags()
+    {
+        var result = new Dictionary<string, int>();
+        var tags = Storage.GetAllPosts().SelectMany(p => p.TagsList);
+
+        foreach (string tag in tags.OrderBy(o => o))
+        {
+            if (!string.IsNullOrEmpty(tag))
+            {
+                AddItemToResult(result, tag);
+            }
+        }
+
+        return result;
+    }
+
+    private static void AddItemToResult(Dictionary<string, int> result, string key)
+    {
+        if (result.ContainsKey(key))
+        {
+            result[key] = result[key] + 1;
+        }
+        else
+        {
+            result.Add(key, 1);
         }
     }
 }
