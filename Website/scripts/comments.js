@@ -29,7 +29,6 @@ window.onload = function () {
         var ajaxRequest = AsynObject.getAjaxRequest(callback);
         ajaxRequest.open("POST", url, true);
         ajaxRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ajaxRequest.setRequestHeader("Connection", "close");
         ajaxRequest.send(objectToUrl(data));
     };
 
@@ -242,8 +241,9 @@ window.onload = function () {
 
         website.addEventListener("keyup", function (e) {
             var w = e.target;
-            if (w.value.trim().length >= 4 && w.value.indexOf("http") === -1)
+            if (w.value.trim().length >= 4 && w.value.indexOf("http") === -1) {
                 w.value = "http://" + w.value;
+            }
         });
 
         var elementsDeleteComments = document.getElementsByClassName('deletecomment');
@@ -256,7 +256,9 @@ window.onload = function () {
             email.value = localStorage.getItem("email");
             website.value = localStorage.getItem("website");
 
-            if (name.value.length === 0) name.value = localStorage.getItem("name");
+            if (name.value.length === 0) {
+                name.value = localStorage.getItem("name");
+            }
         }
     }
 
