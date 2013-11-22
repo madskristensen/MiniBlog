@@ -37,6 +37,7 @@ public static class Storage
                             new XElement("content", post.Content),
                             new XElement("ispublished", post.IsPublished),
                             new XElement("categories", string.Empty),
+                            new XElement("tags", post.Tags),
                             new XElement("comments", string.Empty)
                         ));
 
@@ -99,6 +100,7 @@ public static class Storage
                 Title = ReadValue(doc, "title"),
                 Author = ReadValue(doc, "author"),
                 Content = ReadValue(doc, "content"),
+                Tags = ReadValue(doc, "tags"),
                 Slug = ReadValue(doc, "slug").ToLowerInvariant(),
                 PubDate = DateTime.Parse(ReadValue(doc, "pubDate")),
                 LastModified = DateTime.Parse(ReadValue(doc, "lastModified", DateTime.Now.ToString())),

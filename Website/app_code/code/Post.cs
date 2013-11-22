@@ -1,4 +1,6 @@
-﻿using CookComputing.XmlRpc;
+﻿using System.Linq;
+
+using CookComputing.XmlRpc;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -46,6 +48,9 @@ public class Post
     public string[] Categories { get; set; }
     public List<Comment> Comments { get; private set; }
 
+    [XmlRpcMember("mt_keywords")]
+    public string Tags { get; set; }
+
     public Uri AbsoluteUrl
     {
         get
@@ -60,6 +65,21 @@ public class Post
         get
         {
             return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative);
+        }
+    }
+
+    public List<string> TagsList
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(Tags))
+            {
+                return new List<string>();
+            }
+            else
+            {
+                return Tags.Split(',').Select(o => o.Trim()).Distinct().ToList();
+            }
         }
     }
 

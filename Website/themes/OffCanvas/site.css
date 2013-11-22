@@ -94,6 +94,25 @@ input[type], button, textarea {
                 content: ", ";
             }
 
+    .post header div .tags {
+        margin: 0;
+        padding: 10px 10px 10px 0;
+        display: inline;
+        font-size:small;
+    }
+
+        .post header div .tags a {
+            margin: 0;
+        }
+
+        .post header div .tags li {
+            display: inline;
+        }
+
+            .post header div .tags li:not(:first-child):not(:last-child):after {
+                content: ", ";
+            }
+
 .post abbr {
     border: none;
 }
