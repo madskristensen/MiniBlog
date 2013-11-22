@@ -20,6 +20,7 @@ else
                     @Model.Comments.Count Comments
                 </a>
                 @Categories()
+                @Tags()
             </div>
         </header>
 
@@ -55,6 +56,23 @@ else
             {
                 <li itemprop="articleSection">
                     <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+                </li>
+            }
+        </ul>
+    }
+}
+
+@helper Tags()
+{
+    if (Model.TagsList.Count > 0)
+    {
+        <br />
+        <ul class="tags">
+            <li><em class="glyphicon glyphicon-bookmark"></em> Taged as: </li>
+            @foreach (string tag in Model.TagsList)
+            {
+                <li itemprop="articleSection" title="@tag">
+                    <a href="~/tag/@HttpUtility.UrlEncode(tag.ToLowerInvariant())">@tag</a>
                 </li>
             }
         </ul>
