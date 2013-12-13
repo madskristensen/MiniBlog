@@ -1,6 +1,6 @@
 ﻿/* globals NodeList, HTMLCollection */
 
-window.onload = function () {
+(function () {
     var postId = null;
 
     //#region Helpers
@@ -29,6 +29,7 @@ window.onload = function () {
         var ajaxRequest = AsynObject.getAjaxRequest(callback);
         ajaxRequest.open("POST", url, true);
         ajaxRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajaxRequest.setRequestHeader("Connection", "close");
         ajaxRequest.send(objectToUrl(data));
     };
 
@@ -177,17 +178,13 @@ window.onload = function () {
 
                 document.getElementById("commentcontent").value = "";
 
-                AsynObject.ajax(data, function (state2, status2, html) {
-                    if (state2 === 4 && status2 === 200) {
-                        var comment = toDOM(html)[0];
-                        comment.style.height = "0px";
-                        BindDeleteCommentsEvent(comment);
-                        var elemComments = document.getElementById("comments");
-                        elemComments.appendChild(comment);
-                        slide(comment, "Down");
-                        callback(true);
-                    }
-                });
+                var comment = toDOM(data)[0];
+                comment.style.height = "0px";
+                BindDeleteCommentsEvent(comment);
+                var elemComments = document.getElementById("comments");
+                elemComments.appendChild(comment);
+                slide(comment, "Down");
+                callback(true);
 
                 return;
             }
@@ -266,4 +263,4 @@ window.onload = function () {
         initialize();
     }
 
-};
+})();
