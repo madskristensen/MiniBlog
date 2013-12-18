@@ -2,7 +2,7 @@
     <img src="@Model.GravatarUrl(50)" width="50" height="50" alt="Comment by @Model.Author" />
     <div>
         @Date()
-        <p itemprop="commentText">@Html.Raw(Model.Content)</p>
+        <p itemprop="commentText">@Html.Raw(Model.ContentWithLinks())</p>
         @Author()
         @DeleteButton()
     </div>
