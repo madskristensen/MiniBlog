@@ -83,8 +83,7 @@ public class CommentHandler : IHttpHandler
                             "<br /><br /><hr />" +
                             "Website: " + comment.Website + "<br />" +
                             "E-mail: " + comment.Email + "<br />" +
-                            "IP-address: " + comment.Ip + "<br />" +
-                            request.UserAgent +
+                            "IP-address: " + comment.Ip + 
                         "</div>";
 
 
