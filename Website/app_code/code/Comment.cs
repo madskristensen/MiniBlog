@@ -7,6 +7,7 @@ public class Comment
 {
     private static readonly Regex _linkRegex = new Regex("((http://|https://|www\\.)([A-Z0-9.\\-]{1,})\\.[0-9A-Z?;~&%\\(\\)#,=\\-_\\./\\+]{2,}[0-9A-Z?~&%#=\\-_/\\+])", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     private const string Link = "<a href=\"{0}{1}\" rel=\"nofollow\">{2}</a>";
+    private string _content;
 
     public Comment()
     {
@@ -18,7 +19,11 @@ public class Comment
     public string Author { get; set; }
     public string Email { get; set; }
     public string Website { get; set; }
-    public string Content { get; set; }
+    public string Content
+    {
+        get { return Utility.ContentWithEmoticons(_content); }
+        set { _content = value; }
+    }
     public DateTime PubDate { get; set; }
     public string Ip { get; set; }
     public string UserAgent { get; set; }
