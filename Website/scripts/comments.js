@@ -88,14 +88,6 @@
         return arr;
     }
 
-    function bindEvent(el, eventName, eventHandler) {
-        if (el.addEventListener) {
-            el.addEventListener(eventName, eventHandler, false);
-        } else if (el.attachEvent) {
-            el.attachEvent('on' + eventName, eventHandler);
-        }
-    }
-
     Element.prototype.remove = function () {
         this.parentElement.removeChild(this);
     };
@@ -172,7 +164,7 @@
 
             var elemStatus = document.getElementById("status");
             if (state === 4 && status === 200) {
-                elemStatus.innerText = "Your comment has been added";
+                elemStatus.innerHTML = "Your comment has been added";
                 removeClass(elemStatus, "alert-danger");
                 addClass(elemStatus, "alert-success");
 
@@ -180,7 +172,6 @@
 
                 var comment = toDOM(data)[0];
                 comment.style.height = "0px";
-                BindDeleteCommentsEvent(comment);
                 var elemComments = document.getElementById("comments");
                 elemComments.appendChild(comment);
                 slide(comment, "Down");
@@ -202,15 +193,6 @@
             content: content
         });
 
-    }
-
-    function BindDeleteCommentsEvent(element) {
-        bindEvent(element, 'click', function (e) {
-            e.preventDefault();
-            var button = e.target;
-            var element = getParentsByAttribute(button, "itemprop", "comment")[0];
-            deleteComment(element.getAttribute("data-id"), element);
-        });
     }
 
     function initialize() {
@@ -243,11 +225,14 @@
             }
         });
 
-        var elementsDeleteComments = document.getElementsByClassName('deletecomment');
+        window.addEventListener("click", function (e) {
+            var tag = e.target;
 
-        for (var a = 0, len = elementsDeleteComments.length; a < len; a++) {
-            BindDeleteCommentsEvent(elementsDeleteComments[a]);
-        }
+            if (hasClass(tag, "deletecomment")) {
+                var comment = getParentsByAttribute(tag, "itemprop", "comment")[0];
+                deleteComment(comment.getAttribute("data-id"), comment);
+            }
+        });
 
         if (localStorage) {
             email.value = localStorage.getItem("email");
