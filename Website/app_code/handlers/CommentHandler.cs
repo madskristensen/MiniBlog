@@ -50,10 +50,10 @@ public class CommentHandler : IHttpHandler
         post.Comments.Add(comment);
         Storage.Save(post);
 
-        RenderComment(context, comment);
-
         if (!context.User.Identity.IsAuthenticated)
             System.Threading.ThreadPool.QueueUserWorkItem((s) => SendEmail(comment, post, context.Request));
+
+        RenderComment(context, comment);
     }
 
     private static void RenderComment(HttpContext context, Comment comment)
@@ -83,7 +83,7 @@ public class CommentHandler : IHttpHandler
                             "<br /><br /><hr />" +
                             "Website: " + comment.Website + "<br />" +
                             "E-mail: " + comment.Email + "<br />" +
-                            "IP-address: " + comment.Ip + 
+                            "IP-address: " + comment.Ip +
                         "</div>";
 
 
