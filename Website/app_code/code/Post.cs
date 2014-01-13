@@ -1,22 +1,11 @@
 ﻿using CookComputing.XmlRpc;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
-using System.Linq;
 using System.Web;
 
 [XmlRpcMissingMapping(MappingAction.Ignore)]
 public class Post
 {
-    private static IBlogStorage _storage;
-
-    static Post()
-    {
-        AssemblyCatalog catalog = new AssemblyCatalog(typeof(Post).Assembly);
-        CompositionContainer container = new CompositionContainer(catalog);
-        _storage = container.GetExportedValues<IBlogStorage>().ElementAt(0);
-    }
-
     public Post()
     {
         ID = Guid.NewGuid().ToString();
@@ -68,22 +57,14 @@ public class Post
 
     public Uri Url
     {
-        get { return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative); }
+        get
+        {
+            return new Uri(VirtualPathUtility.ToAbsolute("~/post/" + Slug), UriKind.Relative);
+        }
     }
 
-    public static List<Post> GetAllPosts()
+    public bool AreCommentsOpen(HttpContextBase context)
     {
-        return _storage.GetAllPosts();
-    }
-
-    public void Save()
-    {
-        LastModified = DateTime.UtcNow;
-        _storage.Save(this);
-    }
-
-    public void Delete()
-    {
-        _storage.Delete(this);
+        return PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || context.User.Identity.IsAuthenticated;
     }
 }

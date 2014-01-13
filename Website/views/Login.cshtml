@@ -2,17 +2,18 @@
     Page.Title = "Sign in";
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     Response.Cache.SetCacheability(HttpCacheability.NoCache);
-    
+
     if (Request.HttpMethod == "POST")
     {
         string username = Request.Form["username"];
         string password = Request.Form["password"];
-        
+        string remember = Request.Form["remember"];
+
         if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
         {
             if (FormsAuthentication.Authenticate(username, password))
             {
-                FormsAuthentication.RedirectFromLoginPage(username, true);
+                FormsAuthentication.RedirectFromLoginPage(username, remember == "on");
             }
         }
         else if (!string.IsNullOrEmpty(Request.QueryString["signout"]))
@@ -25,24 +26,30 @@
 
 @if (!User.Identity.IsAuthenticated)
 {
-    <form action="@Request.RawUrl" method="post" id="login">
+    <form action="@Request.RawUrl" method="post" role="form" class="col-md-5 col-md-offset-3" id="login">
         <fieldset>
+            <h1 class="text-center">Sign in</h1>
+
             @if (Request.HttpMethod == "POST")
             {
-                <p class="text-warning">Username or password is incorrect</p>
+                <p class="alert-danger">Username or password is incorrect</p>
             }
 
-            <div class="control-group">
-                <label for="username" class="control-label">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username" required autofocus />
-
-                <label for="password" class="control-label">Password</label>
-                <input type="password" id="password" name="password" placeholder="password" required />
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required autofocus />
             </div>
 
-            <div class="control-group">
-                <button type="submit" class="btn">Sign in</button>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
             </div>
+            <div class="form-group">
+                <input type="checkbox" id="remember" name="remember" />
+                <label for="remember">&nbsp;Remember me</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign in</button>
         </fieldset>
     </form>
 }

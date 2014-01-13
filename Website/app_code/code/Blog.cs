@@ -55,10 +55,10 @@ public static class Blog
         {
             if (HttpContext.Current.Items["currentpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
             {
-                var post = Post.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
+                var post = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
 
                 if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated))
-                    HttpContext.Current.Items["currentpost"] = Post.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
+                    HttpContext.Current.Items["currentpost"] = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
             }
 
             return HttpContext.Current.Items["currentpost"] as Post;
@@ -79,8 +79,8 @@ public static class Blog
 
     public static IEnumerable<Post> GetPosts(int postsPerPage)
     {
-        var posts = from p in Post.GetAllPosts()
-                    where p.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated
+        var posts = from p in Storage.GetAllPosts()
+                    where (p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated
                     select p;
 
         string category = HttpContext.Current.Request.QueryString["category"];
@@ -106,6 +106,20 @@ public static class Blog
         return VirtualPathUtility.ToAbsolute(relative);
     }
 
+    public static string GetPagingUrl(int move)
+    {
+        string url = "/page/{0}/";
+        string category = HttpContext.Current.Request.QueryString["category"];
+
+        if (!string.IsNullOrEmpty(category))
+        {
+            url = "/category/" + HttpUtility.UrlEncode(category.ToLowerInvariant()) + "/" + url;
+        }
+
+        string relative = string.Format("~" + url, Blog.CurrentPage + move);
+        return VirtualPathUtility.ToAbsolute(relative);
+    }
+
     public static string FingerPrint(string rootRelativePath, string cdnPath = "")
     {
         if (!string.IsNullOrEmpty(cdnPath) && !HttpContext.Current.IsDebuggingEnabled)
@@ -115,7 +129,8 @@ public static class Blog
 
         if (HttpRuntime.Cache[rootRelativePath] == null)
         {
-            string absolute = HostingEnvironment.MapPath("~" + rootRelativePath);
+            string relative = VirtualPathUtility.ToAbsolute("~" + rootRelativePath);
+            string absolute = HostingEnvironment.MapPath(relative);
 
             if (!File.Exists(absolute))
             {
@@ -123,9 +138,9 @@ public static class Blog
             }
 
             DateTime date = File.GetLastWriteTime(absolute);
-            int index = rootRelativePath.LastIndexOf('/');
+            int index = relative.LastIndexOf('/');
 
-            string result = rootRelativePath.Insert(index, "/v-" + date.Ticks);
+            string result = relative.Insert(index, "/v-" + date.Ticks);
 
             HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute));
         }
@@ -150,7 +165,6 @@ public static class Blog
             response.ClearContent();
             response.StatusCode = (int)System.Net.HttpStatusCode.NotModified;
             response.SuppressContent = true;
-            response.AppendHeader("vary", "Accept-Encoding");
         }
     }
 }

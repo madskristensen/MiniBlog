@@ -4,19 +4,20 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.WebPages;
 
 public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        Post post = Post.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
+        Post post = Storage.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");
 
         string mode = context.Request["mode"];
 
-        if (mode == "save" && context.Request.HttpMethod == "POST" && (post.PubDate > DateTime.UtcNow.AddDays(-Blog.DaysToComment) || context.User.Identity.IsAuthenticated))
+        if (mode == "save" && context.Request.HttpMethod == "POST" && post.AreCommentsOpen(new HttpContextWrapper(context)))
         {
             Save(context, post);
         }
@@ -47,13 +48,19 @@ public class CommentHandler : IHttpHandler
         };
 
         post.Comments.Add(comment);
-        post.Save();
+        Storage.Save(post);
 
-        string wrapper = VirtualPathUtility.ToAbsolute("~/views/commentwrapper.cshtml") + "?postid=" + post.ID + "&commentid=" + comment.ID;
-        context.Response.Write(wrapper);
+        if (!context.User.Identity.IsAuthenticated)
+            System.Threading.ThreadPool.QueueUserWorkItem((s) => SendEmail(comment, post, context.Request));
 
-        //if (!context.User.Identity.IsAuthenticated)
-        System.Threading.ThreadPool.QueueUserWorkItem((s) => SendEmail(comment, post, context.Request));
+        RenderComment(context, comment);
+    }
+
+    private static void RenderComment(HttpContext context, Comment comment)
+    {
+        var page = (WebPage)WebPageBase.CreateInstanceFromVirtualPath("~/themes/" + Blog.Theme + "/comment.cshtml");
+        page.Context = new HttpContextWrapper(context);
+        page.ExecutePageHierarchy(new WebPageContext(page.Context, page: null, model: comment), context.Response.Output);
     }
 
     private static void SendEmail(Comment comment, Post post, HttpRequest request)
@@ -76,8 +83,7 @@ public class CommentHandler : IHttpHandler
                             "<br /><br /><hr />" +
                             "Website: " + comment.Website + "<br />" +
                             "E-mail: " + comment.Email + "<br />" +
-                            "IP-address: " + comment.Ip + "<br />" +
-                            request.UserAgent +
+                            "IP-address: " + comment.Ip +
                         "</div>";
 
 
@@ -130,7 +136,7 @@ public class CommentHandler : IHttpHandler
         if (comment != null)
         {
             post.Comments.Remove(comment);
-            post.Save();
+            Storage.Save(post);
         }
         else
         {

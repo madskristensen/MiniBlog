@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Hosting;
 
 public class PostHandler : IHttpHandler
 {
@@ -23,49 +21,57 @@ public class PostHandler : IHttpHandler
         }
         else if (mode == "save")
         {
-            EditPost(id, context.Request.Form["title"], context.Request.Form["content"], bool.Parse(context.Request.Form["isPublished"]));
+            EditPost(id, context.Request.Form["title"], context.Request.Form["content"], bool.Parse(context.Request.Form["isPublished"]), context.Request.Form["categories"].Split(','));
         }
     }
 
     private void DeletePost(string id)
     {
-        Post post = Post.GetAllPosts().First(p => p.ID == id);
-        post.Delete();
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
+
+        if (post == null)
+            throw new HttpException(404, "The post does not exist");
+
+        Storage.Delete(post);
     }
 
-    private void EditPost(string id, string title, string content, bool isPublished)
+    private void EditPost(string id, string title, string content, bool isPublished, string[] categories)
     {
-        Post post = Post.GetAllPosts().FirstOrDefault(p => p.ID == id);
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
 
         if (post != null)
         {
             post.Title = title;
             post.Content = content;
+            post.Categories = categories;
         }
         else
         {
-            post = new Post() { Title = title, Content = content, Slug = CreateSlug(title) };
+            post = new Post() { Title = title, Content = content, Slug = CreateSlug(title), Categories = categories };
             HttpContext.Current.Response.Write(post.Url);
         }
 
-        SaveImagesToDisk(post);
+        SaveFilesToDisk(post);
 
         post.IsPublished = isPublished;
-        post.Save();
+        Storage.Save(post);
     }
 
-    private void SaveImagesToDisk(Post post)
+    private void SaveFilesToDisk(Post post)
     {
-        foreach (Match match in Regex.Matches(post.Content, "src=\"(data:([^\"]+))\""))
+        foreach (Match match in Regex.Matches(post.Content, "(src|href)=\"(data:([^\"]+))\""))
         {
-            string extension = Regex.Match(match.Value, "data:image/([a-z]+);base64").Groups[1].Value;
-     
-            byte[] bytes = ConvertToBytes(match.Groups[1].Value);
-            string path = Blog.SaveFileToDisk(bytes, extension);
-            
-            string image = string.Format("src=\"{0}\" alt=\"\" /", path);
+            string extension = Regex.Match(match.Value, "data:([^/]+)/([a-z]+);base64").Groups[2].Value;
 
-            post.Content = post.Content.Replace(match.Value, image);
+            byte[] bytes = ConvertToBytes(match.Groups[2].Value);
+            string path = Blog.SaveFileToDisk(bytes, extension);
+
+            string value = string.Format("src=\"{0}\" alt=\"\" /", path);
+
+            if (match.Groups[1].Value == "href")
+                value = string.Format("href=\"{0}\"", path);
+
+            post.Content = post.Content.Replace(match.Value, value);
         }
     }
 
@@ -81,7 +87,7 @@ public class PostHandler : IHttpHandler
         title = RemoveDiacritics(title);
         title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);
 
-        if (Post.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
+        if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();

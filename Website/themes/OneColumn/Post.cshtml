@@ -1,0 +1,53 @@
+﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <header class="jumbotron">
+        <h1 itemprop="headline name">
+            <a href="@Model.Url" itemprop="url">@Model.Title</a>
+        </h1>
+        <div>
+            <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
+            <a href="@Model.Url#comments">
+                <em class="glyphicon glyphicon-comment"></em>
+                @Model.Comments.Count Comments
+            </a>
+            @Categories()
+        </div>
+    </header>
+
+    <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+
+    @if (Blog.CurrentPost != null)
+    {
+        <section id="comments" aria-label="Comments">
+            @if (Model.Comments.Count > 0)
+            {
+                <h2>Comments</h2>
+            }
+
+            @foreach (Comment comment in Model.Comments)
+            {
+                @RenderPage("Comment.cshtml", comment)
+            }
+        </section>
+
+        if (Model.AreCommentsOpen(Context))
+        {
+            @RenderPage("~/views/CommentForm.cshtml")
+        }
+    }
+</article>
+
+@helper Categories()
+{
+    if (Model.Categories.Length > 0 || User.Identity.IsAuthenticated)
+    {
+        <ul class="categories">
+            <li><em class="glyphicon glyphicon-bookmark"></em> Posted in: </li>
+            @foreach (string cat in Model.Categories)
+            {
+                <li itemprop="articleSection">
+                    <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+                </li>
+            }
+        </ul>
+    }
+}

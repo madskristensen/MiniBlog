@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Web;
 using System.Xml;
@@ -14,8 +13,10 @@ public class FeedHandler : IHttpHandler
             Title = new TextSyndicationContent(Blog.Title),
             Description = new TextSyndicationContent("Latest blog posts"),
             BaseUri = new Uri(context.Request.Url.Scheme + "://" + context.Request.Url.Authority),
-            Items = GetItems()
+            Items = GetItems(),
         };
+
+        feed.Links.Add(new SyndicationLink(feed.BaseUri));
 
         using (var writer = new XmlTextWriter(context.Response.Output))
         {
@@ -28,9 +29,11 @@ public class FeedHandler : IHttpHandler
 
     private IEnumerable<SyndicationItem> GetItems()
     {
-        foreach (Post p in Post.GetAllPosts().Take(10))
+        foreach (Post p in Blog.GetPosts(10))
         {
-            yield return new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.ID, p.PubDate);
+            var item = new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.AbsoluteUrl.ToString(), p.LastModified);
+            item.Authors.Add(new SyndicationPerson("", p.Author, ""));
+            yield return item;
         }
     }
 

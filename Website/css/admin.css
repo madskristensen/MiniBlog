@@ -1,32 +1,42 @@
-﻿.admin {
-    margin-top: 40px;
+﻿@media (max-width: 1024px) {
+    .nav > li {
+        display: inline-block;
+    }
+
+        .nav > li button, #ispublished {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+}
+
+.admin {
+    margin-top: 50px;
 }
 
 #admin {
-    position: fixed;
-    top: 0;
+    font: 12pt arial;
 }
 
     #admin .navbar-inner {
         min-height: 0;
-        padding: 5px;
+        padding-top: 8px;
     }
 
-#admin form {
-    position: absolute;
-    top: 0;
-    right: 1em;
-    margin: 0;
-}
+    #admin form {
+        position: absolute;
+        top: 8px;
+        right: 1em;
+        margin: 0;
+    }
 
-#admin .nav {
-    margin-left: 1em;
-}
+    #admin .nav {
+        margin-left: 1em;
+    }
 
-#admin button:focus {
-    outline: 0;
-    white-space: nowrap;
-}
+    #admin button:focus {
+        outline: 0;
+        white-space: nowrap;
+    }
 
 #ispublished {
     display: none;
@@ -38,12 +48,14 @@
     #ispublished label {
         display: inline;
         position: relative;
-        top: 3px;
+        left: 4px;
+        font-weight: normal;
     }
 
 #admin #tools {
     position: relative;
-    top: 3px;
+    top: 5px;
+    left: 10px;
     margin: 0 1em;
     display: none;
 }
@@ -51,11 +63,11 @@
     #admin #tools a {
         font-size: 14px;
         font-weight: bold;
-        min-width: 10px;
+        padding: 0 9px;
     }
 
-    #admin #tools [class^="icon-"] {
-        margin-top: 2px;
+    #admin #tools div:not(:last-child) {
+        border-right: 1px solid gray;
     }
 
 #admin aside {

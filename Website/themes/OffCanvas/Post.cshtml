@@ -1,0 +1,106 @@
+﻿@if (Page.ShowPaging == true)
+{
+    <div class="col-6 col-sm-6 col-lg-4">
+        <h2>@Model.Title</h2>
+        <p class="excerpt">@MarkupHelper.GetDescription(Model.Content, 235, "...")</p>
+        <p><a class="btn btn-primary" href="@Model.Url" role="button">View details &raquo;</a></p>
+    </div>
+}
+else
+{
+    <article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+        <header class="jumbotron">
+            <h1 itemprop="headline name">
+                <a href="@Model.Url" itemprop="url">@Model.Title</a>
+            </h1>
+            <div>
+                <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
+                <a href="@Model.Url#comments">
+                    <em class="glyphicon glyphicon-comment"></em>
+                    @Model.Comments.Count Comments
+                </a>
+                @Categories()
+            </div>
+        </header>
+
+        <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+        @if (Blog.CurrentPost != null)
+        {
+            <section id="comments" aria-label="Comments">
+                @if (Model.Comments.Count > 0)
+                {
+                    <h2>Comments</h2>
+                }
+
+                @foreach (Comment comment in Model.Comments)
+                {
+                    @RenderPage("Comment.cshtml", comment)
+                }
+            </section>
+
+            if (Model.AreCommentsOpen(Context))
+            {
+                @RenderPage("~/views/CommentForm.cshtml")
+            }
+        }
+    </article>
+
+    @helper Categories()
+{
+    if (Model.Categories.Length > 0)
+    {
+        <ul class="categories">
+            <li><em class="glyphicon glyphicon-bookmark"></em> Posted in: </li>
+            @foreach (string cat in Model.Categories)
+            {
+                <li itemprop="articleSection">
+                    <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+                </li>
+            }
+        </ul>
+    }
+}
+}
+
+@functions{
+    public class MarkupHelper
+    {
+        #region excerpt generation
+
+        public static string GetDescription(string content, int length = 300, string ommission = "...")
+        {
+            return TruncateHtml(StripTags(content), 235, ommission);
+        }
+
+        public static string TruncateHtml(string input, int length = 300, string ommission = "...")
+        {
+            if (input == null || input.Length < length)
+                return input;
+            int nextSpace = input.LastIndexOf(" ", length);
+            return string.Format("{0}" + ommission,
+                                  input.Substring(0, (nextSpace > 0) ? nextSpace : length).Trim());
+        }
+
+        public static string StripTags(string markup)
+        {
+            try
+            {
+                StringReader stringReader = new StringReader(markup);
+                System.Xml.XPath.XPathDocument xPathdocument;
+                using (System.Xml.XmlReader xmlReader = System.Xml.XmlReader.Create(stringReader,
+                        new System.Xml.XmlReaderSettings() { ConformanceLevel = System.Xml.ConformanceLevel.Fragment }))
+                {
+                    xPathdocument = new System.Xml.XPath.XPathDocument(xmlReader);
+                }
+
+                return xPathdocument.CreateNavigator().Value;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        #endregion
+    }
+}
