@@ -39,7 +39,7 @@
                 @if (Page.ShowPaging != null)
                 {
                     <ul class="pager">
-                        @if (Blog.GetPosts(Blog.PostsPerPage * 2).Count() > Blog.PostsPerPage)
+                        @if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
                         {
                             <li class="previous"><a href="@Blog.GetPagingUrl(1)" rel="prev">&larr; Older</a></li>
                         }
