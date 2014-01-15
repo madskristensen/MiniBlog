@@ -77,7 +77,7 @@ public static class Blog
         }
     }
 
-    public static IEnumerable<Post> GetPosts(int postsPerPage)
+    public static IEnumerable<Post> GetPosts(int postsPerPage = 0)
     {
         var posts = from p in Storage.GetAllPosts()
                     where (p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated
@@ -90,7 +90,12 @@ public static class Blog
             posts = posts.Where(p => p.Categories.Any(c => string.Equals(c, category, StringComparison.OrdinalIgnoreCase)));
         }
 
-        return posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
+        if (postsPerPage > 0)
+        {
+            posts = posts.Skip(postsPerPage * (CurrentPage - 1)).Take(postsPerPage);
+        }
+
+        return posts;
     }
 
     public static string SaveFileToDisk(byte[] bytes, string extension)
