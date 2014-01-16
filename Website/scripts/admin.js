@@ -200,7 +200,7 @@
     chkPublish = $("#ispublished").find("input[type=checkbox]");
 
     $(document).keyup(function (e) {
-        if (!document.activeElement.contentEditable) {
+        if (!document.activeElement.isContentEditable) {
             if (e.keyCode === 46) // Delete key
                 deletePost();
             else if (e.keyCode === 27) // ESC key
