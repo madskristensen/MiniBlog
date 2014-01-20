@@ -22,6 +22,7 @@
 
     <meta property="og:title" content="@Page.Title" />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="@Blog.Image" />
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
