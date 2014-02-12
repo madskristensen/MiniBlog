@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>AjaxMin</id>
-    <version>5.2.5021.15814</version>
+    <version>5.7.5124.21499</version>
     <title>Microsoft Ajax Minifier</title>
     <authors>Microsoft Corporation, Ron Logan</authors>
     <owners>Microsoft Corporation, Ron Logan</owners>

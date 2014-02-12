@@ -77,6 +77,17 @@ public static class Blog
         }
     }
 
+    public static Dictionary<string, int> Categories()
+    {
+        var categories = Storage.GetAllPosts().Where(p => p.IsPublished && p.PubDate <= DateTime.UtcNow)// IEnumerable<Post>
+            .SelectMany(c => c.Categories)
+            .GroupBy(g => g.ToString())
+            .Select(s => new { s.Key, Count = s.Count() })
+            .OrderBy(k => k.Key)
+            .ToDictionary(p => p.Key, k => k.Count);
+        return categories;
+    }
+
     public static IEnumerable<Post> GetPosts(int postsPerPage)
     {
         var posts = from p in Storage.GetAllPosts()
