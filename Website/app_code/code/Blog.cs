@@ -49,6 +49,21 @@ public static class Blog
         get { return HttpContext.Current.Request.RawUrl.Trim('/') == "post/new"; }
     }
 
+    public static Post NextPost
+    {
+        get
+        {
+            if (HttpContext.Current.Items["prevpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
+            {
+                var indexOfCurrent = GetPosts().ToList().IndexOf(CurrentPost);
+                if (indexOfCurrent > 0)
+                    HttpContext.Current.Items["prevpost"] = GetPosts().ToList()[indexOfCurrent - 1];
+            }
+
+            return HttpContext.Current.Items["prevpost"] as Post;
+        }
+    }
+
     public static Post CurrentPost
     {
         get
@@ -62,6 +77,22 @@ public static class Blog
             }
 
             return HttpContext.Current.Items["currentpost"] as Post;
+        }
+    }
+
+    public static Post PrevPost
+    {
+        get
+        {
+            if (HttpContext.Current.Items["nextpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
+            {
+                var indexOfCurrent = GetPosts().ToList().IndexOf(CurrentPost);
+                int nextIndex = GetPosts().ToList().Count - 1;
+                if (indexOfCurrent < nextIndex)
+                    HttpContext.Current.Items["nextpost"] = GetPosts().ToList()[nextIndex];
+            }
+
+            return HttpContext.Current.Items["nextpost"] as Post;
         }
     }
 
