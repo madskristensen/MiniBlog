@@ -24,6 +24,14 @@
     <meta property="og:image" content="@Blog.Image" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
+    @if (Blog.PrevPost != null)
+    {
+        <link rel="prev" href="@Blog.PrevPost.Url" />
+    }
+    @if (Blog.NextPost != null)
+    {
+        <link rel="next" href="@Blog.NextPost.Url" />
+    }
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
 
