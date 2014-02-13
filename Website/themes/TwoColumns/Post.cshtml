@@ -1,7 +1,7 @@
 ﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <header class="jumbotron">
         <h1 itemprop="headline name">
-            <a href="@Model.Url" itemprop="url">@HttpUtility.UrlDecode(Model.Title)</a>
+            <a href="@Model.Url" itemprop="url">@Model.Title</a>
         </h1>
         <div>
             <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
@@ -38,7 +38,7 @@
 
 @helper Categories()
 {
-    if (Model.Categories.Length > 0)
+    if (Model.Categories.Length > 0  || User.Identity.IsAuthenticated)
     {
         <ul class="categories">
             <li><em class="glyphicon glyphicon-bookmark"></em> Posted in: </li>
