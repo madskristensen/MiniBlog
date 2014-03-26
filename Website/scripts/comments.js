@@ -9,7 +9,9 @@
         var string = '';
 
         for (var prop in obj) {
-            string += prop + '=' + obj[prop].replace(/ /g, '+') + '&';
+            if (obj.hasOwnProperty(prop)) {
+                string += prop + '=' + obj[prop].replace(/ /g, '+') + '&';
+            }
         }
 
         return string.substring(0, string.length - 1);
@@ -23,7 +25,6 @@
         ajaxRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         ajaxRequest.send(null);
     };
-
 
     AsynObject.postAjax = function (url, callback, data) {
         var ajaxRequest = AsynObject.getAjaxRequest(callback);
@@ -140,8 +141,7 @@
                         element.remove();
                     });
                     return;
-                }
-                else if (status !== 200) {
+                } else if (status !== 200) {
                     alert("Something went wrong. Please try again");
                 }
             }, {
@@ -178,8 +178,7 @@
                 callback(true);
 
                 return;
-            }
-            else if (status !== 200) {
+            } else if (status !== 200) {
                 addClass(elemStatus, "alert-danger");
                 elemStatus.innerText = data.statusText;
                 callback(false);
@@ -247,5 +246,4 @@
     if (document.getElementById("commentform")) {
         initialize();
     }
-
 })();

@@ -44,10 +44,10 @@
     },
     cancelEdit = function () {
         if (isNew) {
-            if (confirm("Do you want to leave this page?"))
+            if (confirm("Do you want to leave this page?")) {
                 history.back();
-        }
-        else {
+            }
+        } else {
             txtTitle.removeAttr('contentEditable');
             txtContent.removeAttr('contentEditable');
             btnCancel.focus();
@@ -70,8 +70,7 @@
                 self.attr("data-cmd", "design");
                 self.addClass("active");
                 txtContent.text(txtContent.html());
-            }
-            else {
+            } else {
                 self.attr("data-cmd", "source");
                 self.removeClass("active");
                 txtContent.html(txtContent.text());
@@ -118,10 +117,11 @@
               cancelEdit(e);
           })
           .fail(function (data) {
-              if (data.status === 409)
+              if (data.status === 409) {
                   showMessage(false, "The title is already in use");
-              else
+              } else {
                   showMessage(false, "Something bad happened. Server reported " + data.status + " " + data.statusText);
+              }
           });
     },
     deletePost = function () {
@@ -145,10 +145,10 @@
     },
     getPostCategories = function () {
         var categories = '';
+
         if ($("#txtCategories").length > 0) {
             categories = $("#txtCategories").val();
-        }
-        else {
+        } else {
             $("ul.categories li a").each(function (index, item) {
                 if (categories.length > 0) {
                     categories += ",";
@@ -164,8 +164,7 @@
         $("ul.categories li").each(function (index, item) {
             if (!firstItemPassed) {
                 firstItemPassed = true;
-            }
-            else {
+            } else {
                 $(item).remove();
             }
         });
@@ -201,10 +200,11 @@
 
     $(document).keyup(function (e) {
         if (!document.activeElement.isContentEditable) {
-            if (e.keyCode === 46) // Delete key
+            if (e.keyCode === 46) { // Delete key
                 deletePost();
-            else if (e.keyCode === 27) // ESC key
+            } else if (e.keyCode === 27) { // ESC key
                 cancelEdit();
+            }
         }
     });
 
@@ -217,11 +217,9 @@
         editPost();
         $("#ispublished").fadeIn();
         chkPublish[0].checked = true;
-    }
-    else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
+    } else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
         btnEdit.removeAttr("disabled");
         btnDelete.removeAttr("disabled");
         $("#ispublished").css({ "display": "inline" });
     }
-
 })(jQuery);
