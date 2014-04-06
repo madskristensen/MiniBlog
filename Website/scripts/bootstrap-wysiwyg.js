@@ -89,13 +89,13 @@
 			    editor.focus();
 			    $.each(files, function (idx, fileInfo) {
 			        if (/^image\//.test(fileInfo.type)) {
-			            $.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
+			            $.when(options.readFileIntoUrl(fileInfo)).done(function (dataUrl) {
 			                execCommand('insertimage', dataUrl);
 			            }).fail(function (e) {
 			                options.fileUploadError("file-reader", e);
 			            });
 			        } else {
-			            $.when(readFileIntoDataUrl(fileInfo)).done(function (dataUrl) {
+			            $.when(options.readFileIntoUrl(fileInfo)).done(function (dataUrl) {
 			                //execCommand('inserthtml', '<a href="' + dataUrl + '">Download</a>');
 			                var frag = document.createDocumentFragment();
 			                var node = document.createElement("a");
@@ -211,7 +211,8 @@
         selectionMarker: 'edit-focus-marker',
         selectionColor: 'darkgrey',
         dragAndDropImages: true,
-        fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
+        fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); },
+        readFileIntoUrl: readFileIntoDataUrl
     };
 }(window.jQuery));
 
