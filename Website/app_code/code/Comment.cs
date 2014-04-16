@@ -26,7 +26,7 @@ public class Comment
 
     public string GravatarUrl(int size)
     {
-        var hash = FormsAuthentication.HashPasswordForStoringInConfigFile(Email.ToLowerInvariant(), "MD5").ToLower();
+        var hash = SimpleMembershipProvider.GetHash(Email.ToLowerInvariant(), "MD5").ToLower();
 
         return string.Format("http://gravatar.com/avatar/{0}?s={1}&d=mm", hash, size);
     }
