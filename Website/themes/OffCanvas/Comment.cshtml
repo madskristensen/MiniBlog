@@ -4,8 +4,9 @@
         @Date()
         <p itemprop="commentText">@Html.Raw(Model.ContentWithLinks())</p>
         @Author()
-        @DeleteButton()
+        @DeleteAndApproveButton()
     </div>
+    @ApprovalMessage()
 </article>
 
 @helper Date()
@@ -25,10 +26,21 @@
         <strong itemprop="creator"><a href="@Model.Website" itemprop="url" rel="nofollow">@Model.Author</a></strong>
     }
 }
-@helper DeleteButton()
+@helper DeleteAndApproveButton()
 {
     if (User.Identity.IsAuthenticated)
     {
         <button class="deletecomment btn btn-link">Delete</button>
+        if (Blog.ModerateComments && !Model.IsApproved)
+        {
+            <button class="approvecomment btn btn-link">Approve</button>
+        }
+    }
+}
+@helper ApprovalMessage()
+{
+    if (Blog.ModerateComments && !Model.IsApproved && !User.Identity.IsAuthenticated)
+    {
+        <div itemprop="approvalWarning">! The comment will not be visible until a moderator approves it !</div>
     }
 }

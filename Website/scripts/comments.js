@@ -152,6 +152,22 @@
         }
     }
 
+    function approveComment(commentId, element) {
+
+        AsynObject.postAjax(endpoint, function (state, status) {
+            if (state === 4 && status === 200) {                
+                element.remove();
+                return;
+            } else if (status !== 200) {
+                alert("Something went wrong. Please try again");
+            }
+        }, {
+            mode: "approve",
+            postId: postId,
+            commentId: commentId
+        });
+    }
+
     function saveComment(name, email, website, content, callback) {
 
         if (localStorage) {
@@ -230,6 +246,10 @@
             if (hasClass(tag, "deletecomment")) {
                 var comment = getParentsByAttribute(tag, "itemprop", "comment")[0];
                 deleteComment(comment.getAttribute("data-id"), comment);
+            }
+            if (hasClass(tag, "approvecomment")) {
+                var comment = getParentsByAttribute(tag, "itemprop", "comment")[0];
+                approveComment(comment.getAttribute("data-id"), tag);
             }
         });
 

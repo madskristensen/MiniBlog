@@ -59,6 +59,7 @@ public static class Storage
                     new XElement("date", comment.PubDate.ToString("yyyy-MM-dd HH:m:ss")),
                     new XElement("content", comment.Content),
                     new XAttribute("isAdmin", comment.IsAdmin),
+                    new XAttribute("isApproved", comment.IsApproved),
                     new XAttribute("id", comment.ID)
                 ));
         }
@@ -150,6 +151,7 @@ public static class Storage
                 Ip = ReadValue(node, "ip"),
                 UserAgent = ReadValue(node, "userAgent"),
                 IsAdmin = bool.Parse(ReadAttribute(node, "isAdmin", "false")),
+                IsApproved = bool.Parse(ReadAttribute(node, "isApproved", "true")),
                 Content = ReadValue(node, "content").Replace("\n", "<br />"),
                 PubDate = DateTime.Parse(ReadValue(node, "date", "2000-01-01")),
             };

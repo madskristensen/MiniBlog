@@ -7,7 +7,7 @@
             <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
             <a href="@Model.Url#comments">
                 <em class="glyphicon glyphicon-comment"></em>
-                @Model.Comments.Count Comments
+                @Model.CountApprovedComments(Context) Comments
             </a>
             @Categories()
         </div>
@@ -18,14 +18,17 @@
     @if (Blog.CurrentPost != null)
     {
         <section id="comments" aria-label="Comments">
-            @if (Model.Comments.Count > 0)
+            @if (Model.CountApprovedComments(Context) > 0)
             {
                 <h2>Comments</h2>
             }
 
             @foreach (Comment comment in Model.Comments)
             {
-                @RenderPage("Comment.cshtml", comment)
+                if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
+                {
+                    @RenderPage("Comment.cshtml", comment)
+                }
             }
         </section>
 
