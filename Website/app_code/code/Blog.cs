@@ -15,6 +15,7 @@ public static class Blog
     private static int _postsPerPage = int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage"));
     private static int _commentDays = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
     private static string _image = ConfigurationManager.AppSettings.Get("blog:image");
+    private static bool _moderateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
 
     public static string Title
     {
@@ -44,6 +45,11 @@ public static class Blog
     public static int DaysToComment
     {
         get { return _commentDays; }
+    }
+
+    public static bool ModerateComments
+    {
+        get { return _moderateComments; }
     }
 
     public static string CurrentSlug

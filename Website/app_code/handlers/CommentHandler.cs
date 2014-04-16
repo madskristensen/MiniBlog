@@ -25,6 +25,10 @@ public class CommentHandler : IHttpHandler
         {
             Delete(context, post);
         }
+        else if (mode == "approve")
+        {
+            Approve(context, post);
+        }
     }
 
     private static void Save(HttpContext context, Post post)
@@ -45,6 +49,7 @@ public class CommentHandler : IHttpHandler
             UserAgent = context.Request.UserAgent,
             IsAdmin = context.User.Identity.IsAuthenticated,
             Content = HttpUtility.HtmlEncode(content.Trim()).Replace("\n", "<br />"),
+            IsApproved = !Blog.ModerateComments,
         };
 
         post.Comments.Add(comment);
@@ -76,9 +81,11 @@ public class CommentHandler : IHttpHandler
 
             string absoluteUrl = request.Url.Scheme + "://" + request.Url.Authority;
             string deleteUrl = absoluteUrl + request.RawUrl + "?postId=" + post.ID + "&commentId=" + comment.ID + "&mode=delete";
+            string approveUrl = absoluteUrl + request.RawUrl + "?postId=" + post.ID + "&commentId=" + comment.ID + "&mode=approve";
             mail.Body = "<div style=\"font: 11pt/1.5 calibri, arial;\">" +
                             comment.Author + " on <a href=\"" + absoluteUrl + post.Url + "\">" + post.Title + "</a>:<br /><br />" +
                             comment.Content + "<br /><br />" +
+                            (Blog.ModerateComments ? "<a href=\"" + approveUrl + "\">Approve comment</a> | " : string.Empty) +
                             "<a href=\"" + deleteUrl + "\">Delete comment</a>" +
                             "<br /><br /><hr />" +
                             "Website: " + comment.Website + "<br />" +
@@ -136,6 +143,30 @@ public class CommentHandler : IHttpHandler
         if (comment != null)
         {
             post.Comments.Remove(comment);
+            Storage.Save(post);
+        }
+        else
+        {
+            throw new HttpException(404, "Comment could not be found");
+        }
+
+        if (context.Request.HttpMethod == "GET")
+        {
+            context.Response.Redirect(post.AbsoluteUrl.ToString() + "#comments", true);
+        }
+    }
+
+    private static void Approve(HttpContext context, Post post)
+    {
+        if (!context.User.Identity.IsAuthenticated)
+            throw new HttpException(403, "No access");
+
+        string commentId = context.Request["commentId"];
+        Comment comment = post.Comments.SingleOrDefault(c => c.ID == commentId);
+
+        if (comment != null)
+        {
+            comment.IsApproved = true;
             Storage.Save(post);
         }
         else
