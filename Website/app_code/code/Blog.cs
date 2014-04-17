@@ -9,48 +9,24 @@ using System.Web.Hosting;
 
 public static class Blog
 {
-    private static string _theme = ConfigurationManager.AppSettings.Get("blog:theme");
-    private static string _title = ConfigurationManager.AppSettings.Get("blog:name");
-    private static string _description = ConfigurationManager.AppSettings.Get("blog:description");
-    private static int _postsPerPage = int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage"));
-    private static int _commentDays = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
-    private static string _image = ConfigurationManager.AppSettings.Get("blog:image");
-    private static bool _moderateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
-
-    public static string Title
+    static Blog()
     {
-        get { return _title; }
+        Theme = ConfigurationManager.AppSettings.Get("blog:theme");
+        Title = ConfigurationManager.AppSettings.Get("blog:name");
+        Description = ConfigurationManager.AppSettings.Get("blog:description");
+        PostsPerPage = int.Parse(ConfigurationManager.AppSettings.Get("blog:postsPerPage"));
+        DaysToComment = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
+        Image = ConfigurationManager.AppSettings.Get("blog:image");
+        ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
     }
 
-    public static string Description
-    {
-        get { return _description; }
-    }
-
-    public static string Theme
-    {
-        get { return _theme; }
-    }
-
-    public static string Image
-    {
-        get { return _image; }
-    }
-
-    public static int PostsPerPage
-    {
-        get { return _postsPerPage; }
-    }
-
-    public static int DaysToComment
-    {
-        get { return _commentDays; }
-    }
-
-    public static bool ModerateComments
-    {
-        get { return _moderateComments; }
-    }
+    public static string Title { get; private set; }
+    public static string Description { get; private set; }
+    public static string Theme { get; private set; }
+    public static string Image { get; private set; }
+    public static int PostsPerPage { get; private set; }
+    public static int DaysToComment { get; private set; }
+    public static bool ModerateComments { get; private set; }
 
     public static int UniqueId
     {
@@ -72,21 +48,6 @@ public static class Blog
         get { return HttpContext.Current.Request.RawUrl.Trim('/') == "post/new"; }
     }
 
-    public static Post NextPost
-    {
-        get
-        {
-            if (HttpContext.Current.Items["prevpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
-            {
-                var indexOfCurrent = GetPosts().ToList().IndexOf(CurrentPost);
-                if (indexOfCurrent > 0)
-                    HttpContext.Current.Items["prevpost"] = GetPosts().ToList()[indexOfCurrent - 1];
-            }
-
-            return HttpContext.Current.Items["prevpost"] as Post;
-        }
-    }
-
     public static Post CurrentPost
     {
         get
@@ -103,20 +64,36 @@ public static class Blog
         }
     }
 
-    public static Post PrevPost
+    public static string GetNextPage()
     {
-        get
+        if (!string.IsNullOrEmpty(CurrentSlug))
         {
-            if (HttpContext.Current.Items["nextpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
-            {
-                var indexOfCurrent = GetPosts().ToList().IndexOf(CurrentPost);
-                int nextIndex = GetPosts().ToList().Count - 1;
-                if (indexOfCurrent < nextIndex)
-                    HttpContext.Current.Items["nextpost"] = GetPosts().ToList()[nextIndex];
-            }
-
-            return HttpContext.Current.Items["nextpost"] as Post;
+            var current = Storage.GetAllPosts().IndexOf(CurrentPost);
+            if (current > 0)
+                return Storage.GetAllPosts()[current - 1].Url.ToString();
         }
+        else if (CurrentPage > 1)
+        {
+            return GetPagingUrl(-1);
+        }
+
+        return null;
+    }
+
+    public static string GetPrevPage()
+    {
+        if (!string.IsNullOrEmpty(CurrentSlug))
+        {
+            var current = Storage.GetAllPosts().IndexOf(CurrentPost);
+            if (current > -1)
+                return Storage.GetAllPosts()[current + 1].Url.ToString();
+        }
+        else
+        {
+            return GetPagingUrl(1);
+        }
+
+        return null;
     }
 
     public static int CurrentPage

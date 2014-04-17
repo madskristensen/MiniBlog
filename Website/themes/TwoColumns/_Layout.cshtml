@@ -1,4 +1,8 @@
-﻿<!doctype html>
+﻿@{
+	string next = Blog.GetNextPage();
+	string prev = Blog.GetPrevPage();
+}
+<!doctype html>
 <html lang="en-us">
 <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8" />
@@ -24,14 +28,14 @@
     <meta property="og:image" content="@Blog.Image" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
-    @if (Blog.PrevPost != null)
-    {
-        <link rel="prev" href="@Blog.PrevPost.Url" />
-    }
-    @if (Blog.NextPost != null)
-    {
-        <link rel="next" href="@Blog.NextPost.Url" />
-    }
+    @if (!string.IsNullOrEmpty(prev))
+	{
+		<link rel="prev" href="@prev" />
+	}
+	@if (!string.IsNullOrEmpty(next))
+	{
+		<link rel="next" href="@next" />
+	}
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
 
