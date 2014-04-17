@@ -31,10 +31,10 @@ public static class Blog
     {
         get { return _theme; }
     }
-    
+
     public static string Image
     {
-        get{ return _image; }
+        get { return _image; }
     }
 
     public static int PostsPerPage
@@ -54,7 +54,7 @@ public static class Blog
 
     public static int UniqueId
     {
-        get { return (Title + Description + Theme + Image + PostsPerPage + DaysToComment + ModerateComments).GetHashCode(); }
+        get { return FingerPrint("/web.config").GetHashCode(); }
     }
 
     public static string CurrentSlug
