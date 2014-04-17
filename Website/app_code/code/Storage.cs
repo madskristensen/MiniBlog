@@ -22,6 +22,7 @@ public static class Storage
         return new List<Post>();
     }
 
+    // Can this be done async?
     public static void Save(Post post)
     {
         string file = Path.Combine(_folder, post.ID + ".xml");
@@ -90,6 +91,7 @@ public static class Storage
 
         List<Post> list = new List<Post>();
 
+        // Can this be done in parallel to speed it up?
         foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
             XElement doc = XElement.Load(file);
