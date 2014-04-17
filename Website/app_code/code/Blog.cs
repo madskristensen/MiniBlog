@@ -52,6 +52,11 @@ public static class Blog
         get { return _moderateComments; }
     }
 
+    public static int XsrfToken
+    {
+        get { return (Title + Description + Theme + Image + PostsPerPage + DaysToComment + ModerateComments).GetHashCode(); }
+    }
+
     public static string CurrentSlug
     {
         get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }

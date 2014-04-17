@@ -9,7 +9,8 @@ public class PostHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        if (!context.User.Identity.IsAuthenticated)
+        int token;
+        if (!context.User.Identity.IsAuthenticated || !int.TryParse(context.Request.Form["token"], out token) || token != Blog.XsrfToken)
             throw new HttpException(403, "No access");
 
         string mode = context.Request.QueryString["mode"];

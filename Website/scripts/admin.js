@@ -106,6 +106,7 @@
             title: txtTitle.text().trim(),
             content: parsedDOM,
             categories: getPostCategories(),
+            token: document.querySelector("[data-token]").getAttribute("data-token")
         })
           .success(function (data) {
               if (isNew) {
