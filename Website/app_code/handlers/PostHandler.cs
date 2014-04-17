@@ -29,17 +29,17 @@ public class PostHandler : IHttpHandler
 
     private void DeletePost(string id)
     {
-        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
+        Post post = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.ID == id);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");
 
-        Storage.Delete(post);
+        StorageFactory.Instance.Delete(post);
     }
 
     private void EditPost(string id, string title, string content, bool isPublished, string[] categories)
     {
-        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
+        Post post = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.ID == id);
 
         if (post != null)
         {
@@ -56,7 +56,7 @@ public class PostHandler : IHttpHandler
         SaveFilesToDisk(post);
 
         post.IsPublished = isPublished;
-        Storage.Save(post);
+        StorageFactory.Instance.Save(post);
     }
 
     private void SaveFilesToDisk(Post post)
@@ -89,7 +89,7 @@ public class PostHandler : IHttpHandler
         title = RemoveDiacritics(title);
         title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);
 
-        if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
+        if (StorageFactory.Instance.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();

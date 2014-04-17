@@ -10,7 +10,7 @@ public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == context.Request["postId"]);
+        Post post = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.ID == context.Request["postId"]);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");
@@ -58,7 +58,7 @@ public class CommentHandler : IHttpHandler
         };
 
         post.Comments.Add(comment);
-        Storage.Save(post);
+        StorageFactory.Instance.Save(post);
 
         if (!context.User.Identity.IsAuthenticated)
         {
@@ -154,7 +154,7 @@ public class CommentHandler : IHttpHandler
         Comment comment = GetComment(context, post);
 
         post.Comments.Remove(comment);
-        Storage.Save(post);
+        StorageFactory.Instance.Save(post);
 
         RedirectOnGET(context, post);
     }
@@ -167,7 +167,7 @@ public class CommentHandler : IHttpHandler
         Comment comment = GetComment(context, post);
 
         comment.IsApproved = true;
-        Storage.Save(post);
+        StorageFactory.Instance.Save(post);
 
         RedirectOnGET(context, post);
     }

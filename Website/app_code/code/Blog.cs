@@ -50,10 +50,10 @@ public static class Blog
         {
             if (HttpContext.Current.Items["currentpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
             {
-                var post = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
+                var post = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
 
                 if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated))
-                    HttpContext.Current.Items["currentpost"] = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
+                    HttpContext.Current.Items["currentpost"] = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
             }
 
             return HttpContext.Current.Items["currentpost"] as Post;
@@ -64,9 +64,9 @@ public static class Blog
     {
         if (!string.IsNullOrEmpty(CurrentSlug))
         {
-            var current = Storage.GetAllPosts().IndexOf(CurrentPost);
+            var current = StorageFactory.Instance.GetAllPosts().IndexOf(CurrentPost);
             if (current > 0)
-                return Storage.GetAllPosts()[current - 1].Url.ToString();
+                return StorageFactory.Instance.GetAllPosts()[current - 1].Url.ToString();
         }
         else if (CurrentPage > 1)
         {
@@ -80,9 +80,9 @@ public static class Blog
     {
         if (!string.IsNullOrEmpty(CurrentSlug))
         {
-            var current = Storage.GetAllPosts().IndexOf(CurrentPost);
-            if (current > -1 && Storage.GetAllPosts().Count > current + 1)
-                return Storage.GetAllPosts()[current + 1].Url.ToString();
+            var current = StorageFactory.Instance.GetAllPosts().IndexOf(CurrentPost);
+            if (current > -1 && StorageFactory.Instance.GetAllPosts().Count > current + 1)
+                return StorageFactory.Instance.GetAllPosts()[current + 1].Url.ToString();
         }
         else
         {
@@ -106,7 +106,7 @@ public static class Blog
 
     public static IEnumerable<Post> GetPosts(int postsPerPage = 0)
     {
-        var posts = from p in Storage.GetAllPosts()
+        var posts = from p in StorageFactory.Instance.GetAllPosts()
                     where (p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated
                     select p;
 
