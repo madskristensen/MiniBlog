@@ -10,7 +10,7 @@ public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        Post post = Storage.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == context.Request["postId"]);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");
@@ -173,7 +173,7 @@ public class CommentHandler : IHttpHandler
     private static Comment GetComment(HttpContext context, Post post)
     {
         string commentId = context.Request["commentId"];
-        Comment comment = post.Comments.SingleOrDefault(c => c.ID == commentId);
+        Comment comment = post.Comments.FirstOrDefault(c => c.ID == commentId);
 
         if (comment == null)
             throw new HttpException(404, "Comment could not be found");

@@ -92,7 +92,7 @@ public static class Storage
         List<Post> list = new List<Post>();
 
         // Can this be done in parallel to speed it up?
-        foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
+        foreach (string file in Directory.EnumerateFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
             XElement doc = XElement.Load(file);
 
