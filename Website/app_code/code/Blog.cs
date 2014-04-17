@@ -85,7 +85,7 @@ public static class Blog
         if (!string.IsNullOrEmpty(CurrentSlug))
         {
             var current = Storage.GetAllPosts().IndexOf(CurrentPost);
-            if (current > -1)
+            if (current > -1 && Storage.GetAllPosts().Count > current + 1)
                 return Storage.GetAllPosts()[current + 1].Url.ToString();
         }
         else
@@ -131,6 +131,8 @@ public static class Blog
 
     public static bool MatchesUniqueId(HttpContext context)
     {
+        // This method is used to prevent XSRF attacks. Make sure the .cshtml files in the 'views' folder are up-to-date.
+        // Both AdminMenu.cshtml and CommentForm.cshtml must have data-token attributes containging @Blog.UniqueId
         int token;
         return int.TryParse(context.Request.Form["token"], out token) && token == Blog.UniqueId;
     }
