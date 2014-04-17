@@ -17,7 +17,7 @@ public class CommentHandler : IHttpHandler
 
         string mode = context.Request["mode"];
 
-        if (mode == "save" && context.Request.HttpMethod == "POST" && post.AreCommentsOpen(new HttpContextWrapper(context)) && Blog.MatchesUniqueId(context))
+        if (mode == "save" && context.Request.HttpMethod == "POST")
         {
             Save(context, post);
         }
@@ -33,6 +33,9 @@ public class CommentHandler : IHttpHandler
 
     private static void Save(HttpContext context, Post post)
     {
+        if (!Blog.MatchesUniqueId(context) || post.AreCommentsOpen(new HttpContextWrapper(context)))
+            throw new HttpException(403, "The data token doesn't match or comments are closed");
+
         string name = context.Request.Form["name"];
         string email = context.Request.Form["email"];
         string website = context.Request.Form["website"];

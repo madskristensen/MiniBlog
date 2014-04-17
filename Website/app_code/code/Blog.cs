@@ -131,6 +131,8 @@ public static class Blog
 
     public static bool MatchesUniqueId(HttpContext context)
     {
+        // This method is used to prevent spam and XSRF attacks. Make sure the .cshtml files in the 'views' folder are up-to-date.
+        // Both AdminMenu.cshtml and CommentForm.cshtml must have data-token attributes containging @Blog.UniqueId
         int token;
         return int.TryParse(context.Request.Form["token"], out token) && token == Blog.UniqueId;
     }
