@@ -85,7 +85,7 @@ public static class Blog
         if (!string.IsNullOrEmpty(CurrentSlug))
         {
             var current = Storage.GetAllPosts().IndexOf(CurrentPost);
-            if (current > -1)
+            if (current > -1 && Storage.GetAllPosts().Count > current + 1)
                 return Storage.GetAllPosts()[current + 1].Url.ToString();
         }
         else
