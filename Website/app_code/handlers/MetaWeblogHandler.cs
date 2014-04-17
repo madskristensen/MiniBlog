@@ -49,7 +49,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
 
         post.Slug = PostHandler.CreateSlug(post.Title);
         post.IsPublished = publish;
-        Storage.Save(post);
+        StorageFactory.Instance.Save(post);
 
         return post.ID;
     }
@@ -58,7 +58,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post match = Storage.GetAllPosts().FirstOrDefault(p => p.ID == postid);
+        Post match = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (match != null)
         {
@@ -68,7 +68,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Categories = post.Categories;
             match.IsPublished = publish;
             match.PubDate = post.PubDate;
-            Storage.Save(match);
+            StorageFactory.Instance.Save(match);
         }
 
         return match != null;
@@ -78,11 +78,11 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == postid);
+        Post post = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (post != null)
         {
-            Storage.Delete(post);
+            StorageFactory.Instance.Delete(post);
         }
 
         return post != null;
@@ -92,7 +92,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == postid);
+        Post post = StorageFactory.Instance.GetAllPosts().FirstOrDefault(p => p.ID == postid);
 
         if (post == null)
             throw new XmlRpcFaultException(0, "Post does not exist");
@@ -114,7 +114,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
 
         List<object> list = new List<object>();
 
-        foreach (var post in Storage.GetAllPosts().Take(numberOfPosts))
+        foreach (var post in StorageFactory.Instance.GetAllPosts().Take(numberOfPosts))
         {
             var info = new
             {
@@ -136,7 +136,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         ValidateUser(username, password);
 
         var list = new List<object>();
-        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
+        var categories = StorageFactory.Instance.GetAllPosts().SelectMany(p => p.Categories);
 
         foreach (string category in categories.Distinct())
         {

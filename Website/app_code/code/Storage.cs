@@ -6,11 +6,11 @@ using System.Web.Hosting;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-public static class Storage
+public class Storage : IStorage
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
 
-    public static List<Post> GetAllPosts()
+    public List<Post> GetAllPosts()
     {
         if (HttpRuntime.Cache["posts"] == null)
             LoadPosts();
@@ -23,7 +23,7 @@ public static class Storage
     }
 
     // Can this be done async?
-    public static void Save(Post post)
+    public void Save(Post post)
     {
         string file = Path.Combine(_folder, post.ID + ".xml");
         post.LastModified = DateTime.UtcNow;
@@ -76,7 +76,7 @@ public static class Storage
         doc.Save(file);
     }
 
-    public static void Delete(Post post)
+    public void Delete(Post post)
     {
         var posts = GetAllPosts();
         string file = Path.Combine(_folder, post.ID + ".xml");
@@ -84,7 +84,7 @@ public static class Storage
         posts.Remove(post);
     }
 
-    private static void LoadPosts()
+    private void LoadPosts()
     {
         if (!Directory.Exists(_folder))
             Directory.CreateDirectory(_folder);
@@ -120,7 +120,7 @@ public static class Storage
         }
     }
 
-    private static void LoadCategories(Post post, XElement doc)
+    private void LoadCategories(Post post, XElement doc)
     {
         XElement categories = doc.Element("categories");
         if (categories == null)
@@ -135,7 +135,7 @@ public static class Storage
 
         post.Categories = list.ToArray();
     }
-    private static void LoadComments(Post post, XElement doc)
+    private void LoadComments(Post post, XElement doc)
     {
         var comments = doc.Element("comments");
 
@@ -162,7 +162,7 @@ public static class Storage
         }
     }
 
-    private static string ReadValue(XElement doc, XName name, string defaultValue = "")
+    private string ReadValue(XElement doc, XName name, string defaultValue = "")
     {
         if (doc.Element(name) != null)
             return doc.Element(name).Value;
@@ -170,7 +170,7 @@ public static class Storage
         return defaultValue;
     }
 
-    private static string ReadAttribute(XElement element, XName name, string defaultValue = "")
+    private string ReadAttribute(XElement element, XName name, string defaultValue = "")
     {
         if (element.Attribute(name) != null)
             return element.Attribute(name).Value;
