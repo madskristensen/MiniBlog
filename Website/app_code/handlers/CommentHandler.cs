@@ -12,7 +12,7 @@ public class CommentHandler : IHttpHandler
     {
         Post post = Storage.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
 
-        if (post == null)
+        if (post == null || !Blog.MatchesUniqueId(context))
             throw new HttpException(404, "The post does not exist");
 
         string mode = context.Request["mode"];

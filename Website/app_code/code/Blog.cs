@@ -52,7 +52,7 @@ public static class Blog
         get { return _moderateComments; }
     }
 
-    public static int XsrfToken
+    public static int UniqueId
     {
         get { return (Title + Description + Theme + Image + PostsPerPage + DaysToComment + ModerateComments).GetHashCode(); }
     }
@@ -150,6 +150,12 @@ public static class Blog
         }
 
         return posts;
+    }
+
+    public static bool MatchesUniqueId(HttpContext context)
+    {
+        int token;
+        return int.TryParse(context.Request.Form["token"], out token) && token == Blog.UniqueId;
     }
 
     public static string SaveFileToDisk(byte[] bytes, string extension)

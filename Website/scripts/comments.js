@@ -30,7 +30,6 @@
         var ajaxRequest = AsynObject.getAjaxRequest(callback);
         ajaxRequest.open("POST", url, true);
         ajaxRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ajaxRequest.setRequestHeader("Connection", "close");
         ajaxRequest.send(objectToUrl(data));
     };
 
@@ -147,7 +146,8 @@
             }, {
                 mode: "delete",
                 postId: postId,
-                commentId: commentId
+                commentId: commentId,
+                token: document.querySelector("[data-token]").getAttribute("data-token")
             });
         }
     }
@@ -164,7 +164,8 @@
         }, {
             mode: "approve",
             postId: postId,
-            commentId: commentId
+            commentId: commentId,
+            token: document.querySelector("[data-token]").getAttribute("data-token")
         });
     }
 
@@ -196,7 +197,7 @@
                 return;
             } else if (status !== 200) {
                 addClass(elemStatus, "alert-danger");
-                elemStatus.innerText = data.statusText;
+                elemStatus.innerText = "Unable to add comment";
                 callback(false);
             }
         }, {
@@ -205,7 +206,8 @@
             name: name,
             email: email,
             website: website,
-            content: content
+            content: content,
+            token: document.querySelector("[data-token]").getAttribute("data-token"),
         });
 
     }
