@@ -2,7 +2,7 @@
     var isPublished = Blog.CurrentPost != null && Blog.CurrentPost.IsPublished;
 }
 
-<nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished" data-token="@Blog.UniqueId">
+<nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished">
     <div class="navbar-inner">
         <ul class="nav navbar-nav">
             <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
