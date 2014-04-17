@@ -41,6 +41,8 @@
 
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
+	
+	@AntiForgery.GetHtml()
 
     if (!Request.IsLocal)
     {

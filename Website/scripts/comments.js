@@ -147,7 +147,7 @@
                 mode: "delete",
                 postId: postId,
                 commentId: commentId,
-                token: document.querySelector("[data-token]").getAttribute("data-token")
+                token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
             });
         }
     }
@@ -165,7 +165,7 @@
             mode: "approve",
             postId: postId,
             commentId: commentId,
-            token: document.querySelector("[data-token]").getAttribute("data-token")
+            token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
         });
     }
 
@@ -207,7 +207,7 @@
             email: email,
             website: website,
             content: content,
-            token: document.querySelector("[data-token]").getAttribute("data-token"),
+            token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
         });
 
     }

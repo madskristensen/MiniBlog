@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
+using System.Web.Helpers;
 using System.Web.Hosting;
 
 public static class Blog
@@ -27,12 +28,7 @@ public static class Blog
     public static int PostsPerPage { get; private set; }
     public static int DaysToComment { get; private set; }
     public static bool ModerateComments { get; private set; }
-
-    public static int UniqueId
-    {
-        get { return FingerPrint("/web.config").GetHashCode(); }
-    }
-
+    
     public static string CurrentSlug
     {
         get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }
@@ -129,12 +125,11 @@ public static class Blog
         return posts;
     }
 
-    public static bool MatchesUniqueId(HttpContext context)
+    public static void ValidateToken(HttpContext context)
     {
-        // This method is used to prevent XSRF attacks. Make sure the .cshtml files in the 'views' folder are up-to-date.
-        // Both AdminMenu.cshtml and CommentForm.cshtml must have data-token attributes containging @Blog.UniqueId
-        int token;
-        return int.TryParse(context.Request.Form["token"], out token) && token == Blog.UniqueId;
+        string token = context.Request.Form["token"];
+        var cookie = context.Request.Cookies.Get("__RequestVerificationToken");
+        AntiForgery.Validate(cookie.Value, token);
     }
 
     public static string SaveFileToDisk(byte[] bytes, string extension)
