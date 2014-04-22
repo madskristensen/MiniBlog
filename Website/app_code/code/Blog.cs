@@ -191,7 +191,6 @@ public static class Blog
     {
         HttpResponseBase response = context.Response;
         HttpRequestBase request = context.Request;
-        lastModified = DateTime.UtcNow < lastModified ? DateTime.UtcNow : lastModified;
         lastModified = new DateTime(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second);
 
         string incomingDate = request.Headers["If-Modified-Since"];
