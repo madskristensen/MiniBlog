@@ -4,7 +4,8 @@
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
         </h1>
         <div>
-            <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>@Author()
+            @Author()
+            <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
             <a href="@Model.Url#comments">
                 <em class="glyphicon glyphicon-comment"></em>
                 @Model.CountApprovedComments(Context) Comments
@@ -59,6 +60,6 @@
 {
     if (!String.IsNullOrEmpty(Model.Author) && Blog.ShowAuthor)
     {
-        <strong> by @Model.Author</strong>
+        <em>by @Model.Author</em><br />
     }
 }
