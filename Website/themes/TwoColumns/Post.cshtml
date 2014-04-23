@@ -4,6 +4,7 @@
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
         </h1>
         <div>
+            @Author()
             <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
             <a href="@Model.Url#comments">
                 <em class="glyphicon glyphicon-comment"></em>
@@ -52,5 +53,13 @@
                 </li>
             }
         </ul>
+    }
+}
+
+@helper Author()
+{
+    if (!String.IsNullOrEmpty(Model.Author) && Blog.ShowAuthor)
+    {
+        <em>by @Model.Author</em><br />
     }
 }

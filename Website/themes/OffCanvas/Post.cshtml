@@ -14,6 +14,7 @@ else
                 <a href="@Model.Url" itemprop="url">@Model.Title</a>
             </h1>
             <div>
+                @Author()
                 <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
                 <a href="@Model.Url#comments">
                     <em class="glyphicon glyphicon-comment"></em>
@@ -49,20 +50,28 @@ else
     </article>
 
     @helper Categories()
-{
-    if (Model.Categories.Length > 0)
     {
-        <ul class="categories">
-            <li><em class="glyphicon glyphicon-bookmark"></em> Posted in: </li>
-            @foreach (string cat in Model.Categories)
-            {
-                <li itemprop="articleSection">
-                    <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
-                </li>
-            }
-        </ul>
+        if (Model.Categories.Length > 0)
+        {
+            <ul class="categories">
+                <li><em class="glyphicon glyphicon-tags"></em> Posted in: </li>
+                @foreach (string cat in Model.Categories)
+                {
+                    <li itemprop="articleSection">
+                        <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+                    </li>
+                }
+            </ul>
+        }
     }
-}
+    @helper Author()
+    {
+        if (!String.IsNullOrEmpty(Model.Author) && Blog.ShowAuthor)
+        {
+            <em>by @Model.Author</em><br />
+        }
+    }
+    
 }
 
 @functions{

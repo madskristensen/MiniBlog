@@ -19,6 +19,7 @@ public static class Blog
         DaysToComment = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
         Image = ConfigurationManager.AppSettings.Get("blog:image");
         ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
+        ShowAuthor = bool.Parse(ConfigurationManager.AppSettings.Get("blog:showAuthor"));
     }
 
     public static string Title { get; private set; }
@@ -28,7 +29,8 @@ public static class Blog
     public static int PostsPerPage { get; private set; }
     public static int DaysToComment { get; private set; }
     public static bool ModerateComments { get; private set; }
-    
+    public static bool ShowAuthor { get; private set; }
+
     public static string CurrentSlug
     {
         get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }
@@ -191,6 +193,7 @@ public static class Blog
     {
         HttpResponseBase response = context.Response;
         HttpRequestBase request = context.Request;
+        lastModified = DateTime.UtcNow < lastModified ? DateTime.UtcNow : lastModified;
         lastModified = new DateTime(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second);
 
         string incomingDate = request.Headers["If-Modified-Since"];
