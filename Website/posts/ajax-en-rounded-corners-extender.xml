@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>AJAX en rounded corners extender</title>
+  <slug>ajax-en-rounded-corners-extender</slug>
+  <author>Jan</author>
+  <pubDate>2008-01-26 20:39:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassC8457C52EF174BBE8A16A724DCF644E3"&gt;Inmiddels ben ik aanbelandt bij het designen van m'n nieuwe weblog. Nu wilde ik voor sommige onderdelen ronde hoekjes gebruiken, omdat dat helemaal hip is tegenwoordig.&lt;br /&gt;Nu biedt het AJAX framework hier een mooie extender voor die je bij ASP.Net panels kunt gebruiken.&lt;br /&gt;Gisteren wilde ik die dus gebruiken, nou vergeet het maar. Die dingen komen niet op mijn website(s).&lt;br /&gt;Het implementeren van die rounded corner extenders is niet enorm lastig. Ongeveer 5 regels code. Het probleem zit hem in het kleuren van de lijnen. Iemand heeft het lumineuze idee gehad dat de ronde hoekjes worden opgebouwd uit tientallen div-blokjes van een hoogte van 1 pixel en waarvan alleen de &lt;em&gt;borders&lt;/em&gt; (hoekjes} een kleur hebben. Deze kleur moet je in de code van je webpagina opgeven. Nou heb ik daar op zich niets op tegen. Het probleem is echter dat deze tientallen div'jes geen ID hebben en geen CSS klasse.&lt;br /&gt;Niet echt W3C dus en al helemaal lastig om ze een andere kleur te geven dan je in de code opgeeft.&lt;br /&gt;Je wilt natuurlijk niet dat bij iedere design update, je ook je code moet updaten. Daar is CSS voor uitgevonden.&lt;br /&gt;&lt;br /&gt;Ja, ik kan er wel work-arounds voor gaan verzinnen, maar daar heb ik geen zin in. Het blijft een bagger oplossing, hoe je het ook wend of keert.&lt;br /&gt;Voor het nieuwe design bedenk ik wel wat anders dan ronde hoekjes, of ik maak ze op een andere manier. Via Google kun je tientallen andere manieren vinden.&lt;br /&gt;&lt;br /&gt;Wel vind ik het jammer dat ze het zo hebben opgelost.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

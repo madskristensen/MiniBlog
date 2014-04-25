@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Server rebooten?</title>
+  <slug>server-rebooten</slug>
+  <author>Jan</author>
+  <pubDate>2007-11-06 20:07:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass356D6BEBF70C4D67A0F945C0A01223B2"&gt;Zo nu en dan komt het wel eens voordat je een server via RDP wilt rebooten. Aangezien ik eigenlijk altijd als Administrator inlog kan dat ook wel, omdat je genoeg rechten hebt.&lt;br /&gt;Wat wel enorm vervelend is, is dat wanneer de server weer opstart, de RDP-service niet goed opkomt. Dan moet er weer een beheerder via VMWare of een andere beheertool inloggen, de service starten en mij weer inlichten.&lt;br /&gt;Aangezien de beheerders ook vaak wel druk zijn met van alles en nog wat kan dit behoorlijk lang duren. Onlangs moest ik hiervoor 3 dagen wachten. Op zich niet enorm erg, omdat ik toch ook wel andere dingen kon doen en de server gewoon bereikbaar was.&lt;br /&gt;&lt;br /&gt;Nu werd mij verteld dat je ook zonder RDP of admin-tool de server kon rebooten.&lt;br /&gt;Heel simpel en via je eigen systeem.&lt;br /&gt;&lt;br /&gt;Door de term&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;shutdown -i&lt;/div&gt;
+&lt;br /&gt;in te tikken krijg je een mooie interface waar je kunt aangeven welke machine je wilt rebooten, uit zetten, in stand-by plaatsen, etc.&lt;br /&gt;Enorm handig als ik weer eens zoiets aantref, ook voor anderen natuurlijk.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

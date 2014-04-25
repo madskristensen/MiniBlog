@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Nieuwsgroepen op WHS</title>
+  <slug>nieuwsgroepen-op-whs</slug>
+  <author>Jan</author>
+  <pubDate>2008-06-09 19:35:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass6168AE04BE694210896699530B36E93A"&gt;Vandaag was ik even op zoek of er ook alternatieven zijn voor GrabIt! of NewsLeecher voor WHS. Dit alternatief heb ik gevonden in Ninan (&lt;em&gt;Ninan is not a newsreader&lt;/em&gt;). De website ziet er op zich wel aardig uit http://www.ninan.org/modules/news/ en het is ook nog gratis. Wat het is, het is een in Java geschreven web applicatie die je dus op een server kunt gaan draaien. De software kijkt in een bepaalde map naar nieuwe NZB bestanden en die gedownloade bestanden plaatst hij dan in de download map. Redelijk eenvoudig dus. Op deze pagina http://www.ninan.org/modules/wfdownloads/viewcat.php?cid=1 kun je gelijk de Windows of Linux versie downloaden. In de bijgeleverde webpagina's staat precies hoe je de applicitate moet installeren. Op zich is het niet enorm lastig, gewoon het bestand &lt;em&gt;ninancore.bat&lt;/em&gt; opstarten en je bent al klaar. Daarna even de benodigde gegevens instellen voor je nieuwsgroepen en klaar ben je. Wel moet ik nog even uitvinden hoe je dit .bat-bestand als een service kunt opstarten. Het is immers niet de bedoeling dat ik continu zo'n lelijke dos-box in het scherm heb staan en de applicatie moet natuurlijk ook draaien als ik zelf niet op de server ben ingelogd. Op de website van Ninan staat wel hoe het ongeveer gaat, maar daar ben ik nog niet helemaal uit. Dat vergt nog nader onderzoek. Wat trouwens ook mooi is, Ninan doet zelf ook het parren en unrarren van gedownloade bestanden. Zodoende hoef je dus ook niet meer Quickpar te installeren op je systeem. Scheelt toch weer enkele minuten per dag parren. Voor nu ben ik echter wel weer tevreden.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

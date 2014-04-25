@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>SharePoint en FileNotFoundException bij opvragen SPSite</title>
+  <slug>sharepoint-en-filenotfoundexception-bij-opvragen-spsite</slug>
+  <author>Jan</author>
+  <pubDate>2011-01-21 20:32:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassA2992A4AE094479FB3775F439CB5119E"&gt;
+&lt;p&gt;Afgelopen week was ik aan de slag met het ontwikkelen van een export applicatie voor een bepaalde Wiki website binnen SharePoint. De bedoeling was dat alle inhoud van de Wiki site als HTML en XML moest kunnen worden ge&amp;euml;xporteerd om zo te kunnen gebruiken in andere systemen.&lt;/p&gt;
+&lt;p&gt;Een dergelijke applicatie ontwikkelen is inmiddels geen probleem meer en ging dus ook aan de slag zonder de code continu te testen. Pas toen ik dacht klaar te zijn kreeg ik een foutmelding bij het openen van de &lt;span style="font-family: Courier New;"&gt;SPSite&lt;/span&gt;, iets als (code kopie van &lt;a href="http://stackoverflow.com/questions/266255/filenotfoundexception-with-the-spsite-constructor-whats-the-problem"&gt;StackOverflow&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New;"&gt;System.IO.FileNotFoundException : The site http://website/ could not be found in the Web application SPWebApplication &lt;br /&gt;Name=SharePoint - 80 Parent=SPWebService.&lt;br /&gt;at Microsoft.SharePoint.SPSite..ctor(SPFarm farm, Uri requestUri, Boolean contextSite, SPUserToken userToken)&lt;br /&gt;at Microsoft.SharePoint.SPSite..ctor(String requestUrl) &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In de gelinkte post van StackOverflow staat ook gelijk wat het probleem is.&lt;/p&gt;
+&lt;p&gt;Het probleem bij mij was namelijk dat de ge&amp;iuml;nstalleerde Sharepoint 2007 versie 64-bits was. De console applicatie (en later de WPF applicatie) werd gebuild als een 32-bits assembly. Blijkbaar mag een 32-bits assembly niet met een 64-bits Sharepoint praten. Als je er over na gaat denken, klinkt dat ook wel logisch, echter had ik er op dat moment nog niet bij stil gestaan.&lt;/p&gt;
+&lt;p&gt;Dit geldt trouwens alleen maar voor externe applicaties. Wanneer je een webpart, feature, timerjob of iets anders maakt dat 'in' SharePoint werkt, dan geldt dit probleem niet. Bij gebruik van WSP Builder moet dan wel de 64-bits cablib worden gebruikt, waarschijnlijk om dezelfde reden als die ik nu zelf heb ondervonden.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

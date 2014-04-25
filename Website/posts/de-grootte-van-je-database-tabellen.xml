@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>De grootte van je database tabellen</title>
+  <slug>de-grootte-van-je-database-tabellen</slug>
+  <author>Jan</author>
+  <pubDate>2008-03-16 14:14:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassC93ABDA701BF497990774A57B4805B22"&gt;De afgelopen tijd merkte ik op dat de grootte van een bepaalde database waar ik vaak mee werk behoorlijk groot wordt in korte tijd. Om te onderzoeken aan welke tabel dit te wijten was moest ik weten hoe groot iedere tabel was. Dit kan uiteraard door de eigenschappen van iedere tabel op te vragen, maar als je meer dan 50 tabellen hebt duurt dit veel te lang. Dat moet ook automatisch kunnen. Ik hoefde niet lang te zoeken voor een script dat ik zocht. Ene Zxtreme had al een mooi script on-line geplaast, te bezichtigen op deze website: http://www.planet-source-code.com/vb/scripts/ShowCode.asp?txtCodeId=732&amp;amp;lngWId=5. Hiermee kun je precies zien hoe groot (in KB's) je tabellen zijn. Eigenlijk komt het er op neer dat je een soortgelijke query als die van hieronder moet uitvoeren.
+&lt;div class="code"&gt;DECLARE @TempTabel TABLE ( [Name] NVARCHAR(255), [Rows] INT, [TabelGrootte] NVARCHAR(50), [Used] NVARCHAR(50), [IndexUsed] NVARCHAR(50), [Unused] NVARCHAR(50) ) INSERT INTO @TempTabel EXEC sp_msforeachtable 'sp_spaceused "?"' SELECT * FROM @TempTabel&lt;/div&gt;
+Zodra je dit in je database doet krijg je per tabel precies te zien wat de grootte er van is. Wel handig. Zo kwam ik er vandaag achter dat er een historie tabel veel oude data bevatte dat wel weg kon.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

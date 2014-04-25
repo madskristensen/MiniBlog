@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>SQL Server 2008 en Filtered indexes</title>
+  <slug>sql-server-2008-en-filtered-indexes</slug>
+  <author>Jan</author>
+  <pubDate>2008-02-16 17:41:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassB81D8748901442A99C1966A70EBEDCB9"&gt;Vandaag kwam ik een interessante post tegen op een ander weblog, namelijk dat je in SQL Server 2008 gebruik kunt maken van een zogenaamde &lt;em&gt;Filtered index&lt;/em&gt;. Dit houdt in dat je een index kan aanmaken op een stukje van de tabel. Nu lukt het mij zelf niet om direct een groot voordeel van een filtered index te bedenken, maar ze zullen er waarschijnlijk wel zijn. Andrew Fryer heeft wel een probleem situatie van 'vroeger' kunnen oplossen met behulp van een filtered index. Hij beschrijft namelijk de situatie dat een kolom in je tabel altijd unieke waarden moet hebben, maar ook &lt;em&gt;NULL&lt;/em&gt; als waarde mag bevatten (dus leeg is). Op z'n eigen weblog beschrijft hij z'n werkwijze (http://blogs.technet.com/andrew/archive/2008/02/21/sql-server-2008-filtered-indexes.aspx). Wat hij doet is de volgende code gebruiken in SQL Server 2008.
+&lt;div class="code"&gt;create unique index production.nullidx on production.product(code) where production.product(code) is not null&lt;/div&gt;
+Wat ik hier van op maak is dat er een unieke constraint op de kolom &lt;em&gt;production.nullids&lt;/em&gt; komt te staan ALS het veld is ingevuld. Ik twijfel er niet aan dat dit handig kan zijn in enkele situaties. Ook denk ik dat dit soort indices ook in m'n eigen applicatie(s) wel kunnen worden toegevoegd, echter heb ik deze nieuwe feature nog niet gemist in m'n huidige brouwsels.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

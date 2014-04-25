@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Systeem account kan geen workflow starten</title>
+  <slug>systeem-account-kan-geen-workflow-starten</slug>
+  <author>Jan</author>
+  <pubDate>2010-05-26 15:28:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassE316D89E4F524BC2933FD89B89C60FE3"&gt;
+&lt;p&gt;Na het oplossen van het probleem dat in de vorige post wordt beschreven, wist een collega van mij te vertellen dat dit wellicht te maken kon hebben met het KB artikel 947284 (&lt;a href="http://support.microsoft.com/kb/947284"&gt;http://support.microsoft.com/kb/947284&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Hier staat namelijk dat er vanaf Servicepack 1 van Sharepoint een wijziging is geweest in het security model. Het Systeem-account mag namelijk niet meer 'declaratieve' workflows opstarten. Wat 'declaratief' in deze context betekend weet ik niet, maar het lijkt er dus op dat het Systeem account helemaal geen workflows meer op mag starten.&lt;/p&gt;
+&lt;p&gt;Wanneer je code uitvoert met &lt;span style="font-family: Courier New; font-size: 10pt;"&gt;RunWithElevatedPrivileges&lt;/span&gt;, dan wordt dit onder het Systeem-account uitgevoerd, omdat dat account alle rechten zou moeten hebben op de web applicatie.&lt;/p&gt;
+&lt;p&gt;Dit had ik dus ook in mijn stuk code gedaan. Om er zeker van te zijn ben ik even ingelogd als het Application Pool account op m'n Sharepoint site. Als naam stond hier inderdaad dat ik het Systeemaccount was.&lt;/p&gt;
+&lt;p&gt;Het is dus zeker een nuttig KB om te kennen bij het schrijven van code dat afhankelijk is van workflows.&lt;/p&gt;
+&lt;p&gt;Sowieso is het handig om de best-practices te kennen voor het inrichten en configureren van een Sharepoint omgeving. Op zich wist ik namelijk wel dat deze specifieke omgeving niet echt best-practice was, maar had niet gedacht dat zoiets eenvoudigs als het starten van een workflow dan niet meer zou gaan werken.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>2 SharePoint quirks which kept me busy</title>
+  <slug>2-sharepoint-quirks-which-kept-me-busy</slug>
+  <author>Jan</author>
+  <pubDate>2014-04-03 12:35:53</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;There are 2 ‘features’ in SharePoint (MOSS2007) which have kept me busy for quite some time in my last project. Yes, you’ve read it right the first time, my latest project was a MOSS 2007 web portal. Of course these issues aren’t really quirks as the product behaves by design, but it has kept me busy for more time as I would bargain for.&lt;/p&gt; &lt;p&gt;&lt;strong&gt;&lt;font size="4"&gt;First quirk:&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt; &lt;p&gt;For some reason I had to create a console application to query the SharePoint user list and delete the users. Normally this doesn’t pose a problem at all. However, this time the following error was thrown every time:&lt;/p&gt;&lt;pre class="brush:bash"&gt;The Web application at http://your-website-here:80 could not be found. 
+Verify that you have typed the URL correctly. 
+If the URL should be serving existing content, 
+the system administrator may need to add a new request URL mapping to the intended application.
+&lt;/pre&gt;
+&lt;p&gt;Quite strange, as the website does exist, I even double checked it.&lt;/p&gt;
+&lt;p&gt;After doing some research on the matter it turns out you need to specify the &lt;em&gt;Platform target&lt;/em&gt; for your application. Mine was set to &lt;em&gt;Any CPU&lt;/em&gt; and had to be changed to &lt;em&gt;x86&lt;/em&gt;. After changing this specific option the code was running correct.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/2-SharePoint-quirks-which-kept-me-busy_C263/image_2.png"&gt;&lt;img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/2-SharePoint-quirks-which-kept-me-busy_C263/image_thumb.png" width="773" height="309"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;font size="4"&gt;Second quirk:&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The other thing I ran in to was not having permission to do anything on my site collection. We were using the &lt;em&gt;stsadm export&lt;/em&gt; and &lt;em&gt;stsadm import&lt;/em&gt; commands to move SharePoint site applications between environments. 
+&lt;p&gt;This means I was familiar with setting the proper permissions on the web application and site collection. However, this time it didn’t work. After having spent several hours on this problem I finally noticed a feature which I had never seen before. Apparently you can set a site lock when doing an export on a website. This makes sense as you don’t want your data to change much when doing this.&lt;/p&gt;
+&lt;p&gt;However, after doing an import, you also need to remove the site lock. If you fail to do so, no one can make changes to the content of the website. To fix this, you can use the stsadm command, like so:&lt;/p&gt;&lt;pre class="brush:bash"&gt;stsadm -o setsitelock -url http://your-website/ -lock none
+&lt;/pre&gt;
+&lt;p&gt;The full documentation can be found on &lt;a href="http://technet.microsoft.com/en-us/library/cc262811(v=office.12).aspx"&gt;MSDN/Technet&lt;/a&gt;. You can also check the current site lock with the &lt;a href="http://technet.microsoft.com/en-us/library/cc262915(v=office.12).aspx"&gt;getsitelock operation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Because I’m a developer who loves a GUI I’ve also found the option in Central Administration. Navigate to the Application Management tab and search for the &lt;em&gt;Site collection quotas and locks&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/2-SharePoint-quirks-which-kept-me-busy_C263/sp_sm_2.png"&gt;&lt;img title="sp_sm" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="sp_sm" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/2-SharePoint-quirks-which-kept-me-busy_C263/sp_sm_thumb.png" width="339" height="188"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;On this page you can select your site collection and set the lock status for it.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/2-SharePoint-quirks-which-kept-me-busy_C263/sp_quotas_locks_2.png"&gt;&lt;img title="sp_quotas_locks" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="sp_quotas_locks" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/2-SharePoint-quirks-which-kept-me-busy_C263/sp_quotas_locks_thumb.png" width="702" height="517"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After setting it to the status &lt;em&gt;Not locked&lt;/em&gt; and you press &lt;em&gt;OK&lt;/em&gt;, your site should be editable again.&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Even though this post references some prehistoric software platform, I do hope you find it useful.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

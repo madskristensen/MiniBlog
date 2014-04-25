@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Meta tags vanuit je codebehind maken</title>
+  <slug>meta-tags-vanuit-je-codebehind-maken</slug>
+  <author>Jan</author>
+  <pubDate>2008-03-29 13:18:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass46F18A66763F41359C76BFF17CDB9214"&gt;Bij het maken van websites is het belangrijk om op iedere pagina je &lt;em&gt;keywords&lt;/em&gt; en &lt;em&gt;description&lt;/em&gt; goed in te vullen. Wanneer je dit niet doet, dan kun je straffen krijgen van zoekmachines en dus een lagere ranking krijgen. Momenteel ben ik weer bezig met het maken van verschillende websites, dus wilde ik ook gelijk de meta tags per pagina kunnen invullen. Hoe dit via normale HTML gaat is mij reeds bekend, maar ik wist nog niet hoe het via de code-behind moest in C#. Na een korte zoektocht op Google is mij duidelijk hoe je meta-tags kunt aanmaken. Zelf maak ik gebruik van masterpages. Deze hebben standaard een zogenaamde &lt;em&gt;ContentPlaceHolder&lt;/em&gt; in de &lt;em&gt;head&lt;/em&gt; en de &lt;em&gt;body&lt;/em&gt; van de pagina. Voor het invullen van meta-tags moet er gebruik worden gemaakt van de placeholder welke in de &lt;em&gt;head&lt;/em&gt; staat gedefinieerd. In C# kun je gebruik maken van de &lt;em&gt;HtmlMeta&lt;/em&gt;. Deze klasse zorgt ervoor dat een meta-tag in de juiste vorm op de pagina verschijnt. Het enige wat je hier aan hoeft mee te geven is de &lt;em&gt;Name&lt;/em&gt; en de &lt;em&gt;Content&lt;/em&gt;, zodra dat is gedaan kun je de klasse toevoegen aan je placeholder. In mijn geval ziet de code er ongeveer als volgt uit
+&lt;div class="code"&gt;HtmlMeta hm = new HtmlMeta(); hm.Name = name; hm.Content = content; HeaderPlaceholder.Controls.Add(hm);&lt;/div&gt;
+Met 4 regels code kun je er dus voor zorgen dat je meta-tags dynamisch worden aangemaakt en je automatisch ook een hogere (of in ieder geval geen lagere) ranking krijgt in de zoekmachines.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

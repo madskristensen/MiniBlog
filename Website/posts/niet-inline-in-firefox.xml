@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Niet inline in FireFox</title>
+  <slug>niet-inline-in-firefox</slug>
+  <author>Jan</author>
+  <pubDate>2008-04-14 20:26:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassEA433D42EBD5410A9F4C02E24F1F3242"&gt;Met de nieuwe stijl om m'n blog heb ik ook in m'n CSS het een en ander aangepast. Een van die dingen is
+&lt;div class="code"&gt;display: inline-block; width: 200px;&lt;/div&gt;
+Dit werkt perfect in IE en aangezien het &lt;em&gt;inline-block&lt;/em&gt; toch redelijk standaard is (dacht ik) heb ik het niet eens in FireFox getest. Nu zag ik zojuist dat deze optie niet werkt in FireFox, tenminste niet in mijn versie. Uiteraard is er een slimme kop bij Mozilla geweest die heeft bedacht dat het toch nodig zou zijn om deze optie toch beschikbaar te hebben. In plaats van gewoon de &lt;em&gt;inline-block&lt;/em&gt; te implementeren, hebben ze iets anders bedacht, namelijk &lt;em&gt;-moz-inline-box&lt;/em&gt;. Jazeker, een Mozilla variant op de 'standaard'. Ok, vanaf CSS3 zit &lt;em&gt;inline-block&lt;em&gt; niet meer in het standaard pakket, maar daar heb ik momenteel nog weinig mee te maken. Nu heb ik m'n CSS weer aan moeten passen, wat er niet mooier op wordt.
+&lt;div class="code"&gt;width: 200px; display: inline-block; display: -moz-inline-box;&lt;/div&gt;
+Bovenstaande code werkt zowel in IE als FF. Of het best-practice is durf ik te betwijfelen, maar het gaat uiteindelijk om het resultaat.&lt;/em&gt;&lt;/em&gt;&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

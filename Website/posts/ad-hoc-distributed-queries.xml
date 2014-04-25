@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Ad Hoc Distributed Queries</title>
+  <slug>ad-hoc-distributed-queries</slug>
+  <author>Jan</author>
+  <pubDate>2007-11-13 20:00:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass70D5D38094DD4CEFBC9518B77D0D08BA"&gt;Vandaag voor het eerst een zogenaamde &lt;em&gt;Distributed query&lt;/em&gt; in SQL gemaakt.&lt;br /&gt;Simpelgezegd houdt dit in dat je een query doet op een andere database en de data daaruit gebruikt in je eigen database.&lt;br /&gt;Hier kun je het woord database op meerdere manieren interpreteren. Volgens mij kun je ook wel een Distributed Query doen op een XML-bestand, wat dus niet een echte database is.&lt;br /&gt;Ik heb vandaag dus data uit een tabel van een Access database via een insert-statement in SQL geimporteerd. Normaliter zou ik zoiets wel doen met [Ctrl]+[C] en [Ctrl]+[V], maar het betrof hier ongeveer 650.000 records (een postcode tabel). Aangezien het kladblok maar 65.000 records in het geheugen kan laten staan zou ik deze actie minstens 10x moeten doen. Daar houdt ik niet echt van.&lt;br /&gt;&lt;br /&gt;Dus op zoek naar een alternatief, dat ik vond in dit type query.&lt;br /&gt;Ten eerste moet je dit activeren in MS SQL Server 2005. Standaard staat dit om beveiligingsredenen uit.&lt;br /&gt;Door middel van de volgende query uit te voeren kun je de functionaliteit activeren:&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;sp_configure 'show advanced options', 1;&lt;br /&gt;GO&lt;br /&gt;RECONFIGURE;&lt;br /&gt;GO&lt;br /&gt;&lt;br /&gt;sp_configure 'Ad Hoc Distributed Queries', 1;&lt;br /&gt;GO&lt;br /&gt;RECONFIGURE;&lt;br /&gt;GO&lt;/div&gt;
+&lt;br /&gt;Ik denk zelfs dat alleen het onderste gedeelte (de laatste 4 regels) ook wel goed genoeg zijn, maar dat heb ik niet getest.&lt;br /&gt;&lt;br /&gt;Nu kun je met MS SQL Server 2005 een distributed query maken.&lt;br /&gt;Ik heb iets uitgevoerd zoals dit:&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;INSERT INTO [PostcodeTabel]&lt;br /&gt;SELECT *&lt;br /&gt;FROM OPENROWSET&lt;br /&gt;(&lt;br /&gt;'Microsoft.Jet.OLEDB.4.0',&lt;br /&gt;'C:\\Temp\\Databases\\\\NLPostcodeDatabase.mdb';&lt;br /&gt;'admin';&lt;br /&gt;'',&lt;br /&gt;'SELECT * FROM AccessPostcodeTabel'&lt;br /&gt;)&lt;/div&gt;
+&lt;br /&gt;Het uitvoeren duurde enkele seconden, maar daarna stonden alle 650.000 records ook in de gewenste tabel.&lt;br /&gt;&lt;br /&gt;Wat een vreugde. Ik was best wel in m'n nopjes toen ik hier achter was gekomen. Weer eens wat leuks geleerd op het werk.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

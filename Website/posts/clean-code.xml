@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Clean Code</title>
+  <slug>clean-code</slug>
+  <author>Jan</author>
+  <pubDate>2010-03-13 15:07:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass9B2062342B754B8AA3BB6980EAAC798F"&gt;
+&lt;p&gt;De afgelopen tijd heb ik het boek &lt;em&gt;Clean Code: A Handbook of Agile Craftmanship&lt;/em&gt; gelezen. &lt;br /&gt;&lt;img src="http://weblogjanv/Lists/Photos/041010_1846_CleanCode1.jpg" alt="" /&gt;&lt;br /&gt;&lt;a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"&gt;http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882&lt;/a&gt;&lt;br /&gt;Een interessant boek met veel tips over hoe je beter code kunt maken en opleveren. Veel van de punten die hij behandeld zijn wel bekend bij de meeste ontwikkelaars, maar toch is het wel fijn om zo'n dergelijk boek te lezen eens in de zoveel jaar.&lt;/p&gt;
+&lt;p&gt;Na het lezen van een van de eerste hoofdstukken kun je al gelijk beginnen met het toepassen van de techniek die hij bespreekt. Zo schrijft Robert C. Martin onder andere dat functies (en klassen) klein dienen te zijn. Over het algemeen zou je een functie prima kunnen inkorten naar een regel of 10. Ik heb dit geprobeerd in de praktijk en het blijkt ook nog waar te zijn. Nu kun je je functies wel allemaal kleiner gaan maken, maar de functionaliteit moet er nog steeds in blijven zitten. Dit heeft natuurlijk als gevolg dat er ineens heel veel functies ontstaan. Deze kunnen weer worden ondergebracht in allerlei 'kleine' klassen. &lt;br /&gt;Tevens kun je zo vaak al snel zien of je ook een overkoepelende abstracte klasse nodig hebt.&lt;/p&gt;
+&lt;p&gt;Om nu gelijk 'clean code' te maken is wel een beetje ondoenlijk heb ik ervaren. Je kunt beter uitgaan van een slechte situatie en die gaan verbeteren. Ik denk dat ik dat dan ook maar ga doen in de toekomst. Eerst de functionaliteit ontwikkelen in 'grote' blokken en daarna refactoren in kleinere stukken die beter en cleaner zijn.&lt;/p&gt;
+&lt;p&gt;Over het boek heb ik ook een kleine presentatie gehouden voor de afdeling. De slides zijn hier te vinden: &lt;a href="http://www.slideshare.net/JandV/clean-code-summary"&gt;http://www.slideshare.net/JandV/clean-code-summary&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Ga nu verder met &lt;em&gt;Working Effectively with Legacy Code&lt;/em&gt;. Hier verwacht ik ongeveer hetzelfde in aan te treffen als in Clean Code.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Wijzigen van servernaam in MS SQL Server</title>
+  <slug>wijzigen-van-servernaam-in-ms-sql-server</slug>
+  <author>Jan</author>
+  <pubDate>2008-07-21 12:53:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass25A70F7715DF48D39D4BB4B6A9236882"&gt;Bij ons op het werk hebben we een standaard virtuele pc die we kunnen inzetten voor verschillende doeleinden/klanten. Dit werkt perfect en is ook zeker aan te raden voor ontwikkel werkzaamheden met Sharepoint opdrachten. Het nadeel van zo'n standaard image is dat de machine 1 naam heeft. Als alle ontwikkelaars dus zo'n machine opstarten, dan zijn er verschillende machines met dezelfde computernaam in het netwerk. In hoeverre het netwerk daar blij mee is weet ik niet, maar zelf vind ik het in ieder geval niet zo mooi. Nu kun je heel eenvoudig de machine naam wijzigen via het Configuratiescherm, dat is dan ook geen probleem. Het probleem ligt echter in MS SQL Server. Wanneer de computernaam wijzigt, kan dit vervelende consequenties hebben voor SQL Server. Nu wil het toeval dat op deze standaard machine ook SQL Server staat geinstalleerd. Er was mij verteld dat het niet mogelijk is om de computernaam van de SQL Server te wijzigen en dat wanneer SQL Server eenmaal is geinstalleerd op de machine, je verder niet meer van dit soort rigoreuze systeemwijzingen moest gaan doorvoeren. Eigenwijs als ik ben, ben ik op zoek gegaan naar een oplossing voor dit probleem. Ik vond het namelijk absurd dat je een computernaam niet meer mag wijzigen nadat SQL Server is geinstalleerd. Mijn zoeken werd al snel beloond veel waarschuwingen, doemdenkers en gelukkig ook 1 oplossing. Dit is namelijk wat je moet doen wanneer je de servernaam in SQL Server wilt wijzigen. Ten eerste wijzig je uiteraard de naam van je server zelf in het Configuratiescherm. Je zult nu waarschijnlijk de server moeten herstarten. Nadat de server weer is opgestart, start je SQL Server Management Studio op (in het geval van SQL Server 2005). Maak een query en controleer of de servernaam binnen SQL Server ook echt 'fout' is. Dit kan worden gedaan door het commando
+&lt;div class="code"&gt;select @@servername&lt;/div&gt;
+uit te voeren. Als resultaat zul je (hoogstwaarschijnlijk) de oude servernaam te zien krijgen. Dit kun je wijzigen door het volgende commando's uit te voeren. Eerst verwijder je de server door
+&lt;div class="code"&gt;sp_dropserver 'OUDESERVERNAAM'&lt;/div&gt;
+uit te voeren en daarna voeg je een nieuwe server toe door dit commando uit te voeren:
+&lt;div class="code"&gt;sp_addserver 'NIEUWESERVERNAAM', local&lt;/div&gt;
+Op dit moment ben je halverwege het proces, want de servernaam is nog niet direct verwerkt. SQL Server zal eerst moeten worden herstart voordat deze wijziging wordt doorgevoerd. Dit kan worden gedaan in de &lt;em&gt;Command Prompt&lt;/em&gt;. Voer gewoon de commando's
+&lt;div class="code"&gt;net stop mssqlserver net start mssqlserver&lt;/div&gt;
+achtereenvolgend uit. Als je de query
+&lt;div class="code"&gt;select @@servername&lt;/div&gt;
+nu weer uitvoert zie je dat de servernaam is gewijzigd. De bron waar ik deze wijsheid vandaan heb is dit: http://blogs.techrepublic.com.com/datacenter/?p=192&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

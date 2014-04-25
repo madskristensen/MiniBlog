@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Expression trees, delegates, functors how and why to use them</title>
+  <slug>expression-trees-amp-func-rsquo-s-differences-and-why-use-it</slug>
+  <author>Jan</author>
+  <pubDate>2011-05-12 19:07:16</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;As of two weeks ago I’ve had the privilege to start doing some development work in a project where a lot of expression trees are used and most classes have at least one implementation of a Func delegate. There’s nothing wrong with that, as it’s something which dates from the .NET 3.0 era if I’m not mistaken, so every .NET 3.5 certified/professional developer should know the existence of them. Downside is, if your only real experience with the matter is reading them up in a text book, there’s a big chance you have forgotten on how and why to use it. Most importantly, what it does.&lt;/p&gt; &lt;p&gt;Lucky for me I’ve done a WP7 project in the &lt;a href="http://www.jan-v.nl/wp7-silverlight-en-m%E2%80%99n-n-layer-architectuur"&gt;recent past&lt;/a&gt; where I became a bit more familiar with the Func and Action delegates. Still, I got the feeling I don’t know half of the stuff you can use it for. This became even more clear 2 weeks ago when I started on this project. I could read the code and visualize what the code was doing, but couldn’t implement new features in a reasonable amount of time. Lucky for me I’m working in a team with several other developers who have (a lot) more experience on the subject explained what I needed to do. While listening to them I thought “Hey, this is easy, why didn’t I think of it!” and started implementing the new code. &lt;br&gt;I think this is the tricky part of developing, it appears to be so easy if it’s explained to you, but hard to think of if you got no real experience with the matter.&lt;/p&gt; &lt;p&gt;Just to be sure, I did small search on what a &lt;a href="http://msdn.microsoft.com/en-us/library/bb549151.aspx"&gt;Func&lt;/a&gt; and an &lt;a href="http://msdn.microsoft.com/en-us/library/018hxwa8.aspx"&gt;Action&lt;/a&gt; represented. I also needed to do a sarch on something completely new to me, an &lt;a href="http://msdn.microsoft.com/en-us/library/bb397951.aspx"&gt;Expression tree&lt;/a&gt;. It’s probably me, but I can’t remember reading up on anything called like that studying for my exams (&lt;a href="http://www.microsoft.com/learning/en/us/exam.aspx?ID=70-536&amp;amp;locale=en-us"&gt;70-536&lt;/a&gt;, &lt;a href="http://www.microsoft.com/learning/en/us/exam.aspx?ID=70-562&amp;amp;locale=en-us"&gt;70-562&lt;/a&gt; &amp;amp; &lt;a href="http://www.microsoft.com/learning/en/us/exam.aspx?ID=70-564&amp;amp;locale=en-us"&gt;70-564&lt;/a&gt;). This probably means I forgot it even existed and didn’t have any questions on it in the exams (phew!).&lt;/p&gt; &lt;p&gt;Reading up on the matter, it appears an Expression tree is just a fancy word for an ‘&lt;em&gt;uncompiled piece of code&lt;/em&gt;’. You can modify the body of the tree so it behaves just the way you want it. After compiling the piece of code you can invoke it with the parameters you want. Quite a powerful feature for sure, if you know how to handle it. A quite familiar expression tree (if you’ve done some database developing with LINQ) is the &lt;a href="http://msdn.microsoft.com/en-us/library/bb546158.aspx"&gt;IQueryable&lt;/a&gt;. You can extend the ‘body’ of the method by calling a lot of lambda’s on it and it get’s compiled when you need to retrieve the data of the collection. That’s the main reason it’s better to use an &lt;a href="http://www.sellsbrothers.com/posts/details/12614"&gt;IQueryable instead of an IEnumerable&lt;/a&gt; when creating a query.&lt;/p&gt; &lt;p&gt;While browsing through the code my mind blown by the following:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;Expression&amp;lt;Func&amp;lt;IViewModel, object&amp;gt;&amp;gt;&lt;/pre&gt;
+&lt;p&gt;I thought I understood the delegates, but this was above my comprehension. Luckily for me I’m not the only one who is struggling with it. Searching for it led me to &lt;a href="http://stackoverflow.com/questions/2664841/difference-between-expressionfunc-and-func"&gt;StackOverflow&lt;/a&gt; and I especially like the following comment:&lt;/p&gt;
+&lt;div style="background-color: #aaa"&gt;
+&lt;ul&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;Expression&amp;lt;Func&amp;lt;...&amp;gt;&amp;gt;&lt;/code&gt;&lt;/strong&gt; is an &lt;em&gt;expression tree&lt;/em&gt; which represents the original source code (it is stored in a tree-like data structure that is very close to the original C# code). In this form, you can analyze the source code and tools like LINQ to SQL can translate the expression tree (source code) to other languages (e.g. SQL in case of LINQ to SQL, but you could also target e.g. JavaScript).&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;Func&amp;lt;...&amp;gt;&lt;/code&gt;&lt;/strong&gt; is an ordinary delegate that you can execute. In this case, the compiler sompiles the body of the function to intermediate language (IL) just like when compiling standard method.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;&lt;/div&gt;
+&lt;p&gt;Developing the WP7 app was my first real experience with these delegate methods. It is awesome what you can do, just by passing a ‘method’ as a parameter to another layer (or class) in your design. With the introduction of expression trees you can even pass methods to different pieces of code and modify the body of it, depending on the situation. Now that’s even more &lt;strong&gt;awesome!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You might have guessed it, I’m starting to become a big fan of these features. The main reason for this post is to remind me on how these things work and what’s the difference between them.&lt;br&gt;Next up are some code examples which will try to make it clear what the different kind of delegates mean and how they can be used. There’s a different &lt;a href="http://dotnetslackers.com/Community/blogs/simoneb/archive/2006/08/20/367.aspx"&gt;blogpost&lt;/a&gt; I found (via StackOverflow) which also does a good job describing the differences between the different delegates.&lt;/p&gt;
+&lt;p&gt;First up, the &lt;strong&gt;Action&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;If you see an &lt;em&gt;Action&amp;lt;T&amp;gt;&lt;/em&gt; defined in your code, it just means there’s a method specified which returns void. You put in a parameter of the type &lt;em&gt;T&lt;/em&gt; and some magic happens. An example:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;public void DemoMethod()
+{
+	Action&lt;string&gt; printMessage = ShowMessage;
+	printMessage("Hello World");
+}
+private void ShowMessage(string message)
+{
+	Response.Write(message);
+}
+&lt;/pre&gt;
+&lt;p&gt;Now, this example isn’t really meaningful, but this can also be used in more advanced scenario’s of course. It’s also possible to add more input parameters, so you could also use an &lt;em&gt;Action&amp;lt;T1, T2, T3, T4, …&amp;gt;&lt;/em&gt;. I’ve read somewhere it goes up until 16 parameters, which most of the time will be enough.&lt;/p&gt;
+&lt;p&gt;As the &lt;em&gt;Action&lt;/em&gt; isn’t really exciting (I haven’t seen any advanced implementations with it), let’s move on to the &lt;strong&gt;Func&lt;/strong&gt;. This one is used a lot in LINQ and lambda expressions. First, let’s cover the basics. A &lt;em&gt;Func&lt;/em&gt; represents a method with one or more input parameters and an output of the type &lt;em&gt;TResult&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The method below is a &lt;em&gt;Func&lt;/em&gt;, just written in the old fashioned way:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;public bool IsThisTextLong(string text)
+{
+	if(text.Length &amp;gt; 100)
+		return true;
+	return false;
+}
+&lt;/pre&gt;
+&lt;p&gt;Just as with an &lt;em&gt;Action&lt;/em&gt;, you can put this logic in a variable and use it there. This will look like this:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;Func&lt;string   , bool&gt; longText = IsThisTextLong;
+bool isThisALongText = longText("Wow, this is a really short text, is it not?");
+&lt;/pre&gt;
+&lt;p&gt;The variable &lt;em&gt;isThisALongText&lt;/em&gt; will get the value of &lt;em&gt;false&lt;/em&gt;. This looks kind of cool, but when can you use such a thing? I’ve used it myself to do some UI manipulation in the business logic layer. I modified some values and they needed to be shown in the UI. &lt;br&gt;A fairly bad example (BusinessLogic needs to be in a different layer and nothing is done with the output string), but I think you know what I mean:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;public MainMethod()
+{
+	BusinessLogic(Write);
+}
+public string Write(string text)
+{
+	Console.WriteLine(text);
+	return text;
+}
+public void BusinessLogic(Func&amp;lt;string, string&amp;gt; func)
+{
+	func("Something for the console.");
+}
+&lt;/pre&gt;
+&lt;p&gt;This could probably be handled in a much better and cleaner way (eventhandlers and callbacks perhaps), but I wanted to use a &lt;em&gt;Func&amp;lt;T, TResult&amp;gt;&lt;/em&gt; as I had never used that before and wanted to see how it worked.&lt;/p&gt;
+&lt;p&gt;When using a lambda expression in your code, you are also using &lt;em&gt;Func&amp;lt;T, TResult&amp;gt;&lt;/em&gt; without even knowing it. Look at this Where-clause I placed on a string:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;string hello = "Wow, Unicorns are in the house!";
+var filteredHello = hello.Where(c =&amp;gt;
+            	{
+            		if (c == 'i')
+            			return true;
+            		return false;
+            	});
+&lt;/pre&gt;
+&lt;p&gt;This is a lambda expression on a string, but if you take a look at the tooltip, you’ll see there’s a &lt;em&gt;Func&amp;lt;char, bool&amp;gt;&lt;/em&gt; defined in it:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/6f29e1b413b2_12F38/image_2.png"&gt;&lt;img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/6f29e1b413b2_12F38/image_thumb.png" width="578" height="64"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As a string is just a collection of characters, you can check every character in the string to see if they match your criteria. If it matches, you need to return a &lt;em&gt;true&lt;/em&gt;, if not &lt;em&gt;false&lt;/em&gt;. In the example above the variable &lt;em&gt;filteredHello&lt;/em&gt; will be a string containing only i-characters, filtered from the hello-string.&lt;/p&gt;
+&lt;p&gt;It’s all quite easy to understand when checking out the above examples, but most of the time things aren’t this simple in real life.&lt;/p&gt;
+&lt;p&gt;Just when I thought I understood the delegates I saw something which blew my mind, it was the expression tree mentioned earlier:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;Expression&amp;lt;Func&amp;lt;IViewModel, object&amp;gt;&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;The developer which showed me this was like “&lt;em&gt;Yeah, you need to create some methods blah blah blah expressions, blah blah blah, check them, blah blah blah&lt;/em&gt;”. While he was talking all I thought was “&lt;em&gt;…….oooookaaaay….let me check &lt;strike&gt;Goo&lt;/strike&gt;Bing for it.&lt;/em&gt;”.&lt;/p&gt;
+&lt;p&gt;I knew I had to do something with an &lt;em&gt;IViewModel&lt;/em&gt; and something needed to come out of it, but what was the &lt;em&gt;Expression&lt;/em&gt; for, how is that used and what does it do? As written earlier in this post, I’ve read up on the subject and know a bit on how to use these expression trees.&lt;/p&gt;
+&lt;p&gt;As lambda expressions are represented as &lt;em&gt;Func&amp;lt;T, TResult&amp;gt;&lt;/em&gt;’s, it’s easy to see a &lt;em&gt;Func&amp;lt;IViewModel, object&amp;gt;&lt;/em&gt; is a lambda expression. Also, an expression is just some piece of uncompiled code, I didn’t need to do anything special with it and could call the method like this:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;public void Validate&amp;lt;TViewModel&amp;gt;(params Expression&amp;lt;Func&amp;lt;TViewModel, object&amp;gt;&amp;gt;[] optionalParameters)
+{
+	//Some validation logic is here.
+}
+
+public void ViewModelExpressionCalling()
+{
+	var dummyViewModel = new DummyViewModel();
+	Validate&amp;lt;dummyviewmodel&amp;gt;(d =&amp;gt; dummyViewModel.DummyParameter1, d =&amp;gt; dummyViewModel.DummyParameter2);
+}
+&lt;/pre&gt;
+&lt;p&gt;Now, this looks a lot easier as opposed to the very advanced looking parameter. The return type is an object (more specific, a string) and the input is a &lt;em&gt;DummyViewModel&lt;/em&gt; (because of the generic).&lt;/p&gt;
+&lt;p&gt;Because you are passing it as an expression, you can use the local variables out-of-scope. That’s because if you use a local variable in an expression tree, it doesn’t get disposed when the scope ends, it keeps in memory until the expression is disposed (really awesome!).&lt;/p&gt;
+&lt;p&gt;The expression tree above just returns a property of a local view model, that is, if you compile it. It’s good to know that before you can use an expression tree you need to compile it, remember, it’s uncompiled. After it’s compiled you can call the &lt;em&gt;Invoke&lt;/em&gt; method on it. What’s cool about this is you can pass any &lt;em&gt;DummyViewModel&lt;/em&gt; variable in the &lt;em&gt;Invoke&lt;/em&gt; method and it’ll use this in the &lt;em&gt;Func&lt;/em&gt;. The variable &lt;em&gt;d&lt;/em&gt; would be the variable we’d pass in the Invoke method. &lt;/p&gt;
+&lt;p&gt;Another plus-side of using expression trees, I was able to check which property was passed in the above example. I needed to check if a specific property was supplied in the collection, if so, it needed validating. Because of this implementation I was able to check out the Body of the expression tree and use some reflection on it. Using this it was fairly easy to discover which properties were defined and in need of validation.&lt;/p&gt;
+&lt;p&gt;I could go on writing on how amazing expression trees are and give examples on how useful they are in real life projects, but I’ll stop for now. Just one more thing for me to write: &lt;strong&gt;Try out expression trees, they are awesome!&lt;/strong&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

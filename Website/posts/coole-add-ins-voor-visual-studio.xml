@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Coole add-ins voor Visual Studio</title>
+  <slug>coole-add-ins-voor-visual-studio</slug>
+  <author>Jan</author>
+  <pubDate>2007-09-11 19:26:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass04FB479CAF894FABB66037F5F1F4EFEE"&gt;Ook maar weer eens iets wat is gerelateerd aan het werk.&lt;br /&gt;Enkele weken terug kwam ik op de volgende website http://www.carlj.ca/2007/09/25/15-free-visual-studio-add-ins/&lt;br /&gt;&lt;br /&gt;Hier worden een 15-tal coole add-ins voor Visual Studio aangeboden. Sommige zijn iets nuttiger als de andere, maar ze zullen allemaal wel handig zijn.&lt;br /&gt;De afgelopen weken was ik namelijk druk bezig met het geestdodende werk om Informaton Packages te schrijven. Dit is zo ongelooflijk saai en simpel werk dat je zoiets het liefste overslaat in het ontwikkelproces. Gelukkig kan dat tegenwoordig ook met de handige Software Factories die zijn te vinden op CodePlex of met behulp van DSL's. Jammergenoeg maken wij hiervan geen gebruik op het werk, dus moest alles met het handje gebeuren.&lt;br /&gt;&lt;br /&gt;Natuurlijk heb ik niets tegen ouderwets handwerk, maar het is wel enorm saai en langzaam. Een van de add-ins die op deze site staat is een macro die dit&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;public String VariabeleNaam = NullValue.ToString();&lt;/div&gt;
+&lt;br /&gt;vertaald naar&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;private String _variabeleNaam = NullValue.ToString()&lt;br /&gt;&lt;br /&gt;public String VariabeleNaam&lt;br /&gt;{&lt;br /&gt;get{ return _variabeleNaam; }&lt;br /&gt;set{ _variabeleNaam = value; }&lt;br /&gt;}&lt;/div&gt;
+&lt;br /&gt;&lt;br /&gt;Enorm handig natuurlijk als je die packages aan het schrijven bent.&lt;br /&gt;Eerst moest ik nog wel uitvinden hoe je macros kunt gebruiken in Visual Studio, maar dat was binnen een half uur gelukt en kon ik hiervan gebruik maken.&lt;br /&gt;Door hier gebruik van te maken was ik enorm snel klaar met de packages te schrijven. Ik denk dat er in totaal minstens 4 uren zijn bespaard door gebruik van deze macro. Waarschijnlijk wel meer. Sowieso was m'n motivatie een stuk hoger op het moment dat ik dit had uitgevonden.&lt;br /&gt;&lt;br /&gt;Ook zit er een handige sorteer macro in het pakket dat ik gebruikte. Zo worden alle private, protected, internal en public variabelen gegroepeerd en op alfabet gesorteerd. Dit vond ik ook wel handig, aangezien ik een voorstander ben van alles een beetje netjes te houden.&lt;br /&gt;&lt;br /&gt;Nou ja, ik vond dat ik deze site toch even moest delen. Het kan namelijk behoorlijk veel tijd besparen als je ouderwets handwerk zit te doen.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

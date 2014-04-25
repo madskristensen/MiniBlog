@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>VS2010b2 IntelliSense probleem</title>
+  <slug>vs2010b2-intellisense-probleem</slug>
+  <author>Jan</author>
+  <pubDate>2009-09-16 18:45:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassEA9FBDE60F6746948634451A55600B91"&gt;Ik had in VS2010b2 een probleem dat er bij javascript geen IntelliSense verscheen. Na het melden van deze bug bij MS Connect hebben ze het geregistreerd en met een tijdelijke workaround gekomen. Wat blijkt, als je de target wijzigt in bijvoorbeeld XHTML1.1 krijg je gelijk IntelliSense die je wilt. Wat ook wordt aangeraden is om al je settings te resetten. Op zich kan dat wel natuurlijk, maar dat is niet echt ideaal. Hier gaan ze er op verder: http://blogs.msdn.com/webdevtools/archive/2009/10/23/visual-studio-2010-beta-2-intellisense-issue-in-javascript-html.aspx Komt er dus op neer dat je bij de 'Import and Export' wizard je settings moet resetten en dan voor Web Development moet kiezen als standaard ontwikkel view. Op zich is dit natuurlijk niet echt een super oplossing, maar ik vind het wel gaaf om te zien dat er echt iets wordt gedaan met de meldingen van het beta product. Zal binnenkort wat intensiever bezig gaan met VS2010 om te kijken of ik nog wat meer kan vinden.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

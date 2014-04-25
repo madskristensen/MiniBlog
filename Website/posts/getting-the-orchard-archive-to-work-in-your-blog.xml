@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Getting the Orchard archive to work in your blog</title>
+  <slug>getting-the-orchard-archive-to-work-in-your-blog</slug>
+  <author>Jan</author>
+  <pubDate>2011-07-27 17:11:26</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;A few months ago I decided to &lt;a href="http://www.jan-v.nl/migratie-naar-orchard"&gt;migrate my weblog from SharePoint to Orchard&lt;/a&gt;, because it’s more lightweight and better suited as a simple blog. I also started to develop some custom modules and themes for this CMS and have to say I like it!&lt;/p&gt; &lt;p&gt;One thing though, which has bothered me from the beginning, was the empty Archive block at the right side of my blog. I had done so much work to import the SharePoint blog entries to Orchard (a manual copy-paste action), so I knew the posts were there, I could even browse to them.&lt;br&gt;Why was it my posts weren’t visible in the archive block?&lt;/p&gt; &lt;p&gt;Today, I found the answer to my problem. It’s a small bug in Orchard when you set the &lt;a href="http://orchard.codeplex.com/discussions/254388"&gt;blog to be the homepage&lt;/a&gt; of the site. Somehow the records in the &lt;font face="Courier New"&gt;[Orchard_Blogs_BlogArchivesPartRecord]&lt;/font&gt; table aren’t updated properly. The &lt;font face="Courier New"&gt;BlogSlug&lt;/font&gt; column should be changed to NULL and not contain the name of your weblog.&lt;/p&gt; &lt;p&gt;Once I knew this I changed the entries so they would contain the value &lt;font face="Courier New"&gt;NULL&lt;/font&gt;:&lt;/p&gt; &lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Getting-the-Orchard-archive-to-work-in-y_107BF/image_2.png"&gt;&lt;img style="background-image: none; border-right-width: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Getting-the-Orchard-archive-to-work-in-y_107BF/image_thumb.png" width="173" height="145"&gt;&lt;/a&gt;&lt;/p&gt; &lt;p&gt;&lt;font size="1"&gt;&lt;strong&gt;Note&lt;/strong&gt;: You probably have got 1 record, but apparently I’ve done some adding and deleting of blogs, so I’ve got multiple. I can probably delete 3 of them, but just to be sure I didn’t.&lt;/font&gt;&lt;/p&gt; &lt;p&gt;Now, after checking the frontpage again I indeed saw a filled out Archive block. It wasn’t showing the correct/expected data, but at least it had some data in it.&lt;/p&gt; &lt;p&gt;In order to retrieve the Archive data, Orchard has a table called &lt;font face="Courier New"&gt;[Orchard_Blogs_BlogPartArchiveRecord]&lt;/font&gt;, which is filled with a summary of posts made in a specific year and month.&lt;/p&gt; &lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Getting-the-Orchard-archive-to-work-in-y_107BF/image_4.png"&gt;&lt;img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Getting-the-Orchard-archive-to-work-in-y_107BF/image_thumb_1.png" width="292" height="370"&gt;&lt;/a&gt;&lt;/p&gt; &lt;p&gt;A nice feature performance wise, but somehow it didn’t had the correct information of my blog. That’s probably because I imported the SharePoint blog entries manual to Orchard and only changed the Created date in the &lt;font face="Courier New"&gt;[Common_CommonPartRecord]&lt;/font&gt; table of the database.&lt;/p&gt; &lt;p&gt;The Archive block probably uses some other columns and maybe even the &lt;font face="Courier New"&gt;[Common_CommonPartVersionRecord]&lt;/font&gt; table, so I had to change the dates of the other columns in these tables also.&lt;/p&gt; &lt;p&gt;Lucky for me, I’ve done some pretty big SQL queries in the past, so this didn’t pose as a big challenge. The correct dates were stored in the &lt;font face="Courier New"&gt;[Common_CommonPartRecord].[CreatedUtc]&lt;/font&gt; column, so updating the &lt;font face="Courier New"&gt;[Common_CommonPartRecord]&lt;/font&gt; table was fairly easy, I used this script:&lt;/p&gt;&lt;pre class="brush: sql"&gt;update Common_CommonPartRecord
+set
+	PublishedUtc = CreatedUtc,
+	ModifiedUtc = CreatedUtc
+&lt;/pre&gt;
+&lt;p&gt;To update the &lt;font face="Courier New"&gt;[Common_CommonPartVersionRecord]&lt;/font&gt; I had to use a cursor in order to update the columns the way I wanted. Still a fairly easy script, if you know cursors exist in SQL Server.&lt;/p&gt;&lt;pre class="brush: sql"&gt;DECLARE @Id INT
+DECLARE @CreatedUtc DATETIME
+
+DECLARE blogCursor CURSOR FOR 
+	select Id, CreatedUtc
+	from Common_CommonPartRecord
+	where Id &amp;lt; 236
+	
+open blogCursor;
+
+fetch next from blogCursor
+INTO @Id, @CreatedUtc
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	PRINT @Id
+	PRINT @CreatedUtc
+	
+	UPDATE Common_CommonPartVersionRecord
+	SET
+		CreatedUtc = @CreatedUtc,
+		ModifiedUtc = @CreatedUtc,
+		PublishedUtc = @CreatedUtc
+	WHERE Common_CommonPartVersionRecord.ContentItemRecord_id = @Id
+	
+	FETCH NEXT FROM blogCursor INTO @Id, @CreatedUtc
+END
+		
+CLOSE blogCursor
+
+DEALLOCATE blogCursor
+&lt;/pre&gt;
+&lt;p&gt;The site still displayed the wrong number of posts per year or month. This didn’t came as a surprise as the numbers within the &lt;font face="Courier New"&gt;[Orchard_Blogs_BlogPartArchiveRecord]&lt;/font&gt; table were still the same. I thought a search update might help. After rebuilding the search index the Archive posts were still all wrong.&lt;br&gt;Checking out the Orchard source code on this subject told me something I didn’t guessed:&lt;/p&gt;&lt;pre class="brush: csharp"&gt;public BlogPartArchiveHandler(IRepository&lt;blogpartarchiverecord&gt; blogArchiveRepository, IBlogPostService blogPostService) {
+            OnPublished&lt;blogpostpart&gt;((context, bp) =&amp;gt; RecalculateBlogArchive(blogArchiveRepository, blogPostService, bp));
+            OnUnpublished&lt;blogpostpart&gt;((context, bp) =&amp;gt; RecalculateBlogArchive(blogArchiveRepository, blogPostService, bp));
+            OnRemoved&lt;blogpostpart&gt;((context, bp) =&amp;gt; RecalculateBlogArchive(blogArchiveRepository, blogPostService, bp));
+        }
+&lt;/pre&gt;
+&lt;p&gt;Because of the nicely worded methods I was able to figure out I just needed to publish, unpublish or delete a blogpost. After re-publishing one of my posts the Archive block was updated with the correct numbers.&lt;/p&gt;
+&lt;p&gt;And now, the Archives are shown correct. Still the current year doesn’t contain any elements, I’ll need to check out what’s the matter with that. The numbers in the tables are all correct, so it’s probably some other bug.&lt;/p&gt;&lt;pre&gt;&lt;/pre&gt;&lt;pre&gt;&lt;/pre&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

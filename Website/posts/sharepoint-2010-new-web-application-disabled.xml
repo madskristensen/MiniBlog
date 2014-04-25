@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Sharepoint 2010 new web application disabled</title>
+  <slug>sharepoint-2010-new-web-application-disabled</slug>
+  <author>Jan</author>
+  <pubDate>2010-06-09 14:22:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassBD621E7F4E284369AB113E71E51C16D8"&gt;
+&lt;p&gt;Gisteren heb ik voor het eerst sinds tijden weer een Sharepoint 2010 omgeving in elkaar gezet. Vorige keer dat ik dat had gedaan was toen Beta 2 net uit was. Ook toen liep ik al tegen een probleem aan, namelijk dat ik geen nieuwe web applicaties kon maken. Op dat moment was ik er maar van uit gegaan dat het kwam omdat het nog een beta product was of iets dergelijks.&lt;/p&gt;
+&lt;p&gt;Het lukte me gisteren nog steeds niet. Het icoon New was disabled, waardoor ik niet een nieuwe web applicatie kon maken.&lt;/p&gt;
+&lt;p&gt;Verschillende resources op internet schreven dat de DisableLoopbackCheck fix kon helpen, Internet Explorer met administrator privileges moet worden opgestart, etc. Al die dingen had ik al gedaan. Wanneer je Central Administration opstart krijg je namelijk automatisch al de UAC naar voren.&lt;/p&gt;
+&lt;p&gt;Uiteindelijk heb ik maar de UAC uitgeschakeld en opnieuw opgestart. Resultaat is dat de New knop nu wel ge-enabled is.&lt;/p&gt;
+&lt;p&gt;Beetje jammer dat je voor een Microsoft product de UAC uit moet schakelen om het goed te laten functioneren.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

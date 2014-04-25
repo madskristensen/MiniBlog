@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>De grootte van mappen en unlocken van bestanden</title>
+  <slug>de-grootte-van-mappen-en-unlocken-van-bestanden</slug>
+  <author>Jan</author>
+  <pubDate>2008-04-28 20:52:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass9EBDCF5BCEE64B9595596FF405E8503E"&gt;Hoe vaak gebeurd het wel niet dat je je pc wilt opruimen, maar je geen idee hebt welke mappen nou zoveel data bevatten. Het gebeurd mij regelmatig. Natuurlijk heb ik wel een redelijk idee van hoe groot een map ongeveer is, maar zeker weten doe ik het nooit. Het vervelende is dat mappen vaak ook weer submappen hebben en die zelf ook weer submappen hebben. Zo kun je dus een behoorlijke tijd zoet zijn met het zoeken naar grote mappen/bestanden. Blijkbaar ben ik niet de enige geweest met dit probleem en is er iemand geweest die er een kleine Windows Verkenner add-in voor heeft geschreven, genaamd &lt;em&gt;Folder Size&lt;/em&gt;, hoe origineel. Deze applicatie zorgt er voor dat er een kolom bij kan worden gemaakt in je Windows Verkenner met daarin de informatie over de totale grootte van de mappen. &lt;img src="http://sourceforge.net/dbimage.php?id=12059" alt="" /&gt; De applicatie/plug-in is op SourceForge te downloaden via deze link: http://foldersize.sourceforge.net/ Nog een probleem dat je vaak hebt bij het verwijderen van bestanden en mappen is dat je een melding krijgt die verdacht veel op deze lijkt: &lt;img src="http://ccollomb.free.fr/unlocker/example.png" alt="" /&gt; Iets heeft dan nog een koppeling met dat bestand, maar zelfs wanneer je alle applicaties afsluit dan krijg je alsnog deze melding. Ook hier is een applicatie voor gemaakt, namelijk &lt;em&gt;Unlocker&lt;/em&gt;. Met behulp van deze applicatie kun je bestanden vrijgeven, waardoor je ze kunt verwijderen. De applicatie is te downloaden op http://ccollomb.free.fr/unlocker/ en is volledig gratis. Nu gaat het schoonmaken van je pc weer een stuk eenvoudiger.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

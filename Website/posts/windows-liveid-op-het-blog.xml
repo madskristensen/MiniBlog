@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Windows LiveID op het blog</title>
+  <slug>windows-liveid-op-het-blog</slug>
+  <author>Jan</author>
+  <pubDate>2010-03-09 22:02:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassFC27228659D743FBABA2A3B77CCBADBD"&gt;
+&lt;p&gt;Het is me gelukt om nu ook een membership provider te implementeren waardoor er nu eindelijk weer gebruikers op het weblog in kunnen loggen. Hier heb ik wel wat hulp bij gehad van de Sharepoint Community Kit die op Codeplex is te vinden. Vanaf heden is het mogelijk om met een Windows Live ID in te loggen op dit weblog. Op zich mooi, maar wat heb ik er voor moeten doen, nou dat is eigenlijk heel eenvoudig.&lt;/p&gt;
+&lt;p&gt;Na wat zoeken en proberen kwam ik uiteindelijk uit op een CKS:WLA project bij Codeplex (&lt;a href="http://cks.codeplex.com/releases/view/7746"&gt;http://cks.codeplex.com/releases/view/7746&lt;/a&gt;) Eigenlijk heb ik eerst het WLA project van deze site geimplementeerd: &lt;a href="http://blog.solanite.com/keith/WLA/Documentation/Home.aspx"&gt;http://blog.solanite.com/keith/WLA/Documentation/Home.aspx&lt;/a&gt;. Omdat ik hier wat problemen mee had was ik op zoek naar enkele oplossingen. Uiteindelijk kwam ik dus bij het CKS project.&lt;/p&gt;
+&lt;p&gt;De implementatie is wel hetzelfde gebleven, echter zijn er enkele bugs in opgelost die nog wel in de 'oude' versie zaten.&lt;/p&gt;
+&lt;p&gt;De readme bij het project is ook behoorlijk duidelijk en eigenlijk ook een kopie van de oude site. Ik kopieer het hier even, zodat de informatie ook geborgd is, mochten ze besluiten het project off-line te halen.&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&lt;strong&gt;Download the SharePoint Solution&lt;/strong&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;The first step of the installation is to download the WSP solution file.&amp;nbsp; You can download the current version&amp;nbsp;&lt;a href="http://blog.solanite.com/keith/WLA/Downloads/WLA.wsp"&gt;&lt;span style="color: #703800; text-decoration: underline;"&gt;here&lt;/span&gt;&lt;/a&gt;. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&lt;strong&gt;Deploy the SharePoint Solution&lt;/strong&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;In order to deploy the solution you need to make sure the WSP file is on the SharePoint server file system.&amp;nbsp; Then you should: &lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Open a command prompt &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Change directory in to the directory you have downloaded the WLA.wsp file &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-size: 8pt;"&gt;&lt;span style="font-family: Verdana;"&gt;Type: "&lt;/span&gt;&lt;span style="font-family: Century;"&gt;C:\Program Files\Common Files\Microsoft Shared\web server extensions\12\bin\stsadm.exe" -o addsolution -filename WLA.wsp&lt;/span&gt;&lt;span style="font-family: Verdana;"&gt; &lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-size: 8pt;"&gt;&lt;span style="font-family: Verdana;"&gt;Type: "&lt;/span&gt;&lt;span style="font-family: Century;"&gt;C:\Program Files\Common Files\Microsoft Shared\web server extensions\12\bin\stsadm.exe" -o&amp;nbsp;deploysolution -name WLA.wsp -immediate -allowgacdeployment&lt;/span&gt;&lt;span style="font-family: Verdana;"&gt; &lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-size: 8pt;"&gt;&lt;span style="font-family: Verdana;"&gt;Type: "&lt;/span&gt;&lt;span style="font-family: Century;"&gt;C:\Program Files\Common Files\Microsoft Shared\web server extensions\12\bin\stsadm.exe" -o&amp;nbsp;execadmsvcjobs&lt;/span&gt;&lt;span style="font-family: Verdana;"&gt; &lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;This will install: &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;C:\Program Files\Common Files\Microsoft Shared\web server extensions\12\TEMPLATE\LAYOUTS\liveinfo.aspx &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;C:\Program Files\Common Files\Microsoft Shared\web server extensions\12\TEMPLATE\LAYOUTS\liveauth-handler.aspx &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;C:\Program Files\Common Files\Microsoft Shared\web server extensions\12\CONFIG\stsadmcommands.addwindowsliveauth.xml &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;GAC: WindowsLiveAuth.dll &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;These files will be installed on all servers in the farm. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&lt;strong&gt;Register a Windows Live ID Application&lt;/strong&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Once the solution is installed you must make sure that you have registered your application with live.com.&amp;nbsp; Doing this will give you an Application ID and a secret key that you will use to identify your users to live.com and authenticate the response that will determine if the user is valid. &lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Login to&amp;nbsp;&lt;a href="https://msm.live.com/app/default.aspx"&gt;&lt;span style="color: #703800; text-decoration: underline;"&gt;https://msm.live.com/app/default.aspx&lt;/span&gt;&lt;/a&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Click on the&amp;nbsp;&lt;strong&gt;Register an Application&lt;/strong&gt;&amp;nbsp;link &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;The&amp;nbsp;&lt;strong&gt;Application Name&lt;/strong&gt;&amp;nbsp;is a name you will use to identify your application &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;The&amp;nbsp;&lt;strong&gt;Return URL&lt;/strong&gt;&amp;nbsp;must be set to&amp;nbsp;&lt;a href="http://your.servername.com/_layouts/liveauth-handler.aspx"&gt;&lt;span style="color: #703800; text-decoration: underline;"&gt;http://your.servername.com/_layouts/liveauth-handler.aspx&lt;/span&gt;&lt;/a&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;The&amp;nbsp;&lt;strong&gt;Secret Key&lt;/strong&gt;&amp;nbsp;is the "password" that will be used to sign the authentication responses (this is the&amp;nbsp;&lt;strong&gt;AppKey&lt;/strong&gt;&amp;nbsp;you will need later) &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Submit the registration &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Click on the&amp;nbsp;&lt;strong&gt;Manage My Applications&lt;/strong&gt;&amp;nbsp;link &lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Using the&amp;nbsp;&lt;strong&gt;Manage My Applications&lt;/strong&gt;&amp;nbsp;page you should remember the&amp;nbsp;&lt;strong&gt;Application ID&lt;/strong&gt;&amp;nbsp; (this is the&amp;nbsp;&lt;strong&gt;AppId&amp;nbsp;&lt;/strong&gt;you will need later)along with the&amp;nbsp;&lt;strong&gt;Secret Key&lt;/strong&gt;&amp;nbsp;you used when registering the application. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&lt;strong&gt;Configure the Authentication Provider&lt;/strong&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Once you have the provider installed and the application registered you need to configure the system to use this information.&amp;nbsp; A new STSADM command has been added to help with this process.&amp;nbsp; To complete the configuration you must: &lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Go to the&amp;nbsp;&lt;strong&gt;Central Administration&lt;/strong&gt;&amp;nbsp;home page &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Click on the&amp;nbsp;&lt;strong&gt;Application Management&amp;nbsp;&lt;/strong&gt;tab &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Click on the&amp;nbsp;&lt;strong&gt;Authentication providers&lt;/strong&gt;&amp;nbsp;link in the&amp;nbsp;&lt;strong&gt;Application Security&amp;nbsp;&lt;/strong&gt;section &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Use the&amp;nbsp;&lt;strong&gt;Web Application&lt;/strong&gt;&amp;nbsp;drop down to ensure that the correct web application is selected &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;In the&amp;nbsp;&lt;strong&gt;Zones&lt;/strong&gt;&amp;nbsp;list pick the zone you want to enable Live ID Authentication on (&lt;strong&gt;Default&lt;/strong&gt;&amp;nbsp;is probably going to be what you are looking for) &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Select the&amp;nbsp;&lt;strong&gt;Authentication Type&lt;/strong&gt;&amp;nbsp;of&amp;nbsp;&lt;strong&gt;Forms&lt;/strong&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Enter a&amp;nbsp;&lt;strong&gt;Membership provider name&amp;nbsp;&lt;/strong&gt;of&amp;nbsp;&lt;strong&gt;LiveID&lt;/strong&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Enter a&amp;nbsp;&lt;strong&gt;Role manager name&lt;/strong&gt;&amp;nbsp;of&amp;nbsp;&lt;strong&gt;LiveRoles&lt;/strong&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Click the&amp;nbsp;&lt;strong&gt;Save&amp;nbsp;&lt;/strong&gt;button &lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;This has configured SharePoint to use the new Membership and Role providers, however there is one more configuration steps to configure the web applications to recognize the new providers.&amp;nbsp; You must: &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Open a command prompt &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-size: 8pt;"&gt;&lt;span style="font-family: Verdana;"&gt;Type: "&lt;/span&gt;&lt;span style="font-family: Century;"&gt;C:\Program Files\Common Files\Microsoft Shared\web server extensions\12\bin\stsadm.exe" -o&amp;nbsp;&lt;/span&gt;&lt;span style="font-family: Verdana;"&gt;addwindowsliveauth -appid &amp;lt;application id&amp;gt; -appkey &amp;lt;application secret key&amp;gt; -appmode &amp;lt;http/https - this is what url your users use&amp;gt; -profsite &amp;lt;URL of site that contains the profile list&amp;gt; -proflist &amp;lt;user profile list name&amp;gt; -locked &amp;lt;URL to send locked users to&amp;gt; -url &amp;lt;URL of the Web Application&amp;gt; &lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;You must run this command for every Web Application you wish to have access to this user list (i.e. the Web Application that will authenticate Live ID users and Central Administration if you want Live ID users to be able to own site collections etc).&amp;nbsp; The one difference when running the command for different Web Applications will be the -url parameter. &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;div&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Finally you need to add the defaultProvider for the Web Application that will authenticate Live ID users, you will replace the following in the web.config for the Web Application: &lt;/span&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&amp;lt;membership&amp;gt; with &amp;lt;membership defaultProvider="LiveID"&amp;gt; &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&amp;lt;roleManager&amp;gt; with &amp;lt;roleManager defaultProvider="LiveRoles" enabled="true" cacheRolesInCookie="true" cookieName="liveroles"&amp;gt; &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;You can find an example portion of the complete web.config&amp;nbsp;&lt;a href="http://blog.solanite.com/keith/WLA/Downloads/webconfig.txt"&gt;&lt;span style="color: #703800; text-decoration: underline;"&gt;here&lt;/span&gt;&lt;/a&gt; &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;Perform an IISRESET and you are done &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&lt;strong&gt;Note:&lt;/strong&gt;&amp;nbsp;As a best practice you will want to have the profsite parameter set to a site that has restricted access as it will allow contributors to lock users. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&lt;strong&gt;Note:&amp;nbsp;&lt;/strong&gt;As a best practice the locked parameter should be a URL that has anonymous access and ideally has contact information about how to become unlocked. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Verdana; font-size: 8pt;"&gt;&lt;strong&gt;Note:&lt;/strong&gt;&amp;nbsp;Live ID users will need to have the Edit Personal User Information&amp;nbsp;&amp;nbsp;permission added to whatever role they have on the site to have access to change their personal information. &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Het registreren van een Windows Live ID applicatie blijkt ook eenvoudig te zijn. Tegenwoordig lijkt het gecombineerd te zijn met de Azure Services, zoals hieronder is te zien:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/033110_1735_WindowsLive1.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Hier krijg je enkele belangrijke gegevens.&lt;/p&gt;
+&lt;p&gt;Door nu verder de readme te volgen kun je eigenlijk in 1x het project succesvol implementeren.&lt;/p&gt;
+&lt;p&gt;Ook kun je nu in de site collectie, waar de WLA is geinstalleerd, de groep &lt;em&gt;Authenticated Live Users&lt;/em&gt; gebruiken, wat eigenlijk hetzelfde is als &lt;em&gt;NT_AUTHORITY\Authenticated Users&lt;/em&gt;. Handig!&lt;/p&gt;
+&lt;p&gt;Hopelijk blijkt het een en ander ook stabiel te zijn, dat is nog afwachten natuurlijk.&lt;/p&gt;
+&lt;p&gt;Wat wel nuttig is om te vermelden is dat gebruikers na het registreren van het account op de site, ze nog wel zelf de gebruikersnaam moeten aanpassen.&lt;/p&gt;
+&lt;p&gt;Dit kan eenvoudig door op de naam te klikken en dan voor &lt;em&gt;My Settings &lt;/em&gt;te kiezen&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/033110_1735_WindowsLive2.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;In het vervolgscherm is een &lt;em&gt;Edit item&lt;/em&gt; link te zien waar op gedrukt kan worden om de profiel informatie te wijzigen:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/033110_1735_WindowsLive3.png" alt="" /&gt;&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

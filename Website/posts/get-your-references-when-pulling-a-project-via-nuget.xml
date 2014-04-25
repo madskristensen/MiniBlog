@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Get your references when pulling a project via NuGet</title>
+  <slug>get-your-references-when-pulling-a-project-via-nuget</slug>
+  <author>Jan</author>
+  <pubDate>2012-04-13 20:33:25</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;Because of a failing hard drive I had to re-install my Windows installation, including cloning all of my BitBucket repositories back to my projects folder. &lt;/p&gt; &lt;p&gt;Getting all the solutions back on the local development machine is very easy, but after opening, I discovered they couldn’t be build anymore. The reason for this: several references were missing. This wasn’t that strange at all, because these references were libraries pulled pulled down via NuGet and not pushed into the repository. &lt;/p&gt; &lt;p&gt;I had suspected there was something in NuGet which would make it easy to download the referenced packages. Reason for me to expect this is the &lt;font face="Consolas"&gt;packages.config&lt;/font&gt; file which is created after pulling down NuGet packages. This file contains all the information needed to re-download them, you see?&lt;/p&gt;&lt;pre class="brush:xml"&gt;&amp;lt;?xml version="1.0" encoding="utf-8"?&amp;gt;
+&amp;lt;packages&amp;gt;
+  &amp;lt;package id="FluentAssertions" version="1.7.1.1" /&amp;gt;
+  &amp;lt;package id="Moq" version="4.0.10827" /&amp;gt;
+&amp;lt;/packages&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;At the moment there isn’t an option (i.e.: I couldn’t find it) to re-download the referenced libraries in the NuGet package manager. After doing a bit more research on the matter I discovered a page in the NuGet documentation called ‘&lt;a href="http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages"&gt;Using NuGet without committing packages to source control’&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Over there they tell you to use the ‘Enable NuGet Package Restore’-option, which is available after right-clicking on the solution file. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Enable NuGet Package Restore Context Menu item" src="http://docs.nuget.org/docs/workflows/images/enable-package-restore.png"&gt;&lt;/p&gt;
+&lt;p&gt;So, this is what I did and it kind of worked. This adds a new solution folder with the name .nuget and a nice NuGet executable.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="New Solution folder with package restore files" src="http://docs.nuget.org/docs/workflows/images/package-restore-solution.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;An important note&lt;/strong&gt;: Make sure you don’t have too much projects loaded in the solution. I’ve tried this option in my Orchard solution with several projects of my own and was confronted with several Internal Server Errors 500 (time outs). After I made sure just my own custom projects were loaded and all other Orchard projects were unloaded, this option worked like a charm.&lt;/p&gt;
+&lt;p&gt;When building the solution, the libraries should get automatically downloaded and installed in the corresponding packages folder. &lt;br&gt;Well, I must have done something wrong when I added the references in the past (via an old NuGet console), because the libraries weren’t placed in the (correct) packages folder.&lt;/p&gt;
+&lt;p&gt;Lucky for me, the newly added NuGet executable can be started via a command prompt also and it takes several startup parameters. The complete list (for the current version):&lt;/p&gt;&lt;pre class="brush:shell"&gt;NuGet Version: 1.7.30402.9028
+usage: NuGet &lt;command&gt; [args] [options]
+Type 'NuGet help &lt;command&gt;' for help on a specific command.
+
+Available commands:
+
+ delete      Deletes a package from the server.
+ help (?)    Displays general help information and help information about other
+             commands.
+ install     Installs a package using the specified sources. If no sources are
+             specified, all sources defined in %AppData%\NuGet\NuGet.config are
+             used.  If NuGet.config specifies no sources, uses the default NuGe
+             t feed.
+ list        Displays a list of packages from a given source. If no sources are
+             specified, all sources defined in %AppData%\NuGet\NuGet.config are
+             used. If NuGet.config specifies no sources, uses the default NuGet
+             feed.
+ pack        Creates a NuGet package based on the specified nuspec or project f
+             ile.
+ publish     Publishes a package that was uploaded to the server but not added
+             to the feed.
+ push        Pushes a package to the server and optionally publishes it.
+ setApiKey   Saves an API key for a given server URL. When no URL is provided A
+             PI key is saved for the NuGet gallery.
+ sources     Provides the ability to manage list of sources located in  %AppDat
+             a%\NuGet\NuGet.config
+ spec        Generates a nuspec for a new package. If this command is run in th
+             e same folder as a project file (.csproj, .vbproj, .fsproj), it wi
+             ll create a tokenized nuspec file.
+ update      Update packages to latest available versions. This command also up
+             dates NuGet.exe itself.
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-re
+ference
+&lt;/pre&gt;
+&lt;p&gt;As I only need to install the packages which are specified in the auto-generated &lt;font face="Consolas"&gt;packages.config&lt;/font&gt;. To do this, the following command can be used from within the command prompt:&lt;/p&gt;&lt;pre class="brush:shell"&gt;nuget i ..\MvcApplication3\packages.config -o ..\Packages&lt;/pre&gt;
+&lt;p&gt;This will install the packages in the Packages folder on the same level as the project folder and your folder structure will look like this:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/0592503cad9b_130A1/image_2.png"&gt;&lt;img style="background-image: none; border-bottom: 0px; border-left: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top: 0px; border-right: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/0592503cad9b_130A1/image_thumb.png" width="183" height="86"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;After having executed this command I was finally able to do a successful build again.&lt;/p&gt;
+&lt;p&gt;It takes a bit of research, but in the end everything will work. I guess these issues will get resolved in future releases of NuGet, but for now this workaround will work.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

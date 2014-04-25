@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>MVVM Light en WP7 ontwikkeling</title>
+  <slug>mvvm-light-en-wp7-ontwikkeling</slug>
+  <author>Jan</author>
+  <pubDate>2010-12-16 21:42:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassB5636CD2898B44408704C1E97023480C"&gt;
+&lt;p&gt;Deze dagen ben ik weer druk doende met een nieuwe Windows Phone 7 applicatie. De vorige applicatie die ik had gemaakt was nogal haastig in elkaar gezet, zonder ook maar een enkel pattern of framework te gebruiken, echt een Hello World dus.&lt;/p&gt;
+&lt;p&gt;Nu ben ik met een tweede applicatie bezig voor m'n werk en die moet toch van iets hogere kwaliteit zijn. Een collega van me had al een framework gevonden dat ons kon helpen met het MVVM pattern dat veel wordt gebruikt bij Silverlight en WPF applicaties, namelijk &lt;a href="http://mvvmlight.codeplex.com/"&gt;MVVM Light&lt;/a&gt;. Het duurde even voordat ik alles op het systeem had staan. Het installeren staat goed beschreven op de site van Galasoft: &lt;a href="http://www.galasoft.ch/mvvm/installing/manually/"&gt;http://www.galasoft.ch/mvvm/installing/manually/&lt;/a&gt;&lt;br /&gt;Let er hier ook op dat de hotfix voor Windows Phone 7 ontwikkeling wordt ge&amp;iuml;nstalleerd:&lt;/p&gt;
+&lt;div&gt;
+&lt;table style="border-collapse: collapse; background: #fbd4b4;" border="0"&gt;
+&lt;colgroup span="1"&gt;&lt;col style="width: 633px;" span="1"&gt;&lt;/col&gt;&lt;/colgroup&gt; 
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 7px; padding-right: 7px; border: 0.5pt solid;"&gt;
+&lt;p&gt;&lt;span style="color: #3a3a3a; font-size: 9pt;"&gt;&lt;strong&gt;Important note for Windows Phone developers&lt;/strong&gt;: If you work with Windows Phone 7, you must &lt;a href="http://www.galasoft.ch/mvvm/installing/hotfix20100719"&gt;&lt;span style="color: #d98000;"&gt;install this hotfix&lt;/span&gt;&lt;/a&gt;&amp;nbsp;on top of V3 SP1.&lt;/span&gt;&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Wanneer dit niet is gedaan krijg je foutmeldingen tijdens het maken van een nieuw MVVM Light WP7 project.&lt;/p&gt;
+&lt;p&gt;Zodra de bestanden goed op het systeem staan kan er worden begonnen met ontwikkelen. Er is een nieuw project template beschikbaar, namelijk MvvmLight (WP7).&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/121610_2044_MVVMLighten1.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Dit project bevat gelijk al een tweetal mappen, Model en ViewModel en een XAML bestand.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/121610_2044_MVVMLighten2.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;De ViewModel map bevat ook gelijk al 2 bestanden. Deze zijn belangrijk!&lt;/p&gt;
+&lt;p&gt;Het bestand &lt;em&gt;MainViewModel.cs&lt;/em&gt; is gelinkt aan de &lt;em&gt;MainPage.xaml&lt;/em&gt; en de &lt;em&gt;ViewModelLocator.cs&lt;/em&gt; bevat volgens mij de logica om ViewModel bestanden te koppelen aan de View's.&lt;/p&gt;
+&lt;p&gt;Het ViewModel.cs bestand heeft nog niet zoveel nuttige inhoud, zoals is te zien:&lt;/p&gt;
+&lt;div&gt;
+&lt;table style="border-collapse: collapse; background: white;" border="0"&gt;
+&lt;colgroup span="1"&gt;&lt;col style="width: 633px;" span="1"&gt;&lt;/col&gt;&lt;/colgroup&gt; 
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 7px; padding-right: 7px; border: 0.5pt solid;"&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 10pt;"&gt;&lt;span style="color: blue;"&gt;public&lt;/span&gt;&amp;nbsp;&lt;span style="color: blue;"&gt;class&lt;/span&gt;&amp;nbsp;&lt;span style="color: #2b91af;"&gt;MainViewModel&lt;/span&gt;&amp;nbsp;:&amp;nbsp;&lt;span style="color: #2b91af;"&gt;ViewModelBase&lt;/span&gt;&lt;br /&gt;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;public&lt;/span&gt;&amp;nbsp;&lt;span style="color: blue;"&gt;string&lt;/span&gt;&amp;nbsp;ApplicationTitle&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;get&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;return&lt;/span&gt;&amp;nbsp;&lt;span style="color: #a31515;"&gt;"MVVM&amp;nbsp;LIGHT"&lt;/span&gt;;&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: green;"&gt;//Nog&amp;nbsp;enkele&amp;nbsp;properties&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;public&lt;/span&gt;&amp;nbsp;MainViewModel()&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;br /&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Omdat ik nog nooit echt met Silverlight, XAML en MVVM heb gewerkt vroeg ik me natuurlijk af hoe het komt dat de properties aan de View zijn gebind. Het grootste nadeel van het gebruik van een framework, is dat je zelf niet alles meer hoeft te maken en dus ook niet precies weet wat er allemaal gebeurd.&lt;/p&gt;
+&lt;p&gt;Na wat spelen in de XAML ben ik er achter gekomen dat deze regel belangrijk is voor de koppeling met de ViewModel:&lt;/p&gt;
+&lt;p style="background: white;"&gt;&amp;nbsp;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style="font-family: Consolas; color: red;"&gt;DataContext&lt;span style="color: blue;"&gt;="{&lt;span style="color: #a31515;"&gt;Binding&lt;span style="color: red;"&gt;&amp;nbsp;Main&lt;span style="color: blue;"&gt;,&lt;span style="color: red;"&gt;&amp;nbsp;Source&lt;span style="color: blue;"&gt;={&lt;span style="color: #a31515;"&gt;StaticResource&lt;span style="color: red;"&gt;&amp;nbsp;Locator&lt;span style="color: blue;"&gt;}}"&amp;gt;&lt;/span&gt;
+												&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;De StaticResource wordt volgens mij gebind naar de &lt;span style="font-family: Consolas; color: #2b91af;"&gt;ViewModelLocator &lt;/span&gt;klasse, vanwege de naam.&lt;br /&gt;Het volgende stuk code zorgt er volgens mij voor dat de MainViewModel wordt gebind:&lt;/p&gt;
+&lt;div&gt;
+&lt;table style="border-collapse: collapse; background: white;" border="0"&gt;
+&lt;colgroup span="1"&gt;&lt;col style="width: 633px;" span="1"&gt;&lt;/col&gt;&lt;/colgroup&gt; 
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 7px; padding-right: 7px; border: 0.5pt solid;"&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style="font-family: Consolas;"&gt;&lt;span style="color: blue;"&gt;public&lt;/span&gt;&amp;nbsp;&lt;span style="color: #2b91af;"&gt;MainViewModel&lt;/span&gt;&amp;nbsp;Main&lt;br /&gt;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;get&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;return&lt;/span&gt;&amp;nbsp;MainStatic;&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;br /&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Ik heb dit getest door de snippets te gebruiken om nog een Locator aan te maken, genaamd Test.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/121610_2044_MVVMLighten3.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Daarna heb ik de DataContext gewijzigd in &lt;span style="font-family: Consolas; color: red;"&gt;&lt;span style="background-color: white;"&gt;DataContext&lt;span style="color: blue;"&gt;="{&lt;span style="color: #a31515;"&gt;Binding&lt;span style="color: red;"&gt;&amp;nbsp;Test&lt;span style="color: blue;"&gt;,&lt;span style="color: red;"&gt;&amp;nbsp;Source&lt;span style="color: blue;"&gt;={&lt;span style="color: #a31515;"&gt;StaticResource&lt;span style="color: red;"&gt;&amp;nbsp;Locator&lt;span style="color: blue;"&gt;}}"&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;. &lt;/span&gt;Nu zag ik de properties van m'n TestViewModel op de pagina weergegeven.&lt;/p&gt;
+&lt;p&gt;Het lijkt dus dat ontwikkelen met MVVM Light of XAML betekend dat je je aan enkele naam conventies moet houden. Op zich leuk en aardig, maar dat is behoorlijk foutgevoelig natuurlijk. Tijdens compileren kom je hier namelijk niet gelijk achter.&lt;/p&gt;
+&lt;p&gt;Het toevoegen van acties aan een knop gaat op een vergelijkbare manier:&lt;/p&gt;
+&lt;div&gt;
+&lt;table style="border-collapse: collapse; background: white;" border="0"&gt;
+&lt;colgroup span="1"&gt;&lt;col style="width: 638px;" span="1"&gt;&lt;/col&gt;&lt;/colgroup&gt; 
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 7px; padding-right: 7px; border: 0.5pt solid;"&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style="font-family: Consolas; color: blue;"&gt;&amp;lt;&lt;span style="color: #a31515;"&gt;Button&lt;span style="color: red;"&gt;&amp;nbsp;Content&lt;span style="color: blue;"&gt;="Zoeken!"&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;span style="color: #a31515;"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;&amp;lt;&lt;span style="color: #a31515;"&gt;Custom&lt;span style="color: blue;"&gt;:&lt;span style="color: #a31515;"&gt;Interaction.Triggers&lt;span style="color: blue;"&gt;&amp;gt;&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;&amp;lt;&lt;span style="color: #a31515;"&gt;Custom&lt;span style="color: blue;"&gt;:&lt;span style="color: #a31515;"&gt;EventTrigger&lt;span style="color: red;"&gt;&amp;nbsp;EventName&lt;span style="color: blue;"&gt;="Click"&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;span style="color: #a31515;"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;&amp;lt;&lt;span style="color: #a31515;"&gt;GalaSoft_MvvmLight_Command&lt;span style="color: blue;"&gt;:&lt;span style="color: #a31515;"&gt;EventToCommand&lt;span style="color: red;"&gt;&amp;nbsp;Command&lt;span style="color: blue;"&gt;="{&lt;span style="color: #a31515;"&gt;Binding&lt;span style="color: red;"&gt;&amp;nbsp;ZoekInDeBuurtCommand&lt;span style="color: blue;"&gt;,&lt;span style="color: red;"&gt;&amp;nbsp;Mode&lt;span style="color: blue;"&gt;=OneWay}"/&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;span style="color: #a31515;"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;&amp;lt;/&lt;span style="color: #a31515;"&gt;Custom&lt;span style="color: blue;"&gt;:&lt;span style="color: #a31515;"&gt;EventTrigger&lt;span style="color: blue;"&gt;&amp;gt;&lt;/span&gt;&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;&amp;lt;/&lt;span style="color: #a31515;"&gt;Custom&lt;span style="color: blue;"&gt;:&lt;span style="color: #a31515;"&gt;Interaction.Triggers&lt;span style="color: blue;"&gt;&amp;gt;&lt;/span&gt;&lt;br /&gt;&lt;span style="color: blue;"&gt;&amp;lt;/&lt;span style="color: #a31515;"&gt;Button&lt;span style="color: blue;"&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Sidenote: Hier heb ik de volgende toevoeging voor moeten doen in het &amp;lt;phone:-element, anders kun je geen gebruik maken van de elementen.&lt;span style="font-family: Consolas;"&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;div&gt;
+&lt;table style="border-collapse: collapse; background: white;" border="0"&gt;
+&lt;colgroup span="1"&gt;&lt;col style="width: 638px;" span="1"&gt;&lt;/col&gt;&lt;/colgroup&gt; 
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 7px; padding-right: 7px; border: 0.5pt solid;"&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; color: red;"&gt;xmlns&lt;span style="color: blue;"&gt;:&lt;span style="color: red;"&gt;Custom&lt;span style="color: blue;"&gt;="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"&lt;span style="color: red;"&gt;xmlns&lt;span style="color: blue;"&gt;:&lt;span style="color: red;"&gt;GalaSoft_MvvmLight_Command&lt;span style="color: blue;"&gt;="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP7"&lt;/span&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;In de code van de ViewModel heb ik dan het volgende RelayCommand gedefinieerd als een property:&lt;/p&gt;
+&lt;div&gt;
+&lt;table style="border-collapse: collapse; background: white;" border="0"&gt;
+&lt;colgroup span="1"&gt;&lt;col style="width: 633px;" span="1"&gt;&lt;/col&gt;&lt;/colgroup&gt; 
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="padding-left: 7px; padding-right: 7px; border: 0.5pt solid;"&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style="font-family: Consolas;"&gt;&lt;span style="color: blue;"&gt;public&lt;/span&gt;&amp;nbsp;&lt;span style="color: #2b91af;"&gt;RelayCommand&lt;/span&gt;&amp;nbsp;ZoekInDeBuurtCommand&lt;br /&gt;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;get&lt;/span&gt;&amp;nbsp;{&amp;nbsp;&lt;span style="color: blue;"&gt;return&lt;/span&gt;&amp;nbsp;&lt;span style="color: blue;"&gt;new&lt;/span&gt;&amp;nbsp;&lt;span style="color: #2b91af;"&gt;RelayCommand&lt;/span&gt;(DoZoekenResultaten);&amp;nbsp;}&lt;br /&gt;}
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;span style="font-family: Consolas;"&gt;&lt;span style="color: blue;"&gt;private&lt;/span&gt;&amp;nbsp;&lt;span style="color: blue;"&gt;void&lt;/span&gt;&amp;nbsp;DoZoekenResultaten()&lt;br /&gt;{&lt;br /&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span style="color: blue;"&gt;throw&lt;/span&gt;&amp;nbsp;&lt;span style="color: blue;"&gt;new&lt;/span&gt;&amp;nbsp;&lt;span style="color: #2b91af;"&gt;NotImplementedException&lt;/span&gt;();&lt;br /&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Op zich is het geen rocket-science, maar ik had eigenlijk verwacht dat het allemaal iets stricter zou werken. Blijkbaar is dat nog niet het geval. Het was in ieder geval even zoeken naar hoe alles precies werkte en hoe je nieuwe elementen op een pagina kan krijgen. Inmiddels is het me gelukt om een leuke WP7 Pivot applicatie te maken. Nu de inhoud van de pivot's nog.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

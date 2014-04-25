@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Geavanceerd zoeken op je team site in MOSS 2007</title>
+  <slug>geavanceerd-zoeken-op-je-team-site-in-moss-2007</slug>
+  <author>Jan</author>
+  <pubDate>2008-06-03 20:28:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassCC5793B1B9AF4B0AA39E0128A97465E1"&gt;Onlangs moest ik een zoekfunctie implementeren op een Sharepoint site die ik had gemaakt. Op zich helemaal niet lastig, maar ik wilde de optie met &lt;em&gt;Geavanceerd zoeken&lt;/em&gt; direct zichtbaar hebben. Toevallig had Amanda Murphy ( http://blog.funknstyle.com/?p=578 ) hetzelfde idee. Zij heeft hier heel veel screenshots bij gemaakt, maar ik leg zo even uit hoe het in z'n werk gaat. Ten eerste moet je een nieuwe site maken. Deze site kun je zelf een titel geven en url, maar het is misschien handig om deze Search of Zoeken te noemen. Ten tweede kies je het template &lt;em&gt;Zoekcentrum&lt;/em&gt; of &lt;em&gt;Search Center&lt;/em&gt; te vinden onder het tabblad &lt;em&gt;Enterprise&lt;/em&gt; (Nederlandse vertaling heb ik momenteel niet beschikbaar). Door deze site aan te maken beland je op de startpagina van het zoekcentrum &lt;strong&gt;met&lt;/strong&gt; de link &lt;em&gt;Geavanceerd zoeken&lt;/em&gt;. Klik op die link en kopieer de URL. Ga weer terug naar je bovenste website waar je de link wilt hebben (je zit nu namelijk in een subsite). Klik hier weer op &lt;em&gt;Site Setting&lt;/em&gt; en dan &lt;em&gt;Search settings&lt;/em&gt; of &lt;em&gt;Zoekopties&lt;/em&gt; (volgens mij). Hier plak je de gekopieerde URL in het veld &lt;em&gt;Use custom scopes&lt;/em&gt; en dan klik je op OK. Resultaat is dat je de link ziet naast de zoekbox. Als je er op klikt zie je een scherm dat lijkt op hieronder &lt;img src="http://jan-v.nl/pics/screens/geavanceerd_zoeken.jpg" alt="" /&gt; Ja, de Nederlandse vertalingen van de Sharepoint opties moet ik even schuldig blijven. Zodra m'n server werkend is kan ik meer behulpzamer zijn op dat front.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

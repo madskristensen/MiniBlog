@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Lokale Mercurial repository naar centrale repository</title>
+  <slug>lokale-mercurial-repository-naar-centrale-repository</slug>
+  <author>Jan</author>
+  <pubDate>2011-01-21 20:22:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassCC2390E2D1504B31BC1889C362E3CA32"&gt;
+&lt;p&gt;Vaak wanneer ik aan het ontwikkelen ben begin ik eerst lokaal met een klein project. Deze groeit uiteindelijk uit in een iets groter project waar nog wat wijzigingen in plaatsvinden en uiteindelijk wordt het dan het product wat je voor ogen had. Tijdens deze ontwikkeling wil ik dan wel altijd versiebeheer hebben, zodat alles geborgd is.&lt;/p&gt;
+&lt;p&gt;Voor m'n priv&amp;eacute; projecten gebruik ik inmiddels al een tijdje &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt; en ben daar ook enorm tevreden over. Zeker met de plug-ins welke voor Visual Studio worden aangeboden is het goed werken en heb je de hele commandline bijna niet meer nodig.&lt;/p&gt;
+&lt;p&gt;Wat ik wel vervelend vond is dat het me nog niet was gelukt om een lokale repository te verplaatsen naar een centrale repository en die dan leading maken.&lt;/p&gt;
+&lt;p&gt;Met het commando &lt;span style="font-family: Courier New;"&gt;hg clone&lt;/span&gt; of &lt;span style="font-family: Courier New;"&gt;hg push&lt;/span&gt; kon ik het wel op m'n centrale server krijgen, maar dan bleef m'n lokale repository leading en dat moet natuurlijk andersom. Na een kleine speurtocht ben ik er achter gekomen dat de leading repository wordt bijgehouden in het bestand &lt;span style="font-family: Courier New;"&gt;hgrc&lt;/span&gt; (pad is &lt;span style="font-family: Courier New;"&gt;.hg/hgrc&lt;/span&gt;). Hier staat een entry in met het pad naar de centrale repository. Door deze aan te passen kun je dus de lokale waarde wijzigen in de centrale.&lt;/p&gt;
+&lt;p&gt;Hieronder de benodigde stappen.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Maak een nieuwe repository op de centrale server &lt;/li&gt;
+&lt;li&gt;Navigeer naar de lokale repository, bijvoorbeeld &lt;span style="font-family: Courier New;"&gt;C:\Projects\Project1&lt;/span&gt; &lt;/li&gt;
+&lt;li&gt;Push de lokale repository naar de centrale, bijvoorbeeld:&lt;br /&gt;&lt;span style="font-family: Courier New;"&gt;hg push http://repositoryserver/hg/Project1&lt;/span&gt; &lt;/li&gt;
+&lt;li&gt;Open nu het bestand &lt;span style="font-family: Courier New;"&gt;.hg/hgrc&lt;/span&gt; met Notepad &lt;/li&gt;
+&lt;li&gt;Wijzig nu het pad naar het pad van de centrale repository, bijvoorbeeld:&lt;br /&gt;&lt;span style="font-family: Courier New;"&gt;[paths]&lt;br /&gt;default = http://repositoryserver/hg/Project1/&lt;/span&gt; &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Wanneer de laatste stap is voltooid zal de centrale repository worden gebruikt voor pushes en pulls, zonder dat dit nog gedefinieerd hoeft te worden.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

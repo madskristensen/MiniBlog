@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Black lines in the watch window</title>
+  <slug>black-lines-in-the-watch-window</slug>
+  <author>Jan</author>
+  <pubDate>2013-11-22 14:26:33</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;On some installations of Visual Studio 2010, 2012 or 2013 I’m confronted with strange behavior. One of these strange things are the black lines in the Watch Window of Visual Studio. Just like the screenshot below (this isn’t my screenshot, I’ve ‘borrowed’ it from someone else)&lt;/p&gt; &lt;p&gt;&lt;img title="187351" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="187351" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Black-lines-in-the-watch-window_D736/187351_0d447eb6-0df3-47a2-8d47-8f6a1a3e1c81.png" width="974" height="589"&gt;&lt;/p&gt; &lt;p&gt;Normally this has something to do with the graphics driver, but updating these drivers doesn’t work all the times. There’s also a work around for this problem, described on the &lt;a href="http://social.msdn.microsoft.com/Forums/en-US/f92381d2-bdcb-494d-93fe-0670ca4098ac/problem-with-black-lines-in-watch-window?forum=vssetup" target="_blank"&gt;MSDN forum&lt;/a&gt;.&lt;/p&gt; &lt;p&gt;The work around is:  &lt;ol&gt; &lt;li&gt;Go to Tools &amp;gt; Options &amp;gt;&amp;nbsp; Environment &amp;gt; Font and Colors  &lt;li&gt;Search for the settings for &lt;em&gt;[Watch, Locals, and Autos Tool Windows]&lt;/em&gt;&amp;nbsp; &lt;li&gt;For &lt;em&gt;Text&lt;/em&gt; select the Default for Item Foreground&lt;/li&gt;&lt;/ol&gt; &lt;p&gt;The options will look something like the image below.&lt;/p&gt; &lt;p&gt;&lt;img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; margin: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Black-lines-in-the-watch-window_D736/image_b0518fe7-76c2-4092-bdfa-320866625012.png" width="648" height="379"&gt;&lt;/p&gt; &lt;p&gt;After you’ve set this option you’ll be able to see the text in your watch window again. The lines will be white again with black text.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

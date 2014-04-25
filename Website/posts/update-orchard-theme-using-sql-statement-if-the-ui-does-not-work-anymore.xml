@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Update Orchard theme using SQL statement if the UI does not work anymore</title>
+  <slug>update-orchard-theme-using-sql-statement-if-the-ui-does-not-work-anymore</slug>
+  <author>Jan</author>
+  <pubDate>2011-09-15 07:29:42</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;If you create a theme for Orchard, it&amp;rsquo;s only a matter of time before you stumble across a &lt;a href="http://en.wikipedia.org/wiki/Screen_of_death"&gt;yellow screen of death&lt;/a&gt;. I know this, because it happened multiple times to me. One of the reasons for these errors are the &lt;a href="http://msdn.microsoft.com/en-us/library/dd264741.aspx"&gt;dynamic&lt;/a&gt; objects, which are used a lot in Orchard.&lt;/p&gt;
+&lt;p&gt;You won&amp;rsquo;t get compile-time errors with these objects, so they need to be handled with care.&lt;/p&gt;
+&lt;p&gt;Now, when a theme causes a yellow screen you are kind of screwed as you can&amp;rsquo;t do anything anymore on the website, like logging in to the admin area.&lt;/p&gt;
+&lt;p&gt;Lucky for us developers, the database isn&amp;rsquo;t obfuscated and we can make rapid changes to it. You can use this script to update your current Orchard theme and set it back to the default Theme Machine theme.&lt;/p&gt;
+&lt;pre class="brush:sql"&gt;UPDATE [OrchardDatabaseName].[dbo].[default_Orchard_Themes_ThemeSiteSettingsPartRecord]
+   SET [Id] = 1
+      ,[CurrentThemeName] = 'TheThemeMachine'
+GO
+&lt;/pre&gt;
+&lt;p&gt;Run the above script on your Orchard database and you will be able to start developing again.&lt;/p&gt;
+&lt;p&gt;If the above script doesn&amp;rsquo;t work, check the &lt;span style="font-family: 'Courier New';" face="Courier New"&gt;[default_Orchard_Themes_ThemeSiteSettingsPartRecord]&lt;/span&gt; table entries. You possibly need to change the Id parameter of the script to the one which is the same as in the database&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

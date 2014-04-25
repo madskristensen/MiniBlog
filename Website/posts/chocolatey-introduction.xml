@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Chocolatey introduction</title>
+  <slug>chocolatey-introduction</slug>
+  <author>Jan</author>
+  <pubDate>2013-12-19 19:28:57</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;Even though the Windows operating system is one of the best in my opinion, there are always something which is only available in a different OS. For example the &lt;em&gt;apt-get&lt;/em&gt; functionality in Linux. I don’t know how this works exactly, but from my basic understanding it’s some kind of repository with a lot of software and libraries which you can download to your device by typing something like the following in a terminal window:&lt;/p&gt;&lt;pre class="brush:bash"&gt;apt-get SomeSoftware
+&lt;/pre&gt;
+&lt;p&gt;Why this feature isn’t available by default in Windows is a mystery to me.&lt;/p&gt;
+&lt;p&gt;Quite some time ago, &lt;a href="http://www.hanselman.com/blog/IsTheWindowsUserReadyForAptget.aspx" target="_blank"&gt;Scott Hanselman blogged about Chocolatey&lt;/a&gt;. Chocolatey is something similar to the apt-get feature from Linux, but now available on a Windows machine. (disclaimer: it’s not really the same, but works for me)&lt;/p&gt;
+&lt;p&gt;Ever since reading this post I wanted to use this awesome piece of software, but all my systems were already up-to-date and never needed it. As of this week, I’ve started working on a new project. Therefore, a new virtual machine had to be installed and configured. An awesome excuse to start using &lt;a href="http://chocolatey.org/" target="_blank"&gt;Chocolatey&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;With Chocolatey you can install all kinds of software, just by typing a command in your Command Prompt or PowerShell window. It will automatically download and install the software for you. The only thing you need to do is wait for the command to finish.&lt;/p&gt;
+&lt;p&gt;Installing Chocolatey is easy also, just open up a command prompt window and copy-paste the install text from the homepage to your window. After the installation has finished, the window will look something like this.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_2.png"&gt;&lt;img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_thumb.png" width="671" height="969"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now you are ready for the real fun, installing software via scipting!&lt;/p&gt;
+&lt;p&gt;Visual Studio 2010 was already installed on my development machine, so I had to think of something else which is necessary. My choice was &lt;a href="http://www.jetbrains.com/resharper/" target="_blank"&gt;ReSharper&lt;/a&gt;. If you are unfamiliar with the Chocolatey commands for installing this software, just head up to the website, search for the software in the search box and everything is explained as the search results show the exact commands you need to install the software.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_4.png"&gt;&lt;img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_thumb_1.png" width="1022" height="442"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Installing ReSharper can be done by just typing the following in the command prompt window:&lt;/p&gt;&lt;pre class="brush:bash"&gt;cinst resharper
+&lt;/pre&gt;
+&lt;p&gt;Hit [Enter] and wait.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_6.png"&gt;&lt;img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_thumb_2.png" width="668" height="332"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;When finished, the gods are thanked appropriately and the software is good to go.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_8.png"&gt;&lt;img title="image" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Chocolatey-introduction_11172/image_thumb_3.png" width="669" height="331"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Of course, you don’t want to install all your development software manually via the prompt window. Therefore, it’s also possible to script it!&lt;/p&gt;
+&lt;p&gt;I’ve created a small Install.ps1 and placed it in a DropBox folder, so I can use it everywhere. The contents look like this.&lt;/p&gt;&lt;pre class="brush:powershell"&gt;# Install Visual Studio 2012 Ultimate
+cinst VisualStudio2012Ultimate
+# Install Visual Studio 2012 Update 4
+cinst VS2012.4
+# Install Visual Studio 2013 Ultimate
+cinst VisualStudio2013Ultimate
+# Install ReSharper
+cinst resharper
+# Install Notepad++
+cinst notepadplusplus
+# Install Fiddler
+cinst fiddler
+# Install FileZilla
+cinst filezilla
+# Install SQL Server 2012 Express
+cinst SqlServer2012Express
+# Install KeePass
+cinst keepass
+# Install Spotify
+cinst spotify
+# Install GitHub for Windows
+cinst githubforwindows
+# Install VLC Player
+cinst vlc
+# Install Beyond Compare
+cinst beyondcompare
+# Install dotPeek
+cinst dotPeek
+# Install dotTrace
+cinst dotTrace
+# Install Remote Desktop Connection Manager
+cinst rdcman
+# Install Sublime Text 2
+cinst sublimetext2
+# Install PowerGUI
+cinst PowerGUI
+# Install TreeSize
+cinst treesizefree
+# Install DropBox
+cinst dropbox
+# Install Google Drive
+cinst googledrive
+# Install SkyDrive
+cinst SkyDrive
+# Install Google Chrome
+cinst GoogleChrome
+# Install Mozilla Firefox
+cinst Firefox
+&lt;/pre&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;There’s probably much more to Chocolatey, but this what I’ve figured out so far. It’s too bad not all software is supported for Chocolatey yet, but it’s a great start. Most software you need is already in the repository and you can add new packages yourself on the website.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

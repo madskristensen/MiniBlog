@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Developing a new Orchard content part and widget</title>
+  <slug>developing-a-new-orchard-content-part-and-widget</slug>
+  <author>Jan</author>
+  <pubDate>2012-05-02 18:30:51</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt; &lt;p&gt;Going through my blogpost draftfolder I noticed this post which I wrote about a year ago. Seeing a lot of time has gone into it I decided to post it anyway. It’s based on Orchard version 1.2, so things might have changed, but the basics are probably the same. Now for the real post. &lt;br&gt;&lt;/p&gt; &lt;p&gt;I’ve got a new job where I was needed to create a new CMS website and add some client specific features on it. As Orchard is my preferred choice at the moment, it didn’t take me long to choose which CMS I was going to use.&lt;/p&gt; &lt;p&gt;To create some new, custom, features to the website I had to create new Modules and wanted to let them act as a Widget. A Widget in Orchard is much like a SharePoint webpart or an old-fashioned ASP.NET usercontrol.&lt;/p&gt; &lt;p&gt;Lucky for me the Orchard team has documented their work quite good, so I could use a lot of code from the ‘&lt;a href="http://www.orchardproject.net/docs/Writing-a-content-part.ashx"&gt;Writing a Content Part&lt;/a&gt;’ and ‘&lt;a href="http://www.orchardproject.net/docs/Writing-a-widget.ashx"&gt;Writing a Widget&lt;/a&gt;’ tutorials.&lt;/p&gt; &lt;p&gt;One of the things I was asked to create is a widget which implements the &lt;a href="http://slideshowpro.net/"&gt;SlideShowPro&lt;/a&gt; viewer. This widget is what I’ll use in this blogpost as an example.&lt;/p&gt; &lt;p&gt;First thing you need to do, if you want to create a Widget, is to create a new Content Part. A Content Part can be implemented as a new module in your Orchard website. You can use the code generation module for this, but if you prefer to do this manual, that’s also possible. If you choose to do this manually you need to create a lot of folders and files yourself as you need to start off with a new ASP.NET MVC 3 Web Application.&lt;/p&gt; &lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_2.png"&gt;&lt;img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_thumb.png" width="479" height="61"&gt;&lt;/a&gt;&lt;/p&gt; &lt;p&gt;Easiest way to create a module is by starting up the orchard command prompt (hides in the bin directory of the Orchard project) and run the following command:&lt;/p&gt; &lt;p&gt;&lt;font face="Courier New"&gt;codegen module NewModule /IncludeInSolution:true&lt;/font&gt;&lt;/p&gt; &lt;p&gt;The parameter &lt;font face="Courier New"&gt;IncludeInSolution&lt;/font&gt; makes sure the new project is added to the Orchard solution, however, it doesn’t work on my machine, so I added it manually to the Modules folder in the solution.&lt;/p&gt; &lt;p&gt;Inside the newly added module you’ll see some files added by default. One of them is the Module.txt file. This file contains some information about the module, like the name, description and author. I first made a mistake by typing some of the properties in lowercase, this resulted in a non-deployable module. Of course, that could also be because of some non-functional code. My final Module text file looks like this:&lt;/p&gt;&lt;pre class="brush: bash"&gt;Name: Vinit.SlideShowPro
+AntiForgery: enabled
+Author: Vinit
+Website: http://vinit.nl
+Version: 1.0
+OrchardVersion: 1.0
+Description: Adds a SlideShow Pro module to the site so slides can be shown.
+Features:
+    Vinit.SlideShowPro:
+        Description: Adds a SlideShow Pro module to the site so slides can be shown.
+		Category: Vinit
+&lt;/pre&gt;
+&lt;p&gt;After setting this up I had to figure out what the model should look like. All content will get uploaded to the site, so I need to specify an URL. This will result in a rather simple and small model with only 1 property, but it’ll do the work.&lt;br&gt;Just add a new class in the Models folder with a proper name and specify the properties you need. If you read the tutorial about writing a content part already, you know you need to add some stuff in the model. &lt;/p&gt;
+&lt;p&gt;For each model you want to use you need to have a class which inherits from the &lt;font face="Courier New"&gt;ContentPart&amp;lt;T&amp;gt;&lt;/font&gt; class and one which inherits from the &lt;font face="Courier New"&gt;ContentPartRecord&lt;/font&gt; class. The class which inherits from the &lt;font face="Courier New"&gt;ContentPartRecord&lt;/font&gt; is somewhat a representation of the table where the information will get stored, sort of a model. The class which inherits the &lt;font face="Courier New"&gt;ContentPart&amp;lt;T&amp;gt;&lt;/font&gt; class will be used in the views and throughout the code, something like a viewmodel.&lt;br&gt;My model class resulted in looking like this:&lt;/p&gt;&lt;pre class='brush:csharp'&gt;public class SlideShowProRecord : ContentPartRecord
+{
+	public virtual string SlideShowUrl { get; set; }
+}
+public class SlideShowProPart : ContentPart&lt;slideshowprorecord&gt;
+{
+	public string SlideUrl
+	{
+		get { return Record.SlideShowUrl; }
+		set { Record.SlideShowUrl = value; }
+	}
+}
+&lt;/pre&gt;
+&lt;p&gt;As you can see I’ll only store 1 string, &lt;font face="Courier New"&gt;SlideShowUrl&lt;/font&gt;, in the database. This property will have to correspond to the column in the database. In the &lt;font face="Courier New"&gt;SlideShowProPart&lt;/font&gt; class I’ve defined the &lt;font face="Courier New"&gt;SlideUrl&lt;/font&gt; to be &lt;font face="Courier New"&gt;Required &lt;/font&gt;so I know it will be available when requested. The &lt;font face="Courier New"&gt;SlideUrl&lt;/font&gt; retrieves and sets the property of the record which we have specified in the &lt;font face="Courier New"&gt;&amp;lt;T&amp;gt;&lt;/font&gt;.&lt;/p&gt;
+&lt;p&gt;Now we need to add some stuff which makes Orchard use our code and modify the database. First off, a &lt;font face="Courier New"&gt;Migration.cs&lt;/font&gt; file. You can do this by adding it via de Orchard prompt by typing:&lt;/p&gt;&lt;pre class="brush:bash"&gt;codegen datamigration NewModule&lt;/pre&gt;
+&lt;p&gt;Or you can just add a new class and call it Migration. I prefer this as you don’t need the extra context switch and it’s faster.&lt;/p&gt;
+&lt;p&gt;The Migration class makes sure the Orchard database is updated after an install or update of a new module. In here you can specify what needs to be created, altered or deleted. First off we need to tell Orchard it has to create a new table with a column named &lt;font face="Courier New"&gt;SlideShowUrl&lt;/font&gt; and tell it we can attach the content part to any content type.&lt;br&gt;This is the necessary code for those steps:&lt;/p&gt;&lt;pre class="brush:csharp"&gt;
+public int Create()
+{
+	SchemaBuilder.CreateTable("SlideShowProRecord", table =&amp;gt; table
+																.ContentPartRecord()
+																.Column("SlideShowUrl", DbType.String));
+
+	ContentDefinitionManager.AlterPartDefinition(typeof(SlideShowProPart).Name, cfg =&amp;gt; cfg.Attachable());
+
+	return 1;
+}
+&lt;/pre&gt;
+&lt;p&gt;As you can see, an int value needs to be returned. This return value acts as a ‘version’ of your module. If you add a new method which returns a higher number, Orchard will automatically see there’s an update for the module and tell the administrator in the dashboard. Once the module is updated, it stores the new ‘version’ number and knows the module is up-to-date. Can’t really tell if this is a best-practice, but hey, it works!&lt;/p&gt;
+&lt;p&gt;After having created the Migration class we also need to add a Handler to the project. The handler handles events of the content part or is able to manipulate the data model, before rendering the content part. Just as the example in the Orchard tutorial, I don’t need advanced stuff happening here, so I didn’t change the code here.&lt;/p&gt;&lt;pre class="brush: csharp"&gt;public SlideShowProHandler(IRepository&lt;slideshowprorecord&gt; repository)
+{
+    Filters.Add(StorageFilter.For(repository));
+}
+&lt;/pre&gt;
+&lt;p&gt;Next up are the views of the content part. Specifying the views is done in something called a Driver. In this driver you can specify which view will be shown for display, edit, summary, etc. All very nice, once you know how this works.&lt;br&gt;A fairly default implementation is this one:&lt;/p&gt;&lt;pre class="brush: csharp"&gt;
+public class Drivers : ContentPartDriver&lt;slideshowpropart&gt;
+{
+    protected override DriverResult Display(SlideShowProPart part, string displayType, dynamic shapeHelper)
+    {
+        return ContentShape("Parts_SlideShowPro", () =&amp;gt; shapeHelper.Parts_SlideShowPro(SlideUrl: part.SlideUrl));
+    }
+
+    //GET
+    protected override DriverResult Editor(SlideShowProPart part, dynamic shapeHelper)
+    {
+        return ContentShape("Parts_SlideShowPro_Edit",
+                            () =&amp;gt;
+                            shapeHelper.EditorTemplate(TemplateName: "Parts/SlideShowPro",
+                                                        Model: part,
+                                                        Prefix: Prefix));
+    }
+
+    //POST
+    protected override DriverResult Editor(SlideShowProPart part, Orchard.ContentManagement.IUpdateModel updater, dynamic shapeHelper)
+    {
+        updater.TryUpdateModel(part, Prefix, null, null);
+        return Editor(part, shapeHelper);
+    }
+}
+&lt;/pre&gt;
+&lt;p&gt;The Display and Editor methods are overridden with some new functionality. The &lt;font face="Courier New"&gt;shapeHelper&lt;/font&gt; parameter is a dynamic type, which means you don’t get IntelliSense from it. I don’t know how the properties are defined on the project, but they work. Maybe I’ll check it out when I’ve got some extra spare time (read: never!).&lt;br&gt;In here you define where the views are located of the content part, “Parts/SlideShowPro” and which model will be used.&lt;/p&gt;
+&lt;p&gt;Fixing the views is rather easy, just add a new view with the name SlideShowPro.cshtml in Views/Parts and in Views/EditorTemplates/Parts and you are done. If you’ve created a MVC site already, you are probably familiar on how to create the views. The Orchard tutorial has a nice example and this is a small snippet of my EditorPart:&lt;/p&gt;&lt;pre class="brush: html"&gt;
+@model Vinit.SlideShowPro.Models.SlideShowProPart
+&amp;lt;fieldset&amp;gt;
+    &amp;lt;legend&amp;gt;SlideShowPro Fields&amp;lt;/legend&amp;gt;
+    &amp;lt;div class="editor-field"&amp;gt;
+        @Html.TextBoxFor(model =&amp;gt; model.SlideUrl)
+        @*Html.ValidationMessageFor(model =&amp;gt; model.SlideUrl)*@
+    &amp;lt;/div&amp;gt;
+&amp;lt;/fieldset&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;And the DisplayPart: &lt;/p&gt;&lt;pre class="brush: html"&gt;
+@if ( Model.SlideUrl != null &amp;amp;&amp;amp; !string.IsNullOrWhiteSpace(Model.SlideUrl) &amp;amp;&amp;amp; Model.SlideUrl.Length &amp;gt; 3) { 
+&amp;lt;script type="text/javascript" src="@String.Format("{0}js/slideshowpro.js", Model.SlideUrl)"&amp;gt;&amp;lt;/script&amp;gt; 
+
+&amp;lt;div id="slideshow"&amp;gt;&amp;lt;/div&amp;gt;
+
+&lt;/pre&gt;
+&lt;p&gt;The last step for successfully creating a content part is adding the placement.info file at the root of the project. This file contains some information on where to locate the views in a larger view.&lt;/p&gt;&lt;pre class="brush: xml"&gt;&amp;lt;Placement&amp;gt;
+    &amp;lt;Place Parts_SlideShowPro="Content:2"/&amp;gt;
+    &amp;lt;Place Parts_SlideShowPro_Edit="Content:7"/&amp;gt;
+&amp;lt;/Placement&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;The above example specifies I want the views in the Content block at the 10th position, or in the editor modus at the 7th position.&lt;/p&gt;
+&lt;p&gt;Now, build, deploy, activate and check out of the content part is working.&lt;/p&gt;
+&lt;p&gt;Once you’ve enabled the new module, you can add the content part to a random content type to check if everything is working.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_4.png"&gt;&lt;img style="background-image: none; border-right-width: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_thumb_1.png" width="233" height="90"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Navigate to the Content Types list and edit one of them, maybe Page.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_6.png"&gt;&lt;img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_thumb_2.png" width="203" height="368"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Check the Slide Show Pro box in the list and click Save. &lt;br&gt;When creating a new page you should see a new block on the screen, the same block as you have specified in the editor view of your module. When viewing the new page you should see the display view on the page.&lt;/p&gt;
+&lt;p&gt;So far for the hard part. Once you’ve got a working content part, creating a Widget from this is a piece of cake.&lt;/p&gt;
+&lt;p&gt;Just add the following code to the Migration class, deploy and you’re happy to go. &lt;/p&gt;&lt;pre class="brush: csharp"&gt;public int UpdateFrom1()
+{
+	// Create a new widget content type with our map
+	ContentDefinitionManager.AlterTypeDefinition("SlideShowProWidget", cfg =&amp;gt; cfg
+		.WithPart("SlideShowProPart")
+		.WithPart("WidgetPart")
+		.WithPart("CommonPart")
+		.WithSetting("Stereotype", "Widget"));
+
+	return 2;
+}
+&lt;/pre&gt;
+&lt;p&gt;In this piece of code you tell Orchard you want to create a SlideShowProWidget which consists of the SlideShowProPart, WidgetPart and CommonPart.&lt;br&gt;Deploy and update the module! If everything is installed correct you should also see a notification in the Dashboard.&lt;/p&gt;
+&lt;p&gt;After that you can add the widget to a content block:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_8.png"&gt;&lt;img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="image" border="0" alt="image" src="http://jan-v.nl/Media/Default/Windows-Live-Writer/Developing-a-new-Orchard-content-part-an_11FA6/image_thumb_3.png" width="395" height="103"&gt;&lt;/a&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;So far for my small tutorial on how to add a new widget to Orchard. Lucky for me most of the stuff was already explained in the Orchard tutorials. I added some comments here which I had to find out myself or didn’t quite get from the original. &lt;br&gt;And as always, it’s always good to try things by yourself. That way you’ll get more experience on the matter.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

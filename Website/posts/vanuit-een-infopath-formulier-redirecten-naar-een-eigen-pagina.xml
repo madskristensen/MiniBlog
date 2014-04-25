@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Vanuit een Infopath formulier redirecten naar een eigen pagina</title>
+  <slug>vanuit-een-infopath-formulier-redirecten-naar-een-eigen-pagina</slug>
+  <author>Jan</author>
+  <pubDate>2008-08-09 17:13:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass365BCF75B00F445CBB057CE3148458DC"&gt;Een van de onderdelen die ik onlangs heb moeten maken in een Sharepoint website zijn Infopath formulieren. Het mooie van deze formulieren is dat ze redelijk gebruikersvriendelijk zijn en je ze in Sharepoint ook volledig kunt ontleden. We hadden gekozen om deze formulieren in een eigen venster (applicatie) op te starten en dat het formulier na indienen werd gesloten. Nadat het formulier wordt gesloten belandt je in de lijst van formulieren. Dit wil je als eindgebruiker natuurlijk niet zien, aangezien dat er veel te technisch uit ziet. Eigenlijk wil je dat je dan op een pagina komt met een melding dat het formulier is opgestuurd en het venster kan worden gesloten. We zagen hier echter geen mogelijkheid tot. Iedere keer dat ik het formulier opende en verstuurde was het een doorn in het oog dat die lijst werd getoond. Plotseling zag ik iets in de hyperlink die het formulier aanriep. Hier werd namelijk de parameter &lt;em&gt;Source&lt;/em&gt; in gestopt. De waarde van deze parameter was de locatie van de lijst met Infopath formulieren (wel helemaal ge-encode). Nu kon ik wel raden wat de parameter &lt;em&gt;Source&lt;/em&gt; deed, maar toch voor de zekerheid heb ik deze even gewijzigd naar http://www.jan-v.nl (en niet ge-encode). Precies wat ik dacht er wordt naar deze source-url ge-redirect nadat je het formulier hebt verstuurd. Dat we eerst op de Infopath lijst uit kwamen was niet zo heel raar, aangezien we de link hadden gekopieerd van de &lt;em&gt;Nieuw item&lt;/em&gt;-knop in de lijst. De originele url was:
+&lt;div class="code"&gt;http://intranet/subsite/subsubsite/_layouts/FormServer.aspx?XsnLocation=http://intranet/subsite/subsubsite/InfopathLijst/Forms/template.xsn&amp;amp;SaveLocation=http%3A%2F%2Fintranet%2Fsubsite%2Fsubsubsite%2FInfopathLijst&amp;amp;&lt;strong&gt;Source=http%3A%2F%2Fintranet%2Fsubsite%2Fsubsubsite%2FInfopathLijst%2FForms%2FAllItems%2Easpx&lt;/strong&gt;&amp;amp;DefaultItemOpen=1&lt;/div&gt;
+en deze is nu gewijzigd om door te linken naar de eigengemaakte melding-pagina:
+&lt;div class="code"&gt;http://intranet/subsite/subsubsite/_layouts/FormServer.aspx?XsnLocation=http://intranet/subsite/subsubsite/InfopathLijst/Forms/template.xsn&amp;amp;SaveLocation=http%3A%2F%2Fintranet%2Fsubsite%2Fsubsubsite%2FInfopathLijst&amp;amp;&lt;strong&gt;Source=http://www.jan-v.nl/meldingpagina.html&lt;/strong&gt;&amp;amp;DefaultItemOpen=1"&lt;/div&gt;
+Eigenlijk is het wel een hele smerige oplossing naar mijn mening, maar in de tijd dat ik met Sharepoint bezig ben heb ik al lang door dat je hier soms niet omheen kunt en oplossingen soms tegen beter weten in moeten worden doorgevoerd.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

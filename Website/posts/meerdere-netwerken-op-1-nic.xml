@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Meerdere netwerken op 1 NIC</title>
+  <slug>meerdere-netwerken-op-1-nic</slug>
+  <author>Jan</author>
+  <pubDate>2010-11-07 13:37:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass95FAE12C9A00476FB08CFA2959D296A1"&gt;
+&lt;p&gt;Tijdens de installatie van Forefront kon ik niet de hele tijd het internet op, omdat dat werd geblokkeerd door de firewall. Reuze handig en veilig, maar niet echt handig wanneer er een probleem moet worden opgelost.&lt;/p&gt;
+&lt;p&gt;Tijdens het spelen met de IP eigenschappen van de m'n laptop stuitte ik ineens op de eigenschappen van IPv4.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/110710_1331_Meerderenet1.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Hier zag dat ik daar meerdere IP adressen kan toevoegen aan de NIC, ook is het mogelijk om meerdere gateway, DNS en WINS servers te definieren. Dit had ik al een keer gedaan voor DNS servers, maar nog nooit bij stil gestaan dat je ook meerdere IP's aan een NIC kan toekennen.&lt;/p&gt;
+&lt;p&gt;Dit heb ik dus gedaan om te kijken of het ook daadwerkelijk werkt. Zo heb ik de instellingen als hieronder opgeslagen:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/110710_1331_Meerderenet2.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Na het opslaan zie je dat de NIC ineens 2 netwerken heeft, '&lt;em&gt;Jan_V&lt;/em&gt;' en '&lt;em&gt;Jan_V 2&lt;/em&gt;'&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/110710_1331_Meerderenet3.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Er wordt nu door Windows gevraagd wat het nieuwe netwerk is (Home, Work, Public) en wanneer je daar iets hebt gekozen kun je het internet op. Dit was reuze handig in mijn situatie. Wel heb ik nog even een route toegevoegd dat verkeer van 10.0.0.x wel via de juiste gateway moest, anders zouden er misschien rare situaties kunnen optreden.&lt;/p&gt;
+&lt;p&gt;Dit is natuurlijk reuze handig als je op meerdere netwerken tegelijkertijd moet zijn. Wel denk ik dat er wat problemen kunnen optreden als je de routes niet goed instelt, maar daar heb ik nog niet mee te maken gehad.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

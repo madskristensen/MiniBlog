@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>LINQ to SQL en GUID's</title>
+  <slug>linq-to-sql-en-guid-s</slug>
+  <author>Jan</author>
+  <pubDate>2008-01-14 18:18:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass801A9CF99F124B9CAC921693975D5542"&gt;Vandaag was ik bezig met het maken van m'n basis weblog functies.&lt;br /&gt;Nu was ik belandt bij het aanmaken van posts, toch wel een essentieel onderdeel. Als identifier maak ik gebruik GUID's en in SQL heb ik dan de newsequentialid() gebruikt.&lt;br /&gt;Uiteraard is dit enorm handig, maar niet direct in combinatie met L2SQL.&lt;br /&gt;Wanneer je zelf geen actie onderneemt dan wordt er gewoon een lege guid toegevoegd. &lt;br /&gt;Gelukkig vond ik al redelijk snel een oplossing hiervoor op Nick Kusters z'n weblog (http://www.nickkusters.com/ViewArticle.aspx?ArticleID=29)&lt;br /&gt;&lt;br /&gt;Je moet dus zelf in de designer aangeven dat de waarde in de database wordt berekend. &lt;br /&gt;Dit kun je zelf ook aangeven in je mapping.xml, maar dan zou je dit iedere keer moeten doen wanneer je deze update.&lt;br /&gt;Aangezien ik daar niet zoveel zin in heb, moest ik maar weer eens testen of een dbml-bestand toch geen optie is.&lt;br /&gt;Gezien m'n vorige post hier, is dat dus ook weer gelukt.&lt;br /&gt;&lt;br /&gt;Zo zie je maar weer dat je toch een beetje vertrouwen moet hebben in Microsoft development en niet eigenwijs bezig gaan.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

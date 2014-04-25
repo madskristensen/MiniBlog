@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Fixing "the trust relationship between this workstation and the primary domain failed"</title>
+  <slug>fixing-the-trust-relationship-between-this-workstation-and-the-primary-domain-failed</slug>
+  <author>Jan</author>
+  <pubDate>2012-11-07 18:15:53</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;Some time ago my ForeFront TMG server had crashed and not being an expert sysadmin, I wasn&amp;rsquo;t able to figure out what was wrong. The only thing I could think of was restoring the server from an earlier snapshot. Thanks to the Hyper-V interface this is really easy, even a software developer can do this.&lt;/p&gt;
+&lt;p&gt;After having restored the server to an earlier state I connected to the server and was prompted with a message telling me &amp;ldquo;&lt;em&gt;the trust relationship between this workstation and the primary domain failed&lt;/em&gt;&amp;rdquo;. I figured this had probably something to do with restoring the snapshot from quite a while back. &lt;a href="http://www.implbits.com/About/Blog/tabid/78/post/don-t-rejoin-to-fix-the-trust-relationship-between-this-workstation-and-the-primary-domain-failed/Default.aspx"&gt;Doing some research on the issue&lt;/a&gt; confirmed my suspicions.&lt;/p&gt;
+&lt;p&gt;Apparently this happens when your machine can&amp;rsquo;t communicate securely with the Active Directory anymore. This can happen for a number of reasons. Reason for my machine not being able to communicate anymore has probably something to do with some password changes, which the old snapshot wasn&amp;rsquo;t aware off.&lt;/p&gt;
+&lt;p&gt;Microsoft has &lt;a href="http://support.microsoft.com/kb/162797"&gt;an article dedicated to this issue&lt;/a&gt;. They tell you to remove the machine from the domain and rejoin. This seems a bit rigorous and I don&amp;rsquo;t really want to do such things to my ForeFront server. Without it I don&amp;rsquo;t have internet!&lt;/p&gt;
+&lt;p&gt;Lucky for me this is exactly what the people at Implbits thought. In the earlier linked article they describe a better solution, which is using &lt;em&gt;netdom.exe&lt;/em&gt;. By using the command below, you can update the password of the machine:&lt;/p&gt;
+&lt;pre class="brush: shell; toolbar: false"&gt;netdom.exe resetpwd /s:&amp;lt;server&amp;gt; /ud:&amp;lt;user&amp;gt; /pd:*
+
+&amp;lt;server&amp;gt; = a domain controller in the joined domain
+&amp;lt;user&amp;gt; = DOMAIN\User format with rights to change the computer password&lt;/pre&gt;
+&lt;p&gt;After updating the password the machine will behave normally again. If you are interested in some more background information, check out &lt;a href="http://www.implbits.com/About/Blog/tabid/78/post/don-t-rejoin-to-fix-the-trust-relationship-between-this-workstation-and-the-primary-domain-failed/Default.aspx"&gt;the blogpost at Implbits&lt;/a&gt;. They&amp;rsquo;ve done some more research on the subject.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

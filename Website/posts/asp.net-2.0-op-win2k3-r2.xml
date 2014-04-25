@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>ASP.Net 2.0 op Win2K3 (R2)</title>
+  <slug>asp.net-2.0-op-win2k3-r2</slug>
+  <author>Jan</author>
+  <pubDate>2008-02-09 17:09:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass6CA5975F19E648E6BC1C791F3C2678D8"&gt;Vorige week moest ik bij een klant een ASP.Net 2.0 website installeren op een server. Deze server was door iemand anders ingericht. Zelf was ik er vanuit gegaan dat alles goed was geconfigureerd, maar niets was minder waar. Na wat stoeien in IIS voor configuraties was ik ten einde raad. Gewone HTML bestanden werden gewoon geladen en getoond op de website, maar m'n ASP.Net applicatie werkte niet. Uiteindelijk ben ik maar gaan Googlen om een antwoord te vinden. Via deze link: http://maniish.wordpress.com/2006/12/22/windows-2003-aspnet-page-gives-404-file-not-found-error-2/ Ben ik erachter gekomen dat je standaard geen dynamische pagina's kunt weergeven op een Windows 2003 (R2) server. Dit moet je speciaal gaan activeren Wat je moet doen is het volgende. Start IIS Klap de treeview uit en klik op &lt;em&gt;Web Server Extension&lt;/em&gt; Nu worden enkele standaard extensies getoond op de rechterkant van het venster Als jouw extensie er bij staat moet je deze nog gaan activeren/toestaan Zodra dat is gedaan kun je werken met je dynamische content. In mijn geval stond er natuurlijk geen ASP.Net 2.0 bij in het lijstje. Deze moest ik zelf dus nog toevoegen. Aangezien ik wel een beetje ervaring heb met slecht geconfigureerde spullen wist ik wel ongeveer wat ik zocht. Je moet zelf een extensie toevoegen. De nieuwe extensie is te vinden in de map &lt;em&gt;C:\Windows\Microsoft.NET\Framework\v2.0.50727&lt;/em&gt; en dan moet je het bestand &lt;em&gt;aspnet_isapi.dll&lt;/em&gt; selecteren. Dit eenmaal gedaan kun je ook ASP.Net 2.0 applicaties draaien op je webserver. Het heeft even wat uitzoekwerk gekost, maar eindelijk draait de server nu goed.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

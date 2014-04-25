@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Versies RDP</title>
+  <slug>versies-rdp</slug>
+  <author>Jan</author>
+  <pubDate>2007-07-04 18:16:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass8E3CC26C372E44E4BD3D4A7E7901649A"&gt;Gisteren had ik weer een 'leuk' probleem.&lt;br /&gt;De hele dag via Remote Desktop zitten werken op een server van het werk. &lt;br /&gt;Druk, druk, druk.&lt;br /&gt;&lt;br /&gt;Rond een uur of 4 reboot ik m'n systeem, start RDP weer op om verbinding te maken met de server en krijg een foutmelding.&lt;br /&gt;Foutmelding was iets in de trand van:&lt;br /&gt;&lt;em&gt;the terminal services activex control (mstscax.dll) does not match the version of the client shell&lt;/em&gt;&lt;br /&gt;Raar, aangezien ik het net nog had gebruikt.&lt;br /&gt;&lt;br /&gt;Antwoord kon ik vinden op deze website http://forums.msrportal.com/archive/index.php?t-20230.html&lt;br /&gt;Blijkt dus dat op een of andere manier de dll van RDP dus is overschreven met een nieuwe versie. Ik dit uitzoeken en dat blijkt ook nog waar te zijn.&lt;br /&gt;Die dll was versie 6.0.nogwat (Windows 2003 dus) en de executable was 5.1.nogwat (Windows XP dus).&lt;br /&gt;Heel vervelend. &lt;br /&gt;Ik dus via safe mode de oude dll uit de i386 directory kopieren naar de system32 directory. Dat hielp niet echt. De foutmelding bleef bestaan.&lt;br /&gt;&lt;br /&gt;Uiteindelijk, nadat ik alle stappen had gedaan, kwam ik tot het besluit dat ik RDP opnieuw moest installeren en dan de nieuwste versie.&lt;br /&gt;Toevallig had ik net geen Win2k3 server cd/dvd naast me liggen. Verdorie.&lt;br /&gt;De bestandsnaam MSRDPCLI.EXE intikken in Google hielp al. Al redelijk snel vond ik een ftp adres waar ik deze kon downloaden.&lt;br /&gt;Dit deed ik dus. Downloaden, runnen en klaar is Kees.&lt;br /&gt;Nu heb ik in de Program Files een werkend RDP programma, versie 5.2.nogwat.&lt;br /&gt;Deze bestanden ook maar naar de system32 gekopieerd. Nu werkt die ook weer.&lt;br /&gt;&lt;br /&gt;Wel een gedoe zeg.&lt;br /&gt;En waar dit nou werd door veroorzaakt? Geen idee.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>IIS Admin Service doesn’t start anymore</title>
+  <slug>iis-admin-service-doesnt-start-anymore</slug>
+  <author>Jan</author>
+  <pubDate>2012-11-07 18:35:16</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;All of a sudden all my websites didn&amp;rsquo;t work anymore. Using some common sense in searching for the root of the problem I discovered the &lt;em&gt;IIS Admin Service&lt;/em&gt; hadn&amp;rsquo;t started after booting up my machine. Trying to manually start up the service didn&amp;rsquo;t help much either, I was confronted with a message telling me &amp;ldquo;&lt;em&gt;The system cannot find the file specified.&lt;/em&gt;&amp;rdquo;. Sadly, the event logs didn&amp;rsquo;t help much, as the logs told me about the same &amp;ldquo;&lt;em&gt;The IIS Admin service terminated with the following error. The system cannot find the file specified&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Having not much to go from here I had to start searching the web to check if other people had stumbled across this issue also. Lucky for me, someone had indeed solved this problem, &lt;a href="http://blogs.iis.net/ma_khan/archive/2008/07/21/troubleshooting-could-not-start-the-iis-admin-service-on-local-computer.aspx"&gt;back in 2008 and blogged about it&lt;/a&gt;. Muqeet had discovered this error usually occurs when the &lt;em&gt;metabase.xml&lt;/em&gt; file is missing or corrupt.&lt;/p&gt;
+&lt;p&gt;Checking out the default location of the &lt;em&gt;metabase.xml&lt;/em&gt; file (&lt;em&gt;C:\WINDOWS\system32\inetsrv\&lt;/em&gt;) confirmed this. Somehow the file was gone from the file system. Lucky for me IIS is backing up the file when a change is made within the IIS configuration. The backups can be found in the &lt;em&gt;History&lt;/em&gt; folder (&lt;em&gt;C:\WINDOWS\system32\inetsrv\History\&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Restoring the most recent backup to the original location had fixed the problem. The IIS Admin Service was able to start again, which means all the websites in IIS had started also.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

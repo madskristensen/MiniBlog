@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Domein en an attempt to resolve the dns name of a dc in the domain being joined has failed</title>
+  <slug>domein-en-an-attempt-to-resolve-the-dns-name-of-a-dc-in-the-domain-being-joined-has-failed</slug>
+  <author>Jan</author>
+  <pubDate>2009-07-08 21:12:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass91F65168E8AB463EB62F817849071E00"&gt;Dat is wat ik vandaag tegen kwam bij het opzetten van m'n domein thuis. Toch raar, aangezien ik zeker weet dat het domein werkt en de DNS bereikbaar moet zijn. Dit was ongeveer de melding: &lt;em&gt;An attempt to resolve the dns name of a dc in the domain being joined has failed. Please verify this client is configured to reach a DNS server that can resolve DNS name in the target domain. &lt;/em&gt;Na even logisch nadenken en de foutmelding wat beter te lezen in plaats van te scannen kwam ik al vrij snel achter de oplossing. Momenteel staat er natuurlijk nog geen DNS server geconfigureerd op de systemen, of de router staat als DNS geconfigureerd. Op die manier kom ik natuurlijk nooit op de domain controller. Wat ik dus nog moest doen is de DNS op alle systemen instellen dat ze primair m'n domain controller gebruiken en daarna (eventueel) nog een andere DNS. Nu ik dit heb aangepast kan ik een systeem toevoegen op het domein. Gelukkig heb ik nog niet veel draaien, maar toch handig om te weten. Jammer dat ik de DNS niet in de router zelf kan instellen. Misschien moet ik dan toch eens een luxer model kopen in plaats van een 3Com OfficeConnect. Het kan natuurlijk ook zo zijn dat ik de optie nog niet goed heb kunnen vinden.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

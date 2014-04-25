@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Sharepoint op je Vista machine</title>
+  <slug>sharepoint-op-je-vista-machine</slug>
+  <author>Jan</author>
+  <pubDate>2008-06-09 19:00:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassF270437792EF47DEA84C451F3CD818EF"&gt;Twee weken terug kwam ik een link tegen dat het nu eindelijk mogelijk is om Sharepoint te draaien op je Vista machine. Dat is natuurlijk helemaal geweldig, want eigenlijk vind ik de methode van ontwikkelen voor Sharepoint die er nu is helemaal ruk! Het slaat wat mij betreft nergens op dat je een of meerdere virtuele servers moet maken om op te ontwikkelen en daarna moet gaan deployen op een team-ontwikkel/acceptatie website en daarna nog eens een keer naar de klant gaat deployen. Ik kan de link op de MSDN site momenteel niet vinden met de basics van source control in Sharepoint, misschien dat die nog op m'n werk laptop staat, dan zet ik die er later nog even bij. De link met tekst en uitleg is trouwens: http://community.bamboosolutions.com/blogs/bambooteamblog/archive/2008/05/21/how-to-install-windows-sharepoint-services-3-0-sp1-on-vista-x64-x86.aspx Zelf heb ik het nog niet geprobeerd, aangezien ik m'n thuis desktop liever niet als testcase opzet voor zoiets (+ het feit dat ik m'n server daar zometeen voor ga inzetten) en ik ook nog geen Vista draai op m'n ontwikkel laptop. Of het allemaal goed werkt weet ik dus niet, maar het lijkt me wel dat je nu minimaal web parts lokaal kunt gaan ontwikkelen. Dat is toch wat mij betreft het grootste voordeel. Een hele WSS of MOSS omgeving op je lokale machine is natuurlijk ook wel leuk, maar mijn basic needs zijn echt het onwikkelen van web parts op een lokale machine. Of natuurlijk een laptop met een Quad-core CPU, 8GB RAM en een harde schijf van 500GB @ minstens 7200 RPM. Omdat ik toch ook wel een beetje re&amp;euml;le kijk op de wereld heb snap ik ook wel dat dat het niet gaat worden.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

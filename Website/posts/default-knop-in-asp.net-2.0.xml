@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Default knop in ASP.Net 2.0</title>
+  <slug>default-knop-in-asp.net-2.0</slug>
+  <author>Jan</author>
+  <pubDate>2008-01-12 15:58:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass66D4971731584CDA8B31DAD9FC9C07E8"&gt;Vandaag had ik een raar probleem in m'n web-applicatie.&lt;br /&gt;Ik had een zoekvenster gemaakt en hier stond maar 1 tekstbox en 1 zoekknop op. Wanneer ik in de tekstbox een zoekstring plaatste en dan op de knop 'Zoek' drukte werden m'n resultaten gevonden.&lt;br /&gt;Wanneer ik echter op de [Enter]-knop op het toetsenbord drukte werd de pagina wel herladen, maar werd het knop-event niet geactiveerd.&lt;br /&gt;Op zich kon ik dit wel verklaren doordat er geen default knop in het form was gedefinieerd. Het rare was echter dat wanneer ik 2 of meer textboxen in het zoekvenster had, dat het zoeken met de [Enter]-knop wel lukte. Nadat ik hier voldoende tijd aan had besteed vond ik het wel welletjes geweest, aangezien ik het probleem niet kon vinden.&lt;br /&gt;&lt;br /&gt;Tijdens m'n zoektocht kwam ik wel de volgende pagina tegen: http://www.beansoftware.com/ASP.NET-Tutorials/Accept-Enter-Key.aspx&lt;br /&gt;&lt;br /&gt;Het blijkt dat je vanaf ASP.Net 2.0 je een &lt;em&gt;DefaultButton&lt;/em&gt; kunt opgeven aan een &lt;em&gt;Panel&lt;/em&gt;. Je geeft het ID van de zoek-knop op en dan werkt het.&lt;br /&gt;Zo heb ik nu dus ook m'n zoekvenster gemaakt, door alle textboxen in een panel te plaatsen met een defaultbutton die refereert naar m'n zoekknop.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

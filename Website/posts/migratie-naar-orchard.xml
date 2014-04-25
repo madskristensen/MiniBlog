@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Migratie naar Orchard</title>
+  <slug>migratie-naar-orchard</slug>
+  <author>Jan</author>
+  <pubDate>2011-01-29 15:28:30</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;p&gt;Sinds gisteren draait m’n weblog niet meer op SharePoint (WSS3.0), maar op het nieuwe .NET CMS genaamd &lt;a href="http://www.orchardproject.net/"&gt;Orchard&lt;/a&gt;. Het lokaal installeren was heel eenvoudig met &lt;a href="http://www.asp.net/webmatrix"&gt;WebMatrix&lt;/a&gt;. Na installatie kon ik gelijk aan de slag met het systeem. Moet zeggen dat het allemaal goed in elkaar steekt en behoorlijk gebruikersvriendelijk is. Installeren van verschillende modules en thema’s kan met 1 klik worden gedaan in de web interface. Dat is wel even wennen als je van SharePoint af komt. Daar moet je eerst allerlei packages installeren, configuraties instellen, etc.&lt;/p&gt; &lt;p&gt;Tot nu toe ben ik dan ook behoorlijk tevreden over het geheel.&lt;/p&gt; &lt;p&gt;Wat wel vervelend is, is dat er momenteel alleen een import (en export) kan worden gedaan met het &lt;a href="http://blogml.codeplex.com/"&gt;BlogML&lt;/a&gt; formaat. Op zich mooi dat die functionaliteit wordt aangeboden, maar zelf vond ik het nogal lastig om hier even snel een export voor te maken vanuit SharePoint. Het verkrijgen van de posts, comments en overige zaken is wel prima te doen, echter moet het dan ook in het valide BlogML formaat worden geplaatst. Dit is op zich ook prima te doen, maar ben er halverwege maar mee gestopt omdat ik teveel zaken onduidelijk vond. Heb alles dus maar ge-copy-paste. Het is iets meer werk, maar zo’n 300 posts zijn nog prima te overzien. Gelukkig heb ik weinig tot geen comments, waardoor eigenlijk alleen de posts over moesten.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

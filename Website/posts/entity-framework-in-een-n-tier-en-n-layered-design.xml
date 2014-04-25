@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Entity Framework in een N-Tier en N-layered design</title>
+  <slug>entity-framework-in-een-n-tier-en-n-layered-design</slug>
+  <author>Jan</author>
+  <pubDate>2010-04-21 11:28:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass86459CD0FB5B45289F9CDE68CB1BAF55"&gt;
+&lt;p&gt;Momenteel ben ik met een project bezig dat met 2 tiers werkt (de database even niet meegerekend). Er is een presentatie laag (MVP) en deze staat in verbinding met een WCF service, de 2&lt;sup&gt;e&lt;/sup&gt; tier. Deze 2&lt;sup&gt;e&lt;/sup&gt; tier heeft dus een service laag, maar ook een business- (BL) en een data access laag (DAL). Dit is tegenwoordig een redelijk standaard design.&lt;/p&gt;
+&lt;p&gt;Omdat ik het Entity Framework wil gebruiken (&lt;a href="http://weblogjanv/Lists/Posts/Post.aspx?ID=186"&gt;http://weblogjanv/Lists/Posts/Post.aspx?ID=186&lt;/a&gt;) zal alleen de DAL toegang moeten hebben tot het Model. De verschillende Entities worden wel in alle projecten gelinkt (service layer, busines layer en data access layer).&lt;/p&gt;
+&lt;p&gt;Het design heb ik al een tijd goed werkend, echter toen ik het geheel wilde gaan testen liep ik tegen problemen aan. De eerste fout die ik tegen kwam was de volgende:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/052610_1328_EntityFrame1.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;"ArgumentException: The specified named connection is either not found in the configuration, not intented tob e used with EntityClient provider, or not valid&lt;/em&gt;"&lt;/p&gt;
+&lt;p&gt;Dit was al snel opgelost door de connectiestring in de web.config van de service te plaatsen.&lt;/p&gt;
+&lt;p&gt;Nadat ik dat had gedaan kwam er een vervelende fout naar voren, namelijk:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/052610_1328_EntityFrame2.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;"MetadataException: Unable to load the specified metadata resource."&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Er is hier veel over te vinden op het internet en komt er op neer dat de metadata van de edmx niet in de dll zijn meegenomen, of dat de referenties in de connectiestring niet correct zijn.&lt;/p&gt;
+&lt;p&gt;Een van de oplossingen is dan om in dit gedeelte van de connectiestring:&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; color: blue; font-size: 9pt;"&gt;metadata=res://*/Model.csdl|res://*/Model.ssdl|res://*/Model.msl &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;de * tekens te vervangen met de naam van de dll, dan zou er zoiets moeten komen te staan:&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; color: blue; font-size: 9pt;"&gt;metadata=res://ModelProject/Model.csdl|res://ModelProject/Model.ssdl|res://ModelProject/Model.msl&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;De reden om dit te doen, is omdat de applicatie blijkbaar moeite kan hebben met het vinden van de benodigde bestanden binnen de dll's.&lt;/p&gt;
+&lt;p&gt;Nog een oplossing zou kunnen zijn om de Metadata Artifact Processing te wijzigen.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://weblogjanv/Lists/Photos/052610_1328_EntityFrame3.png" alt="" /&gt;&lt;/p&gt;
+&lt;p&gt;Deze staat normaal op &lt;em&gt;Embed in Output Assembly&lt;/em&gt;, maar zou dan op &lt;em&gt;Copy to Output Directory&lt;/em&gt; gezet kunnen worden. De aangemaakte bestanden (csdl, ssdl en msl) moeten dan handmatig worden gekopieerd naar de &lt;em&gt;root&lt;/em&gt; of &lt;em&gt;bin&lt;/em&gt; map van de service, afhankelijk van wat je in de web.config zet.&lt;/p&gt;
+&lt;p&gt;Beide opties boden mij geen oplossing. Tijdens het zoeken naar een oplossing voor m'n probleem merkte ik op dat de dll van het Model project niet in m'n bin map werd geplaatst. Dan is het natuurlijk logisch dat de metadata niet gevonden kan worden, aangezien die ook niet aanwezig is.&lt;/p&gt;
+&lt;p&gt;Na veel zoeken heb ik nergens een antwoord kunnen vinden dat mij zou helpen. Overal werd in de service ook gelijk een verbinding gemaakt naar het Model, waardoor alles goed gaat. Vandaag had ik ineens een helder moment. Het kan natuurlijk zijn dat .NET/Visual Studio vind dat het Model project niet nodig is. Als ik de code zo een beetje door kijk, dan wordt nergens iets van het Model project gebruikt. Er is alleen een &lt;em&gt;Reference&lt;/em&gt; gemaakt binnen het DAL project, maar dat is dan ook alles. Hierdoor zal de compiler waarschijnlijk denken dat het project overbodig is en dus niet in de bin map plaatsen.&lt;/p&gt;
+&lt;p&gt;Een kleine test bevestigde mijn vermoeden. Nadat ik een lege klasse had aangemaakt in het Model project en deze in de DAL gebruikte werd de Model dll ook in de bin map geplaatst.&lt;/p&gt;
+&lt;p&gt;In het Model project heb ik dus het volgende aangemaakt:&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;&lt;span style="color: blue;"&gt;namespace&lt;/span&gt; OnsKoopje.Model &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;{ &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;&lt;span style="color: blue;"&gt;public&lt;/span&gt; &lt;span style="color: blue;"&gt;class&lt;/span&gt; &lt;span style="color: #2b91af;"&gt;Empty&lt;/span&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;{ &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;} &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;} &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In m'n DAL project heb ik nu de volgende code geplaatst:&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;&lt;span style="color: blue;"&gt;class&lt;/span&gt; &lt;span style="color: #2b91af;"&gt;ModelLink&lt;/span&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;{ &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;&lt;span style="color: blue;"&gt;private&lt;/span&gt; ModelLink() &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;{ &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;&lt;span style="color: blue;"&gt;var&lt;/span&gt; ep = &lt;span style="color: blue;"&gt;new &lt;/span&gt;Model.&lt;span style="color: #2b91af;"&gt;Empty&lt;/span&gt;(); &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;} &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Consolas; font-size: 9pt;"&gt;} &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Aangezien het Model project nu wordt gebruikt in de DAL, wordt de dll nu ook mee gekopieerd naar de output directory van de service.&lt;/p&gt;
+&lt;p&gt;Het is een beetje een work-around voor het probleem, maar het werkt! Hopelijk wordt dit in de toekomst nog eens opgelost, tenzij ik echt met exotische dingen bezig ben, maar dat lijkt mij niet.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

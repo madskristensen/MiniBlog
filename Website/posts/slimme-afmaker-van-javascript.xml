@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Slimme afmaker van javascript</title>
+  <slug>slimme-afmaker-van-javascript</slug>
+  <author>Jan</author>
+  <pubDate>2008-04-21 19:59:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassC4EAF8602B8F40439B648DB4CD274332"&gt;Vorige week kwam ik achter een leuk feitje, tenminste ik denk dat het een feitje is. Ik was bezig om een chatmodule te maken in een website en de gebruikers daar wilden ook ieder hun eigen kleurtje kunnen selecteren. Op zich geen probleem natuurlijk, dan kun je gewoon een &lt;em&gt;span&lt;/em&gt; maken en daar een kleur aan geven. Aangezien de tekst via AJAX werd ingeladen, moest ik de kleur ook via Javascript er in voegen. Niet zo heel erg lastig, toch ben ik er een behoorlijke tijd mee bezig geweest vind ik zelf. Wat was het (nou ja, een van de) probleem nou? Blijkbaar sluit de &lt;em&gt;innerHTML&lt;/em&gt; van Javascript je HTML tags in je tekst als je dit niet zelf doet in dezelfde regel als ze worden aangemaakt. Ik had dus code wat hier op lijkt:
+&lt;div class="code"&gt;if( kleur_node[0].firstChild != null) { chat_div.innerHTML += '&lt;span&gt;' chat_div.innerHTML += user_node[0].firstChild.nodeValue + ':&amp;nbsp;' chat_div.innerHTML += text_node[0].firstChild.nodeValue + '&lt;/span&gt;&lt;br /&gt;'; }&lt;/div&gt;
+De tekst bleef echter z'n normale kleur houden en niet de kleur die ik wilde. Uiteindelijk heb ik de code &lt;em&gt;kleur_node[0].firstChild.nodeValue&lt;/em&gt; maar vervongen door &lt;em&gt;Red&lt;/em&gt;, zodat ik zeker wist dat er een kleur werd geplaatst. Dit mocht echter niet baten. Hierna heb ik er maar een collega bij geroepen om mee te kijken, het zou kunnen dat ik iets over het hoofd zou hebben gezien. Samen hebben we er dit van gemaakt:
+&lt;div class="code"&gt;if( kleur_node[0].firstChild != null) { chat_div.innerHTML += '&lt;span style="color: red;"&gt;Rode kleur' chat_div.innerHTML += user_node[0].firstChild.nodeValue + ':&amp;nbsp;' chat_div.innerHTML += text_node[0].firstChild.nodeValue + '&lt;/span&gt;&lt;br /&gt;'; }&lt;/div&gt;
+Nu werd de tekst &lt;em&gt;Rode kleur&lt;/em&gt; wel gekleurd, maar de rest van m'n tekst niet. Via de IE Developer Toolbar heb ik toen maar de broncode van dat element bekeken om te kijken wat er precies werd gedaan. Wat bleek nou? De &lt;em&gt;span&lt;/em&gt; die in de eerste regel staat, werd gelijk afgemaakt met een &lt;em&gt;&lt;/em&gt;in de eerste regel, dus na de &lt;em&gt;Rode kleur&lt;/em&gt;. Logisch dat de rest van m'n tekst niet werd opgekleurd. Na veel zoeken en proberen ben ik dus tot de conclusie gekomen dat wanneer je HTML code's in de &lt;em&gt;innerHTML&lt;/em&gt; stopt, deze automatisch worden gesloten. Een handig weetje, maar je kunt hier zo een paar minuten zoet mee zijn. M'n uiteindelijke code is dit geworden.
+&lt;div class="code"&gt;if( kleur_node[0].firstChild != null) { chat_div.innerHTML += '&lt;span&gt;'+ user_node[0].firstChild.nodeValue + ':&amp;nbsp;'+ text_node[0].firstChild.nodeValue + '&lt;/span&gt;&lt;br /&gt;'; }&lt;/div&gt;
+Met deze code wordt alles gewoon goed opgekleurd.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

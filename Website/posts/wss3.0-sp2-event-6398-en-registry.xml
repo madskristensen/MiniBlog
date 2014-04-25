@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>WSS3.0 SP2 event 6398 en registry</title>
+  <slug>wss3.0-sp2-event-6398-en-registry</slug>
+  <author>Jan</author>
+  <pubDate>2010-04-10 20:46:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassDC1EDB57AC6F4EFEB433952D323FAA2E"&gt;
+&lt;div&gt;Al geruime tijd werkt het zoeken niet&amp;nbsp;goed op m'n Sharepoint server waar ook dit weblog op draait. In de eventviewer zag ik het event 6398 continu terug komen.&lt;/div&gt;
+&lt;div&gt;Normaliter krijg je dit event te zien, samen met nog enkele anderen, en geven ze aan dat je de rechten op de dcom OSearch en de IWAM moet wijzigen.&lt;/div&gt;
+&lt;div&gt;Aangezien ik geen MOSS draai heb ik geen OSearch. Wel de IWAM, maar daar had ik de betreffende accounts al lokale activatie rechten op gegeven.&lt;/div&gt;
+&lt;div&gt;De fout die ik ook kreeg sloeg op het register:&lt;/div&gt;
+&lt;div&gt;&lt;em&gt;Requested registry access is not allowed.&lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;Heeft natuurlijk weinig met DCOM te maken. Jammergenoeg stond er niet echt een pad bij waar de accounts dan geen rechten op zou hebben.&lt;/div&gt;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div&gt;Alle Sharepoint accounts in de &lt;em&gt;Administrators&lt;/em&gt; groep plaatsen hielp niet.&lt;/div&gt;
+&lt;div&gt;Uiteindelijk kwam ik op deze post (Technet): &lt;a href="http://social.technet.microsoft.com/Forums/en/sharepointsearch/thread/29c1a681-5996-4e71-ada7-3abc4fe772b5"&gt;http://social.technet.microsoft.com/Forums/en/sharepointsearch/thread/29c1a681-5996-4e71-ada7-3abc4fe772b5&lt;/a&gt;&lt;/div&gt;
+&lt;div&gt;Hier geeft iemand aan dat het mogelijk is dat de zoek database misschien corrupt is, dat was bij hem het geval.&lt;/div&gt;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div&gt;Het kan natuurlijk zo zijn dat dit ook bij mij het geval is.&lt;/div&gt;
+&lt;div&gt;Wat ik nu heb gedaan is de zoekservice &lt;strong&gt;gestopt&lt;/strong&gt;, daarna weer &lt;strong&gt;gestart&lt;/strong&gt;, maar met een &lt;strong&gt;andere database naam&lt;/strong&gt;.&lt;/div&gt;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div&gt;Na de indexer weer te alloceren aan m'n web applicatie is die begonnen met indexeren. Ik heb het zoeken nu even getest met de term '&lt;em&gt;Sharepoint&lt;/em&gt;' en het lijkt te werken. Ik krijg in ieder geval resultaten terug die ik zou verwachten.&lt;/div&gt;
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div&gt;Eindelijk!&lt;/div&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

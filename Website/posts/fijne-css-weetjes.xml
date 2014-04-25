@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Fijne CSS weetjes</title>
+  <slug>fijne-css-weetjes</slug>
+  <author>Jan</author>
+  <pubDate>2007-08-26 14:13:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassC34FEF9090FC4C5E842107B5D0EA0D3C"&gt;Tijdens het werk zat ik weer eens in een CSS bestand wat wijzigingen aan te brengen. Hier stuitte ik ineens op een regel met&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;@media screen&lt;br /&gt;{&lt;br /&gt;&lt;em&gt;css stuff&lt;/em&gt;&lt;br /&gt;}&lt;/div&gt;
+&lt;br /&gt;Zoiets had ik nog nooit gezien en vroeg me dan ook af wat dit betekende. De ontwikkelaar in kwestie wist ook niet meer precies wat dit deed, dus heb ik even gezocht naar dit soort statements.&lt;br /&gt;&lt;br /&gt;Blijkbaar kun je in CSS aangeven welk type 'scherm' welke stijl moet hebben. Zo kun je bijvoorbeeld voor een projector, beeldscherm, printer en pocket pc hetzelfde CSS-bestand gebruiken, maar met andere waarden. Dit is wel enorm gaaf.&lt;br /&gt;Door bijvoorbeeld dit te gebruiken:&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;p { color: green; }&lt;br /&gt;@media screen, projection, tv {&lt;br /&gt;#foo { position: absolute; }&lt;br /&gt;}&lt;br /&gt;@media print {&lt;br /&gt;#navi { display: none; }&lt;br /&gt;}&lt;br /&gt;@media handheld {&lt;br /&gt;#foo { position: static; }&lt;br /&gt;}&lt;/div&gt;
+&lt;br /&gt;Heb je de p-tag voor een handheld, printer, scherm, beamer en televisie anders gedefinieerd.&lt;br /&gt;Je moet wel uitkijken dat je geen idioot moeilijke en onoverzichtelijke code aan het maken bent, maar dit biedt toch potenties.&lt;br /&gt;Volledige uitleg is op deze website te vinden:&lt;br /&gt;http://www.howtocreate.co.uk/tutorials/css/mediatypes/&lt;br /&gt;&lt;br /&gt;Behalve de leuke media-types kun je ook nog gebruik maken van een *, # en .-teken.&lt;br /&gt;Het .-teken was bij mij al bekend. Dit heeft volgens mij betrekking op de namen van de klassen.&lt;br /&gt;Het #-teken ken ik sinds vandaag ook. Deze wordt gebruikt om de stijl van een bepaald ID in je HTML te definieren. Dit kan ook handig zijn, als een speciaal ID iets meer moet opvallen als de rest. Zo kun je weer weer grote if-statements besparen in je code.&lt;br /&gt;Het *-teken is ook wel handig. Dit wordt gebruikt om &lt;strong&gt;alle&lt;/strong&gt; elementen van een bepaald type eenzelfde stijl te geven. Als je dit dus opgeeft voor een body-tag, krijgen alle body's de stijl die bij het *-teken is gebruikt, ongeacht de klasse die ze hebben.&lt;br /&gt;Ook kan het bijvoorbeeld zo worden gebruikt&lt;br /&gt;
+&lt;div class="code"&gt;&lt;br /&gt;* {&lt;br /&gt;margin:0;&lt;br /&gt;padding:0&lt;br /&gt;}&lt;/div&gt;
+&lt;br /&gt;Een mooiere uitleg met ander voorbeeld is hier te vinden: http://www.dustindiaz.com/css-asterisk-the-universal-rule/&lt;br /&gt;&lt;br /&gt;Toch weer een leerzame dag geweest.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

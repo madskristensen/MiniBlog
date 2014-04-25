@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Response.Redirect en ThreadAbortException</title>
+  <slug>response.redirect-en-threadabortexception</slug>
+  <author>Jan</author>
+  <pubDate>2007-05-23 20:05:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass1B4E195F9DEF436F8D9C8859A8ED5537"&gt;Op het werk kwamen we er gisteren achter dat wanneer je een &lt;em&gt;Response.Redirect&lt;/em&gt; doet je een &lt;em&gt;ThreadAbortException&lt;/em&gt; in je applicatie krijgt. Tenminste, als je de redirect doet in een try-catch blok.&lt;br /&gt;&lt;br /&gt;Deze exception is 'by design' in het .Net Framework gestopt. De reden hiervoor is dat het de bedoeling is dat de huidige pagina niet door hoeft te gaan met uitvoeren en je gelijk naar de andere pagina wilt gaan.&lt;br /&gt;Door middel van deze exception wordt dit bewerkstelligd.&lt;br /&gt;Aangezien we dit nog niet wisten, werden er enkele reacties gespuwd over deze oplossing voor het be&amp;Atilde;&amp;laquo;indigen van een web-pagina.&lt;br /&gt;Onze team-leider kwam net een leuke analogie, namelijk '&lt;em&gt;Het is alsof je met een auto moet remmen en dan maar een steeksleutel in de moter gooit om te stoppen. De auto komt dan ook stil te staan.&lt;/em&gt;'&lt;br /&gt;Persoonlijk vond ik dat wel een leuk statement.&lt;br /&gt;&lt;br /&gt;Na even te hebben gezocht op dit 'probleem' kwam ik op een Microsoft pagina uit. Hier staat het probleem beschreven en is er ook een oplossing beschikbaar.&lt;br /&gt;Eerst de http://support.microsoft.com/kb/312629.&lt;br /&gt;De oplossing luidt dat je een overloaded functie moet gebruiken van de Response.Redirect, namelijk &lt;strong&gt;Response.Redirect(String url, bool endResponse)&lt;/strong&gt;.&lt;br /&gt;Door de tweede parameter op &lt;strong&gt;false&lt;/strong&gt; te zetten zul je geen exception krijgen.&lt;br /&gt;&lt;br /&gt;Oh ja, zoals in de MS-link is te lezen geldt dit probleem ook voor Response.End en Server.Transfer functies. Voor deze twee wordt ook een work-around aangeboden in hetzelfde artikel.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

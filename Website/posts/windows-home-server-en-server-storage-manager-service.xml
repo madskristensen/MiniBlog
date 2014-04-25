@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Windows Home Server en Server Storage Manager Service</title>
+  <slug>windows-home-server-en-server-storage-manager-service</slug>
+  <author>Jan</author>
+  <pubDate>2011-02-11 20:24:17</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;p&gt;Enkele maanden terug heb ik WHS afgeschaft en vervangen voor een eenvoudige fileserver. Nu wilde ik toch weer wat meer redundantie en vond ik de Drive Extender van WHS toch wel handig (van meerdere schijven 1 grote maken), dus heb ik het toch maar weer ge&amp;iuml;nstalleerd op een virtuele machine. Uiteraard ook enkele extra schrijven er aan gehangen, waardoor ik nu ongeveer 6TB aan data opslag heb. Klinkt als veel, maar als je enkele VM&amp;rsquo;s draait, backups maakt en alle DVD&amp;rsquo;s die je hebt er opslaat ben je er toch snel doorheen.&lt;/p&gt;
+&lt;p&gt;Na een reboot van de WHS kreeg ik continu een melding dat een of meerdere services niet geladen konden worden. Meestal een voorteken dat er iets niet aan de haak is. Even later zag ik ook de melding voorbij komen dat de Windows Home Server Storage Manager Service niet opgestart kon worden. Dit klink al redelijk serieus. Ook bij het rebooten kreeg ik continu foutmeldingen dat een bestand in de map DE niet kon worden weggeschreven. Ik ben er maar vanuit gegaan dat DE voor Drive Extender staat en een Storage Manager Service ook belangrijk is voor een veilige opslag van de data.&lt;/p&gt;
+&lt;p&gt;Aangezien al m&amp;rsquo;n foto&amp;rsquo;s en documenten ook op de WHS staan moet dat wel een beetje veilig zijn. Na wat zoeken kwam ik al vrij snel op een KB artikel (&lt;a href="http://support.microsoft.com/kb/940349"&gt;940349&lt;/a&gt;). Dit gaat dan wel over Windows 2003 en VSS, maar dit zou dus een oplossing kunnen bieden.&lt;/p&gt;
+&lt;p&gt;Na installatie even 2 reboots gedaan (voor de zekerheid) en sindsdien draait de server weer stabiel.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>'Repopulate' een MS SQL Server 2005 </title>
+  <slug>repopulate-een-ms-sql-server-2005</slug>
+  <author>Jan</author>
+  <pubDate>2008-10-21 19:33:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClassEA4AC083FDA743368BE28BA4BAFC56BE"&gt;Iedere keer wanneer we een Full-Text catalogus opnieuw moeten populaten is het weer een probleem. De optie &lt;em&gt;Repopulate catalog&lt;/em&gt; is grijs en kun je dus niet starten via de interface. In SQL 2000 kon dit nog wel. Inmiddels weten we dat dit niet kan en iedere keer lossen we het weer op door even 5 minuten te Googlen. Zelf vergeet ik namelijk altijd hoe dit gedaan moet worden, omdat je dit eigenlijk nooit doet. Om daar nu van af te zijn post ik hier hoe je in MS SQL Server 2005 je full-text catalog opnieuw kunt populaten. Het commando dat uitgevoerd dient te worden in SQL is het volgende:
+&lt;div class="code"&gt;EXEC sp_fulltext_catalog 'catalogname', 'start_full'&lt;/div&gt;
+Logischerwijs is de &lt;em&gt;catalogname&lt;/em&gt; uiteraard de naam van je full-text catalog. Dat behoeft volgens mij geen verdere uitleg. Hopelijk was het vandaag de laatste keer dat ik dit op Google op moest zoeken.&lt;/div&gt;
+&lt;div class="ExternalClassEA4AC083FDA743368BE28BA4BAFC56BE"&gt;
+&lt;div&gt;Wat ook handig is, is de &amp;lt;i&amp;gt;FULLTEXTCATALOGPROPERTY ('catalog_name' ,'property')&amp;lt;/i&amp;gt; functie. &lt;br /&gt;Mogelijke properties zijn: &lt;br /&gt;&amp;lt;div class='code'&amp;gt; &lt;br /&gt;AccentSensitivity &lt;br /&gt;&lt;br /&gt;Accent-sensitivity setting. &lt;br /&gt;&lt;br /&gt;IndexSize &lt;br /&gt;&lt;br /&gt;ItemCount &lt;br /&gt;&lt;br /&gt;LogSize &lt;br /&gt;&lt;br /&gt;PopulateCompletionAge &lt;br /&gt;&lt;br /&gt;PopulateStatus &lt;br /&gt;&lt;br /&gt;UniqueKeyCount &lt;br /&gt;&amp;lt;/div&amp;gt;&lt;/div&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

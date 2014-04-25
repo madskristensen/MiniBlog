@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Provisioning van een PublishingWeb</title>
+  <slug>provisioning-van-een-publishingweb</slug>
+  <author>Jan</author>
+  <pubDate>2010-11-21 18:45:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass614F2BEF05394B05A87E64ADFC96F19C"&gt;
+&lt;p&gt;Ik heb enkele features gemaakt welke worden geactiveerd bij het aanmaken van een nieuwe site. Voor de zekerheid controleer ik hier of de aangemaakte website wel van het type PublishingWeb is, dit kan gelukkig heel eenvoudig met &lt;em&gt;PublishingWeb.IsPublishingWeb&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Nu had ik de code in debug redelijk goed doorgelopen en werkte alles ook naar behoren. Tijdens het testen liep ik echter tegen wat vreemde problemen aan. De subsites werden maar half gevuld. Omdat ik hier tijdens het debuggen nooit last van had gehad vond ik dat nogal vreemd. Gelukkig wordt er in m'n feature redelijk wat gelogd, dus kon het probleem snel worden gevonden. Blijkbaar waren de aangemaakte sites niet een PublishingWeb. Omdat ik er zeker van ben dat dit wel het geval is, moest het dus wel een ander probleem zijn. Gelukkig ben ik niet de enige die hier last van heeft gehad en zijn er menige posts te vinden waar dit probleem in wordt beschreven.&lt;/p&gt;
+&lt;p&gt;Het komt er op neer dat na het aanmaken van een nieuwe PublishingWeb er op de achtergrond nog het een en ander gebeurd en er op een timerjob moet worden gewacht voordat de nieuwe PublishingWeb ook goed kan worden herkend.&lt;/p&gt;
+&lt;p&gt;Dit is ook de reden waarom de methode wel goed werkt in een while-loop, omdat je daar in kunt blijven totdat je eindelijk een &lt;em&gt;true&lt;/em&gt; terug krijgt. In een productie web-omgeving lijkt me dat niet echt een ideale situatie en zou ik het gebruik van een dergelijke while-loop constructie ook afraden.&lt;/p&gt;
+&lt;p&gt;Het is in ieder geval iets om rekening mee te houden wanneer je een Sharepoint 2010 website aan het provisionen bent.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

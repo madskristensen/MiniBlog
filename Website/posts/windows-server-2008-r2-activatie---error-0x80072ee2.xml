@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Windows Server 2008 R2 activatie - error 0x80072EE2</title>
+  <slug>windows-server-2008-r2-activatie---error-0x80072ee2</slug>
+  <author>Jan</author>
+  <pubDate>2009-07-02 21:11:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass68185253D9494715A0B8EF61B7AA826A"&gt;Momenteel ben ik bezig m'n server thuis te upgraden naar een Win2k8R2 omgeving. Sowieso omdat deze versie van het server OS veel beter is dan ooit tevoren, maar ook omdat het nieuw is. Gisteren heb ik m'n homeserver goed kunnen installeren en activeren en ben vandaag bezig met de 2K8R2 omgeving(en). Nu heb ik een guest 2K8R2 en wilde die graag activeren. Continu kreeg ik de foutmelding dat de activatie niet voltooid kon worden met een errorcode 0x80072EE2. Via Google kwam ik op heel veel hits uit die me zeiden dat de website dan waarschijnlijk down was, omdat het een time-out fout is. Zou kunnen, maar wel raar dat het nu al 2 dagen speelt. Gisteren lukte de activatie me namelijk ook al niet op deze guest. Na wat verder zoeken kwam ik op een blogpost uit van Derek Mangrum (http://grinding-it-out.blogspot.com/2008/05/error-number-0x80072ee2.html ) Hij stelt dat het een fout is in het OS. Je moet namelijk een key toevoegen in het register om activatie mogelijk te maken in het guest OS.
+&lt;div class="code"&gt;I found the solution-- more searching after this post indicated a registry setting was tweaked but the information given was incorrect. Turns out you need to put this in the guest VM's registry: HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters Value(DWORD): DisableTaskOffload = 1 (the incorrect mention was called DisableTaskOffset which I am putting here in hopes anyone who searches for that will find this as well) (information obtained from http://xpworld.spaces.live.com/blog/cns!3110BDF94643CB31!354.entry helped in this)&lt;/div&gt;
+Bovenstaande heb ik gedaan, gereboot en daarna geprobeerd weer te activeren. Dit lukt! Nu heb ik de omgeving eindelijk geactiveerd gekregen.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Automatisch workflow starten bij aanmaken item via code</title>
+  <slug>automatisch-workflow-starten-bij-aanmaken-item-via-code</slug>
+  <author>Jan</author>
+  <pubDate>2010-05-12 15:32:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass277DDFB4F97B47ECA1D337759EB5FAC5"&gt;
+&lt;p&gt;Enige tijd geleden moest ik iets maken voor een klant dat vanuit een 'gewone' ASP.NET pagina een item aanmaakte in een Sharepoint lijst. Op zich geen probleem, zeker niet omdat er in dezelfde application pool werd gewerkt, waardoor er gewoon gebruik gemaakt kon worden van de &lt;span style="font-size: 10pt;"&gt;&lt;span style="font-family: Courier New;"&gt;RunWithElevatedPrivileges&lt;/span&gt; &lt;/span&gt;die Sharepoint biedt.&lt;/p&gt;
+&lt;p&gt;Dit had ik dan ook al snel voor elkaar, maar bij het testen bleek dat de workflow van de lijst niet automatisch werd gestart. Aan de lijst hing namelijk een workflow die automatisch zou moeten starten wanneer er een nieuw item in de lijst wordt aangemaakt.&lt;/p&gt;
+&lt;p&gt;Na wat zoeken ben ik er achter gekomen dat dit 'normaal' gedrag is en er een work-around voor is, namelijk door de workflow ook zelf via code op te starten. Als je dit weet is dat op zich prima, maar ook dat levert een foutmelding op. De melding was (vrij vertaald): '&lt;em&gt;Failed to start (retrying)&lt;/em&gt;'. Enkele minuten later start de workflow alsnog. Wat wel vervelend is, is dat de gebruiker dit niet kan zien, omdat de status continu hetzelfde blijft, totdat de workflow is beeindigd.&lt;/p&gt;
+&lt;p&gt;Zelf kan ik hier prima mee leven, zeker omdat ik geen alternatief had.&lt;/p&gt;
+&lt;p&gt;Vandaag kreeg ik de melding dat er nog iets anders mis ging in het formulier. Na deze melding al vrij snel opgelost te kunnen hebben, heb ik toch even verder gekeken naar dit bovenstaande probleem. Na even zoeken kwam ik langs een post op het MSDN forum waarop staat dat je de workflow ook via de Sharepoint webservices kunt gaan opstarten. Logisch, maar had niet verwacht dat dat een oplossing zou zijn.&lt;/p&gt;
+&lt;p&gt;Als PoC heb ik de code dus omgeschreven om gebruik te maken van de Sharepoint webservice, gemixed met het object model. Tijdens het doorlopen van de code zag ik dat alles nu wel vlekkeloos werkt.&lt;/p&gt;
+&lt;p&gt;Wat ik nu gedaan heb is het volgende (versimpeld voorbeeld):&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;&lt;span style="color: blue;"&gt;private&lt;/span&gt; &lt;span style="color: blue;"&gt;bool&lt;/span&gt; StartWorkflow(&lt;span style="color: #2b91af;"&gt;SPList&lt;/span&gt; list, &lt;span style="color: #2b91af;"&gt;SPListItem&lt;/span&gt; listItem, &lt;span style="color: #2b91af;"&gt;SPWorkflowAssociation&lt;/span&gt; wf) &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;{ &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;&lt;span style="color: blue;"&gt;bool&lt;/span&gt; started = &lt;span style="color: blue;"&gt;false&lt;/span&gt;; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; WorkflowService.&lt;span style="color: #2b91af;"&gt;Workflow&lt;/span&gt; workflowService = &lt;span style="color: blue;"&gt;new&lt;/span&gt; WorkflowService.&lt;span style="color: #2b91af;"&gt;Workflow&lt;/span&gt;(); &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;workflowService.Url = webserviceLink; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;workflowService.UseDefaultCredentials = &lt;span style="color: blue;"&gt;true&lt;/span&gt;; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;workflowService.Credentials = &lt;span style="color: blue;"&gt;new&lt;/span&gt; &lt;span style="color: #2b91af;"&gt;NetworkCredential&lt;/span&gt;(ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_DOMAIN); &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;workflowService.PreAuthenticate = &lt;span style="color: blue;"&gt;true&lt;/span&gt;; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;&lt;span style="color: #2b91af;"&gt;XmlDocument&lt;/span&gt; workflowParameters = &lt;span style="color: blue;"&gt;new&lt;/span&gt; &lt;span style="color: #2b91af;"&gt;XmlDocument&lt;/span&gt;(); &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;workflowParameters.LoadXml(wf.AssociationData); &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;workflowService.StartWorkflow(&lt;span style="color: #2b91af;"&gt;String&lt;/span&gt;.Format(&lt;span style="color: #a31515;"&gt;"http://testsite/{0}"&lt;/span&gt;, listItem.Url), wf.Id, workflowParameters); &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-family: Courier New; font-size: 10pt;"&gt;&lt;span style="color: blue;"&gt;return&lt;/span&gt; started; &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="font-size: 10pt;"&gt;&lt;span style="font-family: Courier New;"&gt;}&lt;/span&gt;&lt;span style="font-family: Century Gothic;"&gt; &lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Op deze manier maak je dus gebruik van de webservice (&lt;span style="font-size: 10pt;"&gt;&lt;span style="font-family: Century Gothic;"&gt;WorkflowService&lt;/span&gt; &lt;/span&gt;= vti_bin/Workflow.asmx). Het is nog niet getest door ons testteam en staat nog niet in productie, maar ziet er toch naar uit dat dit het 'probleem' heeft opgelost van de vage melding. Nu krijg ik alleen maar een juiste status te zien van de workflow en hoef ik ook niet 5 minuten te wachten voordat de workflow opstart (Sharepoint timer).&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

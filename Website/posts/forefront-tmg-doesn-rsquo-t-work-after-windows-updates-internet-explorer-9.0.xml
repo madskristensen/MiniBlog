@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>ForeFront TMG does not work after Windows Updates (Internet Explorer 9.0)</title>
+  <slug>forefront-tmg-doesn-rsquo-t-work-after-windows-updates-internet-explorer-9.0</slug>
+  <author>Jan</author>
+  <pubDate>2011-07-27 16:37:27</pubDate>
+  <lastModified>2014-04-25 12:06:07</lastModified>
+  <content>&lt;p&gt;A few weeks ago I was finally able to install some updates on my ForeFront TMG server, so I installed SP1 of Windows Server 2008R2, all other updates and Internet Explorer 9.0. After noticing my internet connection didn&amp;rsquo;t work anymore I logged in on the server and wanted to check what was wrong using the Management Console.&lt;/p&gt;
+&lt;p&gt;This is when I noticed the ForeFront TMG Management Console didn&amp;rsquo;t work anymore. Every treenode I selected resulted in an alert message stating &amp;lsquo;Member not Found&amp;rsquo;, &amp;lsquo;Refresh failed&amp;rsquo;, etc.&lt;/p&gt;
+&lt;p&gt;At times like this you wish you had created a backup of the server, before you updated it.&lt;/p&gt;
+&lt;p&gt;Lucky for me I was able to go to the internet with a direct line on my router and search for a solution. Because these updates were long overdue, someone must have had the same issue as me. This is one of the reasons I don&amp;rsquo;t like working with new/beta software of area&amp;rsquo;s I don&amp;rsquo;t know much about. I know a thing or two about managing a Microsoft network, but most things are magic to me.&lt;/p&gt;
+&lt;p&gt;An answer to my problem could be found on the &lt;a href="http://social.technet.microsoft.com/Forums/en-US/Forefrontedgegeneral/thread/bae2d851-6099-4367-a125-b77a2b8a694b/"&gt;ForeFront Technet forums of Microsoft&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To fix the issue you need to edit some file/html of ForeFront which resided on your local filesystem. The file which needs to be edited is: &amp;ldquo;&lt;em&gt;C:\Program Files\Microsoft Forefront Threat Management Gateway\UI_HTMLs\TabsHandler\TabsHandler.htc&lt;/em&gt;&amp;rdquo;. Open this file using Notepad as an Administrator.&lt;/p&gt;
+&lt;p&gt;Now search for the lines which contain the text &amp;ldquo;&lt;strong&gt;paddingTop&lt;/strong&gt;&amp;rdquo; in them, these (3?) lines reside in some JavaScript blocks and you need to comment them out. You can do this by placing two slashes (//) at the front of the line.&lt;/p&gt;
+&lt;p&gt;Example: Change the line: &lt;br /&gt;&lt;em&gt;m_aPages [niPage].m_tdMain.style.paddingTop = ((m_nBoostUp &amp;lt; 0) ? -m_nBoostUp : 0) ; &lt;br /&gt;&lt;/em&gt;into: &lt;br /&gt;&lt;em&gt;// m_aPages [niPage].m_tdMain.style.paddingTop = ((m_nBoostUp &amp;lt; 0) ? -m_nBoostUp : 0) ; &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Now, save the file and re-open the ForeFront TMG Management Console.&lt;/p&gt;
+&lt;p&gt;You&amp;rsquo;ll be able to navigate in the console again and do your modifications.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

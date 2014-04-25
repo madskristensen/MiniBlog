@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Bookmarks in PDF maken</title>
+  <slug>bookmarks-in-pdf-maken</slug>
+  <author>Jan</author>
+  <pubDate>2010-07-02 20:16:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass402E047A0D6647ADAC3E78BE9364C6AF"&gt;
+&lt;p&gt;Onlangs ben ik weer begonnen met het studeren voor de nieuwe certificaten voor ASP.NET 4.0 en Sharepoint 2010. Hier zijn momenteel al enkele goede boeken die kunnen helpen met het leren van de materie, zoals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pro ASP.NET 4 in C# 2010, Fourth Edition - &lt;a href="http://apress.com/book/view/1430225297"&gt;http://apress.com/book/view/1430225297&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;Microsoft SharePoint 2010: Building Solutions for SharePoint 2010 - &lt;a href="http://apress.com/book/view/1430228652"&gt;http://apress.com/book/view/1430228652&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;SharePoint 2010 as a Development Platform - &lt;a href="http://apress.com/book/view/1430227060"&gt;http://apress.com/book/view/1430227060&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;Pro SharePoint 2010 Solution Development: Combining .NET, SharePoint, and Office - &lt;a href="http://apress.com/book/view/1430227818"&gt;http://apress.com/book/view/1430227818&lt;/a&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Uiteraard zijn er nog wel veel meer boeken te vinden, maar deze vind ik zelf wel interessant.&lt;/p&gt;
+&lt;p&gt;Om m'n tablet toch weer eens goed te kunnen gebruiken, heb ik gekozen voor het pdf formaat van deze boeken. Het lezen gaat prima, echter is er 1 groot nadeel van de huidige pdf readers, namelijk dat je geen bookmarks (ezelsoren) kunt maken in een boek. Zo moet je dus zelf onthouden waar je in welk boek bent. Niet echt handig.&lt;/p&gt;
+&lt;p&gt;Gelukkig is er iemand zo goed geweest die zich hier ook aan ergerde en een mooie javascript plugin heeft geschreven voor Adobe PDF Reader. Het script is hier te vinden, inclusief de manier hoe het geinstalleerd dient te worden: &lt;a href="http://www.aldenta.com/2006/09/15/plugin-bookmark-a-page-in-your-pdf/"&gt;http://www.aldenta.com/2006/09/15/plugin-bookmark-a-page-in-your-pdf/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Hopelijk wordt deze functionaliteit nu ook eens standaard geimplementeerd in de readers.&lt;/p&gt;
+&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Certificaten om WM5.0</title>
+  <slug>certificaten-om-wm5.0</slug>
+  <author>Jan</author>
+  <pubDate>2007-07-07 14:15:00</pubDate>
+  <lastModified>2014-04-25 12:06:08</lastModified>
+  <content>&lt;div class="ExternalClass12AF9D2D190946288AFDDC05EAA69C80"&gt;Tijdens het ontwikkelen van software op een WM5.0 apparaat kom je er vanzelf een keer achter.&lt;br /&gt;Je applicatie moet verbinding maken met een server waarvoor je een certificaat nodig hebt om te kunnen synchroniseren (met Exchange bijvoorbeeld). Dit is tijdens de ontwikkeling natuurlijk mateloos irritant, aangezien je vaak op een test-server zit te werken en je daar geen duur certificaat op wilt, maar een test certificaat of iets dergelijks.&lt;br /&gt;Deze wordt vaak niet goed gevalideerd door WM5.0, dus krijg je een foutmelding te zien in je applicatie, browser of ActiveSync.&lt;br /&gt;&lt;br /&gt;Op PPC2002 en WM2003 pocket pc's had je nog de DisableCertCheck.exe applicatie http://www.microsoft.com/downloads/details.aspx?FamilyID=D88753B8-8B3A-4F1D-8E94-530A67614DF1&amp;amp;displaylang=en, maar die werkt niet meer op WM5.0.&lt;br /&gt;&lt;br /&gt;Aangezien ik dit toch wilde uitschakelen ben ik op zoek gegaan naar een oplossing.&lt;br /&gt;&lt;br /&gt;Wat blijkt? Je kunt gewoon zelf in het register gaan knoeien om de certificaten check uit te schakelen. Deze informatie heb ik hier gevonden http://winzenz.blogspot.com/2006/03/hacking-your-windows-mobile-50.html&lt;br /&gt;Je moet gewoon in het register onder het pad&lt;br /&gt;&lt;em&gt;Hkey_Current_User\\Software\\Microsoft\\ActiveSync\\Partners&lt;/em&gt;&lt;br /&gt;een value toevoegen.&lt;br /&gt;Dit moet wel onder de value die van toepassing is op de server waarmee je wilt synchroniseren.&lt;br /&gt;Onder die value voeg je de volgende DWORD key toe:&lt;br /&gt;&lt;em&gt;&lt;br /&gt;secure 0&lt;br /&gt;&lt;/em&gt;&lt;br /&gt;Vanaf dat moment wordt het certificaat niet meer gecontroleerd en kun je weer lekker door gaan met synchroniseren.&lt;br /&gt;Wanneer de controle weer van toepassing is kun je de waarde van &lt;em&gt;secure&lt;/em&gt; gewoon weer wijzigen in 1 of de hele value verwijderen.&lt;br /&gt;&lt;br /&gt;Zo blijkt wel weer dat registry hacking altijd moet gebeuren als je ontwikkelaar bent.&lt;/div&gt;</content>
+  <ispublished>true</ispublished>
+  <categories></categories>
+  <comments></comments>
+</post>
