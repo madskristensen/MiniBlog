@@ -29,7 +29,7 @@ public class FeedHandler : IHttpHandler
 
     private IEnumerable<SyndicationItem> GetItems()
     {
-        foreach (Post p in Blog.GetPosts(10))
+        foreach (Post p in Blog.GetPosts())
         {
             var item = new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.AbsoluteUrl.ToString(), p.LastModified);
             item.Authors.Add(new SyndicationPerson("", p.Author, ""));
