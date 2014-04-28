@@ -5,10 +5,10 @@
         </h1>
         <div>
             <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
-            <a href="@Model.Url#comments">
-                @*<em class="glyphicon glyphicon-comment"></em>
-                @Model.CountApprovedComments(Context) Comments*@
-            </a>
+            @*<a href="@Model.Url#comments">
+                $1$<em class="glyphicon glyphicon-comment"></em>
+                @Model.CountApprovedComments(Context) Comments#1#
+            </a>*@
             @Categories()
         </div>
     </header>

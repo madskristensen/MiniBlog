@@ -241,3 +241,13 @@ footer {
 .slideClone img {
     float: left;
 }
+img.me {
+	-ms-border-radius: 72px;
+	-webkit-border-radius: 72px;
+	-moz-border-radius: 72px;
+	border-radius: 72px;
+	margin-bottom: 20px;
+}
+.jumbotron {
+	padding-bottom: 14px;
+}
