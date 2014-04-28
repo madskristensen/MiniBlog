@@ -1,5 +1,5 @@
-﻿$('.search-results').Tapirus('535e3924c4fe2b0200000005', { inputSelector: '#searchInput' });
-$('.search-results').Tapirus('535e3924c4fe2b0200000005', { inputSelector: '#searchInput2' });
+﻿$('.search-results').Tapirus('535e598cbcdd720200000000', { inputSelector: '#searchInput' });
+$('.search-results').Tapirus('535e598cbcdd720200000000', { inputSelector: '#searchInput2' });
 $('#searchform2').hide();
 $('#searchform').submit(function () {
 	$('#searchform2').show();

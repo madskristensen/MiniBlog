@@ -34,6 +34,7 @@ public class FeedHandler : IHttpHandler
 		foreach (Post p in Blog.GetPosts(numberOfItems))
 		{
 			var item = new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.AbsoluteUrl.ToString(), p.LastModified);
+			item.PublishDate = p.PubDate;
 			item.Authors.Add(new SyndicationPerson("", p.Author, ""));
 			yield return item;
 		}
