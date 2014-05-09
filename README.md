@@ -21,6 +21,7 @@ Perfect for the blogger who wants to selfhost a blog.
  * Optimized for WLW
  * Assumes WLW is the main way to write posts
  * You don't have to use WLW (but you should)
+ * Installation: Use Metaweblog API and http://yourdomain/metaweblog to remote post
 * RSS and ATOM __feeds__
 * Schedule posts to be published on a future date
 * __SEO__ optimized
