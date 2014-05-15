@@ -56,3 +56,25 @@ with BlogEngine.NET, the goal was to see how small and simple such a
 blog engine could be. 
 
 This is the result.
+
+### Connecting with Windows Live Writer (WLW)
+
+To connect to MiniBlog with Windows Live Writer (as of WLW build 14.0.8117.416):
+
+- Launch Windows Live Writer
+
+- If you have not used Windows Live Writer to connect to a blog you will get a dialog window asking you to specify what blog service you use. If you have already connected Windows Live Writer to a blog, you can go to _Blogs -> Add blog account..._ and get to the same dialog window.
+
+- In the __What blog service do you use?__ dialog window you will tick the _Other blog service_ radio option and click next.
+
+- The __Add a blog account__ dialog window will ask you for the web address of your blog, the username and password. The web address is the root address of your site. For example, use http://miniblog.azurewebsites.net/ for the live demo site.
+
+- The __Select blog type__ dialog window will let you know Windows Live Writer was not able to detect your blog type. It will ask you for the type of blog and the remote posting URL.  
+Type of blog that you are using: _Metaweblog API_  
+Remote posting URL for your blog: _http://&lt;root-address&gt;/metaweblog_  
+Click next.
+
+- The __Your blog has been set up__ dialog window will let you give your blog a nickname for the Windows Live Writer instance. Change that if you want and click finish to get to posting!
+
+Windows Live Writer can be downloaded at:  
+[http://www.microsoft.com/en-us/download/details.aspx?id=8621](http://www.microsoft.com/en-us/download/details.aspx?id=8621)  
