@@ -135,8 +135,9 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
+        var categories = Blog.GetCategories();
+
         var list = new List<object>();
-        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
 
         foreach (string category in categories.Distinct())
         {
