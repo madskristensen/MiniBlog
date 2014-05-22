@@ -206,4 +206,11 @@ public static class Blog
             response.SuppressContent = true;
         }
     }
+
+    public static IEnumerable<string> GetCategories()
+    {
+        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
+        
+        return categories.Distinct();
+    }
 }
