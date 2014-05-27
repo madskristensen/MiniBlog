@@ -8,7 +8,7 @@ using System.Xml.XPath;
 
 public static class Storage
 {
-    private static string _folder = HostingEnvironment.MapPath("~/posts/");
+    private static string _folder = HostingEnvironment.MapPath("~/App_Data/posts/");
 
     public static List<Post> GetAllPosts()
     {
