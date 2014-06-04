@@ -32,6 +32,9 @@ public class Post
     [XmlRpcMember("wp_slug")]
     public string Slug { get; set; }
 
+    [XmlRpcMember("mt_excerpt")]
+    public string Excerpt { get; set; }
+
     [XmlRpcMember("description")]
     public string Content { get; set; }
 
