@@ -13,7 +13,7 @@
         </div>
     </header>
 
-    @if (Blog.CurrentPost != null && User.Identity.IsAuthenticated)
+    @if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
     {
         <div id="adminExcerpt" style="display:none;">
             <h4>Excerpt:</h4>
@@ -21,7 +21,14 @@
         </div>
     }
     
-    <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+    @if (Blog.CurrentPost == null)
+    {
+        <div itemprop="articleBody">@Model.Excerpt</div>
+    }
+    else
+    {
+        <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+    }
 
     @if (Blog.CurrentPost != null)
     {

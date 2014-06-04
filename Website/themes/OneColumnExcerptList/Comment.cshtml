@@ -1,0 +1,46 @@
+﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "self" : null)">
+    <img src="@Model.GravatarUrl(50)" width="50" height="50" alt="Comment by @Model.Author" />
+    <div>
+        @Date()
+        <p itemprop="commentText">@Html.Raw(Model.ContentWithLinks())</p>
+        @Author()
+        @DeleteAndApproveButton()
+    </div>
+    @ApprovalMessage()
+</article>
+
+@helper Date()
+{
+    var title = Model.PubDate.ToString("yyyy-MM-ddTHH:mm");
+    var display = Model.PubDate.ToString("MMMM d. yyyy HH:mm");
+    <time datetime="@title" itemprop="commentTime">@display</time>
+}
+@helper Author()
+{
+    if (string.IsNullOrEmpty(Model.Website))
+    {
+        <strong itemprop="creator">@Model.Author</strong>
+    }
+    else
+    {
+        <strong itemprop="creator"><a href="@Model.Website" itemprop="url" rel="nofollow">@Model.Author</a></strong>
+    }
+}
+@helper DeleteAndApproveButton()
+{
+    if (User.Identity.IsAuthenticated)
+    {
+        <button class="deletecomment btn btn-link">Delete</button>
+        if (Blog.ModerateComments && !Model.IsApproved)
+        {
+            <button class="approvecomment btn btn-link">Approve</button>
+        }
+    }
+}
+@helper ApprovalMessage()
+{
+    if (Blog.ModerateComments && !Model.IsApproved && !User.Identity.IsAuthenticated)
+    {
+        <div itemprop="approvalWarning">! The comment will not be visible until a moderator approves it !</div>
+    }
+}

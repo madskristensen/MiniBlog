@@ -1,0 +1,243 @@
+﻿@media only screen and (max-width: 1280px) {
+    @-ms-viewport {
+        width: 800px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    @-ms-viewport {
+        width: 600px;
+    }
+}
+
+html, body{
+    height: 100%;
+}
+
+body {
+    font: 1.8em/1.5 'Century Gothic', Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    margin: 0;
+}
+
+img, video, iframe {
+    max-width: 100%;
+}
+
+a {
+    color: #3277b3;
+}
+
+.container {
+    min-height: 100%;
+    padding-bottom: 35px;
+}
+
+    .container > header {
+        border: none;
+        text-align: center;
+        margin: 0 0 3em 0;
+    }
+
+        .container > header a {
+            font-size: 4em;
+            color: #000;
+        }
+
+div[role=main] {
+    margin-bottom: 2em;
+    overflow: auto;
+}
+
+.pager {
+    margin-top: 2em;
+}
+
+input[type], button, textarea {
+    font: inherit !important;
+}
+
+/*#region Post */
+
+.post header h1 {
+    margin: 0 0 3px 0;
+}
+
+.post header a {
+    color: #000;
+}
+
+.post header div {
+    font-size: .75em;
+    opacity: .8;
+    margin-bottom: 1em;
+}
+
+    .post header div a {
+        margin-left: 10px;
+    }
+
+    .post header div .categories {
+        margin: 0;
+        padding: 10px;
+        display: inline;
+    }
+
+        .post header div .categories a {
+            margin: 0;
+        }
+
+        .post header div .categories li {
+            display: inline;
+        }
+
+            .post header div .categories li:not(:first-child):not(:last-child):after {
+                content: ", ";
+            }
+
+.post abbr {
+    border: none;
+}
+
+.post h2 {
+    margin-bottom: 0;
+    font-size: 1.3em;
+}
+
+.post h3 {
+    margin-bottom: 0;
+    font-size: 1.1em;
+}
+
+.post div[itemprop='articleBody'] {
+    border-bottom: 1px solid #d3d3d3;
+    padding-bottom: .5em;
+    margin-bottom: 2em;
+    -ms-text-size-adjust: 150%;
+}
+
+.post p {
+    padding: .2em 0;
+}
+
+/*#endregion */
+
+/*#region Comments */
+
+#comments article {
+    position: relative;
+    max-height: 9999px;
+    overflow: hidden;
+    -webkit-transition: height .5s ease-in-out;
+    -moz-transition: height .5s ease-in-out;
+    -o-transition: height .5s ease-in-out;
+    transition: height .5s ease-in-out;
+}
+
+    #comments article div {
+        padding-left: 70px;
+    }
+
+        #comments article div p {
+            border: 1px solid #d3d3d3;
+            border-radius: 5px;
+            padding: 7px;
+            position: relative;
+        }
+
+            #comments article div p:before {
+                content: "";
+                position: absolute;
+                top: 10px;
+                left: -10px;
+                border-style: solid;
+                border-width: 9px 9px 9px 0;
+                border-color: transparent #d3d3d3;
+            }
+
+            #comments article div p:after {
+                content: "";
+                position: absolute;
+                top: 10px;
+                left: -9px;
+                border-style: solid;
+                border-width: 9px 9px 9px 0;
+                border-color: transparent #ffffff;
+            }
+
+    #comments article.self div p {
+        background: #f7f7f7;
+    }
+
+        #comments article.self div p:after {
+            border-color: transparent #f7f7f7;
+        }
+
+    #comments article [itemprop='commentText'] {
+        margin: 0;
+    }
+
+    #comments article img {
+        border-radius: 5px;
+        position: absolute;
+        top: 19px;
+    }
+
+    #comments article [itemprop='commentTime'] {
+        display: block;
+        text-align: right;
+        font-size: .7em;
+    }
+
+    #comments article [itemprop='creator'] {
+        font-size: .8em;
+        margin-left: 7px;
+    }
+
+    #comments article [itemprop='approvalWarning'] {
+        margin-left: 70px;
+        font-size: 0.6em;
+        background-color: rgba(255, 255, 0, 0.50);
+        padding: 5px;
+    }
+
+/*#endregion */
+
+/*#region Comment form */
+
+#commentform {
+    margin-top: 2em;
+}
+
+#status {
+    margin-left: 1em;
+}
+
+/*#endregion */
+
+/*#region Footer */
+
+footer {
+    background-color: #181818;
+    color: #fff;
+    font-size: .85em;
+    padding: 5px;
+    clear: both;
+    position: relative;
+    margin: -35px 0 0 0;
+    height: 35px;
+}
+
+    footer p {
+        padding: 1em 0;
+        text-align: center;
+    }
+
+    footer a {
+        color: #a9d2e1;
+    }
+
+/*#endregion */
+
+.slideClone img {
+    float: left;
+}

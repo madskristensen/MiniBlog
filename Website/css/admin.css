@@ -92,3 +92,15 @@
     [contenteditable] img {
         cursor: move;
     }
+
+#adminExcerpt {
+    border:solid 1px #CCC; 
+    /*background-color:#3F5D7F;
+    color:white;*/
+    padding:10px; 
+    margin-bottom:20px;
+}
+#adminExcerpt > div {
+    background-color:white;
+    color:black;
+}
