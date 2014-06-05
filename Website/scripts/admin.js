@@ -106,7 +106,7 @@
             title: txtTitle.text().trim(),
             content: parsedDOM,
             categories: getPostCategories(),
-            token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
+            __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
         })
           .success(function (data) {
               if (isNew) {
@@ -127,7 +127,7 @@
     },
     deletePost = function () {
         if (confirm("Are you sure you want to delete this post?")) {
-            $.post(blogPath + "/post.ashx?mode=delete", { id: postId, token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
+            $.post(blogPath + "/post.ashx?mode=delete", { id: postId, __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
                 .success(function () { location.href = blogPath+"/"; })
                 .fail(function () { showMessage(false, "Something went wrong. Please try again"); });
         }

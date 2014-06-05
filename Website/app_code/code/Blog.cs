@@ -132,9 +132,7 @@ public static class Blog
 
     public static void ValidateToken(HttpContext context)
     {
-        string token = context.Request.Form["token"];
-        var cookie = context.Request.Cookies.Get("__RequestVerificationToken");
-        AntiForgery.Validate(cookie.Value, token);
+        AntiForgery.Validate();
     }
 
     public static string SaveFileToDisk(byte[] bytes, string extension)
