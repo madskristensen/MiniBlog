@@ -213,4 +213,22 @@ public static class Blog
         
         return categories.Distinct();
     }
+
+    public static IEnumerable<CategoryInfo> GetCategoriesInfo() {
+        var categoryStrings = Storage.GetAllPosts().SelectMany( x => x.Categories ).ToList().Distinct();
+
+        foreach ( var cat in categoryStrings ) {
+            yield return new CategoryInfo() {
+                Name = cat,
+                PostsCount = Storage.GetAllPosts().Where( p => p.Categories.Any( c => string.Equals( c, cat, StringComparison.OrdinalIgnoreCase ) ) ).Count()
+            };
+        }
+    }
+
+    public class CategoryInfo {
+        public string Name { get; set; }
+
+        public int PostsCount { get; set; }
+    }
+
 }
