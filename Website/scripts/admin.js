@@ -22,7 +22,7 @@
 
     var postId, isNew,
         txtTitle, txtContent, txtMessage, txtImage, chkPublish,
-        btnNew, btnEdit, btnDelete, btnSave, btnCancel,
+        btnNew, btnEdit, btnDelete, btnSave, btnCancel, blogPath,
 
     editPost = function () {
         txtTitle.attr('contentEditable', true);
@@ -100,7 +100,7 @@
            the following statement and ConvertMarkupToXhtml function */
         parsedDOM = ConvertMarkupToValidXhtml(txtContent.html());
 
-        $.post("/post.ashx?mode=save", {
+        $.post(blogPath + "/post.ashx?mode=save", {
             id: postId,
             isPublished: chkPublish[0].checked,
             title: txtTitle.text().trim(),
@@ -127,8 +127,8 @@
     },
     deletePost = function () {
         if (confirm("Are you sure you want to delete this post?")) {
-            $.post("/post.ashx?mode=delete", { id: postId, token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
-                .success(function () { location.href = "/"; })
+            $.post(blogPath + "/post.ashx?mode=delete", { id: postId, token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
+                .success(function () { location.href = blogPath+"/"; })
                 .fail(function () { showMessage(false, "Something went wrong. Please try again"); });
         }
     },
@@ -178,12 +178,10 @@
             $("#txtCategories").parent().remove();
 
             $.each(categoriesArray, function (index, category) {
-                $("ul.categories").append(' <li itemprop="articleSection" title="' + category + '"> <a href="/category/' + encodeURIComponent(category.toLowerCase()) + '">' + category + '</a> </li> ');
+                $("ul.categories").append(' <li itemprop="articleSection" title="' + category + '"> <a href="'+blogPath+'/category/' + encodeURIComponent(category.toLowerCase()) + '">' + category + '</a> </li> ');
             });
         }
     };
-
-    isNew = location.pathname.replace(/\//g, "") === "postnew";
 
     postId = $("[itemprop~='blogPost']").attr("data-id");
 
@@ -198,6 +196,9 @@
     btnSave = $("#btnSave").bind("click", savePost);
     btnCancel = $("#btnCancel").bind("click", cancelEdit);
     chkPublish = $("#ispublished").find("input[type=checkbox]");
+    blogPath = $("#admin").data("blogPath");
+
+    isNew = location.pathname.replace(/\//g, "") === blogPath.replace(/\//g, "") + "postnew";
 
     $(document).keyup(function (e) {
         if (!document.activeElement.isContentEditable) {

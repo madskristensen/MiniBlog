@@ -19,6 +19,8 @@ public static class Blog
         DaysToComment = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
         Image = ConfigurationManager.AppSettings.Get("blog:image");
         ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
+        BlogPath = ConfigurationManager.AppSettings.Get( "blog:path" );
+        BlogPath = string.IsNullOrWhiteSpace( BlogPath ) ? null : BlogPath;
     }
 
     public static string Title { get; private set; }
@@ -28,6 +30,7 @@ public static class Blog
     public static int PostsPerPage { get; private set; }
     public static int DaysToComment { get; private set; }
     public static bool ModerateComments { get; private set; }
+    public static string BlogPath { get; private set; }
     
     public static string CurrentSlug
     {
@@ -41,7 +44,9 @@ public static class Blog
 
     public static bool IsNewPost
     {
-        get { return HttpContext.Current.Request.RawUrl.Trim('/') == "post/new"; }
+        get {
+            return HttpContext.Current.Request.RawUrl.Trim( '/' ) == ( BlogPath!=null ? BlogPath + "/" : "" ) + "post/new";
+        }
     }
 
     public static Post CurrentPost
@@ -213,7 +218,6 @@ public static class Blog
         
         return categories.Distinct();
     }
-
     public static IEnumerable<CategoryInfo> GetCategoriesInfo() {
         var categoryStrings = Storage.GetAllPosts().SelectMany( x => x.Categories ).ToList().Distinct();
 
