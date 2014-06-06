@@ -13,6 +13,25 @@
         </div>
     </header>
 
+    @if (Blog.CurrentPost != null && User.Identity.IsAuthenticated)
+    {
+        <div id="excerpt" style="display:none;">
+            <h4>Excerpt:</h4>
+            <div itemprop="description">@Model.Excerpt</div>
+        </div>
+    }
+    
+    @* If you want to use excerpts rather than full content in list view then uncomment the below 
+        and remove the other articleBody div *@
+    @*@if (Blog.CurrentPost == null)
+    {
+        <div itemprop="articleBody">@Model.Excerpt</div>
+    }
+    else
+    {
+        <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+    }*@
+    
     <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
 
     @if (Blog.CurrentPost != null)

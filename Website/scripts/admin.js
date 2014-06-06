@@ -21,11 +21,14 @@
     // #endregion
 
     var postId, isNew,
-        txtTitle, txtContent, txtMessage, txtImage, chkPublish,
+        txtTitle, txtExcerpt, txtContent, txtMessage, txtImage, chkPublish,
         btnNew, btnEdit, btnDelete, btnSave, btnCancel,
 
     editPost = function () {
         txtTitle.attr('contentEditable', true);
+        txtExcerpt.attr('contentEditable', true);
+		txtExcerpt.css({ minHeight: "100px" });
+        txtExcerpt.parent().css('display', 'block');
         txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
         txtContent.focus();
@@ -49,6 +52,8 @@
             }
         } else {
             txtTitle.removeAttr('contentEditable');
+            txtExcerpt.removeAttr('contentEditable');
+            txtExcerpt.parent().css('display', 'none');
             txtContent.removeAttr('contentEditable');
             btnCancel.focus();
 
@@ -104,6 +109,7 @@
             id: postId,
             isPublished: chkPublish[0].checked,
             title: txtTitle.text().trim(),
+            excerpt: txtExcerpt.text().trim(),
             content: parsedDOM,
             categories: getPostCategories(),
             token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
@@ -188,6 +194,7 @@
     postId = $("[itemprop~='blogPost']").attr("data-id");
 
     txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
+    txtExcerpt = $("[itemprop~='description']");
     txtContent = $("[itemprop~='articleBody']");
     txtMessage = $("#admin .alert");
     txtImage = $("#admin #txtImage");
