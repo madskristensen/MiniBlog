@@ -23,7 +23,7 @@ else
             </div>
         </header>        
         
-        @if (Blog.CurrentPost != null && User.Identity.IsAuthenticated)
+        @if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
         {
             <div id="excerpt" style="display:none;">
                 <h4>Excerpt:</h4>
