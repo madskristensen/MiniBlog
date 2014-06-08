@@ -92,3 +92,13 @@
     [contenteditable] img {
         cursor: move;
     }
+
+.admin #excerpt {
+    border:solid 1px #CCC; 
+    padding:10px; 
+    margin-bottom:20px;
+}
+.admin #excerpt > div {
+    background-color:white;
+    color:black;
+}

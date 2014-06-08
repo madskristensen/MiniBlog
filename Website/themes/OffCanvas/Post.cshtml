@@ -21,7 +21,15 @@ else
                 </a>
                 @Categories()
             </div>
-        </header>
+        </header>        
+        
+        @if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
+        {
+            <div id="excerpt" style="display:none;">
+                <h4>Excerpt:</h4>
+                <div itemprop="description">@Model.Excerpt</div>
+            </div>
+        }
 
         <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
         @if (Blog.CurrentPost != null)
