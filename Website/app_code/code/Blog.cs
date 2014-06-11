@@ -210,13 +210,7 @@ public static class Blog
         }
     }
 
-    public static IEnumerable<string> GetCategories()
-    {
-        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
-        
-        return categories.Distinct();
-    }
-    public static IEnumerable<CategoryInfo> GetCategoriesInfo() {
+    public static IEnumerable<CategoryInfo> GetCategories() {
         var categoryStrings = Storage.GetAllPosts().SelectMany( x => x.Categories ).ToList().Distinct();
 
         foreach ( var cat in categoryStrings ) {

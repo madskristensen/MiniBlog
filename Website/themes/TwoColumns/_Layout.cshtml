@@ -74,7 +74,7 @@
             <section>
                 <h3>Categories</h3>
                 <ul>
-                    @foreach ( var cat in Blog.GetCategoriesInfo() ) {
+                    @foreach ( var cat in Blog.GetCategories() ) {
                         <li><a href="~/category/@HttpUtility.UrlEncode(cat.Name.ToLowerInvariant())">@cat.Name (@cat.PostsCount)</a></li>
                     }
                 </ul>
