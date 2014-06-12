@@ -1,6 +1,6 @@
 ﻿@{
     var isPublished = Blog.CurrentPost != null && Blog.CurrentPost.IsPublished;
-    var path = Blog.BlogPath != null ? "/" + Blog.BlogPath : "";
+    var path = !string.IsNullOrWhiteSpace( Blog.BlogPath ) ? "/" + Blog.BlogPath : "";
 }
 
 <nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished" data-blog-path="@path">

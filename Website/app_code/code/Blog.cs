@@ -20,7 +20,6 @@ public static class Blog
         Image = ConfigurationManager.AppSettings.Get("blog:image");
         ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
         BlogPath = ConfigurationManager.AppSettings.Get( "blog:path" );
-        BlogPath = string.IsNullOrWhiteSpace( BlogPath ) ? null : BlogPath;
     }
 
     public static string Title { get; private set; }
@@ -45,7 +44,7 @@ public static class Blog
     public static bool IsNewPost
     {
         get {
-            return HttpContext.Current.Request.RawUrl.Trim( '/' ) == ( BlogPath!=null ? BlogPath + "/" : "" ) + "post/new";
+            return HttpContext.Current.Request.RawUrl.Trim( '/' ) == ( !string.IsNullOrWhiteSpace( BlogPath ) ? BlogPath + "/" : "" ) + "post/new";
         }
     }
 
