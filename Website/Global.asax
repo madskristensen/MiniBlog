@@ -18,6 +18,7 @@
     public void Application_BeginRequest(object sender, EventArgs e)
     {
         Context.Items["IIS_WasUrlRewritten"] = "false";
+        System.Web.WebPages.WebPageHttpHandler.DisableWebPagesResponseHeader = true;
     }
        
 </script>
