@@ -19,7 +19,7 @@ public static class Blog
         DaysToComment = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
         Image = ConfigurationManager.AppSettings.Get("blog:image");
         ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
-        BlogPath = ConfigurationManager.AppSettings.Get( "blog:path" );
+        BlogPath = ConfigurationManager.AppSettings.Get("blog:path");
     }
 
     public static string Title { get; private set; }
@@ -30,7 +30,7 @@ public static class Blog
     public static int DaysToComment { get; private set; }
     public static bool ModerateComments { get; private set; }
     public static string BlogPath { get; private set; }
-    
+
     public static string CurrentSlug
     {
         get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }
@@ -43,8 +43,9 @@ public static class Blog
 
     public static bool IsNewPost
     {
-        get {
-            return HttpContext.Current.Request.RawUrl.Trim( '/' ) == ( !string.IsNullOrWhiteSpace( BlogPath ) ? BlogPath + "/" : "" ) + "post/new";
+        get
+        {
+            return HttpContext.Current.Request.RawUrl.Trim('/') == (!string.IsNullOrWhiteSpace(BlogPath) ? BlogPath + "/" : "") + "post/new";
         }
     }
 
@@ -179,9 +180,9 @@ public static class Blog
             }
 
             DateTime date = File.GetLastWriteTime(absolute);
-            int index = relative.LastIndexOf('/');
+            int index = relative.LastIndexOf('.');
 
-            string result = relative.Insert(index, "/v-" + date.Ticks);
+            string result = ConfigurationManager.AppSettings.Get("blog:cdnUrl") + relative.Insert(index, "_" + date.Ticks);
 
             HttpRuntime.Cache.Insert(rootRelativePath, result, new CacheDependency(absolute));
         }
@@ -209,14 +210,17 @@ public static class Blog
         }
     }
 
-    public static Dictionary<string,int> GetCategories() {
-        var categoryStrings = Storage.GetAllPosts().SelectMany( x => x.Categories ).ToList().Distinct();
+    public static Dictionary<string, int> GetCategories()
+    {
+        var categoryStrings = Storage.GetAllPosts().SelectMany(x => x.Categories).ToList().Distinct();
         var result = new Dictionary<string, int>();
-        foreach ( var cat in categoryStrings ) {
-            result.Add( cat,
-                Storage.GetAllPosts().Where( p => p.Categories.Any( c => string.Equals( c, cat, StringComparison.OrdinalIgnoreCase ) ) ).Count()
+        foreach (var cat in categoryStrings)
+        {
+            result.Add(cat,
+                Storage.GetAllPosts().Where(p => p.Categories.Any(c => string.Equals(c, cat, StringComparison.OrdinalIgnoreCase))).Count()
             );
         }
+
         return result;
     }
 

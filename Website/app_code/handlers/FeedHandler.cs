@@ -35,8 +35,10 @@ public class FeedHandler : IHttpHandler
                        {
                            PublishDate = p.PubDate
                        };
+
             if (!string.IsNullOrWhiteSpace(p.Excerpt))
                 item.Summary = new TextSyndicationContent(p.Excerpt);
+            
             item.Authors.Add(new SyndicationPerson("", p.Author, ""));
             yield return item;
         }

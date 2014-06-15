@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using CookComputing.XmlRpc;
 
@@ -75,5 +77,32 @@ public class Post
     public int CountApprovedComments(HttpContextBase context)
     {
         return (Blog.ModerateComments && !context.User.Identity.IsAuthenticated) ? this.Comments.Count(c => c.IsApproved) : this.Comments.Count;
+    }
+
+    public string GetHtmlContent()
+    {
+        string result = Content;
+
+        // Youtube content embedded using this syntax: [youtube:xyzAbc123]
+        var video = "<div class=\"video\"><iframe src=\"//www.youtube.com/embed/{0}?modestbranding=1&amp;theme=light\" allowfullscreen></iframe></div>";
+        result = Regex.Replace(result, @"\[youtube:(.*?)\]", (Match m) => string.Format(video, m.Groups[1].Value));
+
+        // Images replaced by CDN paths if they are located in the /posts/ folder
+        var cdn = ConfigurationManager.AppSettings.Get("blog:cdnUrl");
+        result = Regex.Replace(result, "<img.*?src=\"([^\"]+)\"", (Match m) =>
+        {
+            string src = m.Groups[1].Value;
+            int index = src.IndexOf("/posts/");
+
+            if (index > -1)
+            {
+                string clean = src.Substring(index);
+                return m.Value.Replace(src, cdn + clean);
+            }
+
+            return m.Value;
+        });
+
+        return result;
     }
 }
