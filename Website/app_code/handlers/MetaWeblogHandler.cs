@@ -139,7 +139,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
 
         var list = new List<object>();
 
-        foreach ( string category in categories.Select( x => x.Name ) )
+        foreach ( string category in categories.Keys )
         {
             list.Add(new { title = category });
         }
