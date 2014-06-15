@@ -164,10 +164,11 @@ public static class Blog
 
     public static string FingerPrint(string rootRelativePath, string cdnPath = "")
     {
+        if (HttpContext.Current.Request.IsLocal)
+            return rootRelativePath;
+
         if (!string.IsNullOrEmpty(cdnPath) && !HttpContext.Current.IsDebuggingEnabled)
-        {
             return cdnPath;
-        }
 
         if (HttpRuntime.Cache[rootRelativePath] == null)
         {
@@ -175,9 +176,7 @@ public static class Blog
             string absolute = HostingEnvironment.MapPath(relative);
 
             if (!File.Exists(absolute))
-            {
                 throw new FileNotFoundException("File not found", absolute);
-            }
 
             DateTime date = File.GetLastWriteTime(absolute);
             int index = relative.LastIndexOf('.');
