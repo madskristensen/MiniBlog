@@ -214,6 +214,7 @@
 
     function initialize() {
         postId = document.querySelector("[itemprop=blogPost]").getAttribute("data-id");
+        endpoint = document.getElementById("commentform").getAttribute("data-blog-path") + endpoint;
         var email = document.getElementById("commentemail");
         var name = document.getElementById("commentname");
         var website = document.getElementById("commenturl");
