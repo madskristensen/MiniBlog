@@ -71,7 +71,14 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper.
                 </p>
             </section>
-
+            <section>
+                <h3>Categories</h3>
+                <ul>
+                    @foreach ( var cat in Blog.GetCategories() ) {
+                        <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())">@cat.Key (@cat.Value)</a></li>
+                    }
+                </ul>
+            </section>
             <section>
                 <h3>My side projects</h3>
                 <ul>

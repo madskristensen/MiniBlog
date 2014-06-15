@@ -78,3 +78,40 @@ Click next.
 
 Windows Live Writer can be downloaded at:  
 [http://www.microsoft.com/en-us/download/details.aspx?id=8621](http://www.microsoft.com/en-us/download/details.aspx?id=8621)  
+
+### Configuring MiniBlog as Virtual Application
+
+Mini blog is very compact and can be configured as a Virtual Application so you'd be able to use it alongside your existing websites. 
+For example if you've got a running ASP.NET website at `http://yourexamplesite.com/` and you want to setup a blog under `/blog/` path, you could setup `http://yourexamplesite.com/blog/` with a few simple tweaks in web.config settings:
+
+- Set `blog:path` element of `appSettings` to the virtual path that you've configured for MiniBlog. Example with path `blog`
+
+```xml
+<add key="blog:path" value="blog"/>
+```
+
+- Update the `path` attribute of all the `<handlers>` in web.config. Example with path `blog`
+
+```xml
+<handlers>
+    <remove name="CommentHandler"/>
+    <add name="CommentHandler" verb="*" type="CommentHandler" path="/blog/comment.ashx"/>
+    <remove name="PostHandler"/>
+    <add name="PostHandler" verb="POST" type="PostHandler" path="/blog/post.ashx"/>
+    <remove name="MetaWebLogHandler"/>
+    <add name="MetaWebLogHandler" verb="POST,GET" type="MetaWeblogHandler" path="/blog/metaweblog"/>
+    <remove name="FeedHandler"/>
+    <add name="FeedHandler" verb="GET" type="FeedHandler" path="/blog/feed/*"/>
+    <remove name="CssHandler"/>
+    <add name="CssHandler" verb="GET" type="MinifyHandler" path="/blog*.css"/>
+    <remove name="JsHandler"/>
+    <add name="JsHandler" verb="GET" type="MinifyHandler" path="/blog*.js"/>
+</handlers>
+
+<httpErrors>
+    <remove statusCode="404"/>
+    <error statusCode="404" responseMode="ExecuteURL" path="/blog/404.cshtml"/>
+</httpErrors>
+```
+
+After changing the config all that is left is configuring a Virtual Application with the same path(ex. `blog`) inside your IIS website.

@@ -19,6 +19,7 @@ public static class Blog
         DaysToComment = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
         Image = ConfigurationManager.AppSettings.Get("blog:image");
         ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
+        BlogPath = ConfigurationManager.AppSettings.Get( "blog:path" );
     }
 
     public static string Title { get; private set; }
@@ -28,6 +29,7 @@ public static class Blog
     public static int PostsPerPage { get; private set; }
     public static int DaysToComment { get; private set; }
     public static bool ModerateComments { get; private set; }
+    public static string BlogPath { get; private set; }
     
     public static string CurrentSlug
     {
@@ -41,7 +43,9 @@ public static class Blog
 
     public static bool IsNewPost
     {
-        get { return HttpContext.Current.Request.RawUrl.Trim('/') == "post/new"; }
+        get {
+            return HttpContext.Current.Request.RawUrl.Trim( '/' ) == ( !string.IsNullOrWhiteSpace( BlogPath ) ? BlogPath + "/" : "" ) + "post/new";
+        }
     }
 
     public static Post CurrentPost
@@ -127,9 +131,7 @@ public static class Blog
 
     public static void ValidateToken(HttpContext context)
     {
-        string token = context.Request.Form["token"];
-        var cookie = context.Request.Cookies.Get("__RequestVerificationToken");
-        AntiForgery.Validate(cookie.Value, token);
+        AntiForgery.Validate();
     }
 
     public static string SaveFileToDisk(byte[] bytes, string extension)
@@ -207,10 +209,15 @@ public static class Blog
         }
     }
 
-    public static IEnumerable<string> GetCategories()
-    {
-        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
-        
-        return categories.Distinct();
+    public static Dictionary<string,int> GetCategories() {
+        var categoryStrings = Storage.GetAllPosts().SelectMany( x => x.Categories ).ToList().Distinct();
+        var result = new Dictionary<string, int>();
+        foreach ( var cat in categoryStrings ) {
+            result.Add( cat,
+                Storage.GetAllPosts().Where( p => p.Categories.Any( c => string.Equals( c, cat, StringComparison.OrdinalIgnoreCase ) ) ).Count()
+            );
+        }
+        return result;
     }
+
 }
