@@ -19,7 +19,6 @@ public static class Blog
         DaysToComment = int.Parse(ConfigurationManager.AppSettings.Get("blog:daysToComment"));
         Image = ConfigurationManager.AppSettings.Get("blog:image");
         ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
-        ExcerptAsRssContent = bool.Parse(ConfigurationManager.AppSettings.Get("blog:excerptAsRssContent"));
     }
 
     public static string Title { get; private set; }
@@ -29,7 +28,6 @@ public static class Blog
     public static int PostsPerPage { get; private set; }
     public static int DaysToComment { get; private set; }
     public static bool ModerateComments { get; private set; }
-    public static bool ExcerptAsRssContent { get; set; }
     
     public static string CurrentSlug
     {
