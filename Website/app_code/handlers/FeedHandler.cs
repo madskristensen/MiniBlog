@@ -32,9 +32,11 @@ public class FeedHandler : IHttpHandler
         foreach (Post p in Blog.GetPosts(10))
         {
             var item = new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.AbsoluteUrl.ToString(), p.LastModified)
-                       {
-                           PublishDate = p.PubDate
-                       };
+                                   {
+                                       PublishDate = p.PubDate
+                                   };
+            if (!string.IsNullOrWhiteSpace(p.Excerpt))
+                item.Summary = new TextSyndicationContent(p.Excerpt);
             item.Authors.Add(new SyndicationPerson("", p.Author, ""));
             yield return item;
         }
