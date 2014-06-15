@@ -63,6 +63,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         if (match != null)
         {
             match.Title = post.Title;
+            match.Excerpt = post.Excerpt;
             match.Content = post.Content;
             match.Slug = post.Slug;
             match.Categories = post.Categories;
