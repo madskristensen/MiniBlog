@@ -35,6 +35,7 @@
         if (post == null) { throw new HttpException(404, "Post not found"); }
 
         Page.Title = post.Title;
+		Page.Description = post.Excerpt;
         lastModified = post.LastModified;
 
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/" + post.ID + ".xml")));
