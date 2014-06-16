@@ -19,6 +19,12 @@
     {
         Context.Items["IIS_WasUrlRewritten"] = "false";
         System.Web.WebPages.WebPageHttpHandler.DisableWebPagesResponseHeader = true;
+
+        var application = sender as HttpApplication;
+        if (application != null && application.Context != null)
+        {
+            application.Context.Response.Headers.Remove("Server");
+        }
     }
        
 </script>
