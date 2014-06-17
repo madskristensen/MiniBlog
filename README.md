@@ -18,6 +18,7 @@ Perfect for the blogger who wants to selfhost a blog.
  * Gets a perfect score of 100/100 on Google Page Speed
  * Uses __CDN__ for Bootstrap and jQuery in release mode (debug="false")
  * Easy setting for serving static files from another domain. 
+     * Supports the ASP.NET [Reverse Proxy](https://github.com/madskristensen/ReverseProxyCDN)
 * __Windows Live Writer__ (WLW) support
  * Optimized for WLW
  * Assumes WLW is the main way to write posts
