@@ -73,6 +73,10 @@ public static class Storage
             posts.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
             HttpRuntime.Cache.Insert("posts", posts);
         }
+        else
+        {
+            HttpResponse.RemoveOutputCacheItem(string.Format("/{0}", Blog.BlogPath));
+        }
 
         doc.Save(file);
     }
