@@ -75,7 +75,7 @@ public static class Storage
         }
         else
         {
-            HttpResponse.RemoveOutputCacheItem(string.Format("/{0}", Blog.BlogPath));
+            Blog.ClearStartPageCache();
         }
 
         doc.Save(file);
@@ -87,6 +87,7 @@ public static class Storage
         string file = Path.Combine(_folder, post.ID + ".xml");
         File.Delete(file);
         posts.Remove(post);
+        Blog.ClearStartPageCache();
     }
 
     private static void LoadPosts()
