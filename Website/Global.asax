@@ -26,5 +26,22 @@
             application.Context.Response.Headers.Remove("Server");
         }
     }
+
+    public void Application_OnError()
+    {
+        var request = HttpContext.Current.Request;
+        var exception = Server.GetLastError() as HttpException;
+        if (exception == null) return;
+        
+        //Prevents customError behavior when the request is determined to be an AJAX request.
+        if (request["X-Requested-With"] == "XMLHttpRequest" || request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            Server.ClearError();
+            Response.ClearContent();
+            Response.StatusCode = exception.GetHttpCode();
+            Response.StatusDescription = exception.Message;
+            Response.Write(string.Format("<html><body><h1>{0} {1}</h1></body></html>", exception.GetHttpCode(), exception.Message));
+        }
+    }
        
 </script>
