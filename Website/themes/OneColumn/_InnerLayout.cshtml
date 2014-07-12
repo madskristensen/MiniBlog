@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/views/_Layout.cshtml";
+}
+
+<div class="container">
+    <header role="banner">
+        <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
+        <em>@Blog.Description</em>
+    </header>
+
+    <div role="main" class="col-md-8 col-md-offset-2">
+        @RenderBody()
+
+        @if (Page.ShowPaging != null)
+        {
+            <ul class="pager">
+                @if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
+                {
+                    <li class="previous"><a href="@Blog.GetPagingUrl(1)" rel="prev">&larr; Older</a></li>
+                }
+
+                @if (Blog.CurrentPage > 1)
+                {
+                    <li class="next"><a href="@Blog.GetPagingUrl(-1)" rel="next">Newer &rarr;</a></li>
+                }
+            </ul>
+        }
+    </div>
+</div>
