@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Hello world</title>
+  <slug>hello-world</slug>
+  <author>benmccallum</author>
+  <pubDate>2014-07-12 03:46:49</pubDate>
+  <lastModified>2014-07-12 03:46:49</lastModified>
+  <excerpt>First post.</excerpt>
+  <content>Stay tuned..</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>newbeginnings</category>
+  </categories>
+  <comments></comments>
+</post>
