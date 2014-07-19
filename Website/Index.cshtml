@@ -1,7 +1,7 @@
 ﻿@using System.Web.Caching;
 @{
     Page.Title = Blog.Title;
-    Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
+    Layout = "~/themes/" + Blog.Theme + "/_InnerLayout.cshtml";
     DateTime lastModified = DateTime.MinValue;
 
     if (string.IsNullOrEmpty(Blog.CurrentSlug))

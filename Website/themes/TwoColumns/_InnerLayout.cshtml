@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/views/_Layout.cshtml";
+}
+
+<div class="container">
+    <header role="banner">
+        <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
+        <em>@Blog.Description</em>
+    </header>
+
+    <div role="main" class="col-md-8">
+        @RenderBody()
+
+        @if (Page.ShowPaging != null)
+        {
+            <ul class="pager">
+                @if (Blog.GetPosts().Count() > Blog.PostsPerPage * Blog.CurrentPage)
+                {
+                    <li class="previous"><a href="@Blog.GetPagingUrl(1)" rel="prev">&larr; Older</a></li>
+                }
+
+                @if (Blog.CurrentPage > 1)
+                {
+                    <li class="next"><a href="@Blog.GetPagingUrl(-1)" rel="next">Newer &rarr;</a></li>
+                }
+            </ul>
+        }
+    </div>
+
+    <aside role="complementary" class="col-md-3 col-md-offset-1">
+        <section>
+            <h3>About me</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper.
+            </p>
+        </section>
+        <section>
+            <h3>Categories</h3>
+            <ul>
+                @foreach ( var cat in Blog.GetCategories() ) {
+                    <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())">@cat.Key (@cat.Value)</a></li>
+                }
+            </ul>
+        </section>
+        <section>
+            <h3>My side projects</h3>
+            <ul>
+                <li>Project 1</li>
+                <li>Project 2</li>
+                <li>Project 3</li>
+            </ul>
+        </section>
+    </aside>
+</div>
