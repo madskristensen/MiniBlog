@@ -48,7 +48,6 @@ local.properties
 x64/
 build/
 #[Bb]in/
-Website/[Bb]in/*.dll
 [Oo]bj/
 
 # MSTest test Results
