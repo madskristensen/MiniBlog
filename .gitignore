@@ -48,6 +48,7 @@ local.properties
 x64/
 build/
 #[Bb]in/
+Website/[Bb]in/*.dll
 [Oo]bj/
 
 # MSTest test Results
@@ -131,7 +132,7 @@ publish/
 
 # NuGet Packages Directory
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line
-#packages/
+packages/
 
 # Windows Azure Build Output
 csx
