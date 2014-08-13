@@ -1,8 +1,9 @@
 User-agent: *
 Disallow: /views/
 
-sitemap: @(Request.Url.Scheme + "://" + Request.Url.Authority)/sitemap.xml
-
 @{
     Response.ContentType = "text/plain";
+    var path = !string.IsNullOrWhiteSpace(Blog.BlogPath) ? "/" + Blog.BlogPath : "";
 }
+
+sitemap: @(Request.Url.Scheme + "://" + Request.Url.Authority)@path/sitemap.xml
