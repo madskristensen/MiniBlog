@@ -88,9 +88,8 @@ public class PostHandler : IHttpHandler
     {
         title = title.ToLowerInvariant().Replace(" ", "-");
         title = RemoveDiacritics(title);
-        title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);
 
-        if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
+        if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title, StringComparison.OrdinalIgnoreCase)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();
