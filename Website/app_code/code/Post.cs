@@ -88,7 +88,8 @@ public class Post
         result = Regex.Replace(result, @"\[youtube:(.*?)\]", (Match m) => string.Format(video, m.Groups[1].Value));
 
         // Images replaced by CDN paths if they are located in the /posts/ folder
-        var cdn = ConfigurationManager.AppSettings.Get("blog:cdnUrl");
+        var cdnUrl = ConfigurationManager.AppSettings.Get("blog:cdnUrl");
+        var cdn = String.IsNullOrEmpty(cdnUrl) ? String.Format("/{0}", Blog.BlogPath) : cdnUrl;
         result = Regex.Replace(result, "<img.*?src=\"([^\"]+)\"", (Match m) =>
         {
             string src = m.Groups[1].Value;
