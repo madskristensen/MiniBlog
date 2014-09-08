@@ -211,12 +211,16 @@ public static class Blog
 
     public static Dictionary<string, int> GetCategories()
     {
-        var categoryStrings = Storage.GetAllPosts().SelectMany(x => x.Categories).ToList().Distinct();
+        var categoryStrings = Storage.GetAllPosts()
+            .Where(p => ((p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated))
+            .SelectMany(x => x.Categories).ToList().Distinct();
         var result = new Dictionary<string, int>();
         foreach (var cat in categoryStrings)
         {
             result.Add(cat,
-                Storage.GetAllPosts().Where(p => p.Categories.Any(c => string.Equals(c, cat, StringComparison.OrdinalIgnoreCase))).Count()
+                Storage.GetAllPosts()
+                .Where(p => ((p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated))
+                .Count(p => p.Categories.Any(c => string.Equals(c, cat, StringComparison.OrdinalIgnoreCase)))
             );
         }
 
