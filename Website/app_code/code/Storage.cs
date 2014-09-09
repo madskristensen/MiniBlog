@@ -9,6 +9,7 @@ using System.Xml.XPath;
 public static class Storage
 {
     private static string _folder = HostingEnvironment.MapPath("~/posts/");
+    private static readonly string _defaultCategory = "Others";
 
     public static List<Post> GetAllPosts()
     {
@@ -43,9 +44,17 @@ public static class Storage
                         ));
 
         XElement categories = doc.XPathSelectElement("post/categories");
-        foreach (string category in post.Categories)
+        if (post.Categories.Length == 0)
         {
-            categories.Add(new XElement("category", category));
+            post.Categories = new string[] { _defaultCategory };
+            categories.Add(new XElement("category", _defaultCategory));
+        }
+        else
+        {
+            foreach (string category in post.Categories)
+            {
+                categories.Add(new XElement("category", category));
+            }
         }
 
         XElement comments = doc.XPathSelectElement("post/comments");
