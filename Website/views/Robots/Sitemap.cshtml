@@ -3,10 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     @foreach (Post post in Storage.GetAllPosts())
     {
-        <url>
-            <loc>@post.AbsoluteUrl</loc>
-            <lastmod>@post.LastModified.ToString("yyyy-MM-ddThh:mmzzz")</lastmod>
-        </url>
+        if (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated)
+         {
+             <url>
+                 <loc>@post.AbsoluteUrl</loc>
+                 <lastmod>@post.LastModified.ToString("yyyy-MM-ddThh:mmzzz")</lastmod>
+             </url>
+         }
     }
 </urlset>
 
