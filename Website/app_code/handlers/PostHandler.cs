@@ -86,7 +86,7 @@ public class PostHandler : IHttpHandler
 
     public static string CreateSlug(string title)
     {
-        title = title.ToLowerInvariant().Replace(" ", "-");
+        title = title.ToLowerInvariant().Replace(" ", "-").Replace("#", "");
         title = RemoveDiacritics(title);
 
         if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title, StringComparison.OrdinalIgnoreCase)))
