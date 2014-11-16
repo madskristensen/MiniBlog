@@ -4,6 +4,8 @@ A blogging engine based on HTML5 and ASP.NET.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/n78wm50a4a3odecb)](https://ci.appveyor.com/project/madskristensen/miniblog)
 
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+
 __Live demo__: http://miniblog.azurewebsites.net/  
 Username: _demo_  
 Password: _demo_  
