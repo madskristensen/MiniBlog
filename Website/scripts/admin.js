@@ -21,11 +21,14 @@
     // #endregion
 
     var postId, isNew,
-        txtTitle, txtContent, txtMessage, txtImage, chkPublish,
-        btnNew, btnEdit, btnDelete, btnSave, btnCancel,
+        txtTitle, txtExcerpt, txtContent, txtMessage, txtImage, chkPublish,
+        btnNew, btnEdit, btnDelete, btnSave, btnCancel, blogPath,
 
     editPost = function () {
         txtTitle.attr('contentEditable', true);
+        txtExcerpt.attr('contentEditable', true);
+		txtExcerpt.css({ minHeight: "100px" });
+        txtExcerpt.parent().css('display', 'block');
         txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
         txtContent.focus();
@@ -49,6 +52,8 @@
             }
         } else {
             txtTitle.removeAttr('contentEditable');
+            txtExcerpt.removeAttr('contentEditable');
+            txtExcerpt.parent().css('display', 'none');
             txtContent.removeAttr('contentEditable');
             btnCancel.focus();
 
@@ -100,12 +105,14 @@
            the following statement and ConvertMarkupToXhtml function */
         parsedDOM = ConvertMarkupToValidXhtml(txtContent.html());
 
-        $.post("/post.ashx?mode=save", {
+        $.post(blogPath + "/post.ashx?mode=save", {
             id: postId,
             isPublished: chkPublish[0].checked,
             title: txtTitle.text().trim(),
+            excerpt: txtExcerpt.text().trim(),
             content: parsedDOM,
             categories: getPostCategories(),
+            __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
         })
           .success(function (data) {
               if (isNew) {
@@ -126,8 +133,8 @@
     },
     deletePost = function () {
         if (confirm("Are you sure you want to delete this post?")) {
-            $.post("/post.ashx?mode=delete", { id: postId })
-                .success(function () { location.href = "/"; })
+            $.post(blogPath + "/post.ashx?mode=delete", { id: postId, __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
+                .success(function () { location.href = blogPath+"/"; })
                 .fail(function () { showMessage(false, "Something went wrong. Please try again"); });
         }
     },
@@ -177,16 +184,15 @@
             $("#txtCategories").parent().remove();
 
             $.each(categoriesArray, function (index, category) {
-                $("ul.categories").append(' <li itemprop="articleSection" title="' + category + '"> <a href="/category/' + encodeURIComponent(category.toLowerCase()) + '">' + category + '</a> </li> ');
+                $("ul.categories").append(' <li itemprop="articleSection" title="' + category + '"> <a href="'+blogPath+'/category/' + encodeURIComponent(category.toLowerCase()) + '">' + category + '</a> </li> ');
             });
         }
     };
 
-    isNew = location.pathname.replace(/\//g, "") === "postnew";
-
     postId = $("[itemprop~='blogPost']").attr("data-id");
 
     txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
+    txtExcerpt = $("[itemprop~='description']");
     txtContent = $("[itemprop~='articleBody']");
     txtMessage = $("#admin .alert");
     txtImage = $("#admin #txtImage");
@@ -197,6 +203,9 @@
     btnSave = $("#btnSave").bind("click", savePost);
     btnCancel = $("#btnCancel").bind("click", cancelEdit);
     chkPublish = $("#ispublished").find("input[type=checkbox]");
+    blogPath = $("#admin").data("blogPath");
+
+    isNew = location.pathname.replace(/\//g, "") === blogPath.replace(/\//g, "") + "postnew";
 
     $(document).keyup(function (e) {
         if (!document.activeElement.isContentEditable) {

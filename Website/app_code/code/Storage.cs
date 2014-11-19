@@ -22,6 +22,7 @@ public static class Storage
         return new List<Post>();
     }
 
+    // Can this be done async?
     public static void Save(Post post)
     {
         string file = Path.Combine(_folder, post.ID + ".xml");
@@ -34,6 +35,7 @@ public static class Storage
                             new XElement("author", post.Author),
                             new XElement("pubDate", post.PubDate.ToString("yyyy-MM-dd HH:mm:ss")),
                             new XElement("lastModified", post.LastModified.ToString("yyyy-MM-dd HH:mm:ss")),
+                            new XElement("excerpt", post.Excerpt),
                             new XElement("content", post.Content),
                             new XElement("ispublished", post.IsPublished),
                             new XElement("categories", string.Empty),
@@ -59,6 +61,7 @@ public static class Storage
                     new XElement("date", comment.PubDate.ToString("yyyy-MM-dd HH:m:ss")),
                     new XElement("content", comment.Content),
                     new XAttribute("isAdmin", comment.IsAdmin),
+                    new XAttribute("isApproved", comment.IsApproved),
                     new XAttribute("id", comment.ID)
                 ));
         }
@@ -70,6 +73,10 @@ public static class Storage
             posts.Sort((p1, p2) => p2.PubDate.CompareTo(p1.PubDate));
             HttpRuntime.Cache.Insert("posts", posts);
         }
+        else
+        {
+            Blog.ClearStartPageCache();
+        }
 
         doc.Save(file);
     }
@@ -80,6 +87,7 @@ public static class Storage
         string file = Path.Combine(_folder, post.ID + ".xml");
         File.Delete(file);
         posts.Remove(post);
+        Blog.ClearStartPageCache();
     }
 
     private static void LoadPosts()
@@ -89,7 +97,8 @@ public static class Storage
 
         List<Post> list = new List<Post>();
 
-        foreach (string file in Directory.GetFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
+        // Can this be done in parallel to speed it up?
+        foreach (string file in Directory.EnumerateFiles(_folder, "*.xml", SearchOption.TopDirectoryOnly))
         {
             XElement doc = XElement.Load(file);
 
@@ -98,6 +107,7 @@ public static class Storage
                 ID = Path.GetFileNameWithoutExtension(file),
                 Title = ReadValue(doc, "title"),
                 Author = ReadValue(doc, "author"),
+                Excerpt = ReadValue(doc, "excerpt"),
                 Content = ReadValue(doc, "content"),
                 Slug = ReadValue(doc, "slug").ToLowerInvariant(),
                 PubDate = DateTime.Parse(ReadValue(doc, "pubDate")),
@@ -150,6 +160,7 @@ public static class Storage
                 Ip = ReadValue(node, "ip"),
                 UserAgent = ReadValue(node, "userAgent"),
                 IsAdmin = bool.Parse(ReadAttribute(node, "isAdmin", "false")),
+                IsApproved = bool.Parse(ReadAttribute(node, "isApproved", "true")),
                 Content = ReadValue(node, "content").Replace("\n", "<br />"),
                 PubDate = DateTime.Parse(ReadValue(node, "date", "2000-01-01")),
             };

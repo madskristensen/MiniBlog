@@ -1,38 +1,43 @@
-﻿<form id="commentform" role="form" class="form-horizontal">
+﻿@{
+    var path = !string.IsNullOrWhiteSpace(Blog.BlogPath) ? "/" + Blog.BlogPath : "";
+}
+<form id="commentform" role="form" class="form-horizontal" data-blog-path="@path">
     <fieldset>
         <legend>Post comment</legend>
-
-        <div class="form-group">
+		
+        <div class="form-group row">
             <label for="commentname" class="control-label col-sm-2">Name</label>
             <div class="col-sm-7">
                 <input id="commentname" class="form-control" type="text" placeholder="Name" required />
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             <label for="commentemail" class="control-label col-sm-2">Email</label>
             <div class="col-sm-7">
                 <input id="commentemail" class="form-control" type="email" placeholder="Email" required />
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             <label for="commenturl" class="control-label col-sm-2">Website</label>
             <div class="col-sm-7">
                 <input id="commenturl" class="form-control" type="url" placeholder="Website URL" />
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-sm-12">
-                <label for="commentcontent" class="control-label">Comment (no HTML allowed)</label>
+        <div class="form-group row">
+			<label for="commentcontent" class="control-label col-sm-2">Comment (no HTML allowed)</label>
+            <div class="col-sm-10">                
                 <textarea id="commentcontent" class="form-control" rows="4" placeholder="Comment" required></textarea>
             </div>
         </div>
 
-        <div class="form-group col-sm-12">
-            <button class="btn btn-primary">Post comment</button>
-            <span id="status" class="alert" role="status" aria-live="polite"></span>
-        </div>
+		<div class="form-group row">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-primary">Post comment</button>
+				<span id="status" class="alert" role="status" aria-live="polite"></span>
+			</div>
+		</div>
     </fieldset>
 </form>

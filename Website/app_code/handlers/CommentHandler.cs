@@ -4,20 +4,21 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Security;
 using System.Web.WebPages;
 
 public class CommentHandler : IHttpHandler
 {
     public void ProcessRequest(HttpContext context)
     {
-        Post post = Storage.GetAllPosts().SingleOrDefault(p => p.ID == context.Request["postId"]);
+        Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == context.Request["postId"]);
 
         if (post == null)
             throw new HttpException(404, "The post does not exist");
 
         string mode = context.Request["mode"];
 
-        if (mode == "save" && context.Request.HttpMethod == "POST" && post.AreCommentsOpen(new HttpContextWrapper(context)))
+        if (mode == "save" && context.Request.HttpMethod == "POST")
         {
             Save(context, post);
         }
@@ -25,10 +26,19 @@ public class CommentHandler : IHttpHandler
         {
             Delete(context, post);
         }
+        else if (mode == "approve")
+        {
+            Approve(context, post);
+        }
     }
 
     private static void Save(HttpContext context, Post post)
     {
+        Blog.ValidateToken(context);
+
+        if (!post.AreCommentsOpen(new HttpContextWrapper(context)))
+            throw new HttpException(403, "The data token doesn't match or comments are closed");
+
         string name = context.Request.Form["name"];
         string email = context.Request.Form["email"];
         string website = context.Request.Form["website"];
@@ -45,13 +55,17 @@ public class CommentHandler : IHttpHandler
             UserAgent = context.Request.UserAgent,
             IsAdmin = context.User.Identity.IsAuthenticated,
             Content = HttpUtility.HtmlEncode(content.Trim()).Replace("\n", "<br />"),
+            IsApproved = !Blog.ModerateComments,
         };
 
         post.Comments.Add(comment);
         Storage.Save(post);
 
         if (!context.User.Identity.IsAuthenticated)
-            System.Threading.ThreadPool.QueueUserWorkItem((s) => SendEmail(comment, post, context.Request));
+        {
+            MailMessage mail = GenerateEmail(comment, post, context.Request);
+            System.Threading.ThreadPool.QueueUserWorkItem((s) => SendEmail(mail));
+        }
 
         RenderComment(context, comment);
     }
@@ -63,35 +77,43 @@ public class CommentHandler : IHttpHandler
         page.ExecutePageHierarchy(new WebPageContext(page.Context, page: null, model: comment), context.Response.Output);
     }
 
-    private static void SendEmail(Comment comment, Post post, HttpRequest request)
+    private static void SendEmail(MailMessage mail)
     {
         try
         {
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(comment.Email, comment.Author);
-            mail.ReplyToList.Add(comment.Email);
-            mail.To.Add(ConfigurationManager.AppSettings.Get("blog:email"));
-            mail.Subject = "Blog comment: " + post.Title;
-            mail.IsBodyHtml = true;
-
-            string absoluteUrl = request.Url.Scheme + "://" + request.Url.Authority;
-            string deleteUrl = absoluteUrl + request.RawUrl + "?postId=" + post.ID + "&commentId=" + comment.ID + "&mode=delete";
-            mail.Body = "<div style=\"font: 11pt/1.5 calibri, arial;\">" +
-                            comment.Author + " on <a href=\"" + absoluteUrl + post.Url + "\">" + post.Title + "</a>:<br /><br />" +
-                            comment.Content + "<br /><br />" +
-                            "<a href=\"" + deleteUrl + "\">Delete comment</a>" +
-                            "<br /><br /><hr />" +
-                            "Website: " + comment.Website + "<br />" +
-                            "E-mail: " + comment.Email + "<br />" +
-                            "IP-address: " + comment.Ip +
-                        "</div>";
-
-
-            SmtpClient client = new SmtpClient();
-            client.Send(mail);
+            using (SmtpClient client = new SmtpClient())
+            {
+                client.Send(mail);
+                mail.Dispose();
+            }
         }
         catch
         { }
+    }
+
+    private static MailMessage GenerateEmail(Comment comment, Post post, HttpRequest request)
+    {
+        MailMessage mail = new MailMessage();
+        mail.From = new MailAddress(comment.Email, comment.Author);
+        mail.ReplyToList.Add(comment.Email);
+        mail.To.Add(ConfigurationManager.AppSettings.Get("blog:email"));
+        mail.Subject = "Blog comment: " + post.Title;
+        mail.IsBodyHtml = true;
+
+        string absoluteUrl = request.Url.Scheme + "://" + request.Url.Authority;
+        string deleteUrl = absoluteUrl + request.RawUrl + "?postId=" + post.ID + "&commentId=" + comment.ID + "&mode=delete";
+        string approveUrl = absoluteUrl + request.RawUrl + "?postId=" + post.ID + "&commentId=" + comment.ID + "&mode=approve";
+        mail.Body = "<div style=\"font: 11pt/1.5 calibri, arial;\">" +
+                        comment.Author + " on <a href=\"" + absoluteUrl + post.Url + "\">" + post.Title + "</a>:<br /><br />" +
+                        comment.Content + "<br /><br />" +
+                        (Blog.ModerateComments ? "<a href=\"" + approveUrl + "\">Approve comment</a> | " : string.Empty) +
+                        "<a href=\"" + deleteUrl + "\">Delete comment</a>" +
+                        "<br /><br /><hr />" +
+                        "Website: " + comment.Website + "<br />" +
+                        "E-mail: " + comment.Email + "<br />" +
+                        "IP-address: " + comment.Ip +
+                    "</div>";
+        return mail;
     }
 
     private static void Validate(string name, string email, string content)
@@ -128,25 +150,50 @@ public class CommentHandler : IHttpHandler
     private static void Delete(HttpContext context, Post post)
     {
         if (!context.User.Identity.IsAuthenticated)
-            throw new HttpException(403, "No access");
+        {
+            FormsAuthentication.RedirectToLoginPage();
+            context.Response.End();
+        }
 
+        Comment comment = GetComment(context, post);
+
+        post.Comments.Remove(comment);
+        Storage.Save(post);
+
+        RedirectOnGET(context, post);
+    }
+
+    private static void Approve(HttpContext context, Post post)
+    {
+        if (!context.User.Identity.IsAuthenticated)
+        {
+            FormsAuthentication.RedirectToLoginPage();
+            context.Response.End();
+        }
+
+        Comment comment = GetComment(context, post);
+
+        comment.IsApproved = true;
+        Storage.Save(post);
+
+        RedirectOnGET(context, post);
+    }
+
+    private static Comment GetComment(HttpContext context, Post post)
+    {
         string commentId = context.Request["commentId"];
-        Comment comment = post.Comments.SingleOrDefault(c => c.ID == commentId);
+        Comment comment = post.Comments.FirstOrDefault(c => c.ID == commentId);
 
-        if (comment != null)
-        {
-            post.Comments.Remove(comment);
-            Storage.Save(post);
-        }
-        else
-        {
+        if (comment == null)
             throw new HttpException(404, "Comment could not be found");
-        }
 
+        return comment;
+    }
+
+    private static void RedirectOnGET(HttpContext context, Post post)
+    {
         if (context.Request.HttpMethod == "GET")
-        {
             context.Response.Redirect(post.AbsoluteUrl.ToString() + "#comments", true);
-        }
     }
 
     public bool IsReusable

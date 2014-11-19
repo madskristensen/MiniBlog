@@ -23,6 +23,7 @@ public class Comment
     public string Ip { get; set; }
     public string UserAgent { get; set; }
     public bool IsAdmin { get; set; }
+    public bool IsApproved { get; set; }
 
     public string GravatarUrl(int size)
     {

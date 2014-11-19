@@ -1,11 +1,12 @@
 ﻿@{
     var isPublished = Blog.CurrentPost != null && Blog.CurrentPost.IsPublished;
+    var path = !string.IsNullOrWhiteSpace( Blog.BlogPath ) ? "/" + Blog.BlogPath : "";
 }
 
-<nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished">
+<nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished" data-blog-path="@path">
     <div class="navbar-inner">
         <ul class="nav navbar-nav">
-            <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
+            <li><button onclick="location.href='@path/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
             <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
             <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
             <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
@@ -59,9 +60,11 @@
         </div>
     </div>
 
-    <form action="@FormsAuthentication.LoginUrl?signout=true&amp;ReturnUrl=@Request.RawUrl" method="post">
+    <form action="@FormsAuthentication.LoginUrl" method="post">
+		<input type="hidden" name="signout" value="true" />
+		<input type="hidden" name="returnUrl" value="@HttpUtility.HtmlEncode(Request.RawUrl)" />
         <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link pull-right">
-            Sign out &nbsp;<span class="glyphicon glyphicon-lock"></span>
+            Sign out &nbsp;<span class="glyphicon glyphicon-log-out"></span>
         </button>
     </form>
 
