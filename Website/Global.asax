@@ -1,4 +1,5 @@
 ﻿<%@ Application Language="C#" %>
+<%@ Import Namespace="System.IO" %>
 
 <script RunAt="server">
 
@@ -24,6 +25,20 @@
         if (application != null && application.Context != null)
         {
             application.Context.Response.Headers.Remove("Server");
+        }
+    }
+
+    public void Application_Start(object sender, EventArgs e)
+    {
+        string path = HttpContext.Current.Server.MapPath("~/posts_backups/");
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        path = HttpContext.Current.Server.MapPath("~/posts/");
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
         }
     }
 
