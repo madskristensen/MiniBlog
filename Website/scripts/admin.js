@@ -14,7 +14,7 @@
         xHtmlDocument.importNode(htmlDocument.body, true);
         xhtmlBody.appendChild(htmlDocument.body.firstChild);
 
-        /<body.*?><div>(.*?)<\/div><\/body>/gim.exec(xHtmlDocument.documentElement.innerHTML);
+        /<body.*?><div>([\s\S]*?)<\/div><\/body>/i.exec(xHtmlDocument.documentElement.innerHTML);
         return RegExp.$1;
     }
 
