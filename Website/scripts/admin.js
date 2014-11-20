@@ -14,7 +14,7 @@
         xHtmlDocument.importNode(htmlDocument.body, true);
         xhtmlBody.appendChild(htmlDocument.body.firstChild);
 
-        /<body.*?><div>(.*?)<\/div><\/body>/im.exec(xHtmlDocument.documentElement.innerHTML);
+        /<body.*?><div>(.*?)<\/div><\/body>/gim.exec(xHtmlDocument.documentElement.innerHTML);
         return RegExp.$1;
     }
 
@@ -27,7 +27,7 @@
     editPost = function () {
         txtTitle.attr('contentEditable', true);
         txtExcerpt.attr('contentEditable', true);
-		txtExcerpt.css({ minHeight: "100px" });
+        txtExcerpt.css({ minHeight: "100px" });
         txtExcerpt.parent().css('display', 'block');
         txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
