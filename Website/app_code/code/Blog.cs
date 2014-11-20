@@ -137,7 +137,15 @@ public static class Blog
 
     public static string SaveFileToDisk(byte[] bytes, string extension)
     {
-        string relative = "~/posts/files/" + Guid.NewGuid() + "." + extension.Trim('.');
+        string relative = "~/posts/files/" + Guid.NewGuid();
+
+        if (string.IsNullOrWhiteSpace(extension))
+            extension = ".bin";
+        else
+            extension = "." + extension.Trim('.');
+
+        relative += extension;
+
         string file = HostingEnvironment.MapPath(relative);
 
         File.WriteAllBytes(file, bytes);
