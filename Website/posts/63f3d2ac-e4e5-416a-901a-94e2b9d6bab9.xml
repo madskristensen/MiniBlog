@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Optimize Windows Vista for blazing speed</title>
+  <slug>optimize-windows-vista-for-blazing-speed</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2009-05-18 21:17:23</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I was working on one of my old laptops the other day, and realized it seemed just as fast as my newer laptop. The newer box is substantially higher specced - dual core proc, 4GB RAM, nVidia graphics etc. For awhile, I couldn't put my finger on just what the difference was, and then it hit me: the old laptop had Aero turned off. I turned off Aero on the new box and bam, it was noticably more snappy. Windows popped in instantly, menus snapped up with no hesitation. Not just a little improvement, but a drastic improvement in speed. You don't get the glitzy glass interface, but it's definitely worth the graphical loss to have a much faster experience.&lt;/p&gt;
+&lt;p&gt;I haven't tested this on beefier desktop systems, but it gives a great improvement on laptops.&lt;/p&gt;
+&lt;p&gt;Here are the steps:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Open the computer settings window (quickest way to do this is to right click on "My Computer" and select "Properties").&lt;/li&gt;
+    &lt;li&gt;Click "Advanced system settings" on the left under Tasks&lt;/li&gt;
+    &lt;li&gt;Go to the Advanced tab&lt;/li&gt;
+    &lt;li&gt;Click the Settings button under the Performance item&lt;/li&gt;
+    &lt;li&gt;On the Visual Effects tab, Select "Adjust for best performance"&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This will optimize the visual effects for the best performance, but some important visual effects will be missing - especially font smoothing. To get to the optimal settings, check the following items in the list:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Show preview and filters in folder&lt;/li&gt;
+    &lt;li&gt;Show thumbnails instead of icons&lt;/li&gt;
+    &lt;li&gt;Show window contents while dragging&lt;/li&gt;
+    &lt;li&gt;Smooth edges of screen fonts&lt;/li&gt;
+    &lt;li&gt;Smooth-scroll list boxes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The resulting selection will look like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" width="367" height="528" src="http://programcsharp.com/blog/files/perfselected.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Click the OK button, and Windows will recalibrate itself for the new settings.&lt;/p&gt;
+&lt;p&gt;Enjoy the new snappier performance!&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>General</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="323">
+      <author>lfon</author>
+      <email>gravatar@getdt.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-05-18 21:41:35</date>
+      <content>Definitely.  It makes a noticeable difference.  It’s not that Vista wasn’t operating fast already – I have a wicked fast quad core machine – it’s that it changes the PERCEIVED speed by doing away with animations and shadowing and such.  The result is that everything appears to be much more instantaneous.</content>
+    </comment>
+    <comment isAdmin="false" id="324">
+      <author>BKR krediet</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-06-08 12:25:24</date>
+      <content>And Windows keeps putting in fancy stuff to decrease the speed. They think everybody is on a monster PC or something!</content>
+    </comment>
+  </comments>
+</post>

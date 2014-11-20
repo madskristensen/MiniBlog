@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>How to create a comma seperated list from a resultset in one statement</title>
+  <slug>how-to-create-a-comma-seperated-list-from-a-resultset-in-one-statement</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-02-06 16:57:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Since I recently posted a Split UDF, I figured I'd do some research on the best way to do a Join operation. Unfortunately, UDF's can't take table variables as input parameters, so I had to just write a snippet of straight sql. Here's the solution:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;DECLARE&lt;/font&gt;&lt;font size="2"&gt; @valueList &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;varchar&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;1000&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;/font&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;SELECT&lt;br /&gt;
+   &lt;/font&gt;&lt;font size="2"&gt;@valueList &lt;/font&gt;&lt;font color="#808080" size="2"&gt;=&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff00ff" size="2"&gt;COALESCE&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;@valueList &lt;/font&gt;&lt;font color="#808080" size="2"&gt;+&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff0000" size="2"&gt;','&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff0000" size="2"&gt;''&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#808080" size="2"&gt;+&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff00ff" size="2"&gt;CAST&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;Field &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;AS&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;varchar&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;FROM&lt;br /&gt;
+&lt;/font&gt;&lt;font size="2"&gt;   Table&lt;/font&gt;&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;The only way I'd seen before to do this operation involved a cursor, so it was great to come across this idea. Basically, the use of COALESCE function makes this work. For the first row, it returns an empty string, as @valueList is initially null. This makes the result 'val1'. Then, for subsequent rows, it returns the value with a comma appended, so the result is a comma seperated list. In one statement!&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>SQL</category>
+  </categories>
+  <comments></comments>
+</post>

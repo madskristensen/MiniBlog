@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Bitmap to Png converter</title>
+  <slug>bitmap-to-png-converter</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2006-12-20 16:25:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;As I develop, I often have images that are bitmaps or other formats that I want to convert to transparent .png's for use in a website. I whipped up a little app that does a bmp2png conversion, using the RegistryHelper class to hook the right click context menu. &lt;/p&gt;
+&lt;p&gt;Converting an image in .NET is very straightforward, as long as you are doing a conversion from and to a .NET supported image format. Just load the image using the System.Drawing classes, and then save it as the image format you want. Making a color transparent is easy as well -- call the Bitmap.MakeTransparent method and pass in the color to make transparent.&lt;/p&gt;
+&lt;p&gt;Here's a snippet of the code I used to do the conversion and transparency settings:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;&lt;span&gt;using&lt;/span&gt; (&lt;span&gt;Stream&lt;/span&gt; s = &lt;span&gt;File&lt;/span&gt;.OpenRead(srcFileName))&lt;br /&gt;
+&lt;span&gt;using&lt;/span&gt; (&lt;span&gt;Bitmap&lt;/span&gt; src = &lt;span&gt;Image&lt;/span&gt;.FromStream(s, &lt;span&gt;false&lt;/span&gt;, &lt;span&gt;false&lt;/span&gt;) &lt;span&gt;as&lt;/span&gt; &lt;span&gt;Bitmap&lt;/span&gt;)&lt;br /&gt;
+{ &lt;br /&gt;
+    src.MakeTransparent(TransparentColor);&lt;br /&gt;
+    src.Save(destFileName, &lt;span&gt;ImageFormat&lt;/span&gt;.Png); &lt;br /&gt;
+}&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The transparent color by default is &lt;span&gt;&lt;font size="+0"&gt;RGB 0, 255, 128&lt;/font&gt;&lt;/span&gt;. You can change it using a appSettings key in the app.config as follows:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&amp;lt;&lt;span&gt;add&lt;/span&gt; &lt;span&gt;key&lt;/span&gt;&lt;span&gt;=&lt;/span&gt;"&lt;span&gt;transparentColor&lt;/span&gt;" &lt;span&gt;value&lt;/span&gt;&lt;span&gt;=&lt;/span&gt;"&lt;span&gt;0, 255, 128&lt;/span&gt;" /&amp;gt;&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;The app registers the context menu extension automatically when you run it with no arguments, and thereafter .bmp files will have a "Convert to png" right click context menu item. It would be very simple to add additional from and to formats to this code. Let me know if this is something you'd be interested in and I'll add it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE: To register the extension, administrative permissions are required.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://programcsharp.com/blog/files/image2png.zip"&gt;&lt;img border="0" alt="" width="16" height="16" src="http://programcsharp.com/blog/files/icon-zip.png" /&gt;Bmp2Png executable&lt;/a&gt;&lt;br /&gt;
+&lt;a rel="nofollow" href="http://programcsharp.com/blog/files/image2png-source.zip"&gt;&lt;img border="0" alt="" width="16" height="16" src="http://programcsharp.com/blog/files/icon-cs.png" /&gt;Bmp2Png source&lt;/a&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Tools</category>
+    <category>Code</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="175">
+      <author>Tongle</author>
+      <email>tl@wippes.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-11-16 14:48:48</date>
+      <content>I like the idea and appreciate you code. &lt;br /&gt;&lt;br /&gt;JPEG file is quite commonly used too. Could you add conversion of Bitmap to JPEG file?</content>
+    </comment>
+    <comment isAdmin="false" id="176">
+      <author>Mark Otway</author>
+      <email>mark@otway.com</email>
+      <website>http://www.webreaper.net/</website>
+      <ip />
+      <userAgent />
+      <date>2008-06-06 09:58:02</date>
+      <content>Here's an idea. Could you add a "Clipboard to PNG file" function?&lt;br /&gt;&lt;br /&gt;I frequently have to send screenshots to email lists I'm on. I hate sending BMPs, so I do this:&lt;br /&gt;&lt;br /&gt;- Select Window&lt;br /&gt;- Alt-PrtScrn to copy screenshot to clipboard&lt;br /&gt;- Run pbrush.exe&lt;br /&gt;- Paste&lt;br /&gt;- save as PNG&lt;br /&gt;- attach to email&lt;br /&gt;&lt;br /&gt;Would be really neat to just do&lt;br /&gt;&lt;br /&gt;- Select Window&lt;br /&gt;- Alt-PrtScrn&lt;br /&gt;- Right-click desktop, choose 'Paste to PNG'&lt;br /&gt;- File created on desktop called Screen005.png&lt;br /&gt;&lt;br /&gt;:)</content>
+    </comment>
+    <comment isAdmin="false" id="180">
+      <author>programcsharp</author>
+      <email>programcsharp@hotmail.com</email>
+      <website>http://programcsharp.com/blog/Default.aspx</website>
+      <ip />
+      <userAgent />
+      <date>2010-07-12 13:7:01</date>
+      <content>You could, sure. The idea behind this code is to have a one click way to do it.</content>
+    </comment>
+    <comment isAdmin="false" id="181">
+      <author>jason</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2010-06-21 13:0:43</date>
+      <content>why not just open the bitmap and save file as png</content>
+    </comment>
+  </comments>
+</post>

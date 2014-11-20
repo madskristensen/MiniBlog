@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Blog Moved!</title>
+  <slug>blog-moved</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2009-01-22 20:40:10</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I've moved all my technical posts into this blog -- &lt;a href="http://programcsharp.com"&gt;Chris Hynes's .NET Gallimaufry&lt;/a&gt;. The RSS url for this is &lt;a href="http://feeds.feedburner.com/ChrisHynes"&gt;http://feeds.feedburner.com/ChrisHynes&lt;/a&gt;. Company news and related posts will remain at the &lt;a href="http://krystalware.com/blog/"&gt;Krystalware Blog&lt;/a&gt;, with RSS here: &lt;a href="http://feeds.feedburner.com/krystalware"&gt;http://feeds.feedburner.com/krystalware&lt;/a&gt;.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>General</category>
+  </categories>
+  <comments></comments>
+</post>

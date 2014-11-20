@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Universal Principle Names</title>
+  <slug>universal-principle-names</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2005-04-05 12:43:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;The UPN (Universal Principle Name), or as Active Directory calls it, "&lt;a rel="nofollow" href="http://technet2.microsoft.com/WindowsServer/en/library/b9d99222-bf41-40b5-a46f-5045c181b5321033.mspx"&gt;user logon name&lt;/a&gt;", are based on the IETF RFC 822, Standard for the Format of ARPA Internet Text Messages. The way active directory handles them can get a little strange sometimes. The following article has some very useful undocumented stuff about UPNs. This will prove invaluable when setting up a hosting service with multiple domains, especially for email purposes&lt;/p&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://theessentialexchange.com/blogs/michael/archive/2007/11/13/the-user-principle-name-and-you.aspx"&gt;http://theessentialexchange.com/blogs/michael/archive/2007/11/13/the-user-principle-name-and-you.aspx&lt;/a&gt; [updated]&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Active Directory</category>
+  </categories>
+  <comments></comments>
+</post>

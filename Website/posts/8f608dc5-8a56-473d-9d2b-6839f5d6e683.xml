@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Reregistering VSS and VS 2005 integration</title>
+  <slug>reregistering-vss-and-vs-2005-integration</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-01-23 14:23:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Although I hate Visual SourceSafe with a passion, my current job requires it. I much prefer SourceGear Vault, and can't wait until the day I'm back on a Vault SCC system. But for now, I must use VSS. I recently had the problem of VSS integration not working in Visual Studio 2005. I found the following steps, based on reregistering the VSS MSSCCI (MS Source Code Control Interface) dll's:&lt;/p&gt;
+&lt;p&gt;In the VSS folder (usually C:\Program Files\Microsoft Visual SourceSafe\), register the following dll's:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;ssscc.dll &lt;/li&gt;
+    &lt;li&gt;remotevssscc.dll &lt;/li&gt;
+    &lt;li&gt;tdnamespaceextension.dll &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Using regsvr32, that would look like:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;regsvr32 ssscc.dll&lt;br /&gt;
+regsvr32 remotevssscc.dll&lt;br /&gt;
+regsvr32 tdnamespaceextension.dll&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;Then open VS 2005, and go to the Tools-&amp;gt;Options and the Source Control/Plug-in Selection page. You should now be able to select Microsoft Visual SourceSafe from the plugin dropdown.&lt;/p&gt;
+&lt;p&gt;&lt;font color="#ff0000"&gt;NOTE: Source control integration is not supported in the express editions of Visual Studio.&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Thanks for these instructions goes to &lt;/em&gt;&lt;em&gt;Michael Daniel&lt;/em&gt;&lt;em&gt;.&lt;/em&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>General</category>
+    <category>Process/Policies</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="189">
+      <author>Samir</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-07-02 05:28:34</date>
+      <content>This help was awesome!</content>
+    </comment>
+  </comments>
+</post>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>How to dynamically create a generic type</title>
+  <slug>how-to-dynamically-create-a-generic-type</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2006-05-02 15:18:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Today, I ran up against a situation where I needed to create a generic type dymnamically, e.g. to specify what type the object was built around on the fly. I spent a while trying several different methods (Reflection.Emit, Lightweight Code Generation (LCG), etc.), but it turns out I was dramatically over-engineering the problem. In .NET 2.0, there is a new Type.MakeGenericType method that returns a new type that accepts a paramarray of types and returns a generic type built from those parameters.&lt;/p&gt;
+&lt;p&gt;Here is the basic usage, using the generic List&amp;lt;T&amp;gt; class for an example:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;Type genericParameterType = typeof(string);&lt;br /&gt;
+Type genericType = typeof(List&amp;lt;&amp;gt;).MakeGenericType(genericParameterType);&lt;br /&gt;
+&lt;br /&gt;
+ConstructorInfo constructor = genericType.GetConstructor(null);&lt;br /&gt;
+&lt;br /&gt;
+return constructor.Invoke(null);&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt; &lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Code</category>
+  </categories>
+  <comments></comments>
+</post>

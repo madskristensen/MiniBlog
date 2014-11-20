@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Reflector</title>
+  <slug>Reflector</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-05-18 15:21:28</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>Lutz Roeder's &lt;a rel="nofollow" href="http://www.aisto.com/roeder/dotnet/"&gt;Reflector&lt;/a&gt; is one of the most useful tools out there. It's a disassembler that allows you to point at any assembly and break down the code. &lt;a rel="nofollow" href="http://www.hanselman.com/blog/ReflectorAddinsAndPowerShellLanguageSupportForReflector.aspx"&gt;Scott Hansleman shows off a new PowerShell language plugin&lt;/a&gt; for Reflector as well as a nice snapshot of the other addins. It's a great read -- I keep forgetting about all the useful plugins you can add to Reflector.</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Code</category>
+    <category>General</category>
+    <category>Tools</category>
+  </categories>
+  <comments></comments>
+</post>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>NumLock key state at logon</title>
+  <slug>numlock-key-state-at-logon</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-02-07 23:13:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I use a laptop for a lot of my development, and for some reason, from time to time,  NumLock keeps turning on when I log on. I discovered this behavior is controlled by a registry key, and I'm assuming some program tweaks it on install. Here's the info:&lt;/p&gt;
+&lt;p&gt;Key: InitialKeyboardIndicators&lt;br /&gt;
+All Users: HKEY_USERS\.DEFAULT\Control Panel\Keyboard&lt;br /&gt;
+Current User: HKEY_CURRENT_USER\Control Panel\Keyboard&lt;/p&gt;
+&lt;p&gt;The possible settings are as follows:&lt;/p&gt;
+&lt;p&gt;Off: 0&lt;br /&gt;
+On: 2&lt;/p&gt;
+&lt;p&gt;The All Users key sets the NumLock state for the login screen.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>General</category>
+  </categories>
+  <comments></comments>
+</post>

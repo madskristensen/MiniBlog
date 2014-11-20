@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>ASP.NET 2.0 Server Application Unavailable</title>
+  <slug>asp-net-2-0-server-application-unavailable</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2005-10-04 23:33:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I just spent half an hour diagnosing an issue, and was about to give up when I finally solved it. I wanted to save anyone else out there the time.... I just installed VS 2005 RC1 to start playing with .NET 2.0 in earnest, specifically to ensure &lt;a rel="nofollow" href="http://krystalware.com/Products/SlickUpload/"&gt;SlickUpload&lt;/a&gt; compatibility. Lo and behold, when I tried to run a 2.0 website in IIS, I get this big red "Server Application Unavailable" error, with a pointer to the event viewer. When I looked in the event viewer, this is what I saw -- "Failed to execute the request because the ASP.NET process identity does not have read permissions to the global assembly cache." I fiddled around with the GAC a bit, found out that I needed to unregister SHFusion.dll to be able to set permissions, made sure the permissions were set, and still nothing.&lt;/p&gt;
+&lt;p&gt;The fix? ASPNET didn't have permission to the application directory. As soon as I gave it permission, viola, it worked. Why can't Microsoft finally start using error messages that actually make sense? Arrgh.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="26">
+      <author>jsc0624</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-05-04 14:14:58</date>
+      <content>How can I unregister SHFusion.dll?</content>
+    </comment>
+    <comment isAdmin="false" id="27">
+      <author>Chris Hynes</author>
+      <email>chrish@krystalware.com</email>
+      <website>http://krystalware.com/</website>
+      <ip />
+      <userAgent />
+      <date>2007-05-04 16:1:40</date>
+      <content>For this fix, you don't actually have to. But if you want to for some other reason, use regsvr32 from the command line, something like: "regsvr32 -u shfusion.dll". (remember to cd to or put in the proper path to the dll). You can then reregister it like this: "regsvr32 shfusion.dll".</content>
+    </comment>
+  </comments>
+</post>

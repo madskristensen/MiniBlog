@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>The comprehensive guide to Dispose, Finalization, and Resource Management</title>
+  <slug>the-comprehensive-guide-to-dispose-finalization-and-resource-management</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-02-06 19:15:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I've been developing some disposable objects, and was doing research about the proper patterns to follow. This article is a very detailed dissertation on all aspects of IDispose, Finalizers, etc in .NET. Very useful.&lt;/p&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://www.bluebytesoftware.com/blog/PermaLink.aspx?guid=88e62cdf-5919-4ac7-bc33-20c06ae539ae"&gt;http://www.bluebytesoftware.com/blog/PermaLink.aspx?guid=88e62cdf-5919-4ac7-bc33-20c06ae539ae&lt;/a&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Code</category>
+    <category>Process/Policies</category>
+  </categories>
+  <comments></comments>
+</post>

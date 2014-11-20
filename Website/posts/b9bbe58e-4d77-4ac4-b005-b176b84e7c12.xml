@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>How to center an image using css</title>
+  <slug>how-to-center-an-image-using-css</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-02-03 19:08:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I always try to develop my sites to be standards compliant, and this means using css for all formatting and positioning when possible. I keep having to look up how to center an image, so I decided to write a post so I always know where this information is.&lt;/p&gt;
+&lt;p&gt;To center an image, set the left and right margins to auto. This will make the margins fill the available space. You must also set the display to block so the image is treated as a content block. Here's a full css definition:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;img {&lt;br /&gt;
+      &lt;/code&gt;&lt;code&gt;display: block;&lt;br /&gt;
+      margin-left: auto;&lt;br /&gt;
+      margin-right: auto;&lt;br /&gt;
+}&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Client</category>
+    <category>ASP.NET</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="191">
+      <author>Marie</author>
+      <email>campus@ambrea.org</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-06-25 20:12:08</date>
+      <content>Thanks for the putting this out here!</content>
+    </comment>
+  </comments>
+</post>

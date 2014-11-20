@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>ASP.NET Issue/Bug Tracking Systems</title>
+  <slug>asp-net-issue-bug-tracking-systems</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2006-10-25 18:24:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I've run across a few ASP.NET based issue tracking tools. Here's a list of the best ones I found:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;&lt;a rel="nofollow" href="http://countersoft.com/"&gt;&lt;strong&gt;Gemini [CounterSoft]&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+    This is a lightweight, but powerful issue tracking tool. It has a very simple install, and a free license option (up to 10 users, and only on an internal server). The full enterprise license is just $280. I set this up at &lt;a rel="nofollow" href="http://assistedsolutions.com/"&gt;Assisted Solutions&lt;/a&gt; and &lt;a rel="nofollow" href="http://datarg.com/"&gt;Data Research Group&lt;/a&gt;, and they have been very happy with it thus far. It has a few quirks, but supports all the main functionality needed in an issue tracking tool. &lt;/li&gt;
+    &lt;li&gt;&lt;a rel="nofollow" href="http://sourcegear.com/dragnet/"&gt;&lt;strong&gt;Dragnet [SourceGear]&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+    Dragnet is SourceGear's entry into the issue tracking arena. It's got a prettier interface than Gemini, but as far as I can tell, doesn't have a whole lot more functionality. And the price is sky high, comparatively, at $129 per user. I use SourceGear's &lt;a rel="nofollow" href="http://sourcegear.com/vault/"&gt;Vault&lt;/a&gt; system for source control, and have been very satisfied with that, so it would seem that Dragnet would be high quality, and continuing to develop in features. But is it really worth the price premium? Perhaps &lt;a rel="nofollow" href="http://www.ericsink.com/"&gt;Eric Sink &lt;/a&gt;can weigh in with more information on that. &lt;/li&gt;
+    &lt;li&gt;&lt;a rel="nofollow" href="http://www.ifdefined.com/bugtrackernet.html"&gt;BugTracker.NET [free]&lt;/a&gt;&lt;br /&gt;
+    This is a free bug tracking system in .NET. Looks interesting, and still fairly active after several years of development &lt;/li&gt;
+    &lt;li&gt;&lt;a rel="nofollow" href="http://www.asp.net/starterkits/downloadissuetracker.aspx"&gt;Issue Tracker Starter Kit [free]&lt;/a&gt;&lt;br /&gt;
+    There is also, of course, the Microsoft Issue Tracking starter kit. &lt;/li&gt;
+    &lt;li&gt;&lt;a rel="nofollow" href="http://www.bugnetproject.com/"&gt;BugNet [free]&lt;/a&gt;&lt;br /&gt;
+    Another free bug tracker. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With the amount of free or cheap bug tracking tools, it's hard to justify having one not set up. In team development, it's invaluable. For individual developers, it's still a great tool to keep track of customer issues and todos.&lt;/p&gt;
+&lt;p&gt;If anyone has a favorite bug tracking tool, definitely drop me a comment and I'll add it to the list. And if you want a more in depth review, let me know.&lt;/p&gt;
+&lt;p&gt;UPDATE: wikipedia has a fairly exhaustive &lt;a rel="nofollow" href="http://en.wikipedia.org/wiki/Comparison_of_issue_tracking_systems"&gt;grid of bug tracking systems&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;UPDATE: &lt;a rel="nofollow" href="http://weblogs.asp.net/fmarguerie/pages/bug-tracking-tools.aspx"&gt;another list&lt;/a&gt; of bug tracking systems&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+    <category>Process/Policies</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="160">
+      <author>Robert Johnson</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-08-15 16:55:31</date>
+      <content>A bit late the the party, but I would like to add &lt;a href="http://www.teamsupport.com"&gt;TeamSupport.com&lt;/a&gt; to the mix as well.&lt;br /&gt;&lt;br /&gt;TeamSupport is an ASP.NET (C#) integrated customer service and bug tracking system.  It is a hosted solution with various plans depending on what needs you have.&lt;br /&gt;&lt;br /&gt;While most bug tracking systems are standalone and only focus on the developers, TeamSupport works with the customer service group, QA, product management, and of course the developers so that all of the teams are working off the same system.</content>
+    </comment>
+    <comment isAdmin="false" id="161">
+      <author>Morle</author>
+      <email>info@issue-tracking-software.de</email>
+      <website>http://www.issue-tracking-software.de/</website>
+      <ip />
+      <userAgent />
+      <date>2008-05-15 09:41:25</date>
+      <content>Hi,&lt;br /&gt;&lt;br /&gt;here is another list with bug tracking tools and some feature informations at www.issue-tracking-software.de&lt;br /&gt;&lt;br /&gt;BR Morle</content>
+    </comment>
+  </comments>
+</post>

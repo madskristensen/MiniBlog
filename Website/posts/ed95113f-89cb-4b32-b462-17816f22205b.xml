@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Recursively find ASP.NET controls by type with generics</title>
+  <slug>Recursively-find-controls-by-type-with-generics</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2008-01-02 21:37:51</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Sometimes you want to work with all controls on an ASP.NET page by type rather than id. I finally got fed up with the lack of builtin support, and wrote the following method that returns all controls inside another control (or page) by type:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&lt;span style="COLOR: #0000ff"&gt;public&lt;/span&gt; List&amp;lt;T&amp;gt; FindControls&amp;lt;T&amp;gt;(&lt;span style="COLOR: #339966"&gt;Control&lt;/span&gt; parent) &lt;span style="COLOR: #0000ff"&gt;where&lt;/span&gt; &amp;lt;T&amp;gt; : &lt;span style="COLOR: #339966"&gt;Control&lt;/span&gt;&lt;br /&gt;
+{&lt;br /&gt;
+    &lt;span style="COLOR: #339966"&gt;List&lt;/span&gt;&amp;lt;T&amp;gt; foundControls = new &lt;span style="COLOR: #339966"&gt;List&lt;/span&gt;&amp;lt;T&amp;gt;();&lt;br /&gt;
+&lt;br /&gt;
+    FindControls&amp;lt;T&amp;gt;(parent, foundControls);&lt;br /&gt;
+&lt;br /&gt;
+    &lt;span style="COLOR: #0000ff"&gt;return&lt;/span&gt; foundControls;&lt;br /&gt;
+}&lt;br /&gt;
+&lt;br /&gt;
+&lt;span style="COLOR: #0000ff"&gt;void&lt;/span&gt; FindControls&amp;lt;T&amp;gt;(&lt;span style="COLOR: #339966"&gt;Control&lt;/span&gt; parent, &lt;span style="COLOR: #339966"&gt;List&lt;/span&gt;&amp;lt;T&amp;gt; foundControls) &lt;span style="COLOR: #0000ff"&gt;where&lt;/span&gt; &amp;lt;T&amp;gt; : &lt;span style="COLOR: #339966"&gt;Control&lt;/span&gt;&lt;br /&gt;
+{&lt;br /&gt;
+    &lt;span style="COLOR: #0000ff"&gt;foreach&lt;/span&gt; (&lt;span style="COLOR: #339966"&gt;Control&lt;/span&gt; c &lt;span style="COLOR: #0000ff"&gt;in&lt;/span&gt; parent.Controls)&lt;br /&gt;
+    {&lt;br /&gt;
+        &lt;span style="COLOR: #0000ff"&gt;if&lt;/span&gt; (c &lt;span style="COLOR: #0000ff"&gt;is&lt;/span&gt; &amp;lt;T&amp;gt;)&lt;br /&gt;
+            foundControls.Add((&amp;lt;T&amp;gt;)c);&lt;br /&gt;
+        &lt;span style="COLOR: #0000ff"&gt;else if &lt;/span&gt;(c.Controls.Count &amp;gt; 0)&lt;br /&gt;
+            FindControls&amp;lt;T&amp;gt;(parent, foundControls);                &lt;br /&gt;
+    }&lt;br /&gt;
+}&lt;/code&gt;&lt;/blockquote&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+    <category>Code</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="246">
+      <author>Arsi</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-12-30 12:22:33</date>
+      <content>Thanks, that helped me a lot! :)</content>
+    </comment>
+    <comment isAdmin="false" id="247">
+      <author>Eric Chau</author>
+      <email>eric@devcube.net</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-12-03 19:5:39</date>
+      <content>Your code has inspired me to create a utility class that does exactly as shown. However, I have found some errors in the code.  The cleaned up version is as follows. Cheers.&lt;br /&gt;&lt;br /&gt;  public class ControlUtility&lt;br /&gt;  {&lt;br /&gt;    public static List&amp;lt;T&amp;gt; FindControls&amp;lt;T&amp;gt;(Control parent) where T : Control&lt;br /&gt;    {&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;      List&amp;lt;T&amp;gt; foundControls = new List&amp;lt;T&amp;gt;();&lt;br /&gt;&lt;br /&gt;      FindControls&amp;lt;T&amp;gt;(parent, foundControls);&lt;br /&gt;&lt;br /&gt;      return foundControls;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;    static void FindControls&amp;lt;T&amp;gt;(Control parent, List&amp;lt;T&amp;gt; foundControls) where T : Control&lt;br /&gt;    {&lt;br /&gt;      foreach (Control c in parent.Controls)&lt;br /&gt;      {&lt;br /&gt;        if (c is T)&lt;br /&gt;          foundControls.Add((T)c);&lt;br /&gt;        else if (c.Controls.Count &amp;gt; 0)&lt;br /&gt;          FindControls&amp;lt;T&amp;gt;(c, foundControls);&lt;br /&gt;      }&lt;br /&gt;    }&lt;br /&gt;  }</content>
+    </comment>
+    <comment isAdmin="false" id="248">
+      <author>David Brown</author>
+      <email>david.brown5@navy.mil</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-07-11 14:32:39</date>
+      <content>I tried converting to vb.net, unable to do so.  Would you have this in VB.net?  If so please forward.&lt;br /&gt;&lt;br /&gt;thanks</content>
+    </comment>
+    <comment isAdmin="false" id="249">
+      <author>Mendy</author>
+      <email>menachem@bwayphoto.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-08-14 21:2:51</date>
+      <content>Public Function FindControls(Of T) where (Of T) : Control(ByVal parent As Control) As List(Of T)&lt;br /&gt;	Dim foundControls As List(Of T) = New List(Of T)()&lt;br /&gt;&lt;br /&gt;	FindControls(Of T)(parent, foundControls)&lt;br /&gt;&lt;br /&gt;	Return foundControls&lt;br /&gt;End Function&lt;br /&gt;&lt;br /&gt;Private Sub FindControls(Of T) where (Of T) : Control(ByVal parent As Control, ByVal foundControls As List(Of T))&lt;br /&gt;	For Each c As Control In parent.Controls&lt;br /&gt;		If TypeOf c Is (Of T) Then&lt;br /&gt;			foundControls.Add(CType(c, (Of T)))&lt;br /&gt;		ElseIf c.Controls.Count &amp;gt; 0 Then&lt;br /&gt;			FindControls(Of T)(parent, foundControls)&lt;br /&gt;		End If&lt;br /&gt;	Next c&lt;br /&gt;End Sub</content>
+    </comment>
+    <comment isAdmin="false" id="259">
+      <author>Richard Collette</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2010-09-16 19:54:35</date>
+      <content>The VB version wasn't quite VB and does some extra type casting.  Here is some updated VB code (sorry the formatting isn't preserved.&lt;br /&gt;&lt;br /&gt;    Public Function FindControls(Of T As Control)(ByVal parent As Control) As List(Of T)&lt;br /&gt;        Dim foundControls As List(Of T) = New List(Of T)()&lt;br /&gt;        FindControls(Of T)(parent, foundControls)&lt;br /&gt;        Return foundControls&lt;br /&gt;    End Function&lt;br /&gt;&lt;br /&gt;    Public Sub FindControls(Of T As Control)(ByVal parent As Control, ByVal foundControls As List(Of T))&lt;br /&gt;        For Each c As Control In parent.Controls&lt;br /&gt;            Dim cOfT As T = TryCast(c, T)&lt;br /&gt;            If cOfT IsNot Nothing Then&lt;br /&gt;                foundControls.Add(cOfT)&lt;br /&gt;            ElseIf c.Controls.Count &amp;gt; 0 Then&lt;br /&gt;                FindControls(Of T)(parent, foundControls)&lt;br /&gt;            End If&lt;br /&gt;        Next c&lt;br /&gt;    End Sub</content>
+    </comment>
+  </comments>
+</post>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>MIX 07</title>
+  <slug>MIX-07</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-04-20 23:38:41</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I'm going to be at &lt;a rel="nofollow" href="http://visitmix.com"&gt;MIX 07&lt;/a&gt; next week. If you want to meet, hang out, etc., leave me a comment, send me an email (programcsharp atnospam hotmail dot com), or give me a ring at (703) 868-2236.&lt;/p&gt;
+&lt;p&gt;Oh... and lets not forget the bling:&lt;/p&gt;
+&lt;p&gt;&lt;img height="180" width="130" alt="" src="http://krystalware.com/files/blue_meet.png" /&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>General</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="229">
+      <author>Rob Garrett</author>
+      <email>rob@robgarrett.com</email>
+      <website>http://robgarrett.com/</website>
+      <ip />
+      <userAgent />
+      <date>2007-04-28 04:31:03</date>
+      <content>Let me know what the "surprise announcement" from MS is, I am dying to know ;)</content>
+    </comment>
+    <comment isAdmin="false" id="230">
+      <author>Chris Hynes</author>
+      <email>chrish@krystalware.com</email>
+      <website>http://krystalware.com/</website>
+      <ip />
+      <userAgent />
+      <date>2007-05-04 16:17:20</date>
+      <content>The big news was Silverlight (http://silverlight.net/Default.aspx). Basically, a flash competitor, but with some pretty sweet windows media integration as well as (eventually) .NET integration. I'll probably write a followup article on this sometime in future...</content>
+    </comment>
+  </comments>
+</post>

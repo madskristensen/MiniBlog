@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Spoofing an ASP.NET MVC request to use a ViewMasterPage with a non MVC content page</title>
+  <slug>spoofing-asp.net-mvc-request-viewmasterpage-non-mvc-content-page</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2010-03-02 15:36:45</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Sometimes my application has a section with normal ASP.NET requests that doesn't go through the ASP.NET MVC pipeline. I still want to integrate it with the ASP.NET MVC section of my app, using the same master page for example. The ViewMasterPage validates to make sure that the page being rendered is a ViewPage with the same type, so you can't use a normal page with a ViewMasterPage. If you run a ViewPage without an ASP.NET MVC context, all of the html helper methods will throw NullReferenceExceptions.&lt;/p&gt;
+&lt;p&gt;The solution to this issue is to make your page inherit from ViewPage, and then spoof the ASP.NET MVC context before the page renders. This will allow the page to work with a normal ASP.NET request (no ASP.NET MVC pipeline), but also use the same ViewMasterPage used for the rest of your site.&lt;/p&gt;
+&lt;p&gt;Here's what to do:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Make your page class inherit from ViewPage instead of Page.&lt;/li&gt;
+    &lt;li&gt;Add the following method to your page:
+&lt;blockquote&gt;&lt;code&gt;
+void SpoofMvc()&lt;br /&gt;
+{&lt;br /&gt;
+    ControllerContext ctx = new ControllerContext();&lt;br /&gt;
+&lt;br /&gt;
+    ctx.RouteData = new RouteData();&lt;br /&gt;
+&lt;br /&gt;
+    ctx.HttpContext = new HttpContextWrapper(Context);&lt;br /&gt;
+    ctx.RouteData.Values.Add("controller", "TightContent");&lt;br /&gt;
+    ctx.RouteData.Values.Add("action", "View");&lt;br /&gt;
+&lt;br /&gt;
+    this.Html = new HtmlHelper&lt;object&gt;(new ViewContext(ctx, new WebFormView(this.Request.FilePath), ViewData, new TempDataDictionary(), Response.Output), this);&lt;br /&gt;
+}
+&lt;/object&gt;&lt;/code&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+    &lt;li&gt;Call the method before the page is rendered. Page_Load or Page_PreRender should work.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+  </categories>
+  <comments></comments>
+</post>

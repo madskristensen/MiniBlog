@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Import from Community Server to AspNetForum</title>
+  <slug>import-from-community-server-to-aspnetforum</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2008-02-12 16:20:21</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;&lt;strong&gt;UPDATE: Added support for importing tracked forums and topics.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I'm in the process of converting my forums from &lt;a rel="nofollow" href="http://communityserver.org/"&gt;Community Server&lt;/a&gt; to &lt;a rel="nofollow" href="http://www.jitbit.com/asp-net-forum.aspx"&gt;AspNetForum&lt;/a&gt;. While CS may support every single feature under the sun, its very big and unwieldly to work with. The more recent 2007 and 2008 versions are better, but still behemoth. I just want to drop in one simple forum with a couple subgroups, not host a million forums and blogs on my site. For this, AspNetForum fits the bill exactly.&lt;/p&gt;
+&lt;p&gt;There's no official importer for Community Server to AspNetForum, so I wrote my own. It turns out to be fairly simple. Just a SQL script will do it. Here are the steps the script goes through:&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;Import the ASP.NET application, user, and membership tables &lt;/li&gt;
+    &lt;li&gt;Create the AspNetForum single sign-on linkages in its ForumUsers table &lt;/li&gt;
+    &lt;li&gt;Import the groups, forums, topics, and messages &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I packaged all this up into a SQL script that handles the whole process end to end. Just edit it to point to your database and forums and it will do the rest. It assumes the following:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;You've created and set up an AspNetForum database &lt;/li&gt;
+    &lt;li&gt;You've created the ASP.NET user and membership tables in the AspNetForum database &lt;/li&gt;
+    &lt;li&gt;The AspNetForum and ASP.NET user and membership tables are new and empty &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This script will import everything with the same ID values from Community Server, making mapping or redirecting easy.&lt;/p&gt;
+&lt;p&gt;To use the script in SQL Management Studio, do the following steps:&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;Open the script (Import.sql) and connect it to your AspNetForum database &lt;/li&gt;
+    &lt;li&gt;Execute a search and replace operation that replaces "CSDatabaseName" with the name of your Community Server database &lt;/li&gt;
+    &lt;li&gt;Set the @applicationId variable to the ApplicationId matching your Community Server instance in the aspnet_Applications table in your CS database &lt;/li&gt;
+    &lt;li&gt;Set the @groupId variable to the GroupId of the forum group to import from the cs_Groups table &lt;/li&gt;
+    &lt;li&gt;Execute the script &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Download the script and get importing! – &lt;a rel="nofollow" href="http://programcsharp.com/blog/files/CommunityServer2AspNetForumsImport.zip"&gt;CommunityServer2AspNetForumsImport.zip&lt;/a&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+    <category>General</category>
+    <category>SQL</category>
+    <category>Tools</category>
+  </categories>
+  <comments></comments>
+</post>

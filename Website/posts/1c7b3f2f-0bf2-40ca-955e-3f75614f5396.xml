@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Get the MIME type of a System.Drawing Image</title>
+  <slug>Get-the-MIME-type-of-a-System.Drawing-Image</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2008-01-17 17:10:18</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I needed a method to get the mime type of a System.Drawing Image instance that I'd loaded from an upload. All articles I was able to find online suggest some kind of lookup table solution. There's actually another way. Given an Image i, you can map from the i.RawFormat.Guid property to an ImageCodecInfo.FormatID. So it becomes a very simple for loop to get the MIME type of an image or bitmap. This works for any format System.Drawing/GDI+ supports (bmp, png, tiff, jpg/jpeg, etc). Here's the code:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&lt;font color="#3366ff"&gt;&lt;font color="#0000ff"&gt;public static string&lt;/font&gt; &lt;/font&gt;GetMimeType(&lt;font color="#008080"&gt;Image &lt;/font&gt;i)&lt;br /&gt;
+{&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;foreach&lt;/font&gt; (&lt;font color="#008080"&gt;ImageCodecInfo&lt;/font&gt; codec &lt;font color="#0000ff"&gt;in &lt;/font&gt;&lt;font color="#008080"&gt;ImageCodecInfo&lt;/font&gt;.GetImageDecoders())&lt;br /&gt;
+    {&lt;br /&gt;
+        &lt;font color="#0000ff"&gt;if&lt;/font&gt; (codec.FormatID == i.RawFormat.Guid)&lt;br /&gt;
+            &lt;font color="#0000ff"&gt;return&lt;/font&gt; codec.MimeType;&lt;br /&gt;
+    }&lt;br /&gt;
+&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;return&lt;/font&gt; &lt;font color="#800000"&gt;"image/unknown"&lt;/font&gt;;&lt;br /&gt;
+}&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;This won't work for images that were created on the fly (will return "image/unknown"), but will work for all images that were loaded from some source (file, stream, byte[], etc).&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+    <category>Code</category>
+    <category>Imaging</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="267">
+      <author>Phil Smith</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2010-04-13 17:17:16</date>
+      <content>Thanks for this code. Owe you a beer.</content>
+    </comment>
+    <comment isAdmin="false" id="272">
+      <author>hina</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-05-08 06:25:44</date>
+      <content>Thanks!!!</content>
+    </comment>
+    <comment isAdmin="false" id="273">
+      <author>edward jay</author>
+      <email>edward.jay@mac.com</email>
+      <website>http://www.edwardjay.co.uk/</website>
+      <ip />
+      <userAgent />
+      <date>2008-08-30 10:58:53</date>
+      <content>Thanks for your post, vberror12. I think this is just what I'm after.&lt;br /&gt;&lt;br /&gt;But excuse my ignorance.could you please clarify how I make the link between &lt;br /&gt;&lt;br /&gt;System.Drawing.Imaging.RawFormat.Guid  &lt;br /&gt;&lt;br /&gt;and the original call to the image ie.&lt;br /&gt;&lt;br /&gt;Dim fullSizeImg as System.Drawing.Image  = System.Drawing.Image.FromFile(fullpath)&lt;br /&gt;&lt;br /&gt;Many thanks..&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;</content>
+    </comment>
+    <comment isAdmin="false" id="282">
+      <author>vberror13</author>
+      <email>vberror13@yahoo.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-06-14 10:26:50</date>
+      <content>Thanks, i was looking for this codes.</content>
+    </comment>
+    <comment isAdmin="false" id="283">
+      <author>steve</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-12-31 19:9:48</date>
+      <content>great post.  exactly what I needed.  I too prefer not to use large switch statements when a small loop can do the trick.</content>
+    </comment>
+    <comment isAdmin="false" id="285">
+      <author>ddboook</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-09-16 02:15:51</date>
+      <content>Thanks! Your code is very good!</content>
+    </comment>
+  </comments>
+</post>

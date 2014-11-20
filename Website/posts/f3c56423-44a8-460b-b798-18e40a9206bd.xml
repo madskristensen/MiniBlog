@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>How to use iBatis/NHibernate in medium trust/partial trust environments like Mosso</title>
+  <slug>ibatis-nhibernate-mosso-medium-trust-partial-trust-environments</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2009-08-19 20:04:29</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Many shared hosting providers (in this case Mosso) run your ASP.NET applications in a medium trust or modified medium trust environment to reduce security risks. This causes issues with certain techniques and components that require permissions removed by medium trust. &lt;/p&gt;
+&lt;p&gt;One of the biggest issues other than the actual restriction of permissions is the restriction of partially trusted assemblies calling fully trusted code. By default, if an assembly is strong named, partially trusted assemblies (i.e. the application assemblies in your app running under medium/partial trust) can't call it. This hits many open source components such as iBatis and NHibernate. The workaround to this is to add the AllowPartiallyTrustedCallers assembly level attribute. This will mark the assembly as safe for calling by partially trusted assemblies. &lt;/p&gt;
+&lt;p&gt;Here is an example of how to modify iBatis to support this:&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;Download the iBatis source from the iBatis website: &lt;a href="http://ibatis.apache.org/dotnet.cgi"&gt;http://ibatis.apache.org/dotnet.cgi&lt;/a&gt; &lt;/li&gt;
+    &lt;li&gt;Extract the source .zip to a folder&lt;/li&gt;
+    &lt;li&gt;Open the IBatisNet.2005.sln solution in VS.NET&lt;/li&gt;
+    &lt;li&gt;For each project in the solution, open it's AssemblyInfo.cs file
+    &lt;ol&gt;
+        &lt;li&gt;Add this using statement at the top of the file: "using System.Security;"&lt;/li&gt;
+        &lt;li&gt;Add this attribute at the bottom of the file: "[assembly: AllowPartiallyTrustedCallers]"&lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Right click on the solution and select "Configuration Manager..."&lt;/li&gt;
+    &lt;li&gt;In the "Active solution configuration" dropdown, select Release&lt;/li&gt;
+    &lt;li&gt;Uncheck all of the Test projects&lt;/li&gt;
+    &lt;li&gt;Click OK&lt;/li&gt;
+    &lt;li&gt;Build the solution&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Or you can download the compiled assemblies: &lt;a href="http://programcsharp.com/blog/files/iBatis-PartialTrust.zip"&gt;iBatis-PartialTrust.zip&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;Enabling NHibernate for medium/partial trust is a similar procedure. If there is enough demand I will present steps and compiled assemblies for it as well.&lt;/p&gt;
+&lt;p&gt;As for the permission restrictions, most shared hosting providers don't actually run in medium trust as this restricts many useful things such as Reflection etc. One example I've run into recently is Mosso's modified medium trust. They take medium trust, which consists of the following denied permission restrictions: &lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Call unmanaged code.&lt;/li&gt;
+    &lt;li&gt;Call serviced components.&lt;/li&gt;
+    &lt;li&gt;Write to the event log.&lt;/li&gt;
+    &lt;li&gt;Access Microsoft Message Queuing queues.&lt;/li&gt;
+    &lt;li&gt;Access ODBC, OleDb, or Oracle data sources.&lt;/li&gt;
+    &lt;li&gt;Access files outside the application directory.&lt;/li&gt;
+    &lt;li&gt;Access the registry.&lt;/li&gt;
+    &lt;li&gt;Make network or Web service calls (using the System.Net.HttpWebRequest class, for example).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And then Mosso adds back in the following allowed permission to come up with "modified medium trust": &lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;WebPermission Unrestricted="true"&lt;/li&gt;
+    &lt;li&gt;OleDbPermission Unrestricted="true"&lt;/li&gt;
+    &lt;li&gt;OdbcPermission Unrestricted="true"&lt;/li&gt;
+    &lt;li&gt;SocketPermission Unrestricted="true"&lt;/li&gt;
+    &lt;li&gt;ConfigurationPermission Unrestricted="true"&lt;/li&gt;
+    &lt;li&gt;ReflectionPermission Unrestricted="true"&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is still rather limiting, but at least you can get most things done as long as you can call into the necessary assemblies without getting exceptions as discussed in the workaround section above.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+    <category>General</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="335">
+      <author>SKC</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2010-04-21 09:41:58</date>
+      <content>May be a little bit off-topic.&lt;br /&gt;&lt;br /&gt;If we want to access an external Oracle DB from a ASP.NET application running on MOSSO, is it possible?&lt;br /&gt;&lt;br /&gt;If so, since we only have FTP access, how do we install Oracle/ODBC specific stuff?</content>
+    </comment>
+    <comment isAdmin="false" id="336">
+      <author>programcsharp</author>
+      <email>programcsharp@hotmail.com</email>
+      <website>http://programcsharp.com/blog/Default.aspx</website>
+      <ip />
+      <userAgent />
+      <date>2010-05-03 16:30:13</date>
+      <content>You may be able to do Oracle on Mosso if you use an entirely .NET Oracle database provider that works with the permission set Mosso provides. You won't be able to get all of the typical Oracle Client stuff set up on Mosso, but some providers are out there that can access Oracle directly via tcp/ip.&lt;br /&gt;&lt;br /&gt;You also would have to host the Oracle DB somewhere else and connect to it via tcp/ip.</content>
+    </comment>
+    <comment isAdmin="false" id="340">
+      <author>Dave</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-08-19 20:9:28</date>
+      <content>Works perfectly.  Thanks for the tip.  I just plugged your iBatis DLLs right in, over top of my current ones, and they worked fine.</content>
+    </comment>
+  </comments>
+</post>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Web site staging using CruiseControl.NET</title>
+  <slug>web-site-staging-using-cruisecontrol-net</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2006-07-23 20:09:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Most ASP.NET development shops have multiple projects, each with multiple developers working on them. Keeping track of these projects, and making sure they are available in a common location for review can be quite a chore. Recently, I set up a staging server for my company using CruiseControl.NET. This enables any developer, project manager, or other stakeholder to have access to the latest version of the site as it is being built. Because it is an automated process, there is no developer time required to generate and post updates to the central development staging server. This method is also useful for teams practicing Continuous Integration, but the main goal is to use easily available tools to create an automated staging server for ASP.NET web applications.&lt;/p&gt;
+&lt;p&gt;This post outlines the steps required to create an automated staging server using CruiseControl.NET. It also goes through several gotchas that can cause issues if you aren't prepared for them.&lt;/p&gt;
+&lt;h3&gt;What is CruiseControl.NET?&lt;/h3&gt;
+&lt;blockquote&gt;CruiseControl.NET (CCNet) consists of a suite of applications, but at its core is the CruiseControl.NET Server which is an automated integration server. The Server automates the integration process by monitoring the team's source control repository directly. Every time a developer commits a new set of modifications, the server will automatically launch an integration build to validate the changes. When the build is complete, the server notifies the developer whether the changes that they committed integrated successfully or not. &lt;br /&gt;
+-- &lt;a rel="nofollow" href="http://confluence.public.thoughtworks.org/display/CCNET/What+is+CruiseControl.NET"&gt;From the CruiseControl.NET site&lt;/a&gt; &lt;/blockquote&gt;
+&lt;h3&gt;What is Continuous Integration?&lt;/h3&gt;
+&lt;blockquote&gt;The practice of continuous integration represents a fundamental shift in the process of building software. It takes integration, commonly an infrequent and painful exercise, and makes it a simple, core part of a developer's daily activities. Integrating continuously makes integration a part of the natural rhythm of coding, an integral part of the test-code-refactor cycle. Continuous integration is about progressing steadily forward by taking small steps. ... A successful integration is a measure of progress. It provides feedback that the new code runs correctly in the integration environment and successfully interoperates with the rest of the code base. Code sitting unintegrated in a developer's workspace simply does not exist. It is not part of the code base, it cannot be accessed by other developers or tested by the customer. Only when it has been successfully integrated is the benefit of the new code realised. &lt;br /&gt;
+-- &lt;a rel="nofollow" href="http://confluence.public.thoughtworks.org/display/CCNET/What+is+Continuous+Integration"&gt;From the CruiseControl.NET site&lt;/a&gt; &lt;/blockquote&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;Server running IIS and ASP.NET 2.0 -- this will most likely be a normal Windows Server 2003 box, but a Windows XP box could be used if necessary. This should also work with &lt;a rel="nofollow" href="http://mono-project.com/"&gt;Mono&lt;/a&gt; on a linux box or other platforms Mono supports, but I haven't tested that configuration.&lt;/p&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://ccnet.thoughtworks.net/"&gt;CruiseControl.NET&lt;/a&gt; - &lt;a rel="nofollow" href="http://prdownloads.sourceforge.net/ccnet/CruiseControl-1.0.1.NET.zip?download"&gt;Download [.zip]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://ccnetlive.thoughtworks.com/MSBuildXmlLogger-Builds/"&gt;MSBuild XML logger&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Source control software - this example uses &lt;a rel="nofollow" href="http://sourcegear.com/vault/"&gt;SourceGear Vault&lt;/a&gt;, but any other source control tool supported by CruiseControl.NET should work. Here's a list of the &lt;a rel="nofollow" href="http://confluence.public.thoughtworks.org/display/CCNET/Using+CruiseControl.NET+with+other+applications"&gt;scc tools supported by CruiseControl&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Setting up CruiseControl&lt;/h2&gt;
+&lt;p&gt;Setting up CruiseControl.NET is very simple. &lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;&lt;a rel="nofollow" href="http://prdownloads.sourceforge.net/ccnet/CruiseControl-1.0.1.NET.zip?download"&gt;Grab the .zip&lt;/a&gt;. &lt;/li&gt;
+    &lt;li&gt;Extract it to a folder on your server. &lt;/li&gt;
+    &lt;li&gt;Create a virtual directory to the webdashboard folder. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Adding an application to CruiseControl&lt;/h2&gt;
+&lt;p&gt;Create a folder to hold the root of your source repository. I generally put this in c:\dev, or some other simple folder on the server.&lt;/p&gt;
+&lt;p&gt;Use your source control to pull down the root folder of your application. This ensures that the folder structure is created properly. After adding the application to CruiseControl.NET, the source will be updated automatically.&lt;/p&gt;
+&lt;p&gt;Drop the MSBuild XML logger dll into the root folder of the application. Because the MSBuild task is a CruiseControl.NET addon, it doesn't include support for parsing the MSBuild build log.&lt;/p&gt;
+&lt;p&gt;Open the ccnet.config file in the server folder of the CruiseControl.NET application. I pulled out a template application configuration from my setup. Descriptions of each section follow.&lt;/p&gt;
+&lt;p&gt;&amp;lt;cruisecontrol&amp;gt;&lt;br /&gt;
+ &amp;lt;project name="project"&amp;gt;&lt;br /&gt;
+  &amp;lt;webURL&amp;gt;http://server/project/&amp;lt;/webURL&amp;gt;&lt;br /&gt;
+  &amp;lt;triggers&amp;gt;&lt;br /&gt;
+   &amp;lt;intervalTrigger seconds="60" /&amp;gt;&lt;br /&gt;
+  &amp;lt;/triggers&amp;gt;&lt;br /&gt;
+  &amp;lt;sourcecontrol type="vault" autoGetSource="true" applyLabel="false"&amp;gt;&lt;br /&gt;
+   &amp;lt;executable&amp;gt;c:\program files\sourcegear\vault client\vault.exe&amp;lt;/executable&amp;gt;&lt;br /&gt;
+   &amp;lt;username&amp;gt;user&amp;lt;/username&amp;gt;&lt;br /&gt;
+   &amp;lt;password&amp;gt;password&amp;lt;/password&amp;gt;&lt;br /&gt;
+   &amp;lt;host&amp;gt;source.company.com&amp;lt;/host&amp;gt;&lt;br /&gt;
+   &amp;lt;repository&amp;gt;repository&amp;lt;/repository&amp;gt;&lt;br /&gt;
+   &amp;lt;folder&amp;gt;$/project/trunk&amp;lt;/folder&amp;gt;&lt;br /&gt;
+   &amp;lt;ssl&amp;gt;false&amp;lt;/ssl&amp;gt;&lt;br /&gt;
+   &amp;lt;useWorkingDirectory&amp;gt;false&amp;lt;/useWorkingDirectory&amp;gt;&lt;br /&gt;
+   &amp;lt;workingDirectory&amp;gt;c:\dev\project\trunk&amp;lt;/workingDirectory&amp;gt;&lt;br /&gt;
+  &amp;lt;/sourcecontrol&amp;gt;&lt;br /&gt;
+  &amp;lt;tasks&amp;gt;&lt;br /&gt;
+   &amp;lt;msbuild&amp;gt;&lt;br /&gt;
+    &amp;lt;executable&amp;gt;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe&amp;lt;/executable&amp;gt;&lt;br /&gt;
+    &amp;lt;workingDirectory&amp;gt;c:\dev\project\trunk&amp;lt;/workingDirectory&amp;gt;&lt;br /&gt;
+    &amp;lt;projectFile&amp;gt;project.sln&amp;lt;/projectFile&amp;gt;&lt;br /&gt;
+    &amp;lt;buildArgs&amp;gt;/noconsolelogger /p:Configuration=Debug /v:diag&amp;lt;/buildArgs&amp;gt;&lt;br /&gt;
+    &amp;lt;targets&amp;gt;Build&amp;lt;/targets&amp;gt;&lt;br /&gt;
+    &amp;lt;timeout&amp;gt;15&amp;lt;/timeout&amp;gt;&lt;br /&gt;
+    &amp;lt;logger&amp;gt;ThoughtWorks.CruiseControl.MsBuild.XmlLogger,ThoughtWorks.CruiseControl.MsBuild.dll&amp;lt;/logger&amp;gt;&lt;br /&gt;
+   &amp;lt;/msbuild&amp;gt;&lt;br /&gt;
+  &amp;lt;/tasks&amp;gt;&lt;br /&gt;
+ &amp;lt;/project&amp;gt;&lt;br /&gt;
+&amp;lt;/cruisecontrol&amp;gt;&lt;/p&gt;
+&lt;p&gt;This config file has only one project, but you can add additional projects by adding additional project sections. The important parts of this configuration are the webURL key (which we will use later in the dashboard page, so make sure this points to the location where you intend to set up the application virtual directory), and the configuration settings and locations for scc and the build task. The scc task points at a folder on the repository to bring down, and a location to put it in locally. Make sure this points properly to the application root directory you set up in the local dev tree by pulling the source manually. The projectFile key of the msbuild task should point to the solution file for the project. The workingDirectory key of the msbuild task points to the location locally where the solution file can be found.&lt;/p&gt;
+&lt;p&gt;For more information on the config file, check out &lt;a rel="nofollow" href="http://confluence.public.thoughtworks.org/display/CCNET/Configuring+the+Server"&gt;the relevant section of the CruiseControl.NET documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;NOTE: If your app has binaries that are referenced in the projects, but included elsewhere in the source tree, you will have to create another task to pull the component binaries. You can do this by creating a seperate project section, but only including a scc task and not a build task. CruiseControl.NET does not require a build task in a project. This will pull the binaries as they are updated, eliminating another manual step.&lt;/p&gt;
+&lt;p&gt;&amp;lt;project name="Components"&amp;gt;&lt;br /&gt;
+ &amp;lt;triggers&amp;gt;&lt;br /&gt;
+  &amp;lt;intervalTrigger seconds="60" /&amp;gt;&lt;br /&gt;
+ &amp;lt;/triggers&amp;gt;&lt;br /&gt;
+ &amp;lt;sourcecontrol type="vault" autoGetSource="true" applyLabel="false"&amp;gt;&lt;br /&gt;
+  &amp;lt;executable&amp;gt;c:\program files\sourcegear\vault client\vault.exe&amp;lt;/executable&amp;gt;&lt;br /&gt;
+  &amp;lt;username&amp;gt;user&amp;lt;/username&amp;gt;&lt;br /&gt;
+  &amp;lt;password&amp;gt;password&amp;lt;/password&amp;gt;&lt;br /&gt;
+  &amp;lt;host&amp;gt;source.company.com&amp;lt;/host&amp;gt;&lt;br /&gt;
+  &amp;lt;repository&amp;gt;repository&amp;lt;/repository&amp;gt;&lt;br /&gt;
+  &amp;lt;folder&amp;gt;$/Components&amp;lt;/folder&amp;gt;&lt;br /&gt;
+  &amp;lt;ssl&amp;gt;false&amp;lt;/ssl&amp;gt;&lt;br /&gt;
+  &amp;lt;useWorkingDirectory&amp;gt;false&amp;lt;/useWorkingDirectory&amp;gt;&lt;br /&gt;
+  &amp;lt;workingDirectory&amp;gt;c:\dev\Components&amp;lt;/workingDirectory&amp;gt;&lt;br /&gt;
+ &amp;lt;/sourcecontrol&amp;gt;&lt;br /&gt;
+&amp;lt;/project&amp;gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;p&gt;NOTE: If the site you are using is an ASP.NET Web Application project, you will need to install the Web App Project support files on the server. You can &lt;a rel="nofollow" href="http://msdn.microsoft.com/asp.net/reference/infrastructure/wap/default.aspx"&gt;get them from Microsoft here&lt;/a&gt;. If the server doesn't have VS 2005 installed, the installers will fail, but you can still get a web app project to build by copying over the msbuild support files manually. Follow these steps:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;On a development machine with VS and the web app project support files installed, go to C:\Program Files\MSBuild\Microsoft\VisualStudio\v8.0\WebApplications &lt;/li&gt;
+    &lt;li&gt;Get the Microsoft.WebApplication.targets file &lt;/li&gt;
+    &lt;li&gt;Create a C:\Program Files\MSBuild\Microsoft\VisualStudio\v8.0\WebApplications folder on your server &lt;/li&gt;
+    &lt;li&gt;Put the .targets file there &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;NOTE: If you are using an ASP.NET Web Site Project, and have dependancies, most likely they will not get copied properly during the compilation process. Here is an additional msbuild file you can add as a seperate task to copy the files over from the compiled web folder:&lt;/p&gt;
+&lt;p&gt;&amp;lt;Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&amp;gt;&lt;br /&gt;
+ &amp;lt;ItemGroup&amp;gt;&lt;br /&gt;
+  &amp;lt;SourceDlls Include=".\PrecompiledWeb\client\bin\*.*" /&amp;gt;&lt;br /&gt;
+ &amp;lt;/ItemGroup&amp;gt;&lt;br /&gt;
+ &amp;lt;Target Name="Build"&amp;gt;&lt;br /&gt;
+  &amp;lt;Copy sourcefiles="@(SourceDlls)" DestinationFolder=".\client\Bin" SkipUnchangedFiles="false" /&amp;gt;&lt;br /&gt;
+ &amp;lt;/Target&amp;gt;&lt;br /&gt;
+&amp;lt;/Project&amp;gt;&lt;/p&gt;
+&lt;p&gt;Call this with an additional msbuild task like so:&lt;/p&gt;
+&lt;p&gt;&amp;lt;msbuild&amp;gt;&lt;br /&gt;
+ &amp;lt;executable&amp;gt;C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe&amp;lt;/executable&amp;gt;&lt;br /&gt;
+ &amp;lt;workingDirectory&amp;gt;C:\dev\project\client&amp;lt;/workingDirectory&amp;gt;&lt;br /&gt;
+ &amp;lt;projectFile&amp;gt;copyassemblies.msbuild&amp;lt;/projectFile&amp;gt;&lt;br /&gt;
+ &amp;lt;buildArgs&amp;gt;/noconsolelogger /p:Configuration=Debug /v:diag&amp;lt;/buildArgs&amp;gt;&lt;br /&gt;
+ &amp;lt;targets&amp;gt;Build&amp;lt;/targets&amp;gt;&lt;br /&gt;
+ &amp;lt;timeout&amp;gt;15&amp;lt;/timeout&amp;gt;&lt;br /&gt;
+ &amp;lt;logger&amp;gt;ThoughtWorks.CruiseControl.MsBuild.XmlLogger,ThoughtWorks.CruiseControl.MsBuild.dll&amp;lt;/logger&amp;gt;&lt;br /&gt;
+&amp;lt;/msbuild&amp;gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;h2&gt;Building and checking status in CruiseControl&lt;/h2&gt;
+&lt;p&gt;Run ccnet.exe. This will start a dos box that shows the CruiseControl.NET status as it parses the config file, pulls source from scc, and builds the application.&lt;/p&gt;
+&lt;p&gt;Open a browser and point it to the location where you installed the web console.&lt;/p&gt;
+&lt;p&gt;Unless you make pulling from scc and building directly a regular practice, you will probably run into some reference and other build issues. Most of these should be fairly simple to resolve, and by resolving these issues you increase the quality of your repository source tree.&lt;/p&gt;
+&lt;h2&gt;Setting up the application virtual directory&lt;/h2&gt;
+&lt;p&gt;Now that the application builds successfully, you can create a virtual directory in IIS to make it accessible.&lt;/p&gt;
+&lt;p&gt;Open IIS and create a virtual directory that points to the web application folder in the source tree. Use the same name you specified for the application url above.&lt;/p&gt;
+&lt;p&gt;Open a browser and navigate to the virtual directory you created. If all the build steps went properly and the application is configured directly, you'll see your app in all its automated build glory.&lt;/p&gt;
+&lt;h2&gt;Setting up CruiseControl.NET as a service&lt;/h2&gt;
+&lt;p&gt;Up till now, we've been running CruiseControl.NET as an interactive application. This is great for testing, but doesn't work so well in a production environment. Setting CruiseControl.NET up as a service is fairly straightforward. &lt;a rel="nofollow" href="http://confluence.public.thoughtworks.org/display/CCNET/The+Server+Service+Application"&gt;Here is a tutorial&lt;/a&gt; that will walk you through the process.&lt;/p&gt;
+&lt;h2&gt;Creating a dashboard page&lt;/h2&gt;
+&lt;p&gt;The final step is to create a dashboard page that pulls together all the applications you've set up and provides an easy way to navigate to them. This is a great page to hand to a non-techical person, manager etc., so they can easily keep track of application status and review or test applications at any time. I've created a sample page that pulls the app information from the ccnet.config file. Just drop the .aspx and web.config in a folder on the staging server. You'll need to change the ccnetConfigLocation appSettings key to point to the ccnet.config file, and the ccnetConsoleLocation to point to the web console url. Feel free to modify this as necessary to fit your organization. If you come up with any innovations, it'd be great to have them so I can merge them in so everyone can take advantage of them.&lt;/p&gt;
+&lt;h2&gt;Files generated&lt;/h2&gt;
+&lt;ul&gt;
+    &lt;li&gt;Sample dashboard page and web.config &lt;/li&gt;
+    &lt;li&gt;Sample ccnet.config &lt;/li&gt;
+    &lt;li&gt;copyassemblies.msbuild &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://programcsharp.com/files/ccnetdashboard.zip"&gt;Download&lt;/a&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Process/Policies</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="158">
+      <author>jo</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-06-29 12:50:22</date>
+      <content>great</content>
+    </comment>
+  </comments>
+</post>

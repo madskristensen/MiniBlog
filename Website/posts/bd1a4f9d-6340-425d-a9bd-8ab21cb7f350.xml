@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>SQL 2008 installation issues</title>
+  <slug>sql-2008-installation-issues</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2009-10-14 03:57:36</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;With every new SQL version, it seems there are more and more headaches getting it installed, unless you're installing it on a clean OS install. I ran into error after error trying to install on a Vista box that had been upgraded to Windows 7 and had SQL 2005 already installed.&lt;/p&gt;
+&lt;p&gt;I finally dug up a blog entry that helped me out on Mark Michaelis's blog. It took a bit of digging, so I figured I'd give him a bit of google juice: &lt;a href="http://mark.michaelis.net/Blog/SQLServer2008InstallNightmare.aspx"&gt;SQL 2008 install registry issues and uninstall rollback techniques&lt;/a&gt;.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>General</category>
+  </categories>
+  <comments></comments>
+</post>

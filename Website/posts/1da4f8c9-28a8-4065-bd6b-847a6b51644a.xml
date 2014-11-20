@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Deep file and folder/directory copy in .NET</title>
+  <slug>deep-file-and-folderdirectory-copy-in-.net</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2008-01-28 19:24:13</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I just ran up against a requirement to do a deep file and folder/directory copy in .NET (C# to be exact). A quick google didn't turn up any code, so I figured I'd post what I came up with. This is a somewhat naive implementation that may run out of steam for very deep folders or 1000s of files, but works great for most things. This implementation takes a source folder and a destination folder and copies the entire structure including files and folders from the source folder to the destination.&lt;/p&gt;
+&lt;p&gt;So without further ado:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&lt;font color="#0000ff"&gt;private void&lt;/font&gt; CopyFolder(&lt;font color="#0000ff"&gt;string&lt;/font&gt; folder, &lt;font color="#0000ff"&gt;string&lt;/font&gt; destFolder)&lt;br /&gt;
+{&lt;br /&gt;
+  &lt;font color="#008080"&gt;Directory&lt;/font&gt;.CreateDirectory(destFolder);&lt;br /&gt;
+&lt;br /&gt;
+  &lt;font color="#0000ff"&gt;foreach&lt;/font&gt; (&lt;font color="#0000ff"&gt;string&lt;/font&gt; file &lt;font color="#0000ff"&gt;in&lt;/font&gt; &lt;font color="#008080"&gt;Directory&lt;/font&gt;.GetFiles(folder, "*.*", SearchOption.AllDirectories))&lt;br /&gt;
+  {&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;string&lt;/font&gt; fileName = &lt;font color="#008080"&gt;Path&lt;/font&gt;.GetFileName(file);&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;string&lt;/font&gt; filePath = &lt;font color="#008080"&gt;Path&lt;/font&gt;.GetDirectoryName(file.Substring(folder.Length + (folder.EndsWith(&lt;font color="#a31515"&gt;"\\"&lt;/font&gt;) ? 0 : 1)));&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;string&lt;/font&gt; destFilePath;&lt;br /&gt;
+&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;if&lt;/font&gt; (!&lt;font color="#0000ff"&gt;string&lt;/font&gt;.IsNullOrEmpty(filePath))&lt;br /&gt;
+    {&lt;br /&gt;
+      &lt;font color="#0000ff"&gt;string&lt;/font&gt; destFolderPath = &lt;font color="#008080"&gt;Path&lt;/font&gt;.Combine(destFolder, filePath);&lt;br /&gt;
+&lt;br /&gt;
+      &lt;font color="#008080"&gt;Directory&lt;/font&gt;.CreateDirectory(destFolderPath);&lt;br /&gt;
+&lt;br /&gt;
+      destFilePath = &lt;font color="#008080"&gt;Path&lt;/font&gt;.Combine(destFolderPath, fileName);&lt;br /&gt;
+    }&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;else&lt;/font&gt;&lt;br /&gt;
+    {&lt;br /&gt;
+      destFilePath = &lt;font color="#008080"&gt;Path&lt;/font&gt;.Combine(destFolder, fileName);&lt;br /&gt;
+    }        &lt;br /&gt;
+&lt;br /&gt;
+    &lt;font color="#008080"&gt;File&lt;/font&gt;.Copy(file, destFilePath);&lt;br /&gt;
+  }&lt;br /&gt;
+} &lt;/code&gt;&lt;/blockquote&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+    <category>Client</category>
+    <category>Code</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="292">
+      <author>Bill Pierce</author>
+      <email>wcpierce@gmail.com</email>
+      <website>http://blechie.com/wpierce/</website>
+      <ip />
+      <userAgent />
+      <date>2008-01-29 14:36:41</date>
+      <content>Any reason why you wouldn't launch a RoboCopy process?  Or an XCopy process?  Tried and true, probably faster with no 'unknown' deep copy issues.&lt;br /&gt;&lt;br /&gt;-Bill</content>
+    </comment>
+    <comment isAdmin="false" id="293">
+      <author>Chris Hynes</author>
+      <email>chrish@krystalware.com</email>
+      <website>http://krystalware.com/</website>
+      <ip />
+      <userAgent />
+      <date>2008-01-29 15:14:10</date>
+      <content>That's certainly a valid approach. Personally, I typically try to stay in .NET unless there's a clear reason to use external processes. Shelling out to robocopy or xcopy means possible additional dependancies, permissions issues, etc. If perf becomes a problem, that's definitely the next step. Right now, though, perf seems great, and the solution using it has unit tests for its functionality as well as performance.</content>
+    </comment>
+    <comment isAdmin="false" id="294">
+      <author>tervel</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-03-17 13:7:58</date>
+      <content>Good work...&lt;br /&gt;but it won't work :)&lt;br /&gt;&lt;br /&gt;You have a local variable called destFolder, same as [another] local variable that is the second param to the method. As a result the code won't compile</content>
+    </comment>
+    <comment isAdmin="false" id="295">
+      <author>programcsharp</author>
+      <email>programcsharp@hotmail.com</email>
+      <website>http://programcsharp.com/blog/Default.aspx</website>
+      <ip />
+      <userAgent />
+      <date>2009-03-17 13:39:40</date>
+      <content>Good catch. Damn copy/paste. Fixed...</content>
+    </comment>
+    <comment isAdmin="false" id="296">
+      <author>Notstarman</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-03-17 18:20:55</date>
+      <content>It dies when it hits &amp;quot;System Volume Information&amp;quot;. You need to add code to handle exceptions like improper permissions issues.</content>
+    </comment>
+  </comments>
+</post>

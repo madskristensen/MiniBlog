@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Shell File Context Menu Handler</title>
+  <slug>shell-file-context-menu-handler</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2006-12-06 18:06:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;For several programs, I've wanted to be able to add a shell context menu item for a file that runs an exe. After some research, I came up with the following information. This menu is controlled by certain registry entries under the HKCR (Classes Root) entry. In HKCR, there are two relevant entries for each file extension: the actual extension, and the handler for that extension. For .bmp, for example, the extension key is as follows:&lt;/p&gt;
+&lt;img alt="" width="473" height="83" src="http://programcsharp.com/blog/files/bmpentry.png" /&gt;
+&lt;p&gt;The key part of the extension key is the default string value that points to the handler for this extension, in this case Paint.Picture. Here's the handler:&lt;/p&gt;
+&lt;img alt="" width="716" height="195" src="http://programcsharp.com/blog/files/paintpictureentry.png" /&gt;
+&lt;p&gt;To add a new context menu item, simply add a new key to the shell subkey of the handler key. Name it whatever you want. The default string value for the key will be the caption of the menu item. To specify the command to run, add a command subkey to your menu item key. The default string value of this key should be the path to your application. You can append "%1" to pass the filename of the file to your app.&lt;/p&gt;
+&lt;p&gt;I've written a registry helper class that encapsulates all of this, allowing you to create a handler with just one line of code. You can call it as follows:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/font&gt;&lt;font color="#008080" size="2"&gt;RegistryHelper&lt;/font&gt;&lt;font size="2"&gt;.RegisterHandler(&lt;/font&gt;&lt;font color="#800000" size="2"&gt;".ext"&lt;/font&gt;&lt;font size="2"&gt;, &lt;/font&gt;&lt;font color="#800000" size="2"&gt;"commandname"&lt;/font&gt;&lt;font size="2"&gt;, &lt;/font&gt;&lt;font color="#800000" size="2"&gt;"caption"&lt;/font&gt;&lt;font size="2"&gt;, &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;true&lt;/font&gt;&lt;font size="2"&gt;);&lt;/font&gt;&lt;font size="2" /&gt;&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;Where:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;".ext" is the extension you want to add a context menu to &lt;/li&gt;
+    &lt;li&gt;"commandname" is the name of the command &lt;/li&gt;
+    &lt;li&gt;"caption" is the caption to display in the context menu &lt;/li&gt;
+    &lt;li&gt;the boolean in the last parameter determines whether to create a system-wide context menu extension, or to register it for just the current user &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This overload will determine what the path is to the currently running assembly, or you can use one of the other overloads that allows you to specify the path.&lt;/p&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://programcsharp.com/blog/files/registryhelper.zip"&gt;&lt;img border="0" alt="" width="16" height="16" src="http://programcsharp.com/blog/files/icon-cs.png" /&gt;RegistryHelper.cs&lt;/a&gt;&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Code</category>
+    <category>Tools</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="167">
+      <author>md</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2010-08-13 07:26:10</date>
+      <content>Can you provide please a simple how to add a root menu and SubMenus for it?</content>
+    </comment>
+    <comment isAdmin="false" id="172">
+      <author>Gerardo Gala</author>
+      <email>gerardo@ArtisticPinoy.com</email>
+      <website>http://www.artisticpinoy.com/</website>
+      <ip />
+      <userAgent />
+      <date>2009-03-13 17:30:04</date>
+      <content>This code worked perfectly on XP. I couldn't get it to work on Vista (Home).&lt;br /&gt;&lt;br /&gt;Anything I'm missing?&lt;br /&gt;&lt;br /&gt;Thanks!</content>
+    </comment>
+    <comment isAdmin="false" id="173">
+      <author>Chris Hynes</author>
+      <email />
+      <website>http://programcsharp.com/</website>
+      <ip />
+      <userAgent />
+      <date>2009-03-13 18:5:55</date>
+      <content>Do you have UAC on? If so, try running the code as admin -- with UAC on, Vista virtualizes some protected registry writes instead of allowing apps to write to the actual location.</content>
+    </comment>
+  </comments>
+</post>

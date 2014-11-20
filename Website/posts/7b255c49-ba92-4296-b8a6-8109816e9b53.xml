@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>SQL Server Split UDF</title>
+  <slug>sql-server-split-udf</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-02-05 19:13:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;I've seen a lot of people on the net looking for a SQL split user defined function. Looking around, there didn't seem to be anything solid and performant. I found &lt;a rel="nofollow" href="http://www.4guysfromrolla.com/webtech/031004-1.shtml"&gt;this article from 4guysfromrolla&lt;/a&gt;, but looking at all those function calls makes me sick. So I wrote my own hopefully performant UDF. I removed the split character parameter, as almost all uses I saw were based on commas. But that should be very simple to add in.&lt;/p&gt;
+&lt;p&gt;Let me know if you think of any other ideas to make it faster or better. &lt;img alt="" src="/blog/Providers/BlogEntryEditor/FCKeditor/editor/images/smiley/msn/wink_smile.gif" /&gt;&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&lt;font color="#0000ff" size="2"&gt;
+&lt;p&gt;SET&lt;/p&gt;
+&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;ANSI_NULLS&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;ON&lt;br /&gt;
+&lt;/font&gt;&lt;font size="2"&gt;GO&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;SET&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;QUOTED_IDENTIFIER&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;ON&lt;br /&gt;
+&lt;/font&gt;&lt;font size="2"&gt;GO&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;
+&lt;p&gt;CREATE&lt;/p&gt;
+&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;FUNCTION&lt;/font&gt;&lt;font size="2"&gt; Split&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;br /&gt;
+&lt;/font&gt;&lt;font size="2"&gt;   @list &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;varchar&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;255&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;br /&gt;
+)&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;RETURNS&lt;/font&gt;&lt;font size="2"&gt; @listTable &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;TABLE&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;val &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;int&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;AS&lt;br /&gt;
+BEGIN&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   DECLARE&lt;/font&gt;&lt;font size="2"&gt; @len &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;int&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   DECLARE&lt;/font&gt;&lt;font size="2"&gt; @startPos &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;int&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   DECLARE&lt;/font&gt;&lt;font size="2"&gt; @endPos &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;int&lt;/font&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   SET&lt;/font&gt;&lt;font size="2"&gt; @len &lt;/font&gt;&lt;font color="#808080" size="2"&gt;=&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff00ff" size="2"&gt;LEN&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;@list&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;/font&gt;&lt;font size="2"&gt; &lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   SET&lt;/font&gt;&lt;font size="2"&gt; @startPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;=&lt;/font&gt;&lt;font size="2"&gt; 1&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   SET&lt;/font&gt;&lt;font size="2"&gt; @endPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;=&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff00ff" size="2"&gt;CHARINDEX&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font color="#ff0000" size="2"&gt;','&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; @list&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;/font&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   WHILE&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;@endPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;&amp;gt;&lt;/font&gt;&lt;font size="2"&gt; 0&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   BEGIN&lt;br /&gt;
+      &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;INSERT&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;INTO&lt;/font&gt;&lt;font size="2"&gt; @listTable&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;         SELECT&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff00ff" size="2"&gt;SUBSTRING&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;@list&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; @startPos&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; @endPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;-&lt;/font&gt;&lt;font size="2"&gt; @startPos&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;/font&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;      SET&lt;/font&gt;&lt;font size="2"&gt; @startPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;=&lt;/font&gt;&lt;font size="2"&gt; @endPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;+&lt;/font&gt;&lt;font size="2"&gt; 1&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;      SET&lt;/font&gt;&lt;font size="2"&gt; @endPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;=&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff00ff" size="2"&gt;CHARINDEX&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font color="#ff0000" size="2"&gt;','&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; @list&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; @startPos&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   END&lt;/font&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   IF&lt;/font&gt;&lt;font size="2"&gt; @startPos &lt;/font&gt;&lt;font color="#808080" size="2"&gt;&amp;lt;=&lt;/font&gt;&lt;font size="2"&gt; @len&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;      INSERT&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;INTO&lt;/font&gt;&lt;font size="2"&gt; @listTable&lt;br /&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;         SELECT&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#ff00ff" size="2"&gt;SUBSTRING&lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;@list&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; @startPos&lt;/font&gt;&lt;font color="#808080" size="2"&gt;,&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#808080" size="2"&gt;(&lt;/font&gt;&lt;font size="2"&gt;@len &lt;/font&gt;&lt;font color="#808080" size="2"&gt;+&lt;/font&gt;&lt;font size="2"&gt; 1&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;/font&gt;&lt;font size="2"&gt; &lt;/font&gt;&lt;font color="#808080" size="2"&gt;-&lt;/font&gt;&lt;font size="2"&gt; @startPos&lt;/font&gt;&lt;font color="#808080" size="2"&gt;)&lt;/font&gt;&lt;font size="2"&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;END&lt;/p&gt;
+&lt;/font&gt;&lt;font color="#0000ff" size="2"&gt;   RETURN&lt;/font&gt;&lt;font size="2"&gt;
+&lt;p&gt;GO&lt;/p&gt;
+&lt;/font&gt;&lt;/code&gt;&lt;/blockquote&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>SQL</category>
+  </categories>
+  <comments></comments>
+</post>

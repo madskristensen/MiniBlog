@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Building WiX with MSBuild</title>
+  <slug>building-wix-with-msbuild</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2012-03-20 14:08:27</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;The WiX docs on the topic (&lt;a href="http://wix.sourceforge.net/manual-wix3/daily_builds.htm"&gt;Integrating WiX Projects Into Daily Builds&lt;/a&gt;) give a good starting point, but are incomplete, at least for the recent builds. Two additional things they forget to mention: WixToolPath needs to be an absolute path for the Wix.targets project to function properly, and WixExtDir needs to be set to WixToolPath.&lt;/p&gt;
+
+&lt;p&gt;To build WiX from the binaries with MSBuild, do the following (requires MSBuild 4):&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;Snag the binaries from the latest weekly build: &lt;a href="http://wixtoolset.org/releases"&gt;WiX Weekly Releases&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Extract them into a folder you can access with a relative path inside your source control root&lt;/li&gt;
+    &lt;li&gt;Edit all of your .wixproj files and do the following snippet before the &amp;lt;Import Project="$(WixTargetsPath)" &amp;gt; tag:
+&lt;pre&gt;  &amp;lt;WixToolPath&amp;gt;$([System.IO.Path]::GetFullPath('RELATIVEPATHTOWIX\wix\'))&amp;lt;/WixToolPath&amp;gt;
+  &amp;lt;WixTargetsPath&amp;gt;$(WixToolPath)Wix.targets&amp;lt;/WixTargetsPath&amp;gt;
+  &amp;lt;WixTasksPath&amp;gt;$(WixToolPath)wixtasks.dll&amp;lt;/WixTasksPath&amp;gt;
+  &amp;lt;WixExtDir&amp;gt;$(WixToolPath)&amp;lt;/WixExtDir&amp;gt;
+&amp;lt;/PropertyGroup&amp;gt;
+&lt;/pre&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Update the RELATIVEPATHTOWIX to be a relative path that points to the WiX binaries you extracted in step 2.
+&lt;/li&gt;&lt;/ol&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>General</category>
+    <category>Code</category>
+  </categories>
+  <comments></comments>
+</post>

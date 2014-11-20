@@ -1,6 +1,6 @@
 ﻿@{
-	string next = Blog.GetNextPage();
-	string prev = Blog.GetPrevPage();
+    string next = Blog.GetNextPage();
+    string prev = Blog.GetPrevPage();
 }
 <!doctype html>
 <html lang="en-us">
@@ -29,13 +29,13 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
     @if (!string.IsNullOrEmpty(prev))
-	{
-		<link rel="prev" href="@prev" />
-	}
-	@if (!string.IsNullOrEmpty(next))
-	{
-		<link rel="next" href="@next" />
-	}
+    {
+        <link rel="prev" href="@prev" />
+    }
+    @if (!string.IsNullOrEmpty(next))
+    {
+        <link rel="next" href="@next" />
+    }
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
 
@@ -65,12 +65,12 @@
         </div>
 
         <aside role="complementary" class="col-md-3 col-md-offset-1">
-            <section>
+            @*<section>
                 <h3>About me</h3>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper.
                 </p>
-            </section>
+            </section>*@
             <section>
                 <h3>Categories</h3>
                 <ul>
@@ -80,11 +80,11 @@
                 </ul>
             </section>
             <section>
-                <h3>My side projects</h3>
+                <h3>My projects</h3>
                 <ul>
-                    <li>Project 1</li>
-                    <li>Project 2</li>
-                    <li>Project 3</li>
+                    <li><a href="http://griddly.com">Griddly</a></li>
+                    <li><a href="https://ownerreservations.com">Owner Reservations</a></li>
+                    <li><a href="http://remotedesktoprdp.com">Remote Desktop FAQ</a></li>
                 </ul>
             </section>
         </aside>
@@ -99,7 +99,7 @@
         }
         <span>
             Copyright &copy; @DateTime.Now.Year
-            <a href="http://madskristensen.net" itemprop="url name">Mads Kristensen</a>
+            <a href="http://programcsharp.com" itemprop="url name">Chris Hynes</a>
         </span>
     </footer>
 

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>Save as G4 CCITT TIFF with .NET</title>
+  <slug>Save-as-G4-CCITT-TIFF-with-.NET</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-06-11 01:19:41</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;My friend Rob Garrett recently started a &lt;a rel="nofollow" href="http://robgarrett.com/cs/blogs/software/archive/2007/04/24/bak-2-basiks-design-patterns-the-strategy-pattern.aspx"&gt;Design Patterns post series&lt;/a&gt; on his blog. This seems like a great way to share experience with the community and stimulate thought and discussion. I decided to start a series on imaging with .NET, to share some of my experiences and the techniques that enable advanced solutions with .NET imaging and GDI+. This is the kickoff post for the series.&lt;/p&gt;
+&lt;p&gt;In my experience, simple things in .NET are well documented, but it can be hard to find information on how to do complex things. One thing that took me awhile to figure out is how to save a bitmap as a &lt;a rel="nofollow" href="http://en.wikipedia.org/wiki/Ccitt"&gt;CCITT&lt;/a&gt; group 4 &lt;a rel="nofollow" href="http://en.wikipedia.org/wiki/Tiff"&gt;TIFF&lt;/a&gt;. It actually ends up being a simple process.&lt;/p&gt;
+&lt;p&gt;First, you need a monochrome (1bpp) source GDI+ Bitmap. .NET doesn't have a very good built in mechanism for converting from color to monochrome. The only reliable and performant method is a scale-to-grey algorithm written in unsafe code. That will be a topic for another post. For now, lets assume the GDI+ Bitmap is monochrome.&lt;/p&gt;
+&lt;p&gt;To set up for the save process, you need two things -- an EncoderParameters object set for CCITT G4, and an ImageCodecInfo that points to the GDI+ TIFF encoder.&lt;/p&gt;
+&lt;p&gt;First, the EncoderParameters object:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;
+&lt;p&gt;&lt;font color="#008000"&gt;// Encoder parameters for CCITT G4&lt;/font&gt;&lt;br /&gt;
+&lt;font color="#2b91af"&gt;EncoderParameters&lt;/font&gt; eps = &lt;font color="#0000ff"&gt;new&lt;/font&gt; &lt;font color="#2b91af"&gt;EncoderParameters&lt;/font&gt;(1);&lt;/p&gt;
+eps.Param[0] = &lt;font color="#0000ff"&gt;new&lt;/font&gt; &lt;font color="#2b91af"&gt;EncoderParameter&lt;/font&gt;(&lt;font color="#2b91af"&gt;Encoder&lt;/font&gt;.Compression, (&lt;font color="#0000ff"&gt;long&lt;/font&gt;)&lt;font color="#2b91af"&gt;EncoderValue&lt;/font&gt;.CompressionCCITT4);&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;Then, the ImageCodecInfo:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;
+&lt;p&gt;&lt;font color="#2b91af"&gt;ImageCodecInfo&lt;/font&gt;[] ie = &lt;font color="#2b91af"&gt;ImageCodecInfo&lt;/font&gt;.GetImageEncoders();&lt;br /&gt;
+&lt;font color="#2b91af"&gt;ImageCodecInfo&lt;/font&gt; tiffEncoder = &lt;font color="#0000ff"&gt;null&lt;/font&gt;; &lt;/p&gt;
+&lt;p&gt;&lt;font color="#0000ff"&gt;for&lt;/font&gt; (&lt;font color="#0000ff"&gt;int&lt;/font&gt; i = 0; i &amp;lt; ie.Length; i++)&lt;br /&gt;
+{&lt;br /&gt;
+    &lt;font color="#0000ff"&gt;if&lt;/font&gt; (ie[i].MimeType == &lt;font color="#800000"&gt;"image/tiff"&lt;/font&gt;)&lt;br /&gt;
+    {&lt;br /&gt;
+        tiffEncoder = ie[i];&lt;br /&gt;
+&lt;br /&gt;
+        &lt;font color="#0000ff"&gt;break&lt;/font&gt;;&lt;br /&gt;
+    }&lt;br /&gt;
+}&lt;/p&gt;
+&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;If you want to set the image resolution to a standard resolution like 300x300 before you save, call the SetResolution method:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;bmp.SetResolution(300, 300);&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;Once you have those two objects, given a 1bpp Bitmap bmp, it's a simple one method call to the Save method:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;bmp.Save(fileName, tiffEncoder, eps);&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;If the Bitmap has multiple frames, this method will only save a single frame. I'll write another article in future on multiple frame images.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Imaging</category>
+  </categories>
+  <comments></comments>
+</post>

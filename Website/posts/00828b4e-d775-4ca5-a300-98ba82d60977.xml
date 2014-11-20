@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>How to convert an app relative path to an absolute url without ResolveUrl</title>
+  <slug>convert-app-relative-path-to-absolute-url-without-resolveurl</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2007-03-20 19:09:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;Many times I've looked for a way to convert an app relative url (such as one using the ~/ app root notation) to an absolute path without ResolveUrl. If the code is executing outside a Control, for example in an IHttpHandler or business layer code somewhere that has no reference to a Control, you can't call Control.ResolveUrl.&lt;/p&gt;
+&lt;p&gt;Today, I discovered a way to do this without a Control reference. The System.Web.VirtualPathUtility class has some very useful methods for manipulating paths, including one that converts from an app relative path to an absolute path. Instead of Control.ResolveUrl, just call VirtualPathUtility.ToAbsolute:&lt;/p&gt;
+&lt;blockquote&gt;&lt;code&gt;&lt;font size="2"&gt;
+&lt;font color="#0000ff"&gt;string&lt;/font&gt; url = 
+&lt;/font&gt;&lt;font color="#2b91af" size="2"&gt;VirtualPathUtility&lt;/font&gt;&lt;font size="2"&gt;.ToAbsolute(url);&lt;/font&gt;&lt;/code&gt;&lt;/blockquote&gt;
+&lt;p&gt;Viola! An app relative path to an absolute path in one line of code without using Control.ResolveUrl.&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>ASP.NET</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="224">
+      <author>Jimmy</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-08-27 01:21:35</date>
+      <content>Thanks!</content>
+    </comment>
+    <comment isAdmin="false" id="225">
+      <author>manovich</author>
+      <email>manovich@gmail.com</email>
+      <website>http://dotnettipoftheday.org/</website>
+      <ip />
+      <userAgent />
+      <date>2007-10-31 11:23:44</date>
+      <content>&amp;gt; This solution doesn't work if the path includes a querystring&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;You can use HttpRuntime.AppDomainAppVirtualPath (http://dotnettipoftheday.org/tips/HttpRuntime.AppDomainAppVirtualPath.aspx)</content>
+    </comment>
+    <comment isAdmin="false" id="226">
+      <author>Michael</author>
+      <email>mross@racltd.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-07-11 20:55:48</date>
+      <content>I just wanted to let you know that your post was very helpful.  I was not aware of this class and have since been able to make use of it in a couple of custom controls.&lt;br /&gt;&lt;br /&gt;Thanks for the post!</content>
+    </comment>
+    <comment isAdmin="false" id="227">
+      <author>Mike</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-07-12 06:53:46</date>
+      <content>This solution doesn't work if the path includes a querystring</content>
+    </comment>
+  </comments>
+</post>

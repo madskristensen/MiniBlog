@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<post>
+  <title>YME now playing plugin for WLM</title>
+  <slug>yme-now-playing-plugin-for-wlm</slug>
+  <author>Chris Hynes</author>
+  <pubDate>2006-04-10 22:56:00</pubDate>
+  <lastModified>2014-11-20 17:18:41</lastModified>
+  <content>&lt;p&gt;&lt;strong&gt;Update: Just released a small tweak to support the latest versions of &lt;a rel="nofollow" href="http://messenger.msn.com"&gt;WLM&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I've been using &lt;a rel="nofollow" href="http://music.yahoo.com/ymu/"&gt;Yahoo! Music Unlimited&lt;/a&gt; for almost a year now. It's a great service. Cheap ($4.99/mo), fairly good selection, and 192kbs quality. The only problem is, it doesn't integrate with MSN Messenger/Windows Live Messenger's now playing display. There is a third-party plugin that sort of provides this functionality, but it's old, hasn't been updated, and doesn't work properly with the latest versions of WLM.&lt;/p&gt;
+&lt;p&gt;So I pulled together some information and code from a few different sources and whipped up my own plugin, using C# and VS 2005. It is extremly straightforward. Just import the interop libs, implement and interface, and register the assembly in the proper place.&lt;/p&gt;
+&lt;p&gt;The WLM now playing integration is fairly straightforward as well, if undocumented. It uses the WM_COPYDATA message to pass a specially formatted string to Messenger. I have factored the two segments seperately, so it should be easy to swap out the YME or WLM integration to support other music players or messaging services.&lt;/p&gt;
+&lt;p&gt;Feel free to use the component, or peek at the code, as long as you provide attribution back to me.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Requires .NET 2.0 Runtime. You can get it &lt;a rel="nofollow" href="http://www.microsoft.com/downloads/details.aspx?familyid=0856eacb-4362-4b0d-8edd-aab15c5e04f5&amp;amp;displaylang=en"&gt;here&lt;/a&gt;, or as a standard windows update.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a rel="nofollow" href="http://programcsharp.com/blog/files/YMEWLMNowPlaying.msi"&gt;YMEWLMNowPlaying.msi&lt;/a&gt; [installer]&lt;br /&gt;
+&lt;a rel="nofollow" href="http://programcsharp.com/blog/files/YMEWLMNowPlaying.zip"&gt;YMEWLMNowPlaying.zip&lt;/a&gt; [source]&lt;/p&gt;</content>
+  <ispublished>true</ispublished>
+  <categories>
+    <category>Code</category>
+    <category>Tools</category>
+  </categories>
+  <comments>
+    <comment isAdmin="false" id="37">
+      <author>Chris Hynes</author>
+      <email>chrish@krystalware.com</email>
+      <website>http://krystalware.com/</website>
+      <ip />
+      <userAgent />
+      <date>2007-05-04 14:22:56</date>
+      <content>I apologize for this -- my email comment notifications must be broken so I didn't see the comments until now. The links are now fixed.</content>
+    </comment>
+    <comment isAdmin="false" id="38">
+      <author>Ryan</author>
+      <email>ryancartmill@hotmail.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-04-13 20:26:36</date>
+      <content>The download URL above doesn't seem to be working....</content>
+    </comment>
+    <comment isAdmin="false" id="39">
+      <author>Tobias</author>
+      <email>tobiaspete@hotmail.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-04-19 12:37:56</date>
+      <content>The "localhost" can be swapped out with his root domain.  Go to http://programcsharp.com/files/YMEWLMNowPlaying.msi to download the installer, for instance!</content>
+    </comment>
+    <comment isAdmin="false" id="40">
+      <author>April</author>
+      <email>ajohnsen@wi.rr.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-04-28 12:45:52</date>
+      <content>Cant get the damn thing to link I dont know what I'm doing wrong.</content>
+    </comment>
+    <comment isAdmin="false" id="41">
+      <author>Joey</author>
+      <email>tecron@roadrunner.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-05-03 20:8:10</date>
+      <content>YMEWLMNowPlaying.msi [installer]&lt;br /&gt;YMEWLMNowPlaying.zip [source]&lt;br /&gt;&lt;br /&gt;those to links need to be changed to ...&lt;br /&gt;&lt;br /&gt;http://programcsharp.com/files/YMEWLMNowPlaying.msi&lt;br /&gt;&amp;amp;&lt;br /&gt;http://programcsharp.com/files/YMEWLMNowPlaying.zip</content>
+    </comment>
+    <comment isAdmin="false" id="42">
+      <author>Gai</author>
+      <email>womerah@bigpond.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-11-22 23:37:54</date>
+      <content>I have installed http://programcsharp.com/files/YMEWLMNowPlaying.msi&lt;br /&gt;Could you please advise me what I have to do next.&lt;br /&gt;My songs that I am playing on WLM are not showing on Yahoo Messenger.</content>
+    </comment>
+    <comment isAdmin="false" id="43">
+      <author>ChancesDad</author>
+      <email>vampnet77@hotmail.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-12-03 07:39:06</date>
+      <content>Is this a program for yahoo to show what Im listening to? (WMP) while in yahoo messenger?</content>
+    </comment>
+    <comment isAdmin="false" id="44">
+      <author>Chris Hynes</author>
+      <email>chrish@krystalware.com</email>
+      <website>http://krystalware.com/</website>
+      <ip />
+      <userAgent />
+      <date>2007-12-06 17:53:56</date>
+      <content>No, this shows your Yahoo Jukebox currently playing songs in Windows Live Messenger. Are you trying to do Windows Media Player-&amp;gt;Y! Messenger?</content>
+    </comment>
+    <comment isAdmin="false" id="45">
+      <author>Macpatato</author>
+      <email>humbertobrambila@yahoo.com.mx</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-12-20 16:34:43</date>
+      <content>it seems like the links are broken again, im tried several times to download it unsuccesfully...&lt;br /&gt;&lt;br /&gt;Tnx!</content>
+    </comment>
+    <comment isAdmin="false" id="46">
+      <author>Chris Hynes</author>
+      <email>chrish@krystalware.com</email>
+      <website>http://krystalware.com/</website>
+      <ip />
+      <userAgent />
+      <date>2007-12-20 18:3:01</date>
+      <content>It should be working... &lt;br /&gt;http://programcsharp.com/files/YMEWLMNowPlaying.msi&lt;br /&gt;&lt;br /&gt;Are you still getting issues?</content>
+    </comment>
+    <comment isAdmin="false" id="47">
+      <author>John</author>
+      <email>jfmiller@gmx.de</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-12-21 18:21:34</date>
+      <content>I tried to install the plugin, but although it is displayed in YMJ, "Now playing" still doesn't work. I guess its because i use Win Vista and Net Framework 3.0 . &lt;br /&gt;Is there any possibility to get it working? &lt;br /&gt;Thanks in advance! </content>
+    </comment>
+    <comment isAdmin="false" id="48">
+      <author>Carrie</author>
+      <email>carrieb77@hotmail.co.uk</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-06-02 11:19:33</date>
+      <content>Thanks for this, definately worth a look :)</content>
+    </comment>
+    <comment isAdmin="false" id="49">
+      <author>vishal</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2007-07-16 09:27:08</date>
+      <content>i like the misic</content>
+    </comment>
+    <comment isAdmin="false" id="54">
+      <author>KILLER</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-05-25 03:46:44</date>
+      <content>Sorry buddy but this doesn't work for me... but look what i found...&lt;br /&gt;&lt;br /&gt;http://numedecod.ro/Yahoo_Messenger_NowPlaying/&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;ITS REAL!!!</content>
+    </comment>
+    <comment isAdmin="false" id="58">
+      <author>maltar</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-08-16 15:19:13</date>
+      <content>the songs which i hear using my yahoo music engine doesn't appear in the WLM, is there any solution for this problem ?</content>
+    </comment>
+    <comment isAdmin="false" id="60">
+      <author>mc.kadir@hotmail.fr</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-06-25 19:41:29</date>
+      <content>yes</content>
+    </comment>
+    <comment isAdmin="false" id="61">
+      <author>g&amp;#246;khan</author>
+      <email />
+      <website />
+      <ip />
+      <userAgent />
+      <date>2009-05-09 11:23:02</date>
+      <content>giresnlu_18@hotmail.com</content>
+    </comment>
+    <comment isAdmin="false" id="63">
+      <author>SEHAR</author>
+      <email>cute_sehar_21@hotmail.com</email>
+      <website />
+      <ip />
+      <userAgent />
+      <date>2008-07-24 04:54:21</date>
+      <content>well i did install this plugin but it dosn`t work conteniousley&lt;br /&gt;everytime when song changed every time i just go to prefrences in winamp and change configure it i just want it to show songs all by them selves&lt;br /&gt;so whats the answer???&lt;br /&gt;or what ????????? im so pissed off bcoz of it:(</content>
+    </comment>
+  </comments>
+</post>
