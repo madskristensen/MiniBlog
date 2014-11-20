@@ -89,10 +89,15 @@ public class Post
 
         // Images replaced by CDN paths if they are located in the /posts/ folder
         var cdn = ConfigurationManager.AppSettings.Get("blog:cdnUrl");
+        var root = ConfigurationManager.AppSettings.Get("blog:path") + "/posts/";
+
+        if (!root.StartsWith("/"))
+            root = "/" + root;
+
         result = Regex.Replace(result, "<img.*?src=\"([^\"]+)\"", (Match m) =>
         {
             string src = m.Groups[1].Value;
-            int index = src.IndexOf("/posts/");
+            int index = src.IndexOf(root);
 
             if (index > -1)
             {
