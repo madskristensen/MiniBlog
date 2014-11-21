@@ -21,7 +21,7 @@
         </div>
     }
 
-    <div itemprop="articleBody">@Html.Raw(Model.GetHtmlContent())</div>
+    <div itemprop="articleBody">@Html.Raw(Blog.IsEditing ? Model.Content : Model.GetHtmlContent())</div>
 
     @if (Blog.CurrentPost != null)
     {
