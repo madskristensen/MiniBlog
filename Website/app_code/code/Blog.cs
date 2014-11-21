@@ -49,6 +49,14 @@ public static class Blog
         }
     }
 
+    public static bool IsEditing
+    {
+        get
+        {
+            return HttpContext.Current.Request.QueryString["mode"] == "edit";
+        }
+    }
+
     public static Post CurrentPost
     {
         get

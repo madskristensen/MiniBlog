@@ -7,7 +7,7 @@
     <div class="navbar-inner">
         <ul class="nav navbar-nav">
             <li><button onclick="location.href='@path/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
-            <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
+            <li><button onclick="location.href='@path/post/@Blog.CurrentSlug?mode=edit'" class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
             <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
             <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
             <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
@@ -61,8 +61,8 @@
     </div>
 
     <form action="@FormsAuthentication.LoginUrl" method="post">
-		<input type="hidden" name="signout" value="true" />
-		<input type="hidden" name="returnUrl" value="@HttpUtility.HtmlEncode(Request.RawUrl)" />
+        <input type="hidden" name="signout" value="true" />
+        <input type="hidden" name="returnUrl" value="@HttpUtility.HtmlEncode(Request.RawUrl)" />
         <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link pull-right">
             Sign out &nbsp;<span class="glyphicon glyphicon-log-out"></span>
         </button>
