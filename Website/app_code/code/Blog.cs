@@ -180,7 +180,7 @@ public static class Blog
 
     public static string FingerPrint(string rootRelativePath, string cdnPath = "")
     {
-        if (HttpContext.Current.Request.IsLocal)
+        if ( HttpContext.Current.Request.IsLocal && String.IsNullOrWhiteSpace( Blog.BlogPath ) )
             return rootRelativePath;
 
         if (!string.IsNullOrEmpty(cdnPath) && !HttpContext.Current.IsDebuggingEnabled)
