@@ -65,7 +65,7 @@ public static class Blog
             {
                 var post = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
 
-                if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated))
+                if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated || (HttpContext.Current.Request.QueryString["key"] ?? string.Empty).Equals(post.ID, StringComparison.InvariantCultureIgnoreCase)))
                     HttpContext.Current.Items["currentpost"] = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
             }
 
