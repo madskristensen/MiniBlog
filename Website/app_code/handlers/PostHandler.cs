@@ -62,9 +62,22 @@ public class PostHandler : IHttpHandler
 
     private void SaveFilesToDisk(Post post)
     {
-        foreach (Match match in Regex.Matches(post.Content, "(src|href)=\"(data:([^\"]+))\""))
+        foreach (Match match in Regex.Matches(post.Content, "(src|href)=\"(data:([^\"]+))\"(>.*?</a>)?"))
         {
-            string extension = Regex.Match(match.Value, "data:([^/]+)/([a-z]+);base64").Groups[2].Value;
+            string extension = string.Empty;
+            string filename = string.Empty;
+
+            // Image
+            if (match.Groups[1].Value == "src")
+            {
+                extension = Regex.Match(match.Value, "data:([^/]+)/([a-z]+);base64").Groups[2].Value;
+            }
+            // Other file type
+            else
+            {
+                // Entire filename
+                extension = Regex.Match(match.Value, "data:([^/]+)/([a-z0-9+-.]+);base64.*\">(.*)</a>").Groups[3].Value;
+            }
 
             byte[] bytes = ConvertToBytes(match.Groups[2].Value);
             string path = Blog.SaveFileToDisk(bytes, extension);
@@ -74,7 +87,8 @@ public class PostHandler : IHttpHandler
             if (match.Groups[1].Value == "href")
                 value = string.Format("href=\"{0}\"", path);
 
-            post.Content = post.Content.Replace(match.Value, value);
+            Match m = Regex.Match(match.Value, "(src|href)=\"(data:([^\"]+))\"");
+            post.Content = post.Content.Replace(m.Value, value);
         }
     }
 
