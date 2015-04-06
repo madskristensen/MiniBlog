@@ -33,7 +33,7 @@ Perfect for the blogger who wants to selfhost a blog.
  * Support for __robots.txt__ and __sitemap.xml__
 * Theming support
  * Based on Bootstrap themes. Makes it easy to customize your blog
- * Comes with a one-column and a two-column theme
+ * Comes with a one-column, two-column, and off-canvas theme
 * __No database__ required
  * Uses the same XML format as BlogEngine.NET
  * Move your existing blog to MiniBlog using [MiniBlog Formatter](https://github.com/madskristensen/MiniBlogFormatter)
