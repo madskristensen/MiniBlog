@@ -35,15 +35,15 @@
         if (post == null) { throw new HttpException(404, "Post not found"); }
 
         Page.Title = post.Title;
-		Page.Description = post.Excerpt;
+        Page.Description = post.Excerpt;
         lastModified = post.LastModified;
 
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/" + post.ID + ".xml")));
 
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
-	
-	@AntiForgery.GetHtml()
+    
+    @AntiForgery.GetHtml()
 
     if ( !Request.IsLocal && !User.Identity.IsAuthenticated )
     {
@@ -54,7 +54,7 @@
         Response.Cache.VaryByParams["slug"] = true;
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
-        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/Content")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/themes/" + Blog.Theme)));
 
         
