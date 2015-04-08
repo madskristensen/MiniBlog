@@ -21,6 +21,7 @@ public class FeedHandler : IHttpHandler
         using (var writer = new XmlTextWriter(context.Response.Output))
         {
             var formatter = GetFormatter(context, feed);
+            writer.Formatting = Formatting.Indented;
             formatter.WriteTo(writer);
         }
 
