@@ -240,7 +240,7 @@ public static class Blog
         return result;
     }
 
-    public static List<Post> GetRecentPosts(int count)
+    public static IEnumerable<Post> GetRecentPosts(int count)
     {
         return GetVisiblePosts().Take(count).ToList();
     }
