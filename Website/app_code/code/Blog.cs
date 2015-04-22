@@ -66,7 +66,7 @@ public static class Blog
                 var post = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
 
                 if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated || (HttpContext.Current.Request.QueryString["key"] ?? string.Empty).Equals(post.ID, StringComparison.InvariantCultureIgnoreCase)))
-                    HttpContext.Current.Items["currentpost"] = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
+                    HttpContext.Current.Items["currentpost"] = post;
             }
 
             return HttpContext.Current.Items["currentpost"] as Post;
@@ -227,25 +227,32 @@ public static class Blog
 
     public static Dictionary<string, int> GetCategories()
     {
-        var categoryStrings = Storage.GetAllPosts()
-            .Where(p => ((p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated))
-            .SelectMany(x => x.Categories).ToList().Distinct();
         var result = new Dictionary<string, int>();
-        foreach (var cat in categoryStrings)
+        
+        foreach (var category in GetVisiblePosts().SelectMany(post => post.Categories))
         {
-            result.Add(cat,
-                Storage.GetAllPosts()
-                .Where(p => ((p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated))
-                .Count(p => p.Categories.Any(c => string.Equals(c, cat, StringComparison.OrdinalIgnoreCase)))
-            );
-        }
+            if (!result.ContainsKey(category))
+                result.Add(category, 0);
 
+            result[category] = result[category] + 1;
+        }
+        
         return result;
+    }
+
+    public static List<Post> GetRecentPosts(int count)
+    {
+        return GetVisiblePosts().Take(count).ToList();
+    }
+
+    private static IEnumerable<Post> GetVisiblePosts()
+    {
+        return Storage.GetAllPosts()
+                      .Where(p => ((p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated));
     }
 
     public static void ClearStartPageCache()
     {
         HttpResponse.RemoveOutputCacheItem(string.Format("/{0}", BlogPath));
     }
-
 }
