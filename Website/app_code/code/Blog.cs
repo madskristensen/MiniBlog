@@ -63,9 +63,9 @@ public static class Blog
         {
             if (HttpContext.Current.Items["currentpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
             {
-                var post = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug);
+                var post = GetVisiblePosts().FirstOrDefault(p => p.Slug == CurrentSlug);
 
-                if (post != null && (post.IsPublished || HttpContext.Current.User.Identity.IsAuthenticated || (HttpContext.Current.Request.QueryString["key"] ?? string.Empty).Equals(post.ID, StringComparison.InvariantCultureIgnoreCase)))
+                if (post != null)
                     HttpContext.Current.Items["currentpost"] = post;
             }
 
@@ -77,9 +77,10 @@ public static class Blog
     {
         if (!string.IsNullOrEmpty(CurrentSlug))
         {
-            var current = Storage.GetAllPosts().IndexOf(CurrentPost);
+            var posts = GetVisiblePosts().ToList();
+            var current = posts.IndexOf(CurrentPost);
             if (current > 0)
-                return Storage.GetAllPosts()[current - 1].Url.ToString();
+                return posts[current - 1].Url.ToString();
         }
         else if (CurrentPage > 1)
         {
@@ -93,11 +94,12 @@ public static class Blog
     {
         if (!string.IsNullOrEmpty(CurrentSlug))
         {
-            var current = Storage.GetAllPosts().IndexOf(CurrentPost);
-            if (current > -1 && Storage.GetAllPosts().Count > current + 1)
-                return Storage.GetAllPosts()[current + 1].Url.ToString();
+            var posts = GetVisiblePosts().ToList();
+            var current = posts.IndexOf(CurrentPost);
+            if (current > -1 && posts.Count > current + 1)
+                return posts[current + 1].Url.ToString();
         }
-        else
+        else if(GetPosts().Count() > PostsPerPage * CurrentPage)
         {
             return GetPagingUrl(1);
         }
@@ -119,9 +121,7 @@ public static class Blog
 
     public static IEnumerable<Post> GetPosts(int postsPerPage = 0)
     {
-        var posts = from p in Storage.GetAllPosts()
-                    where (p.IsPublished && p.PubDate <= DateTime.UtcNow) || HttpContext.Current.User.Identity.IsAuthenticated
-                    select p;
+        var posts = GetVisiblePosts();
 
         string category = HttpContext.Current.Request.QueryString["category"];
 
