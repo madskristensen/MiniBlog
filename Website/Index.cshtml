@@ -1,12 +1,14 @@
 ﻿@using System.Web.Caching;
 @{
-    Page.Title = Blog.Title;
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     DateTime lastModified = DateTime.MinValue;
 
     if (string.IsNullOrEmpty(Blog.CurrentSlug))
     {
+        Page.Title = Blog.Title;
+        Page.Description = Blog.Description;
         Page.ShowPaging = true;
+        
         var posts = Blog.GetPosts(Blog.PostsPerPage);
 
         foreach (var post in posts)
@@ -34,7 +36,7 @@
 
         if (post == null) { throw new HttpException(404, "Post not found"); }
 
-        Page.Title = post.Title;
+        Page.Title = string.Format("{0} - {1}", post.Title, Blog.Title);
         Page.Description = post.Excerpt;
         lastModified = post.LastModified;
 
