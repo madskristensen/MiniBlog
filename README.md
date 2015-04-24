@@ -28,6 +28,7 @@ Perfect for the blogger who wants to selfhost a blog.
  * You don't have to use WLW (but you should)
 * RSS and ATOM __feeds__
 * Schedule posts to be published on a future date
+* Get feedback on an unpublished post by sending a preview link 
 * __SEO__ optimized
  * Uses HTML 5 __microdata__ to add semantic meaning
  * Support for __robots.txt__ and __sitemap.xml__
