@@ -61,16 +61,33 @@ public static class Blog
     {
         get
         {
-            if (HttpContext.Current.Items["currentpost"] == null && !string.IsNullOrEmpty(CurrentSlug))
+            if (HttpContext.Current.Items["currentpost"] == null)
             {
-                var post = GetVisiblePosts().FirstOrDefault(p => p.Slug == CurrentSlug);
-
+                var post = FindCurrentPost();
                 if (post != null)
                     HttpContext.Current.Items["currentpost"] = post;
             }
 
             return HttpContext.Current.Items["currentpost"] as Post;
         }
+    }
+
+    private static Post FindCurrentPost()
+    {
+        if (string.IsNullOrEmpty(CurrentSlug))
+            return null;
+
+        var post = GetVisiblePosts().FirstOrDefault(p => p.Slug == CurrentSlug);
+        if (post == null)
+        {
+            var previewId = HttpContext.Current.Request.QueryString["key"];
+            if (!string.IsNullOrEmpty(previewId))
+            {
+                post = Storage.GetAllPosts().FirstOrDefault(p => p.Slug == CurrentSlug && p.ID.Equals(previewId, StringComparison.OrdinalIgnoreCase));
+            }
+        }
+
+        return post;
     }
 
     public static string GetNextPage()
