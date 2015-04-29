@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Helpers;
@@ -38,7 +39,7 @@ public static class Blog
 
     public static string CurrentCategory
     {
-        get { return (HttpContext.Current.Request.QueryString["category"] ?? string.Empty).Trim().ToLowerInvariant(); }
+        get { return WebUtility.UrlDecode(HttpContext.Current.Request.QueryString["category"] ?? string.Empty).Trim().ToLowerInvariant(); }
     }
 
     public static bool IsNewPost
@@ -140,7 +141,7 @@ public static class Blog
     {
         var posts = GetVisiblePosts();
 
-        string category = HttpContext.Current.Request.QueryString["category"];
+        var category = CurrentCategory;
 
         if (!string.IsNullOrEmpty(category))
         {
@@ -184,7 +185,7 @@ public static class Blog
     public static string GetPagingUrl(int move)
     {
         string url = "/page/{0}/";
-        string category = HttpContext.Current.Request.QueryString["category"];
+        string category = CurrentCategory;
 
         if (!string.IsNullOrEmpty(category))
         {
