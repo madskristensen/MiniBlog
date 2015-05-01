@@ -221,4 +221,8 @@
         btnDelete.removeAttr("disabled");
         $("#ispublished").css({ "display": "inline" });
     }
+
+    $(".dropdown-menu > input").click(function (e) {
+        e.stopPropagation();
+    });
 })(jQuery);

@@ -1,6 +1,6 @@
 ﻿@{
     var isPublished = Blog.CurrentPost != null && Blog.CurrentPost.IsPublished;
-    var path = !string.IsNullOrWhiteSpace( Blog.BlogPath ) ? "/" + Blog.BlogPath : "";
+    var path = !string.IsNullOrWhiteSpace(Blog.BlogPath) ? "/" + Blog.BlogPath : "";
 }
 
 <nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished" data-blog-path="@path">
@@ -48,7 +48,11 @@
             </div>
 
             <div class="btn-group">
-                <a class="btn btn-mini" data-edit="createLink" title="Hyperlink"><i class="glyphicon glyphicon-globe"></i></a>
+                <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="glyphicon glyphicon-globe"></i></a>
+                <div class="dropdown-menu row" role="menu">
+                    <input class="col-md-9 col-lg-9" placeholder="URL" type="text" data-edit="createLink" />
+                    <button class="btn btn-xs col-md-3 col-lg-3" type="button">Add</button>
+                </div>
                 <a class="btn btn-mini" data-edit="unlink" title="Remove hyperlink"><i class="glyphicon glyphicon-remove"></i></a>
                 <a class="btn btn-mini uploadimage"><i class="glyphicon glyphicon-picture"></i></a>
             </div>
@@ -78,6 +82,7 @@
 {
     <script src="@Blog.FingerPrint("/scripts/jquery-2.1.3.js", "//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")"></script>
     <script src="@Blog.FingerPrint("/scripts/jquery.hotkeys.js")"></script>
+    <script src="@Blog.FingerPrint("/scripts/bootstrap.min.js")"></script>
     <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")" defer></script>
     <script src="@Blog.FingerPrint("/scripts/admin.js")" defer></script>
 }
