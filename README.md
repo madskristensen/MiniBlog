@@ -89,7 +89,7 @@ Windows Live Writer can be downloaded at:
 
 ### Configuring MiniBlog as Virtual Application
 
-Mini blog is very compact and can be configured as a Virtual Application so you'd be able to use it alongside your existing websites. 
+MiniBlog is very compact and can be configured as a Virtual Application so you'd be able to use it alongside your existing websites. 
 For example if you've got a running ASP.NET website at `http://yourexamplesite.com/` and you want to setup a blog under `/blog/` path, you could setup `http://yourexamplesite.com/blog/` with a few simple tweaks in web.config settings:
 
 - Set `blog:path` element of `appSettings` to the virtual path that you've configured for MiniBlog. Example with path `blog`
