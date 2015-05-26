@@ -80,7 +80,7 @@ else
 
         public static string GetDescription(string content, int length = 300, string ommission = "...")
         {
-            return TruncateHtml(StripTags(content), 235, ommission);
+            return TruncateHtml(StripTags(content), length, ommission);
         }
 
         public static string TruncateHtml(string input, int length = 300, string ommission = "...")
