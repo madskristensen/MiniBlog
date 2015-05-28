@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -100,13 +102,26 @@ public class PostHandler : IHttpHandler
 
     public static string CreateSlug(string title)
     {
-        title = title.ToLowerInvariant().Replace(" ", "-").Replace("#", "");
+        title = title.ToLowerInvariant().Replace(" ", "-");
         title = RemoveDiacritics(title);
+        title = RemoveReservedUrlCharacters(title);
 
         if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title, StringComparison.OrdinalIgnoreCase)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();
+    }
+
+    static string RemoveReservedUrlCharacters(string text)
+    {
+        var reservedCharacters = new List<string>() { "!", "#", "$", "&", "'", "(", ")", "*", ",", "/", ":", ";", "=", "?", "@", "[", "]", "\"", "%", ".", "<", ">", "\\", "^", "_", "'", "{", "}", "|", "~", "`", "+" };
+
+        foreach (var chr in reservedCharacters)
+        {
+            text = text.Replace(chr, "");
+        }
+
+        return text;
     }
 
     static string RemoveDiacritics(string text)
