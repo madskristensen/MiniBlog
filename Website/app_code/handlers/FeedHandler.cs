@@ -22,6 +22,7 @@ public class FeedHandler : IHttpHandler
 		using (var writer = new XmlTextWriter(context.Response.Output))
 		{
 			var formatter = GetFormatter(context, feed);
+            writer.Formatting = Formatting.Indented;
 			formatter.WriteTo(writer);
 		}
 
@@ -33,8 +34,13 @@ public class FeedHandler : IHttpHandler
 		int numberOfItems = getAllItems ? 0 : 20;
 		foreach (Post p in Blog.GetPosts(numberOfItems))
 		{
-			var item = new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.AbsoluteUrl.ToString(), p.LastModified);
-			item.PublishDate = p.PubDate;
+            var item = new SyndicationItem(p.Title, p.Content, p.AbsoluteUrl, p.AbsoluteUrl.ToString(), p.LastModified)
+                       {
+                           PublishDate = p.PubDate
+                       };
+            if (!string.IsNullOrWhiteSpace(p.Excerpt))
+                item.Summary = new TextSyndicationContent(p.Excerpt);
+            
 			item.Authors.Add(new SyndicationPerson("", p.Author, ""));
 			yield return item;
 		}

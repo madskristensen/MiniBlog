@@ -1,14 +1,15 @@
 ﻿@{
     Response.ContentType = "text/xml";
+    var path = !string.IsNullOrWhiteSpace(Blog.BlogPath) ? "/" + Blog.BlogPath : "";
 }
 
 <rsd version="1.0">
     <service>
         <enginename>MiniBlog</enginename>
         <enginelink>http://github.com/madskristensen/miniblog/</enginelink>
-        <homepagelink>@Request.Url.Scheme://@Request.Url.Authority</homepagelink>
+        <homepagelink>@Request.Url.Scheme://@Request.Url.Authority@path</homepagelink>
         <apis>
-            <api name="MetaWeblog" preferred="true" apilink="@Request.Url.Scheme://@Request.Url.Authority/metaweblog" blogid="1" />
+            <api name="MetaWeblog" preferred="true" apilink="@Request.Url.Scheme://@Request.Url.Authority@path/metaweblog" blogid="1" />
         </apis>
     </service>
 </rsd>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Security;
 using System.Web.WebPages;
 
 public class CommentHandler : IHttpHandler
@@ -149,7 +150,10 @@ public class CommentHandler : IHttpHandler
     private static void Delete(HttpContext context, Post post)
     {
         if (!context.User.Identity.IsAuthenticated)
-            throw new HttpException(403, "No access");
+        {
+            FormsAuthentication.RedirectToLoginPage();
+            context.Response.End();
+        }
 
         Comment comment = GetComment(context, post);
 
@@ -162,7 +166,10 @@ public class CommentHandler : IHttpHandler
     private static void Approve(HttpContext context, Post post)
     {
         if (!context.User.Identity.IsAuthenticated)
-            throw new HttpException(403, "No access");
+        {
+            FormsAuthentication.RedirectToLoginPage();
+            context.Response.End();
+        }
 
         Comment comment = GetComment(context, post);
 

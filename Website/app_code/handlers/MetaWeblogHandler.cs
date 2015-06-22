@@ -47,7 +47,15 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        post.Slug = PostHandler.CreateSlug(post.Title);
+        if (!string.IsNullOrWhiteSpace(post.Slug))
+        {
+            post.Slug = PostHandler.CreateSlug(post.Slug);
+        }
+        else
+        {
+            post.Slug = PostHandler.CreateSlug(post.Title);    
+        }
+        
         post.IsPublished = publish;
         Storage.Save(post);
 
@@ -63,11 +71,12 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
         if (match != null)
         {
             match.Title = post.Title;
+            match.Excerpt = post.Excerpt;
             match.Content = post.Content;
-            match.Slug = post.Slug;
+            match.Slug = PostHandler.CreateSlug(post.Slug);
             match.Categories = post.Categories;
             match.IsPublished = publish;
-            match.PubDate = post.PubDate;
+
             Storage.Save(match);
         }
 
@@ -135,10 +144,11 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
     {
         ValidateUser(username, password);
 
-        var list = new List<object>();
-        var categories = Storage.GetAllPosts().SelectMany(p => p.Categories);
+        var categories = Blog.GetCategories();
 
-        foreach (string category in categories.Distinct())
+        var list = new List<object>();
+
+        foreach ( string category in categories.Keys )
         {
             list.Add(new { title = category });
         }

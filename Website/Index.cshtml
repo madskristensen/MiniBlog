@@ -1,12 +1,14 @@
 ﻿@using System.Web.Caching;
 @{
-    Page.Title = Blog.Title;
     Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
     DateTime lastModified = DateTime.MinValue;
 
     if (string.IsNullOrEmpty(Blog.CurrentSlug))
     {
+        Page.Title = Blog.Title;
+        Page.Description = Blog.Description;
         Page.ShowPaging = true;
+        
         var posts = Blog.GetPosts(Blog.PostsPerPage);
 
         foreach (var post in posts)
@@ -34,17 +36,18 @@
 
         if (post == null) { throw new HttpException(404, "Post not found"); }
 
-        Page.Title = post.Title;
+        Page.Title = string.Format("{0} - {1}", post.Title, Blog.Title);
+        Page.Description = post.Excerpt;
         lastModified = post.LastModified;
 
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/posts/" + post.ID + ".xml")));
 
         @RenderPage("~/themes/" + Blog.Theme + "/Post.cshtml", post)
     }
-	
-	@AntiForgery.GetHtml()
+    
+    @AntiForgery.GetHtml()
 
-    if (!Request.IsLocal)
+    if ( !Request.IsLocal && !User.Identity.IsAuthenticated )
     {
         Response.Cache.AppendCacheExtension("max-age=0");
         Response.Cache.SetValidUntilExpires(true);
@@ -53,7 +56,7 @@
         Response.Cache.VaryByParams["slug"] = true;
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
-        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/css")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/Content")));
         Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/themes/" + Blog.Theme)));
 
         

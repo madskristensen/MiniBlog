@@ -1,0 +1,104 @@
+﻿@media (max-width: 1024px) {
+    .nav > li {
+        display: inline-block;
+    }
+
+        .nav > li button, #ispublished {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+}
+
+.admin {
+    margin-top: 50px;
+}
+
+#admin {
+    font: 12pt arial;
+}
+
+    #admin .navbar-inner {
+        min-height: 0;
+        padding-top: 8px;
+    }
+
+    #admin form {
+        position: absolute;
+        top: 8px;
+        right: 1em;
+        margin: 0;
+    }
+
+    #admin .nav {
+        margin-left: 1em;
+    }
+
+    #admin button:focus {
+        outline: 0;
+        white-space: nowrap;
+    }
+
+#ispublished {
+    display: none;
+    position: relative;
+    top: 7px;
+    left: 10px;
+}
+
+    #ispublished label {
+        display: inline;
+        position: relative;
+        left: 4px;
+        font-weight: normal;
+    }
+
+#admin #tools {
+    position: relative;
+    top: 5px;
+    left: 10px;
+    margin: 0 1em;
+    display: none;
+}
+
+    #admin #tools a {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 0 9px;
+    }
+
+    #admin #tools div:not(:last-child) {
+        border-right: 1px solid gray;
+    }
+
+#admin aside {
+    position: absolute;
+    top: 4em;
+    text-align: center;
+    width: 100%;
+    display: none;
+}
+
+    #admin aside .alert {
+        display: inline-block;
+        padding: 8px 1em;
+    }
+
+[contenteditable] {
+    outline: thin dashed #ccc;
+    width: 100%;
+    display: inline-block;
+}
+
+    [contenteditable] img {
+        cursor: move;
+    }
+
+.admin #excerpt {
+    border:solid 1px #CCC; 
+    padding:10px; 
+    margin-bottom:20px;
+}
+.admin #excerpt > div {
+    background-color:white;
+    color:black;
+}
