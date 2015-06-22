@@ -21,9 +21,17 @@ else
                 </a>
                 @Categories()
             </div>
-        </header>
+        </header>        
+        
+        @if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
+        {
+            <div id="excerpt" style="display:none;">
+                <h4>Excerpt:</h4>
+                <div itemprop="description">@Model.Excerpt</div>
+            </div>
+        }
 
-        <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+        <div itemprop="articleBody">@Html.Raw(Blog.IsEditing ? Model.Content : Model.GetHtmlContent())</div>
         @if (Blog.CurrentPost != null)
         {
             <section id="comments" aria-label="Comments">
@@ -50,10 +58,10 @@ else
 
     @helper Categories()
 {
-    if (Model.Categories.Length > 0)
+    if (Model.Categories.Length > 0 || User.Identity.IsAuthenticated)
     {
         <ul class="categories">
-            <li><em class="glyphicon glyphicon-bookmark"></em> Posted in: </li>
+            <li><em class="glyphicon glyphicon-bookmark"></em>&nbsp; Posted in:&nbsp;</li>
             @foreach (string cat in Model.Categories)
             {
                 <li itemprop="articleSection">
@@ -72,7 +80,7 @@ else
 
         public static string GetDescription(string content, int length = 300, string ommission = "...")
         {
-            return TruncateHtml(StripTags(content), 235, ommission);
+            return TruncateHtml(StripTags(content), length, ommission);
         }
 
         public static string TruncateHtml(string input, int length = 300, string ommission = "...")

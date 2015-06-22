@@ -8,7 +8,7 @@
     <supportsNewCategoriesInline>Yes</supportsNewCategoriesInline>
     <supportsCommentPolicy>No</supportsCommentPolicy>
     <supportsSlug>Yes</supportsSlug>
-    <supportsExcerpt>No</supportsExcerpt>
+    <supportsExcerpt>Yes</supportsExcerpt>
     <supportsPages>No</supportsPages>
     <supportsPageParent>No</supportsPageParent>
     <supportsAuthor>No</supportsAuthor>
@@ -23,6 +23,6 @@
     <watermarkImageUrl>favicon.ico</watermarkImageUrl>
     <homepageLinkText>View your blog</homepageLinkText>
     <adminLinkText>Manage your blog</adminLinkText>
-    <adminUrl><![CDATA[{blog-homepage-url}login/]]></adminUrl>
+    <adminUrl><![CDATA[{blog-homepage-url}views/login.cshtml]]></adminUrl>
   </weblog>
 </manifest>

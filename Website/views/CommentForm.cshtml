@@ -1,4 +1,7 @@
-﻿<form id="commentform" role="form" class="form-horizontal">
+﻿@{
+    var path = !string.IsNullOrWhiteSpace(Blog.BlogPath) ? "/" + Blog.BlogPath : "";
+}
+<form id="commentform" role="form" class="form-horizontal" data-blog-path="@path">
     <fieldset>
         <legend>Post comment</legend>
 		

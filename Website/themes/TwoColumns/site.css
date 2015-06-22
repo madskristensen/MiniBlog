@@ -23,6 +23,10 @@ img, video, iframe {
     max-width: 100%;
 }
 
+td img, video, iframe {
+    max-width: none;
+}
+
 a {
     color: #3277b3;
 }

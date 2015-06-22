@@ -1,20 +1,20 @@
 ﻿@{
-	string next = Blog.GetNextPage();
-	string prev = Blog.GetPrevPage();
+    string next = Blog.GetNextPage();
+    string prev = Blog.GetPrevPage();
 }
 <!doctype html>
 <html lang="en-us">
 <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8" />
     <title>@Page.Title</title>
-    <meta name="description" content="@Blog.Description" />
+    <meta name="description" content="@Page.Description" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
     <link type="application/rsd+xml" rel="edituri" title="RSD" href="~/views/robots/rsd" />
     <link type="application/rss+xml" rel="alternate" title="@Blog.Title" href="~/feed/rss/" />
     <link type="application/atom+xml" rel="alternate" title="@Blog.Title" href="~/feed/atom/" />
 
-    <link rel="stylesheet" href="@Blog.FingerPrint("/css/bootstrap-3.0.0.css", "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Blog.FingerPrint("/Content/bootstrap.css", "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")" />
     <link rel="stylesheet" href="@Blog.FingerPrint("/themes/" + Blog.Theme + "/site.css")" />
     <link rel="shortcut icon" href="@Blog.FingerPrint("/favicon.ico")" type="image/x-icon" />
     <link rel="dns-prefetch" href="http://gravatar.com/" />
@@ -28,20 +28,20 @@
     <meta property="og:image" content="@Blog.Image" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="@(Request.Url.Scheme +"://" + Request.Url.Authority + Request.RawUrl)" />
-	@if (!string.IsNullOrEmpty(prev))
-	{
-		<link rel="prev" href="@prev" />
-	}
-	@if (!string.IsNullOrEmpty(next))
-	{
-		<link rel="next" href="@next" />
-	}
+    @if (!string.IsNullOrEmpty(prev))
+    {
+        <link rel="prev" href="@prev" />
+    }
+    @if (!string.IsNullOrEmpty(next))
+    {
+        <link rel="next" href="@next" />
+    }
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
 
     <div class="container">
         <header role="banner">
-            <span itemprop="name"><a href="~/" itemprop="url">@Blog.Title</a></span><br />
+            <span><a href="~/" itemprop="url">@Blog.Title</a></span><br />
             <em>@Blog.Description</em>
         </header>
 
@@ -96,6 +96,6 @@
 {
     if (User.Identity.IsAuthenticated)
     {
-        <link href="@Blog.FingerPrint("/css/admin.css")" rel="stylesheet" />
+        <link href="@Blog.FingerPrint("/Content/admin.css")" rel="stylesheet" />
     }
 }

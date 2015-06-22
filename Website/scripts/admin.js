@@ -14,18 +14,21 @@
         xHtmlDocument.importNode(htmlDocument.body, true);
         xhtmlBody.appendChild(htmlDocument.body.firstChild);
 
-        /<body.*?><div>(.*?)<\/div><\/body>/im.exec(xHtmlDocument.documentElement.innerHTML);
+        /<body.*?><div>([\s\S]*?)<\/div><\/body>/i.exec(xHtmlDocument.documentElement.innerHTML);
         return RegExp.$1;
     }
 
     // #endregion
 
     var postId, isNew,
-        txtTitle, txtContent, txtMessage, txtImage, chkPublish,
-        btnNew, btnEdit, btnDelete, btnSave, btnCancel,
+        txtTitle, txtExcerpt, txtContent, txtMessage, txtImage, chkPublish,
+        btnNew, btnEdit, btnDelete, btnSave, btnCancel, blogPath,
 
     editPost = function () {
         txtTitle.attr('contentEditable', true);
+        txtExcerpt.attr('contentEditable', true);
+        txtExcerpt.css({ minHeight: "100px" });
+        txtExcerpt.parent().css('display', 'block');
         txtContent.wysiwyg({ hotKeys: {}, activeToolbarClass: "active" });
         txtContent.css({ minHeight: "400px" });
         txtContent.focus();
@@ -47,20 +50,9 @@
             if (confirm("Do you want to leave this page?")) {
                 history.back();
             }
-        } else {
-            txtTitle.removeAttr('contentEditable');
-            txtContent.removeAttr('contentEditable');
-            btnCancel.focus();
-
-            btnNew.removeAttr("disabled");
-            btnEdit.removeAttr("disabled");
-            btnSave.attr("disabled", true);
-            btnCancel.attr("disabled", true);
-            chkPublish.attr("disabled", true);
-
-            showCategoriesForDisplay();
-
-            $("#tools").fadeOut();
+        } else
+        {
+            window.location = window.location.href.split(/\?|#/)[0];
         }
     },
     toggleSourceView = function () {
@@ -100,13 +92,14 @@
            the following statement and ConvertMarkupToXhtml function */
         parsedDOM = ConvertMarkupToValidXhtml(txtContent.html());
 
-        $.post("/post.ashx?mode=save", {
+        $.post(blogPath + "/post.ashx?mode=save", {
             id: postId,
             isPublished: chkPublish[0].checked,
             title: txtTitle.text().trim(),
+            excerpt: txtExcerpt.text().trim(),
             content: parsedDOM,
             categories: getPostCategories(),
-            token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
+            __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
         })
           .success(function (data) {
               if (isNew) {
@@ -127,8 +120,8 @@
     },
     deletePost = function () {
         if (confirm("Are you sure you want to delete this post?")) {
-            $.post("/post.ashx?mode=delete", { id: postId, token: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
-                .success(function () { location.href = "/"; })
+            $.post(blogPath + "/post.ashx?mode=delete", { id: postId, __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
+                .success(function () { location.href = blogPath+"/"; })
                 .fail(function () { showMessage(false, "Something went wrong. Please try again"); });
         }
     },
@@ -178,26 +171,28 @@
             $("#txtCategories").parent().remove();
 
             $.each(categoriesArray, function (index, category) {
-                $("ul.categories").append(' <li itemprop="articleSection" title="' + category + '"> <a href="/category/' + encodeURIComponent(category.toLowerCase()) + '">' + category + '</a> </li> ');
+                $("ul.categories").append(' <li itemprop="articleSection" title="' + category + '"> <a href="'+blogPath+'/category/' + encodeURIComponent(category.toLowerCase()) + '">' + category + '</a> </li> ');
             });
         }
     };
 
-    isNew = location.pathname.replace(/\//g, "") === "postnew";
-
     postId = $("[itemprop~='blogPost']").attr("data-id");
 
     txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
+    txtExcerpt = $("[itemprop~='description']");
     txtContent = $("[itemprop~='articleBody']");
     txtMessage = $("#admin .alert");
     txtImage = $("#admin #txtImage");
 
     btnNew = $("#btnNew");
-    btnEdit = $("#btnEdit").bind("click", editPost);
+    btnEdit = $("#btnEdit");
     btnDelete = $("#btnDelete").bind("click", deletePost);
     btnSave = $("#btnSave").bind("click", savePost);
     btnCancel = $("#btnCancel").bind("click", cancelEdit);
     chkPublish = $("#ispublished").find("input[type=checkbox]");
+    blogPath = $("#admin").data("blogPath");
+
+    isNew = location.pathname.replace(/\//g, "") === blogPath.replace(/\//g, "") + "postnew";
 
     $(document).keyup(function (e) {
         if (!document.activeElement.isContentEditable) {
@@ -219,8 +214,15 @@
         $("#ispublished").fadeIn();
         chkPublish[0].checked = true;
     } else if (txtTitle !== null && txtTitle.length === 1 && location.pathname.length > 1) {
+        if (location.search.indexOf("mode=edit") != -1)
+            editPost();
+
         btnEdit.removeAttr("disabled");
         btnDelete.removeAttr("disabled");
         $("#ispublished").css({ "display": "inline" });
     }
+
+    $(".dropdown-menu > input").click(function (e) {
+        e.stopPropagation();
+    });
 })(jQuery);

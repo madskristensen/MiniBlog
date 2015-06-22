@@ -1,12 +1,13 @@
 ﻿@{
     var isPublished = Blog.CurrentPost != null && Blog.CurrentPost.IsPublished;
+    var path = !string.IsNullOrWhiteSpace(Blog.BlogPath) ? "/" + Blog.BlogPath : "";
 }
 
-<nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished">
+<nav id="admin" data-role="editor-toolbar" class="navbar navbar-default navbar-fixed-top" data-ispublished="@isPublished" data-blog-path="@path">
     <div class="navbar-inner">
         <ul class="nav navbar-nav">
-            <li><button onclick="location.href='/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
-            <li><button class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
+            <li><button onclick="location.href='@path/post/new/'" class="btn btn-link" id="btnNew">New post</button></li>
+            <li><button onclick="location.href='@path/post/@Blog.CurrentSlug?mode=edit'" class="btn btn-link" id="btnEdit" disabled>Edit</button></li>
             <li><button class="btn btn-link" id="btnDelete" disabled>Delete</button></li>
             <li><button class="btn btn-link" id="btnSave" disabled>Save</button></li>
             <li><button class="btn btn-link" id="btnCancel" disabled>Cancel</button></li>
@@ -19,6 +20,7 @@
         <div id="tools">
 
             <div class="btn-group">
+                <a class="btn btn-mini" data-edit="formatBlock <p>">&para;</a>
                 <a class="btn btn-mini" data-edit="formatBlock <h1>">H1</a>
                 <a class="btn btn-mini" data-edit="formatBlock <h2>">H2</a>
                 <a class="btn btn-mini" data-edit="formatBlock <h3>">H3</a>
@@ -46,7 +48,11 @@
             </div>
 
             <div class="btn-group">
-                <a class="btn btn-mini" data-edit="createLink" title="Hyperlink"><i class="glyphicon glyphicon-globe"></i></a>
+                <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="glyphicon glyphicon-globe"></i></a>
+                <div class="dropdown-menu row" role="menu">
+                    <input class="col-md-9 col-lg-9" placeholder="URL" type="text" data-edit="createLink" />
+                    <button class="btn btn-xs col-md-3 col-lg-3" type="button">Add</button>
+                </div>
                 <a class="btn btn-mini" data-edit="unlink" title="Remove hyperlink"><i class="glyphicon glyphicon-remove"></i></a>
                 <a class="btn btn-mini uploadimage"><i class="glyphicon glyphicon-picture"></i></a>
             </div>
@@ -60,8 +66,8 @@
     </div>
 
     <form action="@FormsAuthentication.LoginUrl" method="post">
-		<input type="hidden" name="signout" value="true" />
-		<input type="hidden" name="returnUrl" value="@HttpUtility.HtmlEncode(Request.RawUrl)" />
+        <input type="hidden" name="signout" value="true" />
+        <input type="hidden" name="returnUrl" value="@HttpUtility.HtmlEncode(Request.RawUrl)" />
         <button type="submit" title="Signed in as @User.Identity.Name" class="btn btn-link pull-right">
             Sign out &nbsp;<span class="glyphicon glyphicon-log-out"></span>
         </button>
@@ -74,7 +80,9 @@
 
 @if (!string.IsNullOrEmpty(Blog.CurrentSlug))
 {
-    <script src="@Blog.FingerPrint("/scripts/jquery-2.0.2.js", "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js")"></script>
+    <script src="@Blog.FingerPrint("/scripts/jquery-2.1.3.js", "//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")"></script>
+    <script src="@Blog.FingerPrint("/scripts/jquery.hotkeys.js")"></script>
+    <script src="@Blog.FingerPrint("/scripts/bootstrap.min.js", "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")"></script>
     <script src="@Blog.FingerPrint("/scripts/bootstrap-wysiwyg.js")" defer></script>
     <script src="@Blog.FingerPrint("/scripts/admin.js")" defer></script>
 }

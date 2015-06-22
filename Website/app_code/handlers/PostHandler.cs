@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -23,7 +25,7 @@ public class PostHandler : IHttpHandler
         }
         else if (mode == "save")
         {
-            EditPost(id, context.Request.Form["title"], context.Request.Form["content"], bool.Parse(context.Request.Form["isPublished"]), context.Request.Form["categories"].Split(','));
+            EditPost(id, context.Request.Form["title"], context.Request.Form["excerpt"], context.Request.Form["content"], bool.Parse(context.Request.Form["isPublished"]), context.Request.Form["categories"].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
         }
     }
 
@@ -37,19 +39,20 @@ public class PostHandler : IHttpHandler
         Storage.Delete(post);
     }
 
-    private void EditPost(string id, string title, string content, bool isPublished, string[] categories)
+    private void EditPost(string id, string title, string excerpt, string content, bool isPublished, string[] categories)
     {
         Post post = Storage.GetAllPosts().FirstOrDefault(p => p.ID == id);
 
         if (post != null)
         {
             post.Title = title;
+            post.Excerpt = excerpt;
             post.Content = content;
             post.Categories = categories;
         }
         else
         {
-            post = new Post() { Title = title, Content = content, Slug = CreateSlug(title), Categories = categories };
+            post = new Post() { Title = title, Excerpt = excerpt, Content = content, Slug = CreateSlug(title), Categories = categories };
             HttpContext.Current.Response.Write(post.Url);
         }
 
@@ -61,19 +64,33 @@ public class PostHandler : IHttpHandler
 
     private void SaveFilesToDisk(Post post)
     {
-        foreach (Match match in Regex.Matches(post.Content, "(src|href)=\"(data:([^\"]+))\""))
+        foreach (Match match in Regex.Matches(post.Content, "(src|href)=\"(data:([^\"]+))\"(>.*?</a>)?"))
         {
-            string extension = Regex.Match(match.Value, "data:([^/]+)/([a-z]+);base64").Groups[2].Value;
+            string extension = string.Empty;
+            string filename = string.Empty;
+
+            // Image
+            if (match.Groups[1].Value == "src")
+            {
+                extension = Regex.Match(match.Value, "data:([^/]+)/([a-z]+);base64").Groups[2].Value;
+            }
+            // Other file type
+            else
+            {
+                // Entire filename
+                extension = Regex.Match(match.Value, "data:([^/]+)/([a-z0-9+-.]+);base64.*\">(.*)</a>").Groups[3].Value;
+            }
 
             byte[] bytes = ConvertToBytes(match.Groups[2].Value);
             string path = Blog.SaveFileToDisk(bytes, extension);
 
-            string value = string.Format("src=\"{0}\" alt=\"\" /", path);
+            string value = string.Format("src=\"{0}\" alt=\"\" ", path);
 
             if (match.Groups[1].Value == "href")
                 value = string.Format("href=\"{0}\"", path);
 
-            post.Content = post.Content.Replace(match.Value, value);
+            Match m = Regex.Match(match.Value, "(src|href)=\"(data:([^\"]+))\"");
+            post.Content = post.Content.Replace(m.Value, value);
         }
     }
 
@@ -87,12 +104,24 @@ public class PostHandler : IHttpHandler
     {
         title = title.ToLowerInvariant().Replace(" ", "-");
         title = RemoveDiacritics(title);
-        title = Regex.Replace(title, @"([^0-9a-z-])", string.Empty);
+        title = RemoveReservedUrlCharacters(title);
 
-        if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title)))
+        if (Storage.GetAllPosts().Any(p => string.Equals(p.Slug, title, StringComparison.OrdinalIgnoreCase)))
             throw new HttpException(409, "Already in use");
 
         return title.ToLowerInvariant();
+    }
+
+    static string RemoveReservedUrlCharacters(string text)
+    {
+        var reservedCharacters = new List<string>() { "!", "#", "$", "&", "'", "(", ")", "*", ",", "/", ":", ";", "=", "?", "@", "[", "]", "\"", "%", ".", "<", ">", "\\", "^", "_", "'", "{", "}", "|", "~", "`", "+" };
+
+        foreach (var chr in reservedCharacters)
+        {
+            text = text.Replace(chr, "");
+        }
+
+        return text;
     }
 
     static string RemoveDiacritics(string text)

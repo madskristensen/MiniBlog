@@ -13,7 +13,26 @@
         </div>
     </header>
 
-    <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+    @if ((Blog.CurrentPost != null || Blog.IsNewPost) && User.Identity.IsAuthenticated)
+    {
+        <div id="excerpt" style="display:none;">
+            <h4>Excerpt:</h4>
+            <div itemprop="description">@Model.Excerpt</div>
+        </div>
+    }
+    
+    @* If you want to use excerpts rather than full content in list view then uncomment the below 
+        and remove the other articleBody div *@
+    @*@if (Blog.CurrentPost == null)
+    {
+        <div itemprop="articleBody">@Model.Excerpt</div>
+    }
+    else
+    {
+        <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
+    }*@
+    
+    <div itemprop="articleBody">@Html.Raw(Blog.IsEditing ? Model.Content : Model.GetHtmlContent())</div>
 
     @if (Blog.CurrentPost != null)
     {
@@ -44,7 +63,7 @@
     if (Model.Categories.Length > 0 || User.Identity.IsAuthenticated)
     {
         <ul class="categories">
-            <li><em class="glyphicon glyphicon-tags"></em>&nbsp; Posted in: </li>
+            <li><em class="glyphicon glyphicon-tags"></em>&nbsp; Posted in:&nbsp;</li>
             @foreach (string cat in Model.Categories)
             {
                 <li itemprop="articleSection">
