@@ -93,14 +93,6 @@
 					Most of the stuff I write over here will have some relation to the Microsoft products I'm using.
 				</p>
 			</section>
-            <section>
-                <h3>Categories</h3>
-                <ul>
-                    @foreach ( var cat in Blog.GetCategories() ) {
-                        <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())">@cat.Key (@cat.Value)</a></li>
-                    }
-                </ul>
-            </section>
 			<section>
 				<h3>Contact me:</h3>
 				<ul>
@@ -109,6 +101,14 @@
 					<li><a href="http://www.vinit.nl">Vinit</a></li>
 				</ul>
 			</section>
+            <section>
+                <h3>Categories</h3>
+                <ul>
+                    @foreach ( var cat in Blog.GetCategories() ) {
+                        <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())">@cat.Key (@cat.Value)</a></li>
+                    }
+                </ul>
+            </section>			
 			<form id="searchform2">
 				<input id="searchInput2" type="search" class="search-active" placeholder="Search">
 			</form>
