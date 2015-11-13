@@ -1,4 +1,5 @@
 ﻿using CookComputing.XmlRpc;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -73,7 +74,10 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             match.Title = post.Title;
             match.Excerpt = post.Excerpt;
             match.Content = post.Content;
-            match.Slug = PostHandler.CreateSlug(post.Slug);
+
+            if (!string.Equals(match.Slug, post.Slug, StringComparison.OrdinalIgnoreCase))
+                match.Slug = PostHandler.CreateSlug(post.Slug);
+
             match.Categories = post.Categories;
             match.IsPublished = publish;
 
