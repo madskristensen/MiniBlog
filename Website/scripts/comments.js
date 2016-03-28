@@ -10,11 +10,13 @@
 
         for (var prop in obj) {
             if (obj.hasOwnProperty(prop)) {
-                string += prop + '=' + obj[prop].replace(/ /g, '+') + '&';
+                string += encodeURIComponent(prop) + '=' + encodeURIComponent(obj[prop]) + '&';
             }
         }
 
-        return string.substring(0, string.length - 1);
+        string = string.substring(0, string.length - 1).replace(/%20/g, '+');
+
+        return string;
     }
 
     var AsynObject = AsynObject ? AsynObject : {};
