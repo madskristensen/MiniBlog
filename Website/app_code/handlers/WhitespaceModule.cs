@@ -2,8 +2,6 @@
 using System.Text;
 using System.Web;
 using WebMarkupMin.Core;
-using WebMarkupMin.Core.Minifiers;
-using WebMarkupMin.Core.Settings;
 
 public class WhitespaceModule : IHttpModule
 {
@@ -11,7 +9,7 @@ public class WhitespaceModule : IHttpModule
 
     void IHttpModule.Dispose()
     {
-        // Nothing to dispose; 
+        // Nothing to dispose;
     }
 
     void IHttpModule.Init(HttpApplication app)
