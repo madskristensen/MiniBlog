@@ -23,6 +23,8 @@ public static class Blog
         BlogPath = ConfigurationManager.AppSettings.Get("blog:path");
         Copyright = ConfigurationManager.AppSettings.Get("blog:copyright");
         CopyrightUrl = ConfigurationManager.AppSettings.Get("blog:copyrightUrl");
+        GoogleAnalyticsId = ConfigurationManager.AppSettings.Get("blog:googleAnalyticsId");
+        GoogleAnalyticsDomain = ConfigurationManager.AppSettings.Get("blog:googleAnalyticsDomain");
     }
 
     public static string Title { get; private set; }
@@ -35,6 +37,8 @@ public static class Blog
     public static string BlogPath { get; private set; }
     public static string Copyright { get; private set; }
     public static string CopyrightUrl { get; private set; }
+    public static string GoogleAnalyticsId { get; set; }
+    public static string GoogleAnalyticsDomain { get; set; }
 
     public static string CurrentSlug
     {
@@ -60,6 +64,11 @@ public static class Blog
         {
             return HttpContext.Current.Request.QueryString["mode"] == "edit";
         }
+    }
+
+    public static bool IsGoogleAnalyticsConfigured
+    {
+        get { return !string.IsNullOrEmpty(GoogleAnalyticsId) && !string.IsNullOrEmpty(GoogleAnalyticsDomain); }
     }
 
     public static Post CurrentPost

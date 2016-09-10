@@ -36,6 +36,10 @@
     {
         <link rel="next" href="@next" />
     }
+    @if (User.Identity.IsAuthenticated)
+    {
+        @RenderPage("~/views/Ga.cshtml")
+    }
 </head>
 <body itemscope itemtype="http://schema.org/Blog" class="@(User.Identity.IsAuthenticated ? "admin": null)">
 
