@@ -53,11 +53,11 @@
 	</script>
 	<div class="container">
 		<header role="banner">
-            <span><a href="~/" itemprop="url">@Blog.Title</a></span><br />
+			<span><a href="~/" itemprop="url"><img src="~/Media/logo.png" alt="Logo Jan-V.nl" title="@Blog.Title"/></a></span><br />
 			<em>@Blog.Description</em>
 		</header>
 
-		<div role="main" class="col-md-8">
+		<div role="main" class="col-md-9">
 			@RenderBody()
 
 			@if (Page.ShowPaging != null)
@@ -76,7 +76,7 @@
 			}
 		</div>
 		
-		<aside role="complementary" class="col-md-3 col-md-offset-1">
+		<aside role="complementary" class="col-md-3">
 			<form id="searchform">
 				<input id="searchInput" type="search" class="search-active" placeholder="Search">
 			</form>
@@ -87,7 +87,7 @@
 					My name is Jan de Vries.
 				</p>
 				<p>
-					I'm working at 4DotNet, a Microsoft oriented consulting company in the Netherlands.
+					I'm working at <a href="http://www.4dotnet.nl/">4DotNet</a>, a Microsoft oriented consulting company in the Netherlands.
 				</p>
 				<p>
 					Most of the stuff I write over here will have some relation to the Microsoft products I'm using.

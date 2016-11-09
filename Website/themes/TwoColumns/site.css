@@ -255,3 +255,23 @@ img.me {
 .jumbotron {
 	padding-bottom: 14px;
 }
+.container > header {
+	margin-top: 20px;
+}
+.container > div[role=main] {
+	border-right: #F7941E solid 20px;
+}
+.container > aside {
+	height: 100%;
+	background-color: #F4E9DC;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	-ms-border-bottom-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	-ms-border-top-right-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+.jumbotron {
+	background-color: #F4E9DC;
+}
