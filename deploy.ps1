@@ -1,1 +1,1 @@
-robocopy "$Env:DEPLOYMENT_SOURCE" "$Env:DEPLOYMENT_TARGET" /E
+robocopy "$Env:DEPLOYMENT_SOURCE\Website" "$Env:DEPLOYMENT_TARGET" /E
