@@ -216,3 +216,4 @@ pip-log.txt
 .mr.developer.cfg
 
 web.config
+Website/posts/*
