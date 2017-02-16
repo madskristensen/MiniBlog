@@ -242,16 +242,12 @@ public static class Blog
 
     public static Dictionary<string, int> GetCategories()
     {
-        var result = new Dictionary<string, int>();
-        
-        foreach (var category in GetVisiblePosts().SelectMany(post => post.Categories))
-        {
-            if (!result.ContainsKey(category))
-                result.Add(category, 0);
+        var result = GetVisiblePosts()
+            .SelectMany(post => post.Categories)
+            .GroupBy(category => category, (category, items) => new { Category = category, Count = items.Count() })
+            .OrderBy(x => x.Category)
+            .ToDictionary(x => x.Category, x => x.Count);
 
-            result[category] = result[category] + 1;
-        }
-        
         return result;
     }
 
