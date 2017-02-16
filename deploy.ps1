@@ -1,0 +1,1 @@
+robocopy "$Env:DEPLOYMENT_SOURCE" "$Env:DEPLOYMENT_TARGET" /E
