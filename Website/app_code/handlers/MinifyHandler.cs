@@ -11,7 +11,7 @@ public class MinifyHandler : IHttpHandler
         string file = context.Server.MapPath(context.Request.CurrentExecutionFilePath);
         string ext = Path.GetExtension(file);
 
-        if (context.IsDebuggingEnabled)
+        if (context.Request.IsAuthenticated || context.IsDebuggingEnabled)
         {
             context.Response.TransmitFile(file);
         }
