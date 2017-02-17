@@ -77,9 +77,18 @@
 		</div>
 		
 		<aside role="complementary" class="col-md-3">
-			<form id="searchform">
-				<input id="searchInput" type="search" class="search-active" placeholder="Search">
-			</form>
+			<script>
+			  (function() {
+				var cx = '016464995905244916127:voml_il1bmy';
+				var gcse = document.createElement('script');
+				gcse.type = 'text/javascript';
+				gcse.async = true;
+				gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(gcse, s);
+			  })();
+			</script>
+			<gcse:search></gcse:search>
 			<section>
 				<h3>About me</h3>
 				<img src="/Media/Jan_LThumb.jpg" alt="picture of me" title="Jan V" class="me" width="144" height="144"/>
@@ -109,10 +118,6 @@
                     }
                 </ul>
             </section>			
-			<form id="searchform2">
-				<input id="searchInput2" type="search" class="search-active" placeholder="Search">
-			</form>
-			<div class="search-results"></div>
 		</aside>
 	</div>
 
