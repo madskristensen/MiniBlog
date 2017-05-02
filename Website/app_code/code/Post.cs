@@ -9,6 +9,8 @@ using CookComputing.XmlRpc;
 [XmlRpcMissingMapping(MappingAction.Ignore)]
 public class Post
 {
+    private string _content;
+
     public Post()
     {
         ID = Guid.NewGuid().ToString();
@@ -38,7 +40,11 @@ public class Post
     public string Excerpt { get; set; }
 
     [XmlRpcMember("description")]
-    public string Content { get; set; }
+    public string Content
+    {
+        get { return Utility.ContentWithEmoticons(_content); }
+        set { _content = value; }
+    }
 
     [XmlRpcMember("dateCreated")]
     public DateTime PubDate { get; set; }
