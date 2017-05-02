@@ -31,6 +31,24 @@
     {
         <div itemprop="articleBody">@Html.Raw(Model.Content)</div>
     }*@
+
+    @* Alternatively you can display post teasers in list view that are identified with <!--more--> markers*@
+    @*<div itemprop="articleBody">
+        @if (Blog.CurrentPost != null)
+        {
+            @Html.Raw(Blog.IsEditing ? Model.Content : Model.GetHtmlContent())
+        }
+        else if (Model.HasTeaser)
+        {
+            var teaser = string.Format("{0}<br><a href=\"{1}\" itemprop=\"url\">Read more</a>", 
+                Model.GetHtmlTeaser().Trim(), Model.Url);
+            @Html.Raw(teaser)
+        }
+        else
+        {
+            @Html.Raw(Model.GetHtmlContent())
+        }
+    </div>*@
     
     <div itemprop="articleBody">@Html.Raw(Blog.IsEditing ? Model.Content : Model.GetHtmlContent())</div>
 

@@ -79,14 +79,49 @@ public class Post
         return (Blog.ModerateComments && !context.User.Identity.IsAuthenticated) ? this.Comments.Count(c => c.IsApproved) : this.Comments.Count;
     }
 
+    public bool HasTeaser
+    {
+        get { return GetTeaserMarkerIndex(Content) != -1; }
+    }
+
+    public string GetHtmlTeaser()
+    {
+        var result = GetTeaser(Content);
+        result = HandleYoutube(result);
+        result = HandleImageCDN(result);
+
+        return result;
+    }
+
     public string GetHtmlContent()
     {
-        string result = Content;
+        var result = HandleYoutube(Content);
+        result = HandleImageCDN(result);
 
+        return result;
+    }
+
+    private static string GetTeaser(string content)
+    {
+        var index = GetTeaserMarkerIndex(content);
+        return index == -1 ? content : content.Substring(0, index);
+    }
+
+    private static int GetTeaserMarkerIndex(string content)
+    {
+        const string teaserMarker = "<!--more-->";
+        return content.IndexOf(teaserMarker, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string HandleYoutube(string content)
+    {
         // Youtube content embedded using this syntax: [youtube:xyzAbc123]
-        var video = "<div class=\"video\"><iframe src=\"//www.youtube.com/embed/{0}?modestbranding=1&amp;theme=light\" allowfullscreen></iframe></div>";
-        result = Regex.Replace(result, @"\[youtube:(.*?)\]", (Match m) => string.Format(video, m.Groups[1].Value));
+        const string video = "<div class=\"video\"><iframe src=\"//www.youtube.com/embed/{0}?modestbranding=1&amp;theme=light\" allowfullscreen></iframe></div>";
+        return Regex.Replace(content, @"\[youtube:(.*?)\]", (Match m) => string.Format(video, m.Groups[1].Value));
+    }
 
+    private static string HandleImageCDN(string content)
+    {
         // Images replaced by CDN paths if they are located in the /posts/ folder
         var cdn = ConfigurationManager.AppSettings.Get("blog:cdnUrl");
         var root = ConfigurationManager.AppSettings.Get("blog:path") + "/posts/";
@@ -94,20 +129,18 @@ public class Post
         if (!root.StartsWith("/"))
             root = "/" + root;
 
-        result = Regex.Replace(result, "<img.*?src=\"([^\"]+)\"", (Match m) =>
-        {
-            string src = m.Groups[1].Value;
-            int index = src.IndexOf(root);
+        return Regex.Replace(content, "<img.*?src=\"([^\"]+)\"", (Match m) =>
+                                                                 {
+                                                                     string src = m.Groups[1].Value;
+                                                                     int index = src.IndexOf(root);
 
-            if (index > -1)
-            {
-                string clean = src.Substring(index);
-                return m.Value.Replace(src, cdn + clean);
-            }
+                                                                     if (index > -1)
+                                                                     {
+                                                                         string clean = src.Substring(index);
+                                                                         return m.Value.Replace(src, cdn + clean);
+                                                                     }
 
-            return m.Value;
-        });
-
-        return result;
+                                                                     return m.Value;
+                                                                 });
     }
 }
