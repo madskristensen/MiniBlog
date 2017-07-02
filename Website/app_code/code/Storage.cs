@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using System.Xml.Linq;
@@ -43,7 +44,7 @@ public static class Storage
                         ));
 
         XElement categories = doc.XPathSelectElement("post/categories");
-        foreach (string category in post.Categories)
+        foreach (string category in post.Categories.OrderBy(c => c))
         {
             categories.Add(new XElement("category", category));
         }
