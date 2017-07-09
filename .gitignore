@@ -1,4 +1,11 @@
 #################
+## THIS PROJECT
+#################
+Website/bin/*.dll
+Website/bin/*.xml
+packages/
+
+#################
 ## Eclipse
 #################
 
