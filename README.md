@@ -1,6 +1,6 @@
 # MiniBlog
 
-A blogging engine based on HTML5 and ASP.NET.
+A blogging engine based on HTML5 and ASP.NET. For an ASP.NET Core version, see [Miniblog.Core](https://github.com/madskristensen/Miniblog.Core).
 
 [![Build status](https://ci.appveyor.com/api/projects/status/n78wm50a4a3odecb)](https://ci.appveyor.com/project/madskristensen/miniblog)
 
