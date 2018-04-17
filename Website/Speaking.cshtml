@@ -1,0 +1,138 @@
+﻿@using System.Web.Caching;
+@{
+    Layout = "~/themes/" + Blog.Theme + "/_Layout.cshtml";
+
+    Page.Title = "Speaking";
+    Page.Description = "Conferences and meetups where I'm speaking or have speaked in the past.";
+
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+        <header class="jumbotron">
+            <h1 itemprop="headline name">
+                <a href="/speaking" itemprop="url">Speaking</a>
+            </h1>
+        </header>
+
+        <div itemprop="articleBody">
+            <p>
+                I love speaking at (international) conferences, meetups, local events or at companies. Sharing my passion for everything tech
+                related which crosses my path, be it something developer related, designing a proper architecture or just
+                share the experience and pitfalls of some project I'm working on.
+            </p>
+            <p>
+                Sharing information is the key to success in our industry and discussing pros and cons of a specific technology
+                on an event is keeping all of us up-to-date!
+            </p>
+            <p>
+                I'll update this page whenever I get invited to speak at an event. If you happen to be at an event where I'm giving
+                a talk, feel free to have a chat with me. I love talking about tech!
+            </p>
+
+            <h2>
+                Upcoming events
+            </h2>
+            <div>
+                <h3>
+                    <a href="https://www.topconf.com/conference/devops-tallinn-2018/index" target="_blank">
+                        DevOps Talinn 2018
+                    </a>
+                </h3>
+                <p>
+                    Talinn, 17 May 2018
+                </p>
+            </div>
+            <h2>
+                Past events
+            </h2>
+            <div>
+                <h3>
+                    <a href="https://www.sdn.nl/EVENTS/23-maart-2018" target="_blank">
+                        SDN Event
+                    </a>
+                </h3>
+                <p>
+                    Zeist, 23 March 2018
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <a href="http://appdevcon.nl/" target="_blank">
+                        AppDevCon
+                    </a>
+                </h3>
+                <p>
+                    Zeist, 16 March 2018
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <a href="http://www.4dotnet.nl/nieuws/move-up-with-azure-event" target="_blank">
+                        Move Up with Azure
+                    </a>
+                </h3>
+                <p>
+                    Nieuwegein, 22 February 2018
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <a href="https://www.meetup.com/nl-NL/dotnet-amsterdam/" target="_blank">
+                        dotNet Amsterdam meetup
+                    </a>
+                </h3>
+                <p>
+                    Amsterdam, 21 February 2018
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <a href="https://www.techdays.nl/" target="_blank">
+                        TechDays NL 2017
+                    </a>
+                </h3>
+                <p>
+                    Amsterdam, 12-13 October 2017
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <a href="https://www.meetup.com/nl-NL/dutchdotnet/events/238324204/" target="_blank">
+                        Dutch .NET Group
+                    </a>
+                </h3>
+                <p>
+                    Nieuwegein, 13 April 2017
+                </p>
+            </div>
+        </div>
+
+    </article>
+
+    @helper Categories()
+        {
+            if (Model.Categories.Length > 0 || User.Identity.IsAuthenticated)
+            {
+                <ul class="categories">
+                    <li><em class="glyphicon glyphicon-tags"></em>&nbsp; Posted in:&nbsp;</li>
+                    @foreach (string cat in Model.Categories)
+                    {
+                        <li itemprop="articleSection">
+                            <a href="~/category/@HttpUtility.UrlEncode(cat.ToLowerInvariant())">@cat</a>
+                        </li>
+                    }
+                </ul>
+            }
+}
+
+    if (!Request.IsLocal && !User.Identity.IsAuthenticated)
+    {
+        Response.Cache.AppendCacheExtension("max-age=0");
+        Response.Cache.SetValidUntilExpires(true);
+        Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
+        Response.Cache.SetVaryByCustom("authenticated");
+        Response.Cache.VaryByParams["slug"] = true;
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/scripts")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/Content")));
+        Response.AddCacheDependency(new CacheDependency(Server.MapPath("~/themes/" + Blog.Theme)));
+    }
+}
