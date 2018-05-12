@@ -118,7 +118,7 @@ public class MetaWeblogHandler : XmlRpcService, IMetaWeblog
             wp_slug = post.Slug,
             categories = post.Categories.ToArray(),
             postid = post.ID,
-            mt_excerpt = post.Excerpt
+            mt_excerpt = post.Excerpt ?? ""
         };
     }
 

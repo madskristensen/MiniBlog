@@ -1,6 +1,6 @@
 # MiniBlog
 
-A blogging engine based on HTML5 and ASP.NET.
+A blogging engine based on HTML5 and ASP.NET. For an ASP.NET Core version, see [Miniblog.Core](https://github.com/madskristensen/Miniblog.Core).
 
 [![Build status](https://ci.appveyor.com/api/projects/status/n78wm50a4a3odecb)](https://ci.appveyor.com/project/madskristensen/miniblog)
 
@@ -22,10 +22,10 @@ Perfect for the blogger who wants to selfhost a blog.
  * Uses __CDN__ for Bootstrap and jQuery in release mode (debug="false")
  * Easy setting for serving static files from another domain. 
      * Supports the ASP.NET [Reverse Proxy](https://github.com/madskristensen/ReverseProxyCDN)
-* __Windows Live Writer__ (WLW) support
- * Optimized for WLW
- * Assumes WLW is the main way to write posts
- * You don't have to use WLW (but you should)
+* __Open Live Writer__ (OLW) support
+ * Optimized for OLW
+ * Assumes OLW is the main way to write posts
+ * You don't have to use OLW (but you should)
 * RSS and ATOM __feeds__
 * Schedule posts to be published on a future date
 * Get feedback on an unpublished post by sending a preview link 
@@ -63,29 +63,29 @@ blog engine could be.
 
 This is the result.
 
-### Connecting with Windows Live Writer (WLW)
+### Connecting with Open Live Writer (OLW)
 
-To connect to MiniBlog with Windows Live Writer (as of WLW build 16.4.3528.331):
+To connect to MiniBlog with Open Live Writer:
 
-- Launch Windows Live Writer
+- Launch Open Live Writer
 
-- If you have not used Windows Live Writer to connect to a blog you will get a dialog window asking you to specify what blog service you use. If you have already connected Windows Live Writer to a blog, you can go to _Blogs -> Add blog account..._ and get to the same dialog window.
+- If you have not used Open Live Writer to connect to a blog you will get a dialog window asking you to specify what blog service you use. If you have already connected Open Live Writer to a blog, you can go to _Blogs -> Add blog account..._ and get to the same dialog window.
 
 - In the __What blog service do you use?__ dialog window you will tick the _Other services_ radio option and click next.
 
 - The __Add a blog account__ dialog window will ask you for the web address of your blog, the username and password. The web address is the root address of your site. For example, use http://miniblog.azurewebsites.net/ for the live demo site.
 
-- The __Download Blog Theme__ dialog window will let you know Windows Live Writer can download your blog theme if you allow it to publish a temporary post. Selecting yes will allow you to view how your posts will look directly from the Windows Live Writer editor. 
+- The __Download Blog Theme__ dialog window will let you know Open Live Writer can download your blog theme if you allow it to publish a temporary post. Selecting yes will allow you to view how your posts will look directly from the Open Live Writer editor. 
 
-- The __Select blog type__ dialog window will let you know Windows Live Writer was not able to detect your blog type. It will ask you for the type of blog and the remote posting URL.  
+- The __Select blog type__ dialog window will let you know Open Live Writer was not able to detect your blog type. It will ask you for the type of blog and the remote posting URL.  
 Type of blog that you are using: _Metaweblog API_  
 Remote posting URL for your blog: _http://&lt;root-address&gt;/metaweblog_  
 Click next.
 
-- The __Your blog has been set up__ dialog window will let you give your blog a nickname for the Windows Live Writer instance. Change that if you want and click finish to get to posting!
+- The __Your blog has been set up__ dialog window will let you give your blog a nickname for the Open Live Writer instance. Change that if you want and click finish to get to posting!
 
-Windows Live Writer can be downloaded at:  
-[http://windows.microsoft.com/en-us/windows-live/essentials](http://windows.microsoft.com/en-us/windows-live/essentials)  
+Open Live Writer can be downloaded at:  
+[http://openlivewriter.org/](http://openlivewriter.org/)  
 
 ### Configuring MiniBlog as Virtual Application
 

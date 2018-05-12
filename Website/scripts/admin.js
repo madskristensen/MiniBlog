@@ -179,7 +179,7 @@
     postId = $("[itemprop~='blogPost']").attr("data-id");
 
     txtTitle = $("[itemprop~='blogPost'] [itemprop~='name']");
-    txtExcerpt = $("[itemprop~='description']");
+    txtExcerpt = $("[itemprop~='blogPost'] [itemprop~='description']");
     txtContent = $("[itemprop~='articleBody']");
     txtMessage = $("#admin .alert");
     txtImage = $("#admin #txtImage");
