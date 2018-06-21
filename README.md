@@ -10,6 +10,9 @@ __Live demo__: http://miniblog.azurewebsites.net/
 Username: _demo_  
 Password: _demo_  
 
+### Custom theme
+In search for custom designed themes for MiniBlog? [Click here](https://francis.bio/miniblog-themes/).
+
 ## Simple, flexible and powerful
 
 A minimal, yet full featured blog engine using ASP.NET Razor Web Pages. 
