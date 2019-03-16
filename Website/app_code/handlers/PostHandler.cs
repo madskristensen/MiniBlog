@@ -68,6 +68,13 @@ public class PostHandler : IHttpHandler
         {
             string extension = string.Empty;
             string filename = string.Empty;
+            string[] allowedExtensions = new [] {
+              "jpg",
+              "jpeg",
+              "gif",
+              "png",
+              "bmp"
+            };
 
             // Image
             if (match.Groups[1].Value == "src")
@@ -81,16 +88,19 @@ public class PostHandler : IHttpHandler
                 extension = Regex.Match(match.Value, "data:([^/]+)/([a-z0-9+-.]+);base64.*\">(.*)</a>").Groups[3].Value;
             }
 
-            byte[] bytes = ConvertToBytes(match.Groups[2].Value);
-            string path = Blog.SaveFileToDisk(bytes, extension);
+            if (allowedExtensions.Contains(extension)) 
+            {
+                byte[] bytes = ConvertToBytes(match.Groups[2].Value);
+                string path = Blog.SaveFileToDisk(bytes, extension);
 
-            string value = string.Format("src=\"{0}\" alt=\"\" ", path);
+                string value = string.Format("src=\"{0}\" alt=\"\" ", path);
 
-            if (match.Groups[1].Value == "href")
-                value = string.Format("href=\"{0}\"", path);
+                if (match.Groups[1].Value == "href")
+                    value = string.Format("href=\"{0}\"", path);
 
-            Match m = Regex.Match(match.Value, "(src|href)=\"(data:([^\"]+))\"");
-            post.Content = post.Content.Replace(m.Value, value);
+                Match m = Regex.Match(match.Value, "(src|href)=\"(data:([^\"]+))\"");
+                post.Content = post.Content.Replace(m.Value, value);
+            }
         }
     }
 
