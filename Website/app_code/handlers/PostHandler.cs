@@ -69,11 +69,11 @@ public class PostHandler : IHttpHandler
             string extension = string.Empty;
             string filename = string.Empty;
             string[] allowedExtensions = new [] {
-              "jpg",
-              "jpeg",
-              "gif",
-              "png",
-              "bmp"
+              ".jpg",
+              ".jpeg",
+              ".gif",
+              ".png",
+              ".webp"
             };
 
             // Image
@@ -88,7 +88,7 @@ public class PostHandler : IHttpHandler
                 extension = Regex.Match(match.Value, "data:([^/]+)/([a-z0-9+-.]+);base64.*\">(.*)</a>").Groups[3].Value;
             }
 
-            if (allowedExtensions.Contains(extension)) 
+            if (allowedExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase)) 
             {
                 byte[] bytes = ConvertToBytes(match.Groups[2].Value);
                 string path = Blog.SaveFileToDisk(bytes, extension);
