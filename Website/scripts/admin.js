@@ -101,7 +101,7 @@
             categories: getPostCategories(),
             __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value")
         })
-          .success(function (data) {
+          .done(function (data) {
               if (isNew) {
                   location.href = data;
                   return;
@@ -121,7 +121,7 @@
     deletePost = function () {
         if (confirm("Are you sure you want to delete this post?")) {
             $.post(blogPath + "/post.ashx?mode=delete", { id: postId, __RequestVerificationToken: document.querySelector("input[name=__RequestVerificationToken]").getAttribute("value") })
-                .success(function () { location.href = blogPath+"/"; })
+                .done(function () { location.href = blogPath+"/"; })
                 .fail(function () { showMessage(false, "Something went wrong. Please try again"); });
         }
     },
