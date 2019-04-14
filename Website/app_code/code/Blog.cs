@@ -21,6 +21,10 @@ public static class Blog
         Image = ConfigurationManager.AppSettings.Get("blog:image");
         ModerateComments = bool.Parse(ConfigurationManager.AppSettings.Get("blog:moderateComments"));
         BlogPath = ConfigurationManager.AppSettings.Get("blog:path");
+
+        DateFormat = GetStringAppSetting("blog:dateFormat", "MMMM d. yyyy");
+        DateTimeFormat = GetStringAppSetting("blog:dateTimeFormat", "MMMM d. yyyy HH:mm");
+        DateTimeFormatTitle = GetStringAppSetting("blog:dateTimeFormatTitle", "yyyy-MM-ddTHH:mm");
     }
 
     public static string Title { get; private set; }
@@ -31,7 +35,18 @@ public static class Blog
     public static int DaysToComment { get; private set; }
     public static bool ModerateComments { get; private set; }
     public static string BlogPath { get; private set; }
+    public static string DateFormat { get; private set; }
+    public static string DateTimeFormat { get; private set; }
+    public static string DateTimeFormatTitle { get; private set; }
 
+    private static string GetStringAppSetting(string setting, string defaultValue){
+
+        var value = ConfigurationManager.AppSettings.Get(setting);
+        value = value == null ? defaultValue : value;
+
+        return value;
+    }
+    
     public static string CurrentSlug
     {
         get { return (HttpContext.Current.Request.QueryString["slug"] ?? string.Empty).Trim().ToLowerInvariant(); }

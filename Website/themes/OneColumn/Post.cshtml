@@ -4,7 +4,7 @@
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
         </h1>
         <div>
-            <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString("MMMM d. yyyy")</abbr>
+            <abbr title="@Model.PubDate.ToLocalTime()" itemprop="datePublished">@Model.PubDate.ToLocalTime().ToString(Blog.DateFormat)</abbr>
             <a href="@Model.Url#comments">
                 <em class="glyphicon glyphicon-comment"></em>
                 @Model.CountApprovedComments(Context) Comments
