@@ -54,16 +54,6 @@
 	}
 </head>
 <body itemscope itemtype="https://schema.org/WebPage" class="@(User.Identity.IsAuthenticated ? "admin": null)">
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2661604-2"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
-
-		gtag('config', 'UA-2661604-2');
-	</script>
-
 	<div class="container">
 		<header role="banner">
 			<span><a href="~/" itemprop="url"><img src="~/Media/logo.png" alt="Logo Jan-V.nl" title="@Blog.Title" /></a></span><br />
@@ -140,6 +130,16 @@
 			<a href="https://jan-v.nl" itemprop="url name">Jan-V.nl</a>
 		</span>
 	</footer>
+
+	@*<!-- Global site tag (gtag.js) - Google Analytics -->*@
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2661604-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-2661604-2');
+	</script>
 
 	@if (User.Identity.IsAuthenticated)
 	{
