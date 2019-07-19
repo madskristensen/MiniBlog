@@ -1,4 +1,4 @@
-﻿<article class="post" data-id="@Model.ID" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+﻿<article class="post" data-id="@Model.ID" itemscope itemtype="https://schema.org/BlogPosting" itemprop="blogPost">
     <header class="jumbotron">
         <h1 itemprop="headline name">
             <a href="@Model.Url" itemprop="url">@Model.Title</a>
@@ -36,27 +36,8 @@
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		})();
 		</script>
-		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-		<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        @*<section id="comments" aria-label="Comments">
-            @if (Model.CountApprovedComments(Context) > 0)
-            {
-                <h2>Comments</h2>
-            }
-
-            @foreach (Comment comment in Model.Comments)
-            {
-                if (comment.IsApproved || !Blog.ModerateComments || Context.User.Identity.IsAuthenticated)
-                {
-                    @RenderPage("Comment.cshtml", comment)
-                }
-            }
-        </section>
-
-        if (Model.AreCommentsOpen(Context))
-        {
-            @RenderPage("~/views/CommentForm.cshtml")
-        }*@
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     }
 </article>
 

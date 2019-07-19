@@ -1,4 +1,4 @@
-﻿<article data-id="@Model.ID" itemscope itemtype="http://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "self" : null)">
+﻿<article data-id="@Model.ID" itemscope itemtype="https://schema.org/UserComments" itemprop="comment" class="@(Model.IsAdmin ? "self" : null)">
     <img src="@Model.GravatarUrl(50)" width="50" height="50" alt="Comment by @Model.Author" />
     <div>
         @Date()

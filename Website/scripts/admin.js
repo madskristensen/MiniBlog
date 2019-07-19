@@ -5,8 +5,8 @@
     function ConvertMarkupToValidXhtml(markup) {
         var docImplementation = document.implementation;
         var htmlDocument = docImplementation.createHTMLDocument("temp");
-        var xHtmlDocument = docImplementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);
-        var xhtmlBody = xHtmlDocument.createElementNS('http://www.w3.org/1999/xhtml', 'body');
+        var xHtmlDocument = docImplementation.createDocument('https://www.w3.org/1999/xhtml', 'html', null);
+        var xhtmlBody = xHtmlDocument.createElementNS('https://www.w3.org/1999/xhtml', 'body');
 
         htmlDocument.body.innerHTML = "<div>" + markup + "</div>";
 
