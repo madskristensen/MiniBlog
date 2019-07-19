@@ -28,7 +28,7 @@ td img, video, iframe {
 }
 
 a {
-	color: #3277b3;
+	color: #105896;
 }
 
 .container {
@@ -270,6 +270,16 @@ img.me {
 	border-bottom-right-radius: 6px;
 	-ms-border-top-right-radius: 6px;
 	border-top-right-radius: 6px;
+}
+
+.container > aside a {
+	color: #105896;
+	font-weight: bold;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.container > aside ul {
+	list-style-type: none;
+	margin-left: -20px;
 }
 
 .jumbotron {
