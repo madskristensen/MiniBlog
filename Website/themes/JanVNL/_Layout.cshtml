@@ -54,21 +54,19 @@
 	}
 </head>
 <body itemscope itemtype="https://schema.org/WebPage" class="@(User.Identity.IsAuthenticated ? "admin": null)">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2661604-2"></script>
 	<script>
-		(function (i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date(); a = s.createElement(o),
-			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-		ga('create', 'UA-2661604-2', 'jan-v.nl');
-		ga('send', 'pageview');
-
+		gtag('config', 'UA-2661604-2');
 	</script>
+
 	<div class="container">
 		<header role="banner">
-			<span><a href="~/" itemprop="url"><img src="~/Media/logo.png" alt="Logo Jan-V.nl" title="@Blog.Title"/></a></span><br />
+			<span><a href="~/" itemprop="url"><img src="~/Media/logo.png" alt="Logo Jan-V.nl" title="@Blog.Title" /></a></span><br />
 			<em>@Blog.Description</em>
 		</header>
 
@@ -90,52 +88,53 @@
 				</ul>
 			}
 		</div>
-		
+
 		<aside role="complementary" class="col-md-3">
 			<script>
-			  (function() {
-				var cx = '016464995905244916127:voml_il1bmy';
-				var gcse = document.createElement('script');
-				gcse.type = 'text/javascript';
-				gcse.async = true;
-				gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-				var s = document.getElementsByTagName('script')[0];
-				s.parentNode.insertBefore(gcse, s);
-			  })();
+				(function () {
+					var cx = '016464995905244916127:voml_il1bmy';
+					var gcse = document.createElement('script');
+					gcse.type = 'text/javascript';
+					gcse.async = true;
+					gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+					var s = document.getElementsByTagName('script')[0];
+					s.parentNode.insertBefore(gcse, s);
+				})();
 			</script>
 			<gcse:search></gcse:search>
-		    <section>
-		        <h3>About me</h3>
-		        <img src="/Media/portrait-site.png" alt="picture of Jan" title="Jan V" class="me" width="144" height="144"/>
-		        <p>
-		            My name is Jan de Vries.
-		        </p>
-		        <p>
-		            I'm a Microsoft MVP working at <a href="https://www.4dotnet.nl/">4DotNet</a>, a Microsoft oriented consulting company in the Netherlands.
-		        </p>
-		        <p>
-		            Most of the stuff I write over here will have some relation to the Microsoft products I'm using.
-		        </p>
-		    </section>
-		    <section>
-                <img src="/Media/MVP_Logo_Horizontal_Preferred_Cyan300_CMYK_72ppi.png" alt="Microsoft MVP Logo" title="Microsoft MVP Logo"/>
-		    </section>
+			<section>
+				<h3>About me</h3>
+				<img src="/Media/portrait-site.png" alt="picture of Jan" title="Jan V" class="me" width="144" height="144" />
+				<p>
+					My name is Jan de Vries.
+				</p>
+				<p>
+					I'm a Microsoft MVP working at <a href="https://www.4dotnet.nl/">4DotNet</a>, a Microsoft oriented consulting company in the Netherlands.
+				</p>
+				<p>
+					Most of the stuff I write over here will have some relation to the Microsoft products I'm using.
+				</p>
+			</section>
+			<section>
+				<img src="/Media/MVP_Logo_Horizontal_Preferred_Cyan300_CMYK_72ppi.png" alt="Microsoft MVP Logo" title="Microsoft MVP Logo" />
+			</section>
 			<section>
 				<h3>Contact me:</h3>
 				<ul>
 					<li><a href="https://www.linkedin.com/in/jandv">LinkedIn</a></li>
 					<li><a href="https://twitter.com/Jan_de_v">Twitter</a></li>
-				    <li><a href="/speaking">Speaking</a></li>
+					<li><a href="/speaking">Speaking</a></li>
 				</ul>
 			</section>
-            <section>
-                <h3>Categories</h3>
-                <ul>
-                    @foreach ( var cat in Blog.GetCategories() ) {
-                        <li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())">@cat.Key (@cat.Value)</a></li>
-                    }
-                </ul>
-            </section>			
+			<section>
+				<h3>Categories</h3>
+				<ul>
+					@foreach (var cat in Blog.GetCategories())
+					{
+						<li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())">@cat.Key (@cat.Value)</a></li>
+					}
+				</ul>
+			</section>
 		</aside>
 	</div>
 
