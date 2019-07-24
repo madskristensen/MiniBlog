@@ -109,7 +109,7 @@
 			<section>
 				<h3>Categories</h3>
 				<ul>
-					@foreach (var cat in Blog.GetCategories())
+					@foreach (var cat in Blog.GetCategories().Where(c => c.Value >= 5))
 					{
 						<li><a href="~/category/@HttpUtility.UrlEncode(cat.Key.ToLowerInvariant())">@cat.Key (@cat.Value)</a></li>
 					}
