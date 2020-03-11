@@ -47,6 +47,7 @@
     
     @AntiForgery.GetHtml()
 
+
     if ( !Request.IsLocal && !User.Identity.IsAuthenticated )
     {
         Response.Cache.AppendCacheExtension("max-age=0");
