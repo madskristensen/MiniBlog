@@ -88,7 +88,7 @@ Click next.
 - The __Your blog has been set up__ dialog window will let you give your blog a nickname for the Open Live Writer instance. Change that if you want and click finish to get to posting!
 
 Open Live Writer can be downloaded at:  
-[http://openlivewriter.org/](http://openlivewriter.org/)  
+[https://openlivewriter.com/](https://openlivewriter.com/)  
 
 ### Configuring MiniBlog as Virtual Application
 
