@@ -11,8 +11,8 @@
 
 @helper Date()
 {
-    var title = Model.PubDate.ToString("yyyy-MM-ddTHH:mm");
-    var display = Model.PubDate.ToString("MMMM d. yyyy HH:mm");
+    var title = Model.PubDate.ToString(Blog.DateTimeFormatTitle);
+    var display = Model.PubDate.ToString(Blog.DateTimeFormat);
     <time datetime="@title" itemprop="commentTime">@display</time>
 }
 @helper Author()
